@@ -13,6 +13,7 @@ import { loadSheet, loadRateCard } from "./agent/sheet.ts";
 import { loadLedger, saveLedger } from "./ledger.ts";
 import { resolveHold, type TreasurerChoice } from "./agent/resolve.ts";
 import { handleWebhook } from "./webhooks.ts";
+import { runClosure } from "./agent/closure.ts";
 
 const require = createRequire(import.meta.url);
 const PORT = Number(process.env.PORT ?? 4173);
@@ -21,7 +22,7 @@ const PAYPAL_MODE = (process.env.PAYPAL_CLIENT_ID ? "live" : "dry") as "live" | 
 
 /** Sam's tap on a held game: POST /api/holds/<gameId> {"choice":"pay_full"|"pay_show_up"|"pay_nobody"} */
 async function treasurerDecides(gameId: string, choice: TreasurerChoice) {
-  const t = await loadFromFile("data/tournament-2026.json");
+  const t = await loadFromFile(DOC);
   const ledger = await loadLedger(LEDGER, t.slug);
   const hold = ledger.holds[gameId];
   const game = t.games.find((g) => g.id === gameId);
@@ -85,6 +86,15 @@ const server = createServer(async (req, res) => {
       const body = JSON.parse(await readBody(req) || "{}");
       const out = await treasurerDecides(decodeURIComponent(path.slice("/api/holds/".length)), body.choice);
       return json(res, out.ok ? 200 : 409, out);
+    }
+    /** A gym closes: POST /api/replan {"court":"Gym D","from":"14:00","day":"2026-05-16"}. The agent re-plans,
+     *  the moves are written into the document, the refunds go through PayPal, and the plan comes back. */
+    if (req.method === "POST" && path === "/api/replan") {
+      const body = JSON.parse(await readBody(req) || "{}");
+      if (!body.court || !body.from) return json(res, 400, { ok: false, message: "court and from (HH:MM) are required" });
+      const r = await runClosure({ closure: { day: String(body.day ?? "2026-05-16"), court: String(body.court), from: String(body.from) }, paypal: PAYPAL_MODE, runId: process.env.RUN_ID ?? "live", docPath: DOC, apply: true });
+      const { trace, ...plan } = r;
+      return json(res, 200, { ok: true, ...plan, steps: trace.filter((s) => s.kind === "tool").map((s) => ({ name: s.name, input: s.input, ok: (s.output as any)?.ok })) });
     }
     if (api[path]) return send(res, await readFile(api[path]).catch(() => Buffer.from("null")), ".json");
     if (path.startsWith("/api/")) return json(res, 404, { isError: true, message: `no such endpoint ${path}` });

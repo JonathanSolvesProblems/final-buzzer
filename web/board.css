@@ -223,3 +223,20 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
 .nav a { color: var(--ink-muted); text-decoration: none; font-size: 13px; font-weight: 600; padding: 8px 10px; clip-path: var(--chamfer-3); }
 .nav a[aria-current] { background: var(--housing); color: var(--flap); }
 @media (max-width: 900px) { .nav { order: 4; } }
+
+/* a gym closes: the control on the board's printed line, and the plan the agent comes back with */
+.close { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.close select { font: 600 12px/1 var(--body); color: var(--flap); background: var(--black-face); border: 0; padding: 7px 8px; clip-path: var(--chamfer-3); min-height: 32px; }
+.close .btn { min-height: 32px; padding: 6px 10px; font-size: 12px; }
+.topline .legend { margin-left: 0; }
+.plan { margin: 0 0 10px; background: var(--black-face); color: var(--flap); padding: 10px 14px 12px; clip-path: var(--chamfer); }
+.plan h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
+.plan h3 { margin: 10px 0 4px; font-size: 12px; font-weight: 600; color: var(--ghost); }
+.plan p { margin: 0; font-size: 13px; }
+.plan ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.45; }
+.plan .quiet { color: var(--ghost); font-size: 12px; margin-top: 6px; }
+.flap.final .face { padding-left: 11px; box-shadow: inset 4px 0 0 var(--yellow); }
+.flap.final .note { color: var(--flap); left: 11px; }
+.flap.unplayed { --face-bg: var(--keyline); --face-ink: var(--ghost); }
+.flap.unplayed .face::before { content: ""; position: absolute; inset: 1px; background: var(--housing); clip-path: var(--chamfer-3); }
+@media (max-width: 900px) { .close { margin-left: 0; flex-wrap: wrap; } }

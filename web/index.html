@@ -43,7 +43,13 @@
         <li><i class="l-held"></i>Held for Sam</li>
         <li><i class="l-fold"></i>Folds to end of day</li>
       </ul>
+      <form class="close" id="close" aria-label="Close a court">
+        <label class="sr" for="close-court">Court</label><select id="close-court"></select>
+        <label class="sr" for="close-from">From</label><select id="close-from"></select>
+        <button class="btn second" type="submit">Close this court</button>
+      </form>
     </div>
+    <section class="plan" id="plan" aria-live="polite" hidden></section>
     <section class="scoreline" aria-label="Today so far">
       <aside class="hold" id="held-card" aria-labelledby="held-title" hidden>
         <div class="top">

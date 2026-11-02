@@ -3,8 +3,8 @@
    the tile while you watch. Sam's tap on a held game posts to the server, which pays through the
    same gate and the same PayPal call as the agent. */
 import { Scheduler, StringHelper } from "/vendor/bryntum/scheduler.module.js";
+import { normalise, matchup, sentence, get, GAME_MINUTES } from "/feed.js";
 
-const GAME_MINUTES = 75;
 const enc = (s) => StringHelper.encodeHtml(String(s ?? ""));
 const $ = (id) => document.getElementById(id);
 const money = (n) => "$" + Number(n).toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -13,30 +13,13 @@ const SHORT = {};
 const sh = (t) => SHORT[t] ?? t;
 
 const [doc, sheet, card] = await Promise.all([get("/api/tournament"), get("/api/sheet"), get("/api/rate-card")]);
-const T = normalise(doc);
+let T = normalise(doc);
 const days = [...new Set(T.games.map((g) => g.start.slice(0, 10)))].sort();
 let day = days.find((d) => d.endsWith("05-16")) ?? days[0];
 let ledger = { payouts: {}, holds: {}, folds: {}, events: [] };
 let replay = null;
 const flipped = new Set();
-
-/* ---- the document, numbered the way the agent numbers it (start, then court order) ---- */
-function normalise(doc) {
-  const order = new Map(doc.courts.map((c, i) => [c.id, i]));
-  const name = new Map(doc.courts.map((c) => [c.id, /^\d+$/.test(c.name) ? `${(c.venue ?? "").replace("Lakeside College", "Lakeside")} ${c.name}` : c.name]));
-  const games = [];
-  for (const d of doc.divisions) {
-    const team = new Map(d.teams.map((t) => [t.id, t.name]));
-    for (const g of d.games) {
-      if (!g.start || !g.courtId) continue;
-      games.push({ id: g.id, courtId: g.courtId, number: 0, division: d.name, stage: g.stage, home: g.homeId ? team.get(g.homeId) ?? null : null, away: g.awayId ? team.get(g.awayId) ?? null : null, court: name.get(g.courtId) ?? g.courtId, start: g.start, status: g.status, bye: Boolean(g.bye) });
-    }
-  }
-  games.sort((a, b) => a.start.localeCompare(b.start) || order.get(a.courtId) - order.get(b.courtId));
-  games.forEach((g, i) => { g.number = i + 1; });
-  return { slug: doc.slug, name: doc.name, games, courts: doc.courts.map((c) => ({ id: c.id, name: name.get(c.id), venue: c.venue ?? "" })) };
-}
-const matchup = (g) => g.home && g.away ? `${g.home} v ${g.away}` : g.stage;
+const events = (t) => t.games.map((g) => ({ id: g.id, resourceId: g.courtId, name: matchup(g), startDate: g.start, duration: GAME_MINUTES, durationUnit: "minute" }));
 
 /* ---- money state per game, from the ledger ---- */
 function stateOf(g) {
@@ -50,6 +33,8 @@ function stateOf(g) {
   if (p && (p.status === "PENDING" || p.status === "PROCESSING")) return { kind: "paying", payout: p };
   if (p && p.status.startsWith("ERROR")) return { kind: "held", hold: { reason: `PayPal did not pay: ${p.status}`, question: null, at: p.createdAt } };
   if (folds.length) return { kind: "folded", folds };
+  if (g.status === "forfeit" && g.note.startsWith("not played")) return { kind: "unplayed" };
+  if (g.status !== "scheduled") return { kind: "final" }; // saved on the scorer's phone, the agent has not written yet
   return { kind: "scheduled" };
 }
 /** The replay's clock: the latest game the agent acted on, plus a game's length. */
@@ -79,15 +64,17 @@ function noteHTML(g, s) {
   if (s.kind === "held") return `<span class="note">${enc(s.hold.flags?.forfeit ? "Forfeit, held" : "Held for Sam")}</span>`;
   if (s.kind === "folded") return `<span class="note">Folds to end of day</span>`;
   if (s.kind === "live") return `<span class="note">In play</span>`;
+  if (s.kind === "final") return `<span class="note">${enc(g.status === "forfeit" ? "Forfeit" : "Final")}${g.hs != null ? ` ${g.hs} to ${g.as}` : ""}, agent working</span>`;
+  if (s.kind === "unplayed") return `<span class="note">Not played, refunded</span>`;
+  if (g.note.startsWith("moved from")) return `<span class="note">Moved, was ${enc(g.note.slice(11).split(":")[0])}</span>`;
   return `<span class="note">${enc(sentence(g.division))}</span>`;
 }
 const vsHTML = (g) => g.home ? `<span>${enc(sh(g.home))}</span><span>v ${enc(sh(g.away))}</span>` : `<span>${enc(sentence(g.stage))}</span>`;
-const sentence = (s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 function tileHTML(g, s) {
   const face = (cls) => `<div class="face ${cls}" aria-hidden="true"><span class="vs">${vsHTML(g)}</span>${noteHTML(g, s)}</div>`;
   return `<div class="flap ${s.kind}${flipped.has(g.id) ? " just-flipped" : ""}">${s.kind === "held" ? face("top") + face("bottom") : face("top")}</div>`;
 }
-const label = (g, s) => `Game ${g.number}, ${g.division.toLowerCase()}, ${matchup(g)}, ${g.court}, ${g.start.slice(11)}, ${({ paid: "final, officials paid", paying: "final, paying", held: "held for Sam", folded: "final, folds to end of day", live: "in play", scheduled: "not started" })[s.kind]}`;
+const label = (g, s) => `Game ${g.number}, ${g.division.toLowerCase()}, ${matchup(g)}, ${g.court}, ${g.start.slice(11)}, ${({ paid: "final, officials paid", paying: "final, paying", held: "held for Sam", folded: "final, folds to end of day", live: "in play", final: "final, the agent is working", unplayed: "not played, refunded", scheduled: "not started" })[s.kind]}`;
 
 /* ---- the scheduler ---- */
 const dayStart = (d) => { const first = T.games.filter((g) => g.start.startsWith(d)).map((g) => g.start.slice(11)).sort()[0] ?? "09:00"; return new Date(`${d}T${first.slice(0, 2)}:00`); };
@@ -100,7 +87,7 @@ const scheduler = new Scheduler({
   viewPreset: { base: "hourAndDay", tickWidth: 84, headers: [{ unit: "hour", dateFormat: "H:mm" }] },
   columns: [{ text: "Court", field: "name", width: 104, htmlEncode: false, renderer: ({ record }) => `<div class="court">${enc(record.name)}<small>${enc(record.venue.split(" ")[0])}</small></div>` }],
   resources: courtsOn(day),
-  events: T.games.map((g) => ({ id: g.id, resourceId: g.courtId, name: matchup(g), startDate: g.start, duration: GAME_MINUTES, durationUnit: "minute" })),
+  events: events(T),
   rowHeight: 52, barMargin: 2, readOnly: true, eventStyle: null, eventColor: null, autoHeight: true,
   // the board wears its own surface, not a Bryntum theme; without this the component fetches one from a CDN
   detectCSSCompatibilityIssues: false,
@@ -245,24 +232,60 @@ for (const [id, choice] of [["pay-full", "pay_full"], ["pay-showup", "pay_show_u
   });
 }
 
-/* ---- polling: the agent writes the ledger, the board reads it ---- */
+/* ---- a gym closes ---- */
+function renderClosure() {
+  const dayGames = T.games.filter((g) => g.start.startsWith(day));
+  const slots = [...new Set(dayGames.map((g) => g.start.slice(11)))].sort();
+  $("close-court").innerHTML = courtsOn(day).map((c) => `<option value="${enc(c.name)}">${enc(c.name)}</option>`).join("");
+  $("close-from").innerHTML = slots.map((s) => `<option value="${s}">${s}</option>`).join("");
+}
+$("close").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const court = $("close-court").value, from = $("close-from").value;
+  const plan = $("plan");
+  plan.hidden = false; plan.innerHTML = `<h2>${enc(court)} closes at ${from}</h2><p class="quiet">The agent is re-planning the rest of the day against the schedule's rules.</p>`;
+  $("source").textContent = "re-planning"; $("source").classList.add("busy");
+  let r;
+  try { r = await fetch("/api/replan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ court, from, day }) }).then((x) => x.json()); }
+  catch (err) { r = { ok: false, message: err.message }; }
+  $("source").textContent = "live, every 3 s"; $("source").classList.remove("busy");
+  if (!r.ok) { plan.innerHTML += `<p class="quiet">${enc(r.message ?? "The server could not run the re-plan.")}</p>`; return; }
+  const byN = new Map(T.games.map((g) => [g.number, g]));
+  const moves = r.applied.map((m) => { const g = byN.get(m.game_number); return `<li><b>Game ${m.game_number}</b>, ${enc(g ? matchup(g) : "")}: ${enc(m.from.court)} ${m.from.start} to <b>${enc(m.to.court)} ${m.to.start}</b>${m.reassigned.length ? `, officials reassigned (${m.reassigned.length})` : ""}</li>`; }).join("");
+  const lost = r.unplayable.map((u) => `<li><b>Game ${u.game_number}</b>, ${enc(u.teams.join(" v "))}: not played. ${enc(u.reason)}</li>`).join("");
+  const refunds = r.refunds.map((f) => `<li>${enc(f.team)} (${enc(f.division)}): $${f.amount} ${f.currency}, ${enc(f.rule)}${f.via ? `, through PayPal ${enc(f.via)}` : ""}: ${enc(f.status)}</li>`).join("");
+  plan.innerHTML = `<h2>${enc(court)} closed at ${from}</h2><p>${enc(r.summary ?? "")}</p>` +
+    (moves ? `<h3>Moved</h3><ul>${moves}</ul>` : "") + (lost ? `<h3>Cannot be played</h3><ul>${lost}</ul>` : "") + (refunds ? `<h3>Refunds, pro rata by the fee rule</h3><ul>${refunds}</ul>` : "") +
+    (r.rejected.length ? `<h3>Moves the rules refused</h3><ul>${r.rejected.map((x) => `<li>Game ${x.game_number} to ${enc(x.wanted.court)} ${x.wanted.start}: ${enc(x.problems.join("; "))}</li>`).join("")}</ul>` : "") +
+    `<p class="quiet">${r.loop.calls} model calls, ${r.steps.filter((s) => s.name === "check_move").length} placements checked, ${Math.round(r.loop.ms / 1000)} s.</p>`;
+  await poll();
+});
+
+/* ---- polling: the scorer's app writes the document, the agent writes the ledger, the board reads both ---- */
 let lastText = "";
 async function poll() {
   try {
-    const [l, r] = await Promise.all([fetch("/api/ledger").then((x) => x.text()), fetch("/api/replay").then((x) => x.json()).catch(() => null)]);
+    const [l, r, d] = await Promise.all([
+      fetch("/api/ledger").then((x) => x.text()),
+      fetch("/api/replay").then((x) => x.json()).catch(() => null),
+      fetch(`/api/tournament?v=${T.version}`).then((x) => (x.status === 304 ? null : x.json())).catch(() => null),
+    ]);
     replay = r;
+    let changed = false;
+    if (d) { T = normalise(d); scheduler.eventStore.data = events(T); scheduler.resourceStore.data = courtsOn(day); renderClosure(); changed = true; }
     if (l !== lastText) {
       const next = JSON.parse(l) || { payouts: {}, holds: {}, folds: {}, events: [] };
       for (const p of Object.values(next.payouts ?? {})) if (p.status === "SUCCESS" && ledger.payouts[p.senderBatchId]?.status !== "SUCCESS") flipped.add(p.gameId);
-      ledger = next; lastText = l; render();
+      ledger = next; lastText = l; changed = true;
     }
+    if (changed) render();
   } catch (e) { $("source").textContent = "ledger unreadable"; }
 }
-async function get(url) { const r = await fetch(url); if (!r.ok) throw new Error(`${url}: ${r.status}`); return r.json(); }
 
 renderRate();
+renderClosure();
 $("event-name").textContent = T.name;
-$("club").textContent = doc.association ?? "Northside Youth Basketball";
+$("club").textContent = T.association || "Northside Youth Basketball";
 await poll();
 render();
 setInterval(poll, 2500);
