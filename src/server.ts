@@ -1,3 +1,4 @@
+import "./env.ts";
 /**
  * The board's server: static files from web/, the Bryntum package, and the agent's results as JSON.
  *

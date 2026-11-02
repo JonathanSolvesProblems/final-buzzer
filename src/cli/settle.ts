@@ -1,9 +1,10 @@
+import "../env.ts";
 /**
  * The end-of-day batch: every official who asked to be paid once a day gets one PayPal payout
  * for the games the agent folded. One batch per official per day, so a second run cannot pay twice.
  *
- *   node --env-file=.env src/cli/settle.ts --day 2026-05-16 --run-id <same run id as the replay>
- *   node --env-file=.env src/cli/settle.ts --day 2026-05-16 --paypal dry
+ *   node src/cli/settle.ts --day 2026-05-16 --run-id <same run id as the replay>
+ *   node src/cli/settle.ts --day 2026-05-16 --paypal dry
  */
 import { mkdir, writeFile } from "node:fs/promises";
 import { loadFromFile } from "../app/feed.ts";

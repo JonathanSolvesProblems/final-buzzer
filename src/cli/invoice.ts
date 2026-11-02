@@ -1,9 +1,10 @@
+import "../env.ts";
 /**
  * Invoice every team for the entry fee through the PayPal MCP server (create_invoice, send_invoice).
  * Idempotent: a team with an invoice id in results/invoices.json is skipped.
  *
- *   node --env-file=.env src/cli/invoice.ts            # all teams
- *   node --env-file=.env src/cli/invoice.ts --limit 3
+ *   node src/cli/invoice.ts            # all teams
+ *   node src/cli/invoice.ts --limit 3
  */
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { connectPayPalMcp } from "../paypal/mcp.ts";

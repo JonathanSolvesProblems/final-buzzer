@@ -1,8 +1,9 @@
+import "../env.ts";
 /**
  * The agent on duty: watches the scorer's app and acts the moment a game goes final.
  *
- *   node --env-file=.env src/cli/watch.ts                 # watches http://localhost:4173/api/tournament
- *   TOURNAMENT_URL=https://.../api/tournament node --env-file=.env src/cli/watch.ts
+ *   node src/cli/watch.ts                 # watches http://localhost:4173/api/tournament
+ *   TOURNAMENT_URL=https://.../api/tournament node src/cli/watch.ts
  *
  * Every save the app makes bumps the document's version; the watcher polls with ?v= so an unchanged
  * document costs a 304. A game that turns final or forfeit runs the buzzer agent once, with the

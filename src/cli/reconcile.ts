@@ -1,10 +1,11 @@
+import "../env.ts";
 /**
  * Read the money back from PayPal, not from our ledger: Transaction Search through the PayPal MCP
  * server (list_transactions), matched against the ledger's payout batches. The second headline
  * figure (dollars moved, games covered) comes from here.
  *
- *   node --env-file=.env src/cli/reconcile.ts                # the last 31 days
- *   node --env-file=.env src/cli/reconcile.ts --since 2026-11-01T00:00:00Z
+ *   node src/cli/reconcile.ts                # the last 31 days
+ *   node src/cli/reconcile.ts --since 2026-11-01T00:00:00Z
  *
  * Writes results/reconcile.json. PayPal's transaction search can lag the payout by up to a few
  * hours in the sandbox; a batch the ledger holds that PayPal has not listed yet is reported as

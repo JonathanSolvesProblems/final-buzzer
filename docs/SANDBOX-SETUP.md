@@ -37,7 +37,7 @@ password the dashboard shows, and the payout appears in Activity.
 ```
 copy .env.example .env      (fill it in)
 node src/cli/build-sheet.ts
-node --env-file=.env src/cli/live.ts --game 17
+node src/cli/live.ts --game 17
 ```
 
 A good run prints the agent's steps, the decision, and the line

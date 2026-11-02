@@ -1,9 +1,10 @@
+import "../env.ts";
 /**
  * The daily chase: for each unpaid entry-fee invoice, the agent decides wait, remind, split, release
  * or hold, and executes it through the PayPal MCP server.
  *
- *   node --env-file=.env src/cli/chase.ts --today 2026-04-28          # one day, as the cron would run it
- *   node --env-file=.env src/cli/chase.ts --from 2026-04-10 --to 2026-05-10
+ *   node src/cli/chase.ts --today 2026-04-28          # one day, as the cron would run it
+ *   node src/cli/chase.ts --from 2026-04-10 --to 2026-05-10
  *       # the replay: day by day, applying the staged payments (recorded on PayPal as e-transfers)
  *       # and the staged reply, running the agent only where a decision is due
  *

@@ -43,14 +43,14 @@ node src/cli/build-sheet.ts    # the officials' sheet for the 88 games
 node src/cli/build-teams.ts    # the teams to invoice
 
 npm run board                  # the board, the money board and the scorer's phone on http://localhost:4173/
-node --env-file=.env src/cli/watch.ts                    # the agent on duty: pays as games go final on /score.html
-node --env-file=.env src/cli/live.ts --game 17           # one game from the terminal: final, decide, pay, measure
-node --env-file=.env src/cli/replay.ts --day 2026-05-16  # Saturday's 34 games through the agent, in order
-node --env-file=.env src/cli/settle.ts --day 2026-05-16 --run-id <run>   # the end-of-day batch
-node --env-file=.env src/cli/invoice.ts                  # invoice every team
-node --env-file=.env src/cli/chase.ts --from 2026-04-10 --to 2026-05-10  # the chase, day by day
-node --env-file=.env src/cli/replan.ts --court "Gym D" --from 14:00      # a gym closes at 14:00
-node --env-file=.env src/cli/reconcile.ts                # read the money back from PayPal's transaction search
+node src/cli/watch.ts                    # the agent on duty: pays as games go final on /score.html
+node src/cli/live.ts --game 17           # one game from the terminal: final, decide, pay, measure
+node src/cli/replay.ts --day 2026-05-16  # Saturday's 34 games through the agent, in order
+node src/cli/settle.ts --day 2026-05-16 --run-id <run>   # the end-of-day batch
+node src/cli/invoice.ts                  # invoice every team
+node src/cli/chase.ts --from 2026-04-10 --to 2026-05-10  # the chase, day by day
+node src/cli/replan.ts --court "Gym D" --from 14:00      # a gym closes at 14:00
+node src/cli/reconcile.ts                # read the money back from PayPal's transaction search
 
 npm test                       # the guards, the feed, the re-plan rules
 npm run check                  # fails when this file's numbers disagree with results/

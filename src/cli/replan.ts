@@ -1,8 +1,9 @@
+import "../env.ts";
 /**
  * A gym closes: re-plan the rest of its day and settle the money for what cannot be played.
  *
- *   node --env-file=.env src/cli/replan.ts --court "Gym D" --from 14:00 --day 2026-05-16
- *   node --env-file=.env src/cli/replan.ts --court "Gym D" --from 14:00 --paypal dry
+ *   node src/cli/replan.ts --court "Gym D" --from 14:00 --day 2026-05-16
+ *   node src/cli/replan.ts --court "Gym D" --from 14:00 --paypal dry
  *
  * Writes results/replan.json: the agent's plan, every move re-checked by the schedule's rules,
  * the games that cannot be played with each team's pro-rata refund, and what PayPal did with it.

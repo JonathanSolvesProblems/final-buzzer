@@ -7,7 +7,8 @@ function scripted(turns: Array<{ stop: string; content: any[] }>): MessagesClien
   const sent: any[] = [];
   return {
     sent,
-    messages: { create: async (req: any) => { sent.push(req); const t = turns.shift()!; return { id: "m", type: "message", role: "assistant", model: "fake", content: t.content, stop_reason: t.stop, stop_sequence: null, usage: { input_tokens: 10, output_tokens: 5 } } as any; } },
+    // the loop mutates one messages array between calls, so keep a snapshot of what each call saw
+    messages: { create: async (req: any) => { sent.push({ ...req, messages: structuredClone(req.messages) }); const t = turns.shift()!; return { id: "m", type: "message", role: "assistant", model: "fake", content: t.content, stop_reason: t.stop, stop_sequence: null, usage: { input_tokens: 10, output_tokens: 5 } } as any; } },
   };
 }
 const use = (id: string, name: string, input: any = {}) => ({ type: "tool_use", id, name, input });

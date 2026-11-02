@@ -1,12 +1,13 @@
+import "../env.ts";
 /**
  * Replay the real schedule through the agent: every game goes final in order, the agent decides,
  * PayPal pays, and the gap from buzzer to payout is recorded for each one.
  *
- *   node --env-file=.env src/cli/replay.ts                        # all 88 games, live sandbox payouts
- *   node --env-file=.env src/cli/replay.ts --day 2026-05-16        # Saturday only
- *   node --env-file=.env src/cli/replay.ts --paypal off            # ablation: PayPal removed
- *   node --env-file=.env src/cli/replay.ts --scripted              # ablation: fixed rule instead of the model
- *   node --env-file=.env src/cli/replay.ts --limit 5 --paypal dry  # a quick look, nothing sent
+ *   node src/cli/replay.ts                        # all 88 games, live sandbox payouts
+ *   node src/cli/replay.ts --day 2026-05-16        # Saturday only
+ *   node src/cli/replay.ts --paypal off            # ablation: PayPal removed
+ *   node src/cli/replay.ts --scripted              # ablation: fixed rule instead of the model
+ *   node src/cli/replay.ts --limit 5 --paypal dry  # a quick look, nothing sent
  *
  * Results: results/buzzer-replay.json (live), results/ablation-no-paypal.json, results/ablation-scripted.json.
  * Progress is written after every game, so a stopped run can resume with --from <game number>.

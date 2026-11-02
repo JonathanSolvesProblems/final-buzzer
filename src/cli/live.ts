@@ -1,9 +1,10 @@
+import "../env.ts";
 /**
  * One game, end to end: a final score lands, the agent decides, PayPal pays, the gap is recorded.
  *
- *   node --env-file=.env src/cli/live.ts --game 17              # mark game 17 final in the local document, pay
- *   node --env-file=.env src/cli/live.ts --game 17 --paypal dry # decide only, no PayPal call
- *   node --env-file=.env src/cli/live.ts --game 17 --source url --wait
+ *   node src/cli/live.ts --game 17              # mark game 17 final in the local document, pay
+ *   node src/cli/live.ts --game 17 --paypal dry # decide only, no PayPal call
+ *   node src/cli/live.ts --game 17 --source url --wait
  *       # watch the scorer's app (TOURNAMENT_URL) until game 17 is saved final on the phone, then pay
  *
  * The first successful live payout is written to results/first-live-run.json; every run goes to
