@@ -1,0 +1,159 @@
+{
+  "day": "2026-05-16",
+  "runId": "sat1",
+  "paypal": "live",
+  "settled": [
+    {
+      "gameId": "",
+      "number": 0,
+      "senderBatchId": "northside-2026-sat1-2026-05-16-off-u",
+      "batchId": "BQ3CCATM4VDEG",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com",
+          "game": 23
+        },
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com",
+          "game": 31
+        },
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com",
+          "game": 39
+        }
+      ],
+      "finalAt": "",
+      "createdAt": "2026-11-02T21:08:16.496Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "officialId": "off-u",
+      "day": "2026-05-16",
+      "total": "75.00",
+      "completedAt": "2026-11-02T21:08:51Z"
+    },
+    {
+      "gameId": "",
+      "number": 0,
+      "senderBatchId": "northside-2026-sat1-2026-05-16-off-v",
+      "batchId": "BEB3987TR6YLN",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com",
+          "game": 24
+        },
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com",
+          "game": 32
+        },
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com",
+          "game": 40
+        }
+      ],
+      "finalAt": "",
+      "createdAt": "2026-11-02T21:08:51.894Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "officialId": "off-v",
+      "day": "2026-05-16",
+      "total": "135.00",
+      "completedAt": "2026-11-02T21:09:24Z"
+    },
+    {
+      "gameId": "",
+      "number": 0,
+      "senderBatchId": "northside-2026-sat1-2026-05-16-off-w",
+      "batchId": "5R4LJLCHNJ4J6",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com",
+          "game": 24
+        },
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com",
+          "game": 32
+        },
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com",
+          "game": 40
+        }
+      ],
+      "finalAt": "",
+      "createdAt": "2026-11-02T21:09:25.010Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "officialId": "off-w",
+      "day": "2026-05-16",
+      "total": "135.00",
+      "completedAt": "2026-11-02T21:09:59Z"
+    },
+    {
+      "gameId": "",
+      "number": 0,
+      "senderBatchId": "northside-2026-sat1-2026-05-16-off-x",
+      "batchId": "RRPAYMRPEH72Q",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com",
+          "game": 24
+        },
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com",
+          "game": 32
+        },
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com",
+          "game": 40
+        }
+      ],
+      "finalAt": "",
+      "createdAt": "2026-11-02T21:10:00.647Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "officialId": "off-x",
+      "day": "2026-05-16",
+      "total": "75.00",
+      "completedAt": "2026-11-02T21:10:33Z"
+    }
+  ]
+}

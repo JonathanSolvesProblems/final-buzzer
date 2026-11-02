@@ -1,0 +1,94 @@
+{
+  "game": {
+    "id": "g005",
+    "number": 44,
+    "division": "Novice",
+    "matchup": "Ridgeway v Harbour",
+    "court": "Gym C",
+    "start": "2026-05-16T16:30",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T21:10:48.488Z",
+  "paypalMode": "dry",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "pay_now",
+    "reason": "scripted: pay everyone on the sheet at the card rate whenever a game ends",
+    "items": [
+      {
+        "official_id": "off-j",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-k",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-l",
+        "role": "table",
+        "amount": 25
+      }
+    ],
+    "fold_official_ids": [],
+    "question_for_treasurer": null,
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    }
+  },
+  "blockedBy": null,
+  "guard": {
+    "ok": true,
+    "checked": [
+      "3 item(s) against 3 on the card",
+      "total 115.00 against the per-game cap 200.00",
+      "every amount equals the rate card"
+    ]
+  },
+  "payout": {
+    "senderBatchId": "northside-2026-sat1-g44",
+    "batchId": null,
+    "status": "DRY_RUN",
+    "completedAt": null,
+    "secondsFromBuzzer": null,
+    "items": [
+      {
+        "official_id": "off-j",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-j@example.com"
+      },
+      {
+        "official_id": "off-k",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-k@example.com"
+      },
+      {
+        "official_id": "off-l",
+        "role": "table",
+        "amount": "25.00",
+        "receiver": "official-l@example.com"
+      }
+    ]
+  },
+  "hold": null,
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "scripted",
+    "calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "ms": 0,
+    "endedBy": "script"
+  },
+  "trace": [],
+  "outcome": "dry"
+}

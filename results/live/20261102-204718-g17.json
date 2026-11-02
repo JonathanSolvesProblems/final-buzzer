@@ -1,0 +1,402 @@
+{
+  "game": {
+    "id": "g053",
+    "number": 17,
+    "division": "Bantam Boys",
+    "matchup": "Bayview v Highland",
+    "court": "Gym EF",
+    "start": "2026-05-16T09:00",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T20:46:36.783Z",
+  "paypalMode": "live",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "pay_now",
+    "items": [
+      {
+        "official_id": "off-a",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-b",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-c",
+        "role": "table",
+        "amount": 25
+      }
+    ],
+    "fold_official_ids": [],
+    "reason": "Game 17 Bayview v Highland is final at 52–47, not a forfeit, and the sheet has two refs and a table official. All three want to be paid per game and PayPal shows nothing paid for this game, so both refs get $45 and the table official gets $25 from the card.",
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    }
+  },
+  "blockedBy": null,
+  "guard": {
+    "ok": true,
+    "checked": [
+      "3 item(s) against 3 on the card",
+      "total 115.00 against the per-game cap 200.00",
+      "every amount equals the rate card"
+    ]
+  },
+  "payout": {
+    "senderBatchId": "northside-2026-20261102-204636-g17",
+    "batchId": "Y5MM9T7CJSCWY",
+    "status": "SUCCESS",
+    "completedAt": "2026-11-02T20:47:17Z",
+    "secondsFromBuzzer": 40.2,
+    "items": [
+      {
+        "official_id": "off-a",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-a@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T20:47:09Z"
+      },
+      {
+        "official_id": "off-b",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-b@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T20:47:10Z"
+      },
+      {
+        "official_id": "off-c",
+        "role": "table",
+        "amount": "25.00",
+        "receiver": "official-c@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T20:47:09Z"
+      }
+    ]
+  },
+  "hold": null,
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 2,
+    "input_tokens": 7233,
+    "output_tokens": 578,
+    "ms": 6853,
+    "endedBy": "terminal"
+  },
+  "trace": [
+    {
+      "t": "2026-11-02T20:46:38.975Z",
+      "ms": 2184,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 2893,
+        "output_tokens": 113
+      }
+    },
+    {
+      "t": "2026-11-02T20:46:38.976Z",
+      "ms": 2185,
+      "kind": "tool",
+      "name": "read_game_sheet",
+      "input": {},
+      "output": {
+        "game": {
+          "number": 17,
+          "division": "Bantam Boys",
+          "matchup": "Bayview v Highland",
+          "court": "Gym EF",
+          "venue": "Northside Collegiate",
+          "start": "2026-05-16T09:00",
+          "status": "final",
+          "score": "52 to 47",
+          "note": null,
+          "bye": false
+        },
+        "previous_status": "scheduled",
+        "officials": [
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-a",
+              "label": "Official A",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-b",
+              "label": "Official B",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "table",
+            "official": {
+              "id": "off-c",
+              "label": "Official C",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2026-11-02T20:46:38.976Z",
+      "ms": 2185,
+      "kind": "tool",
+      "name": "read_rate_card",
+      "input": {},
+      "output": {
+        "currency": "CAD",
+        "per_game": {
+          "referee": 45,
+          "table": 25
+        },
+        "officials_per_game": {
+          "referees": 2,
+          "table": 1
+        },
+        "forfeit": {
+          "rule": "show_up_fee_only",
+          "show_up_fee": null
+        },
+        "bye": {
+          "rule": "no_officials_no_pay"
+        }
+      }
+    },
+    {
+      "t": "2026-11-02T20:46:38.977Z",
+      "ms": 2186,
+      "kind": "tool",
+      "name": "check_paypal_for_game",
+      "input": {},
+      "output": {
+        "already_paid": false,
+        "sender_batch_id": "northside-2026-20261102-204636-g17",
+        "checked": "no batch recorded for this game; PayPal also refuses a repeat of this batch id for 30 days"
+      }
+    },
+    {
+      "t": "2026-11-02T20:46:38.977Z",
+      "ms": 2186,
+      "kind": "tool",
+      "name": "officials_day_schedule",
+      "input": {},
+      "output": [
+        {
+          "id": "off-a",
+          "label": "Official A",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 17,
+              "start": "09:00",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 25,
+              "start": "11:30",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 33,
+              "start": "12:45",
+              "court": "Lakeside 1",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 41,
+              "start": "15:15",
+              "court": "Gym E",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 49,
+              "start": "17:45",
+              "court": "Gym CD",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 25,
+            "start": "11:30",
+            "court": "Gym C",
+            "minutes_after_this_one_started": 150
+          }
+        },
+        {
+          "id": "off-b",
+          "label": "Official B",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 17,
+              "start": "09:00",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 25,
+              "start": "11:30",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 33,
+              "start": "12:45",
+              "court": "Lakeside 1",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 41,
+              "start": "15:15",
+              "court": "Gym E",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 49,
+              "start": "17:45",
+              "court": "Gym CD",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 25,
+            "start": "11:30",
+            "court": "Gym C",
+            "minutes_after_this_one_started": 150
+          }
+        },
+        {
+          "id": "off-c",
+          "label": "Official C",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 17,
+              "start": "09:00",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 25,
+              "start": "11:30",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 33,
+              "start": "12:45",
+              "court": "Lakeside 1",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 41,
+              "start": "15:15",
+              "court": "Gym E",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 49,
+              "start": "17:45",
+              "court": "Gym CD",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 25,
+            "start": "11:30",
+            "court": "Gym C",
+            "minutes_after_this_one_started": 150
+          }
+        }
+      ]
+    },
+    {
+      "t": "2026-11-02T20:46:43.641Z",
+      "ms": 6850,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 4340,
+        "output_tokens": 465
+      }
+    },
+    {
+      "t": "2026-11-02T20:46:43.641Z",
+      "ms": 6850,
+      "kind": "tool",
+      "name": "decide",
+      "input": {
+        "choice": "pay_now",
+        "items": [
+          {
+            "official_id": "off-a",
+            "role": "referee",
+            "amount": 45
+          },
+          {
+            "official_id": "off-b",
+            "role": "referee",
+            "amount": 45
+          },
+          {
+            "official_id": "off-c",
+            "role": "table",
+            "amount": 25
+          }
+        ],
+        "fold_official_ids": [],
+        "reason": "Game 17 Bayview v Highland is final at 52–47, not a forfeit, and the sheet has two refs and a table official. All three want to be paid per game and PayPal shows nothing paid for this game, so both refs get $45 and the table official gets $25 from the card.",
+        "flags": {
+          "forfeit": false,
+          "official_missing": false,
+          "already_paid": false,
+          "amount_uncertain": false,
+          "reopened_score": false
+        }
+      },
+      "output": {
+        "recorded": true,
+        "choice": "pay_now"
+      }
+    }
+  ],
+  "outcome": "paid"
+}

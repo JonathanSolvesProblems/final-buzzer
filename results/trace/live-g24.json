@@ -1,0 +1,320 @@
+{
+  "game": {
+    "id": "g028",
+    "number": 24,
+    "division": "Mini Boys",
+    "matchup": "Lakeshore 4 v Ridgeway",
+    "court": "Gym F",
+    "start": "2026-05-16T11:30",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T20:52:05.893Z",
+  "paypalMode": "live",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "fold",
+    "reason": "Game 24 is final, 41 to 35, not a forfeit. The sheet is full: refs V and W and table official X. PayPal shows nothing paid for this game. All three asked to be paid at the end of the day and all have game 32 at 12:45 later today, so their pay for this game waits for the end-of-day payout.",
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    },
+    "fold_official_ids": [
+      "off-v",
+      "off-w",
+      "off-x"
+    ]
+  },
+  "blockedBy": null,
+  "guard": null,
+  "payout": null,
+  "hold": null,
+  "folded": [
+    "off-v",
+    "off-w",
+    "off-x"
+  ],
+  "error": null,
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 2,
+    "input_tokens": 7164,
+    "output_tokens": 935,
+    "ms": 10551,
+    "endedBy": "terminal"
+  },
+  "trace": [
+    {
+      "t": "2026-11-02T20:52:07.729Z",
+      "ms": 1835,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 2899,
+        "output_tokens": 113
+      }
+    },
+    {
+      "t": "2026-11-02T20:52:07.729Z",
+      "ms": 1835,
+      "kind": "tool",
+      "name": "read_game_sheet",
+      "input": {},
+      "output": {
+        "game": {
+          "number": 24,
+          "division": "Mini Boys",
+          "matchup": "Lakeshore 4 v Ridgeway",
+          "court": "Gym F",
+          "venue": "Northside Collegiate",
+          "start": "2026-05-16T11:30",
+          "status": "final",
+          "score": "41 to 35",
+          "note": null,
+          "bye": false
+        },
+        "previous_status": "scheduled",
+        "officials": [
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-v",
+              "label": "Official V",
+              "payout_preference": "end_of_day",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-w",
+              "label": "Official W",
+              "payout_preference": "end_of_day",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "table",
+            "official": {
+              "id": "off-x",
+              "label": "Official X",
+              "payout_preference": "end_of_day",
+              "paypal": "o***@example.com"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2026-11-02T20:52:07.729Z",
+      "ms": 1835,
+      "kind": "tool",
+      "name": "read_rate_card",
+      "input": {},
+      "output": {
+        "currency": "CAD",
+        "per_game": {
+          "referee": 45,
+          "table": 25
+        },
+        "officials_per_game": {
+          "referees": 2,
+          "table": 1
+        },
+        "forfeit": {
+          "rule": "show_up_fee_only",
+          "show_up_fee": null
+        },
+        "bye": {
+          "rule": "no_officials_no_pay"
+        }
+      }
+    },
+    {
+      "t": "2026-11-02T20:52:07.729Z",
+      "ms": 1835,
+      "kind": "tool",
+      "name": "check_paypal_for_game",
+      "input": {},
+      "output": {
+        "already_paid": false,
+        "sender_batch_id": "northside-2026-sat1-g24",
+        "checked": "no batch recorded for this game; PayPal also refuses a repeat of this batch id for 30 days"
+      }
+    },
+    {
+      "t": "2026-11-02T20:52:07.729Z",
+      "ms": 1835,
+      "kind": "tool",
+      "name": "officials_day_schedule",
+      "input": {},
+      "output": [
+        {
+          "id": "off-v",
+          "label": "Official V",
+          "payout_preference": "end_of_day",
+          "games_today": [
+            {
+              "number": 24,
+              "start": "11:30",
+              "court": "Gym F",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 32,
+              "start": "12:45",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 40,
+              "start": "15:15",
+              "court": "Gym D",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 48,
+              "start": "16:30",
+              "court": "Lakeside 1",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 32,
+            "start": "12:45",
+            "court": "Lakeside 2",
+            "minutes_after_this_one_started": 75
+          }
+        },
+        {
+          "id": "off-w",
+          "label": "Official W",
+          "payout_preference": "end_of_day",
+          "games_today": [
+            {
+              "number": 24,
+              "start": "11:30",
+              "court": "Gym F",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 32,
+              "start": "12:45",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 40,
+              "start": "15:15",
+              "court": "Gym D",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 48,
+              "start": "16:30",
+              "court": "Lakeside 1",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 32,
+            "start": "12:45",
+            "court": "Lakeside 2",
+            "minutes_after_this_one_started": 75
+          }
+        },
+        {
+          "id": "off-x",
+          "label": "Official X",
+          "payout_preference": "end_of_day",
+          "games_today": [
+            {
+              "number": 24,
+              "start": "11:30",
+              "court": "Gym F",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 32,
+              "start": "12:45",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 40,
+              "start": "15:15",
+              "court": "Gym D",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 48,
+              "start": "16:30",
+              "court": "Lakeside 1",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 32,
+            "start": "12:45",
+            "court": "Lakeside 2",
+            "minutes_after_this_one_started": 75
+          }
+        }
+      ]
+    },
+    {
+      "t": "2026-11-02T20:52:16.444Z",
+      "ms": 10550,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 4265,
+        "output_tokens": 822
+      }
+    },
+    {
+      "t": "2026-11-02T20:52:16.444Z",
+      "ms": 10550,
+      "kind": "tool",
+      "name": "decide",
+      "input": {
+        "choice": "fold",
+        "reason": "Game 24 is final, 41 to 35, not a forfeit. The sheet is full: refs V and W and table official X. PayPal shows nothing paid for this game. All three asked to be paid at the end of the day and all have game 32 at 12:45 later today, so their pay for this game waits for the end-of-day payout.",
+        "flags": {
+          "forfeit": false,
+          "official_missing": false,
+          "already_paid": false,
+          "amount_uncertain": false,
+          "reopened_score": false
+        },
+        "fold_official_ids": [
+          "off-v",
+          "off-w",
+          "off-x"
+        ]
+      },
+      "output": {
+        "recorded": true,
+        "choice": "fold"
+      }
+    }
+  ],
+  "outcome": "folded"
+}

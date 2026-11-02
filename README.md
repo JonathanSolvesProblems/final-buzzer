@@ -73,7 +73,24 @@ It cannot pay an amount that is not on the rate card. It cannot pay a forfeit's 
 
 ## Results
 
-Measured figures live in `results/` and are checked against this file by `src/cli/check-claims.ts`. Until `results/buzzer-replay.json` exists, this section makes no claim.
+Officials paid a median of 40.2 s after the final buzzer: Saturday's 34 games replayed live through the agent and the PayPal sandbox, 2 November 2026 (`results/buzzer-replay.json`).
+
+| | Result |
+|---|---|
+| Games paid | 28 of Saturday's 34, 81 officials, $3,145 CAD paid out |
+| Buzzer to payout | median 40.2 s, fastest 38.7 s, slowest 45.8 s. About 7 s is the agent deciding; the rest is PayPal completing the batch |
+| Held for Sam | 3: a game PayPal already showed paid (a re-saved score), the staged forfeit, the game with no table official |
+| End-of-day batch | 12 shares folded during the day, paid that evening as one payout per official, $420 (`results/settle-2026-05-16.json`) |
+| Errors | 0 |
+| Model cost | about $1.40 for the 34 games |
+
+Seconds are PayPal's batch completion time minus the moment the score was saved. Amounts are test money on a provisional rate card.
+
+**With PayPal switched off** (`results/ablation-no-paypal.json`): the agent held all 34 games. It could not check PayPal's record of a game, so it paid nobody rather than risk paying twice.
+
+**With a fixed rule in place of the agent** (`results/ablation-scripted.json`, a dry run from the same starting state): the rule would have paid the re-saved game a second time, and ignored the four officials who asked to be paid once a day. The forfeit and the missing official it could not pay either, because the code gate refuses them whoever decides: those two catches belong to the gate, the duplicate and the end-of-day preference to the agent.
+
+`npm run check` fails if any figure in this section stops matching those files.
 
 ## Licence
 

@@ -1,0 +1,312 @@
+{
+  "game": {
+    "id": "g064",
+    "number": 36,
+    "division": "Cadet Girls",
+    "matchup": "Bayview v Riverside",
+    "court": "Lakeside 2",
+    "start": "2026-05-16T14:00",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T21:13:29.542Z",
+  "paypalMode": "off",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "hold",
+    "reason": "Game 36 is final, 53 to 47, and the sheet is complete: refs J and K and table official L, all paid per game. By the card that's $45, $45 and $25. But PayPal was switched off, so I couldn't check whether this game was already paid, and nothing could be sent. Held.",
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    },
+    "question_for_treasurer": "Game 36 is final and the sheet is complete. Refs J and K get $45 each and table official L gets $25, $115 in all. PayPal was off, so I couldn't check whether this game was already paid, and nothing was sent. Pay the $115 once PayPal is back on and shows nothing for game 36?"
+  },
+  "blockedBy": null,
+  "guard": null,
+  "payout": null,
+  "hold": {
+    "question": "Game 36 is final and the sheet is complete. Refs J and K get $45 each and table official L gets $25, $115 in all. PayPal was off, so I couldn't check whether this game was already paid, and nothing was sent. Pay the $115 once PayPal is back on and shows nothing for game 36?",
+    "reason": "Game 36 is final, 53 to 47, and the sheet is complete: refs J and K and table official L, all paid per game. By the card that's $45, $45 and $25. But PayPal was switched off, so I couldn't check whether this game was already paid, and nothing could be sent. Held."
+  },
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 2,
+    "input_tokens": 7104,
+    "output_tokens": 532,
+    "ms": 7199,
+    "endedBy": "terminal"
+  },
+  "trace": [
+    {
+      "t": "2026-11-02T21:13:32.159Z",
+      "ms": 2616,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 2896,
+        "output_tokens": 113
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:32.159Z",
+      "ms": 2616,
+      "kind": "tool",
+      "name": "read_game_sheet",
+      "input": {},
+      "output": {
+        "game": {
+          "number": 36,
+          "division": "Cadet Girls",
+          "matchup": "Bayview v Riverside",
+          "court": "Lakeside 2",
+          "venue": "Lakeside College",
+          "start": "2026-05-16T14:00",
+          "status": "final",
+          "score": "53 to 47",
+          "note": null,
+          "bye": false
+        },
+        "previous_status": "scheduled",
+        "officials": [
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-j",
+              "label": "Official J",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-k",
+              "label": "Official K",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "table",
+            "official": {
+              "id": "off-l",
+              "label": "Official L",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:32.159Z",
+      "ms": 2616,
+      "kind": "tool",
+      "name": "read_rate_card",
+      "input": {},
+      "output": {
+        "currency": "CAD",
+        "per_game": {
+          "referee": 45,
+          "table": 25
+        },
+        "officials_per_game": {
+          "referees": 2,
+          "table": 1
+        },
+        "forfeit": {
+          "rule": "show_up_fee_only",
+          "show_up_fee": null
+        },
+        "bye": {
+          "rule": "no_officials_no_pay"
+        }
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:32.159Z",
+      "ms": 2616,
+      "kind": "tool",
+      "name": "check_paypal_for_game",
+      "input": {},
+      "output": {
+        "isError": true,
+        "errorCategory": "permission",
+        "isRetryable": false,
+        "message": "PayPal tools are switched off in this run. Nothing can be checked or paid."
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:32.160Z",
+      "ms": 2617,
+      "kind": "tool",
+      "name": "officials_day_schedule",
+      "input": {},
+      "output": [
+        {
+          "id": "off-j",
+          "label": "Official J",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 20,
+              "start": "10:15",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 28,
+              "start": "11:30",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 36,
+              "start": "14:00",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 44,
+              "start": "16:30",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 44,
+            "start": "16:30",
+            "court": "Gym C",
+            "minutes_after_this_one_started": 150
+          }
+        },
+        {
+          "id": "off-k",
+          "label": "Official K",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 20,
+              "start": "10:15",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 28,
+              "start": "11:30",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 36,
+              "start": "14:00",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 44,
+              "start": "16:30",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 44,
+            "start": "16:30",
+            "court": "Gym C",
+            "minutes_after_this_one_started": 150
+          }
+        },
+        {
+          "id": "off-l",
+          "label": "Official L",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 20,
+              "start": "10:15",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 28,
+              "start": "11:30",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 36,
+              "start": "14:00",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 44,
+              "start": "16:30",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 44,
+            "start": "16:30",
+            "court": "Gym C",
+            "minutes_after_this_one_started": 150
+          }
+        }
+      ]
+    },
+    {
+      "t": "2026-11-02T21:13:36.741Z",
+      "ms": 7198,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 4208,
+        "output_tokens": 419
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:36.741Z",
+      "ms": 7198,
+      "kind": "tool",
+      "name": "decide",
+      "input": {
+        "choice": "hold",
+        "reason": "Game 36 is final, 53 to 47, and the sheet is complete: refs J and K and table official L, all paid per game. By the card that's $45, $45 and $25. But PayPal was switched off, so I couldn't check whether this game was already paid, and nothing could be sent. Held.",
+        "flags": {
+          "forfeit": false,
+          "official_missing": false,
+          "already_paid": false,
+          "amount_uncertain": false,
+          "reopened_score": false
+        },
+        "question_for_treasurer": "Game 36 is final and the sheet is complete. Refs J and K get $45 each and table official L gets $25, $115 in all. PayPal was off, so I couldn't check whether this game was already paid, and nothing was sent. Pay the $115 once PayPal is back on and shows nothing for game 36?"
+      },
+      "output": {
+        "recorded": true,
+        "choice": "hold"
+      }
+    }
+  ],
+  "outcome": "held"
+}

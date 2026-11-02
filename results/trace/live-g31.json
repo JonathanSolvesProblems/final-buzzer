@@ -1,0 +1,369 @@
+{
+  "game": {
+    "id": "g015",
+    "number": 31,
+    "division": "Mini Girls",
+    "matchup": "Lakeshore v Pinecrest",
+    "court": "Gym EF",
+    "start": "2026-05-16T12:45",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T20:55:22.177Z",
+  "paypalMode": "live",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "pay_now",
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    },
+    "items": [
+      {
+        "official_id": "off-s",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-t",
+        "role": "referee",
+        "amount": 45
+      }
+    ],
+    "fold_official_ids": [
+      "off-u"
+    ],
+    "reason": "Game 31 ended 48 to 42 and the sheet has two refs and a table official. PayPal shows nothing paid for this game. Refs S and T are paid $45 each from the card. Table official U asked to be paid at the end of the day and still has game 39 at 15:15, so U's $25 goes into the end-of-day payment."
+  },
+  "blockedBy": null,
+  "guard": {
+    "ok": true,
+    "checked": [
+      "2 item(s) against 2 on the card",
+      "total 90.00 against the per-game cap 200.00",
+      "every amount equals the rate card"
+    ]
+  },
+  "payout": {
+    "senderBatchId": "northside-2026-sat1-g31",
+    "batchId": "8HZ323J4YFMUG",
+    "status": "SUCCESS",
+    "completedAt": "2026-11-02T20:56:03Z",
+    "secondsFromBuzzer": 40.8,
+    "items": [
+      {
+        "official_id": "off-s",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-s@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T20:55:55Z"
+      },
+      {
+        "official_id": "off-t",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-t@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T20:55:55Z"
+      }
+    ]
+  },
+  "hold": null,
+  "folded": [
+    "off-u"
+  ],
+  "error": null,
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 2,
+    "input_tokens": 7135,
+    "output_tokens": 660,
+    "ms": 7519,
+    "endedBy": "terminal"
+  },
+  "trace": [
+    {
+      "t": "2026-11-02T20:55:24.117Z",
+      "ms": 1939,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 2897,
+        "output_tokens": 113
+      }
+    },
+    {
+      "t": "2026-11-02T20:55:24.117Z",
+      "ms": 1939,
+      "kind": "tool",
+      "name": "read_game_sheet",
+      "input": {},
+      "output": {
+        "game": {
+          "number": 31,
+          "division": "Mini Girls",
+          "matchup": "Lakeshore v Pinecrest",
+          "court": "Gym EF",
+          "venue": "Northside Collegiate",
+          "start": "2026-05-16T12:45",
+          "status": "final",
+          "score": "48 to 42",
+          "note": null,
+          "bye": false
+        },
+        "previous_status": "scheduled",
+        "officials": [
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-s",
+              "label": "Official S",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-t",
+              "label": "Official T",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "table",
+            "official": {
+              "id": "off-u",
+              "label": "Official U",
+              "payout_preference": "end_of_day",
+              "paypal": "o***@example.com"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2026-11-02T20:55:24.117Z",
+      "ms": 1939,
+      "kind": "tool",
+      "name": "read_rate_card",
+      "input": {},
+      "output": {
+        "currency": "CAD",
+        "per_game": {
+          "referee": 45,
+          "table": 25
+        },
+        "officials_per_game": {
+          "referees": 2,
+          "table": 1
+        },
+        "forfeit": {
+          "rule": "show_up_fee_only",
+          "show_up_fee": null
+        },
+        "bye": {
+          "rule": "no_officials_no_pay"
+        }
+      }
+    },
+    {
+      "t": "2026-11-02T20:55:24.117Z",
+      "ms": 1939,
+      "kind": "tool",
+      "name": "check_paypal_for_game",
+      "input": {},
+      "output": {
+        "already_paid": false,
+        "sender_batch_id": "northside-2026-sat1-g31",
+        "checked": "no batch recorded for this game; PayPal also refuses a repeat of this batch id for 30 days"
+      }
+    },
+    {
+      "t": "2026-11-02T20:55:24.117Z",
+      "ms": 1939,
+      "kind": "tool",
+      "name": "officials_day_schedule",
+      "input": {},
+      "output": [
+        {
+          "id": "off-s",
+          "label": "Official S",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 23,
+              "start": "10:15",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 31,
+              "start": "12:45",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 39,
+              "start": "15:15",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 47,
+              "start": "16:30",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 39,
+            "start": "15:15",
+            "court": "Gym C",
+            "minutes_after_this_one_started": 150
+          }
+        },
+        {
+          "id": "off-t",
+          "label": "Official T",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 23,
+              "start": "10:15",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 31,
+              "start": "12:45",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 39,
+              "start": "15:15",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 47,
+              "start": "16:30",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 39,
+            "start": "15:15",
+            "court": "Gym C",
+            "minutes_after_this_one_started": 150
+          }
+        },
+        {
+          "id": "off-u",
+          "label": "Official U",
+          "payout_preference": "end_of_day",
+          "games_today": [
+            {
+              "number": 23,
+              "start": "10:15",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 31,
+              "start": "12:45",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 39,
+              "start": "15:15",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 47,
+              "start": "16:30",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 39,
+            "start": "15:15",
+            "court": "Gym C",
+            "minutes_after_this_one_started": 150
+          }
+        }
+      ]
+    },
+    {
+      "t": "2026-11-02T20:55:29.696Z",
+      "ms": 7518,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 4238,
+        "output_tokens": 547
+      }
+    },
+    {
+      "t": "2026-11-02T20:55:29.696Z",
+      "ms": 7518,
+      "kind": "tool",
+      "name": "decide",
+      "input": {
+        "choice": "pay_now",
+        "flags": {
+          "forfeit": false,
+          "official_missing": false,
+          "already_paid": false,
+          "amount_uncertain": false,
+          "reopened_score": false
+        },
+        "items": [
+          {
+            "official_id": "off-s",
+            "role": "referee",
+            "amount": 45
+          },
+          {
+            "official_id": "off-t",
+            "role": "referee",
+            "amount": 45
+          }
+        ],
+        "fold_official_ids": [
+          "off-u"
+        ],
+        "reason": "Game 31 ended 48 to 42 and the sheet has two refs and a table official. PayPal shows nothing paid for this game. Refs S and T are paid $45 each from the card. Table official U asked to be paid at the end of the day and still has game 39 at 15:15, so U's $25 goes into the end-of-day payment."
+      },
+      "output": {
+        "recorded": true,
+        "choice": "pay_now"
+      }
+    }
+  ],
+  "outcome": "paid"
+}

@@ -1,0 +1,2058 @@
+{
+  "slug": "northside-2026",
+  "payouts": {
+    "northside-2026-20261102-204636-g17": {
+      "gameId": "g053",
+      "number": 17,
+      "senderBatchId": "northside-2026-20261102-204636-g17",
+      "batchId": "Y5MM9T7CJSCWY",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-a@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:47:09Z"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:47:10Z"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:47:09Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:46:36.783Z",
+      "createdAt": "2026-11-02T20:46:43.642Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:47:17Z",
+      "secondsFromBuzzer": 40.2
+    },
+    "northside-2026-sat1-g18": {
+      "gameId": "g068",
+      "number": 18,
+      "senderBatchId": "northside-2026-sat1-g18",
+      "batchId": "KNTM7EDFLFFDL",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-d",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-d@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:48:21Z"
+        },
+        {
+          "official_id": "off-e",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-e@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:48:21Z"
+        },
+        {
+          "official_id": "off-f",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-f@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:48:21Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:47:48.182Z",
+      "createdAt": "2026-11-02T20:47:54.783Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:48:28Z",
+      "secondsFromBuzzer": 39.8
+    },
+    "northside-2026-sat1-g19": {
+      "gameId": "g073",
+      "number": 19,
+      "senderBatchId": "northside-2026-sat1-g19",
+      "batchId": "2HYYW7CCZ44FJ",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-g",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-g@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:49:05Z"
+        },
+        {
+          "official_id": "off-h",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-h@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:49:05Z"
+        },
+        {
+          "official_id": "off-i",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-i@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:49:05Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:48:29.528Z",
+      "createdAt": "2026-11-02T20:48:39.290Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:49:13Z",
+      "secondsFromBuzzer": 43.5
+    },
+    "northside-2026-sat1-g20": {
+      "gameId": "g006",
+      "number": 20,
+      "senderBatchId": "northside-2026-sat1-g20",
+      "batchId": "BQ28ZZDL7GUHE",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-j",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-j@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:49:48Z"
+        },
+        {
+          "official_id": "off-k",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-k@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:49:48Z"
+        },
+        {
+          "official_id": "off-l",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-l@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:49:48Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:49:14.643Z",
+      "createdAt": "2026-11-02T20:49:21.439Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:49:56Z",
+      "secondsFromBuzzer": 41.4
+    },
+    "northside-2026-sat1-g21": {
+      "gameId": "g039",
+      "number": 21,
+      "senderBatchId": "northside-2026-sat1-g21",
+      "batchId": "D2VXT29EZLRFC",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-m",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-m@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:50:28Z"
+        },
+        {
+          "official_id": "off-n",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-n@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:50:28Z"
+        },
+        {
+          "official_id": "off-o",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-o@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:50:28Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:49:56.554Z",
+      "createdAt": "2026-11-02T20:50:02.568Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:50:36Z",
+      "secondsFromBuzzer": 39.4
+    },
+    "northside-2026-sat1-g22": {
+      "gameId": "g062",
+      "number": 22,
+      "senderBatchId": "northside-2026-sat1-g22",
+      "batchId": "U2V8E69PSXY6E",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-p",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-p@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:51:09Z"
+        },
+        {
+          "official_id": "off-q",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-q@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:51:09Z"
+        },
+        {
+          "official_id": "off-r",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-r@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:51:09Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:50:36.839Z",
+      "createdAt": "2026-11-02T20:50:43.698Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:51:17Z",
+      "secondsFromBuzzer": 40.2
+    },
+    "northside-2026-sat1-g23": {
+      "gameId": "g069",
+      "number": 23,
+      "senderBatchId": "northside-2026-sat1-g23",
+      "batchId": "A378EACGVGSS2",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-s",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-s@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:51:56Z"
+        },
+        {
+          "official_id": "off-t",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-t@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:51:56Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:51:18.649Z",
+      "createdAt": "2026-11-02T20:51:30.837Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:52:04Z",
+      "secondsFromBuzzer": 45.4
+    },
+    "northside-2026-sat1-g25": {
+      "gameId": "g020",
+      "number": 25,
+      "senderBatchId": "northside-2026-sat1-g25",
+      "batchId": "Y3KMJPJRYFKSU",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-a@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:52:48Z"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:52:48Z"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:52:48Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:52:16.448Z",
+      "createdAt": "2026-11-02T20:52:22.565Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:52:56Z",
+      "secondsFromBuzzer": 39.6
+    },
+    "northside-2026-sat1-g27": {
+      "gameId": "g026",
+      "number": 27,
+      "senderBatchId": "northside-2026-sat1-g27",
+      "batchId": "DNNXDYFTKKDHN",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-g",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-g@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:53:45Z"
+        },
+        {
+          "official_id": "off-h",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-h@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:53:45Z"
+        },
+        {
+          "official_id": "off-i",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-i@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:53:45Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:53:06.218Z",
+      "createdAt": "2026-11-02T20:53:19.002Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:53:52Z",
+      "secondsFromBuzzer": 45.8
+    },
+    "northside-2026-sat1-g28": {
+      "gameId": "g081",
+      "number": 28,
+      "senderBatchId": "northside-2026-sat1-g28",
+      "batchId": "394WJ6ZGCXKZC",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-j",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-j@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:54:25Z"
+        },
+        {
+          "official_id": "off-k",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-k@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:54:25Z"
+        },
+        {
+          "official_id": "off-l",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-l@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:54:25Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:53:53.206Z",
+      "createdAt": "2026-11-02T20:54:00.077Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:54:33Z",
+      "secondsFromBuzzer": 39.8
+    },
+    "northside-2026-sat1-g29": {
+      "gameId": "g084",
+      "number": 29,
+      "senderBatchId": "northside-2026-sat1-g29",
+      "batchId": "HE9D8562LFTNA",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-m",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-m@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:55:09Z"
+        },
+        {
+          "official_id": "off-n",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-n@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:55:09Z"
+        },
+        {
+          "official_id": "off-o",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-o@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:55:09Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:54:34.938Z",
+      "createdAt": "2026-11-02T20:54:42.755Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:55:17Z",
+      "secondsFromBuzzer": 42.1
+    },
+    "northside-2026-sat1-g31": {
+      "gameId": "g015",
+      "number": 31,
+      "senderBatchId": "northside-2026-sat1-g31",
+      "batchId": "8HZ323J4YFMUG",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-s",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-s@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:55:55Z"
+        },
+        {
+          "official_id": "off-t",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-t@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:55:55Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:55:22.177Z",
+      "createdAt": "2026-11-02T20:55:29.696Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:56:03Z",
+      "secondsFromBuzzer": 40.8
+    },
+    "northside-2026-sat1-g33": {
+      "gameId": "g076",
+      "number": 33,
+      "senderBatchId": "northside-2026-sat1-g33",
+      "batchId": "4SNJ7PCP9KLVY",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-a@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:56:42Z"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:56:42Z"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:56:42Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:56:10.508Z",
+      "createdAt": "2026-11-02T20:56:16.270Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:56:50Z",
+      "secondsFromBuzzer": 39.5
+    },
+    "northside-2026-sat1-g34": {
+      "gameId": "g056",
+      "number": 34,
+      "senderBatchId": "northside-2026-sat1-g34",
+      "batchId": "DFP93Z2TQBDM6",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-d",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-d@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:57:26Z"
+        },
+        {
+          "official_id": "off-e",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-e@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:57:26Z"
+        },
+        {
+          "official_id": "off-f",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-f@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:57:25Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:56:51.138Z",
+      "createdAt": "2026-11-02T20:56:59.427Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:57:33Z",
+      "secondsFromBuzzer": 41.9
+    },
+    "northside-2026-sat1-g35": {
+      "gameId": "g047",
+      "number": 35,
+      "senderBatchId": "northside-2026-sat1-g35",
+      "batchId": "YYMA2X4PMP3J8",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-g",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-g@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:58:07Z"
+        },
+        {
+          "official_id": "off-h",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-h@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:58:07Z"
+        },
+        {
+          "official_id": "off-i",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-i@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:58:07Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:57:34.720Z",
+      "createdAt": "2026-11-02T20:57:41.363Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:58:14Z",
+      "secondsFromBuzzer": 39.3
+    },
+    "northside-2026-sat1-g36": {
+      "gameId": "g064",
+      "number": 36,
+      "senderBatchId": "northside-2026-sat1-g36",
+      "batchId": "3EGC6JPXEK4WU",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-j",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-j@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:58:48Z"
+        },
+        {
+          "official_id": "off-k",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-k@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:58:48Z"
+        },
+        {
+          "official_id": "off-l",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-l@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:58:48Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:58:16.147Z",
+      "createdAt": "2026-11-02T20:58:22.089Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:58:56Z",
+      "secondsFromBuzzer": 39.9
+    },
+    "northside-2026-sat1-g37": {
+      "gameId": "g063",
+      "number": 37,
+      "senderBatchId": "northside-2026-sat1-g37",
+      "batchId": "VELM6ZMHM95MJ",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-m",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-m@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:59:29Z"
+        },
+        {
+          "official_id": "off-n",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-n@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:59:30Z"
+        },
+        {
+          "official_id": "off-o",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-o@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:59:29Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:58:56.842Z",
+      "createdAt": "2026-11-02T20:59:03.291Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:59:37Z",
+      "secondsFromBuzzer": 40.2
+    },
+    "northside-2026-sat1-g38": {
+      "gameId": "g003",
+      "number": 38,
+      "senderBatchId": "northside-2026-sat1-g38",
+      "batchId": "6KMS7TY4AR5WS",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-p",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-p@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:00:09Z"
+        },
+        {
+          "official_id": "off-q",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-q@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:00:09Z"
+        },
+        {
+          "official_id": "off-r",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-r@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:00:09Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:59:38.031Z",
+      "createdAt": "2026-11-02T20:59:44.098Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:00:17Z",
+      "secondsFromBuzzer": 39
+    },
+    "northside-2026-sat1-g39": {
+      "gameId": "g019",
+      "number": 39,
+      "senderBatchId": "northside-2026-sat1-g39",
+      "batchId": "6V46RQYXHK57L",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-s",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-s@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:00:53Z"
+        },
+        {
+          "official_id": "off-t",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-t@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:00:53Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:00:17.414Z",
+      "createdAt": "2026-11-02T21:00:29.036Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:01:01Z",
+      "secondsFromBuzzer": 43.6
+    },
+    "northside-2026-sat1-g41": {
+      "gameId": "g027",
+      "number": 41,
+      "senderBatchId": "northside-2026-sat1-g41",
+      "batchId": "BHUKBUWHP949A",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-a@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:01:39Z"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:01:39Z"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:01:39Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:01:08.161Z",
+      "createdAt": "2026-11-02T21:01:13.980Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:01:47Z",
+      "secondsFromBuzzer": 38.8
+    },
+    "northside-2026-sat1-g42": {
+      "gameId": "g079",
+      "number": 42,
+      "senderBatchId": "northside-2026-sat1-g42",
+      "batchId": "2Z5TV24JXLKAU",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-d",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-d@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:02:19Z"
+        },
+        {
+          "official_id": "off-e",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-e@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:02:21Z"
+        },
+        {
+          "official_id": "off-f",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-f@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:02:19Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:01:48.990Z",
+      "createdAt": "2026-11-02T21:01:55.294Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:02:28Z",
+      "secondsFromBuzzer": 39
+    },
+    "northside-2026-sat1-g43": {
+      "gameId": "g077",
+      "number": 43,
+      "senderBatchId": "northside-2026-sat1-g43",
+      "batchId": "MLS6DP4FAVX5E",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-g",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-g@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:03:01Z"
+        },
+        {
+          "official_id": "off-h",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-h@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:03:01Z"
+        },
+        {
+          "official_id": "off-i",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-i@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:03:00Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:02:28.849Z",
+      "createdAt": "2026-11-02T21:02:35.972Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:03:09Z",
+      "secondsFromBuzzer": 40.2
+    },
+    "northside-2026-sat1-g44": {
+      "gameId": "g005",
+      "number": 44,
+      "senderBatchId": "northside-2026-sat1-g44",
+      "batchId": "S9C26657WUH3J",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-j",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-j@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:03:42Z"
+        },
+        {
+          "official_id": "off-k",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-k@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:03:42Z"
+        },
+        {
+          "official_id": "off-l",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-l@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:03:42Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:03:10.599Z",
+      "createdAt": "2026-11-02T21:03:16.495Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:03:50Z",
+      "secondsFromBuzzer": 39.4
+    },
+    "northside-2026-sat1-g45": {
+      "gameId": "g029",
+      "number": 45,
+      "senderBatchId": "northside-2026-sat1-g45",
+      "batchId": "ERX9SQ98SKUJ4",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-m",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-m@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:04:23Z"
+        },
+        {
+          "official_id": "off-n",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-n@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:04:23Z"
+        },
+        {
+          "official_id": "off-o",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-o@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:04:23Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:03:51.251Z",
+      "createdAt": "2026-11-02T21:03:58.228Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:04:30Z",
+      "secondsFromBuzzer": 38.7
+    },
+    "northside-2026-sat1-g46": {
+      "gameId": "g013",
+      "number": 46,
+      "senderBatchId": "northside-2026-sat1-g46",
+      "batchId": "LFAKGE7VLNGSW",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-p",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-p@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:05:02Z"
+        },
+        {
+          "official_id": "off-q",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-q@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:05:02Z"
+        },
+        {
+          "official_id": "off-r",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-r@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:05:03Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:04:30.635Z",
+      "createdAt": "2026-11-02T21:04:36.089Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:05:11Z",
+      "secondsFromBuzzer": 40.4
+    },
+    "northside-2026-sat1-g47": {
+      "gameId": "g060",
+      "number": 47,
+      "senderBatchId": "northside-2026-sat1-g47",
+      "batchId": "EBVKAN38WVXCA",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-s",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-s@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:05:48Z"
+        },
+        {
+          "official_id": "off-t",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-t@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:05:48Z"
+        },
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:05:48Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:05:12.901Z",
+      "createdAt": "2026-11-02T21:05:22.516Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:05:56Z",
+      "secondsFromBuzzer": 43.1
+    },
+    "northside-2026-sat1-g48": {
+      "gameId": "g067",
+      "number": 48,
+      "senderBatchId": "northside-2026-sat1-g48",
+      "batchId": "37XSGDW5QUK8A",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:06:29Z"
+        },
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:06:30Z"
+        },
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:06:30Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:05:57.428Z",
+      "createdAt": "2026-11-02T21:06:03.307Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:06:37Z",
+      "secondsFromBuzzer": 39.6
+    },
+    "northside-2026-sat1-g49": {
+      "gameId": "g048",
+      "number": 49,
+      "senderBatchId": "northside-2026-sat1-g49",
+      "batchId": "EW3FBEMJQFZ7Y",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-a@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:07:12Z"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:07:12Z"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:07:12Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:06:37.694Z",
+      "createdAt": "2026-11-02T21:06:45.841Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:07:20Z",
+      "secondsFromBuzzer": 42.3
+    },
+    "northside-2026-sat1-g50": {
+      "gameId": "g057",
+      "number": 50,
+      "senderBatchId": "northside-2026-sat1-g50",
+      "batchId": "MPCZGQERDQ3NA",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-d",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-d@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:07:53Z"
+        },
+        {
+          "official_id": "off-e",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-e@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:07:53Z"
+        },
+        {
+          "official_id": "off-f",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-f@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:07:53Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:07:20.126Z",
+      "createdAt": "2026-11-02T21:07:27.989Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:08:01Z",
+      "secondsFromBuzzer": 40.9
+    },
+    "northside-2026-sat1-2026-05-16-off-u": {
+      "gameId": "",
+      "number": 0,
+      "senderBatchId": "northside-2026-sat1-2026-05-16-off-u",
+      "batchId": "BQ3CCATM4VDEG",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com",
+          "game": 23
+        },
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com",
+          "game": 31
+        },
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com",
+          "game": 39
+        }
+      ],
+      "finalAt": "",
+      "createdAt": "2026-11-02T21:08:16.496Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "officialId": "off-u",
+      "day": "2026-05-16",
+      "total": "75.00",
+      "completedAt": "2026-11-02T21:08:51Z"
+    },
+    "northside-2026-sat1-2026-05-16-off-v": {
+      "gameId": "",
+      "number": 0,
+      "senderBatchId": "northside-2026-sat1-2026-05-16-off-v",
+      "batchId": "BEB3987TR6YLN",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com",
+          "game": 24
+        },
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com",
+          "game": 32
+        },
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com",
+          "game": 40
+        }
+      ],
+      "finalAt": "",
+      "createdAt": "2026-11-02T21:08:51.894Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "officialId": "off-v",
+      "day": "2026-05-16",
+      "total": "135.00",
+      "completedAt": "2026-11-02T21:09:24Z"
+    },
+    "northside-2026-sat1-2026-05-16-off-w": {
+      "gameId": "",
+      "number": 0,
+      "senderBatchId": "northside-2026-sat1-2026-05-16-off-w",
+      "batchId": "5R4LJLCHNJ4J6",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com",
+          "game": 24
+        },
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com",
+          "game": 32
+        },
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com",
+          "game": 40
+        }
+      ],
+      "finalAt": "",
+      "createdAt": "2026-11-02T21:09:25.010Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "officialId": "off-w",
+      "day": "2026-05-16",
+      "total": "135.00",
+      "completedAt": "2026-11-02T21:09:59Z"
+    },
+    "northside-2026-sat1-2026-05-16-off-x": {
+      "gameId": "",
+      "number": 0,
+      "senderBatchId": "northside-2026-sat1-2026-05-16-off-x",
+      "batchId": "RRPAYMRPEH72Q",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com",
+          "game": 24
+        },
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com",
+          "game": 32
+        },
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com",
+          "game": 40
+        }
+      ],
+      "finalAt": "",
+      "createdAt": "2026-11-02T21:10:00.647Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "officialId": "off-x",
+      "day": "2026-05-16",
+      "total": "75.00",
+      "completedAt": "2026-11-02T21:10:33Z"
+    },
+    "northside-2026-video1-g9": {
+      "gameId": "g018",
+      "number": 9,
+      "senderBatchId": "northside-2026-video1-g9",
+      "batchId": "7MA3YARPKH8N6",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "sb-mmwys29394507@personal.example.com",
+          "status": "SUCCESS",
+          "timeProcessed": "2026-11-02T21:11:56Z"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:11:55Z"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T21:11:55Z"
+        }
+      ],
+      "finalAt": "2026-11-02T21:11:23.266Z",
+      "createdAt": "2026-11-02T21:11:29.494Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T21:12:03Z",
+      "secondsFromBuzzer": 39.7
+    }
+  },
+  "holds": {
+    "g053": {
+      "gameId": "g053",
+      "number": 17,
+      "at": "2026-11-02T20:47:48.178Z",
+      "reason": "Game 17 is final, 57 to 47, with both refs and the table official on the sheet. But PayPal already shows it paid at 20:47:17Z: 45, 45 and 25 CAD, all still unclaimed. So I held it and sent nothing more.",
+      "question": "Game 17 already shows paid on PayPal at 20:47 (two refs at $45, the table official at $25, all unclaimed). Nothing more was sent. Confirm?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": true,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g023": {
+      "gameId": "g023",
+      "number": 26,
+      "at": "2026-11-02T20:53:06.215Z",
+      "reason": "Game 26 went final as a forfeit (20 to 0). The sheet has both refs and the table official, and nothing is paid on PayPal yet. The card pays only a show-up fee for a forfeit, but it doesn't say how much, so I can't work out what to pay.",
+      "question": "Game 26 (Lakeshore 2 v Beacon) was a forfeit. Should we pay the show-up fee (the card doesn't give an amount) or pay in full, $115 (two refs at $45 and the table official at $25)?",
+      "flags": {
+        "forfeit": true,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": true,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g040": {
+      "gameId": "g040",
+      "number": 30,
+      "at": "2026-11-02T20:55:22.165Z",
+      "reason": "Game 30 (Pinecrest v Glenview) is final at 47 to 41, but the sheet has only two refs, P and Q, and no table official. Nobody is paid until Sam confirms who was on the table.",
+      "question": "Game 30 has no table official on the sheet. Who was on the table, or do we pay the two refs only ($45 each)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": true,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    }
+  },
+  "folds": {
+    "off-u": [
+      {
+        "gameId": "g069",
+        "number": 23,
+        "official_id": "off-u",
+        "role": "table",
+        "amount": "25.00",
+        "at": "2026-11-02T20:51:30.837Z"
+      },
+      {
+        "gameId": "g015",
+        "number": 31,
+        "official_id": "off-u",
+        "role": "table",
+        "amount": "25.00",
+        "at": "2026-11-02T20:55:29.696Z"
+      },
+      {
+        "gameId": "g019",
+        "number": 39,
+        "official_id": "off-u",
+        "role": "table",
+        "amount": "25.00",
+        "at": "2026-11-02T21:00:29.036Z"
+      }
+    ],
+    "off-v": [
+      {
+        "gameId": "g028",
+        "number": 24,
+        "official_id": "off-v",
+        "role": "referee",
+        "amount": "45.00",
+        "at": "2026-11-02T20:52:16.444Z"
+      },
+      {
+        "gameId": "g066",
+        "number": 32,
+        "official_id": "off-v",
+        "role": "referee",
+        "amount": "45.00",
+        "at": "2026-11-02T20:56:10.500Z"
+      },
+      {
+        "gameId": "g025",
+        "number": 40,
+        "official_id": "off-v",
+        "role": "referee",
+        "amount": "45.00",
+        "at": "2026-11-02T21:01:08.132Z"
+      }
+    ],
+    "off-w": [
+      {
+        "gameId": "g028",
+        "number": 24,
+        "official_id": "off-w",
+        "role": "referee",
+        "amount": "45.00",
+        "at": "2026-11-02T20:52:16.444Z"
+      },
+      {
+        "gameId": "g066",
+        "number": 32,
+        "official_id": "off-w",
+        "role": "referee",
+        "amount": "45.00",
+        "at": "2026-11-02T20:56:10.500Z"
+      },
+      {
+        "gameId": "g025",
+        "number": 40,
+        "official_id": "off-w",
+        "role": "referee",
+        "amount": "45.00",
+        "at": "2026-11-02T21:01:08.132Z"
+      }
+    ],
+    "off-x": [
+      {
+        "gameId": "g028",
+        "number": 24,
+        "official_id": "off-x",
+        "role": "table",
+        "amount": "25.00",
+        "at": "2026-11-02T20:52:16.444Z"
+      },
+      {
+        "gameId": "g066",
+        "number": 32,
+        "official_id": "off-x",
+        "role": "table",
+        "amount": "25.00",
+        "at": "2026-11-02T20:56:10.500Z"
+      },
+      {
+        "gameId": "g025",
+        "number": 40,
+        "official_id": "off-x",
+        "role": "table",
+        "amount": "25.00",
+        "at": "2026-11-02T21:01:08.132Z"
+      }
+    ]
+  },
+  "events": [
+    {
+      "at": "2026-11-02T20:46:44.578Z",
+      "kind": "payout_created",
+      "gameId": "g053",
+      "number": 17,
+      "detail": "Y5MM9T7CJSCWY"
+    },
+    {
+      "at": "2026-11-02T20:47:18.302Z",
+      "kind": "paid",
+      "gameId": "g053",
+      "number": 17,
+      "detail": {
+        "seconds": 40.2,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:47:48.178Z",
+      "kind": "hold",
+      "gameId": "g053",
+      "number": 17,
+      "detail": "Game 17 is final, 57 to 47, with both refs and the table official on the sheet. But PayPal already shows it paid at 20:47:17Z: 45, 45 and 25 CAD, all still unclaimed. So I held it and sent nothing more."
+    },
+    {
+      "at": "2026-11-02T20:47:55.336Z",
+      "kind": "payout_created",
+      "gameId": "g068",
+      "number": 18,
+      "detail": "KNTM7EDFLFFDL"
+    },
+    {
+      "at": "2026-11-02T20:48:29.524Z",
+      "kind": "paid",
+      "gameId": "g068",
+      "number": 18,
+      "detail": {
+        "seconds": 39.8,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:48:39.821Z",
+      "kind": "payout_created",
+      "gameId": "g073",
+      "number": 19,
+      "detail": "2HYYW7CCZ44FJ"
+    },
+    {
+      "at": "2026-11-02T20:49:14.640Z",
+      "kind": "paid",
+      "gameId": "g073",
+      "number": 19,
+      "detail": {
+        "seconds": 43.5,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:49:22.635Z",
+      "kind": "payout_created",
+      "gameId": "g006",
+      "number": 20,
+      "detail": "BQ28ZZDL7GUHE"
+    },
+    {
+      "at": "2026-11-02T20:49:56.551Z",
+      "kind": "paid",
+      "gameId": "g006",
+      "number": 20,
+      "detail": {
+        "seconds": 41.4,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:50:03.177Z",
+      "kind": "payout_created",
+      "gameId": "g039",
+      "number": 21,
+      "detail": "D2VXT29EZLRFC"
+    },
+    {
+      "at": "2026-11-02T20:50:36.835Z",
+      "kind": "paid",
+      "gameId": "g039",
+      "number": 21,
+      "detail": {
+        "seconds": 39.4,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:50:44.384Z",
+      "kind": "payout_created",
+      "gameId": "g062",
+      "number": 22,
+      "detail": "U2V8E69PSXY6E"
+    },
+    {
+      "at": "2026-11-02T20:51:18.646Z",
+      "kind": "paid",
+      "gameId": "g062",
+      "number": 22,
+      "detail": {
+        "seconds": 40.2,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:51:31.446Z",
+      "kind": "payout_created",
+      "gameId": "g069",
+      "number": 23,
+      "detail": "A378EACGVGSS2"
+    },
+    {
+      "at": "2026-11-02T20:52:05.890Z",
+      "kind": "paid",
+      "gameId": "g069",
+      "number": 23,
+      "detail": {
+        "seconds": 45.4,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:52:16.444Z",
+      "kind": "fold",
+      "gameId": "g028",
+      "number": 24,
+      "detail": [
+        "off-v",
+        "off-w",
+        "off-x"
+      ]
+    },
+    {
+      "at": "2026-11-02T20:52:23.384Z",
+      "kind": "payout_created",
+      "gameId": "g020",
+      "number": 25,
+      "detail": "Y3KMJPJRYFKSU"
+    },
+    {
+      "at": "2026-11-02T20:52:57.448Z",
+      "kind": "paid",
+      "gameId": "g020",
+      "number": 25,
+      "detail": {
+        "seconds": 39.6,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:53:06.215Z",
+      "kind": "hold",
+      "gameId": "g023",
+      "number": 26,
+      "detail": "Game 26 went final as a forfeit (20 to 0). The sheet has both refs and the table official, and nothing is paid on PayPal yet. The card pays only a show-up fee for a forfeit, but it doesn't say how much, so I can't work out what to pay."
+    },
+    {
+      "at": "2026-11-02T20:53:19.627Z",
+      "kind": "payout_created",
+      "gameId": "g026",
+      "number": 27,
+      "detail": "DNNXDYFTKKDHN"
+    },
+    {
+      "at": "2026-11-02T20:53:53.204Z",
+      "kind": "paid",
+      "gameId": "g026",
+      "number": 27,
+      "detail": {
+        "seconds": 45.8,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:54:00.821Z",
+      "kind": "payout_created",
+      "gameId": "g081",
+      "number": 28,
+      "detail": "394WJ6ZGCXKZC"
+    },
+    {
+      "at": "2026-11-02T20:54:34.933Z",
+      "kind": "paid",
+      "gameId": "g081",
+      "number": 28,
+      "detail": {
+        "seconds": 39.8,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:54:43.477Z",
+      "kind": "payout_created",
+      "gameId": "g084",
+      "number": 29,
+      "detail": "HE9D8562LFTNA"
+    },
+    {
+      "at": "2026-11-02T20:55:17.834Z",
+      "kind": "paid",
+      "gameId": "g084",
+      "number": 29,
+      "detail": {
+        "seconds": 42.1,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:55:22.165Z",
+      "kind": "hold",
+      "gameId": "g040",
+      "number": 30,
+      "detail": "Game 30 (Pinecrest v Glenview) is final at 47 to 41, but the sheet has only two refs, P and Q, and no table official. Nobody is paid until Sam confirms who was on the table."
+    },
+    {
+      "at": "2026-11-02T20:55:30.380Z",
+      "kind": "payout_created",
+      "gameId": "g015",
+      "number": 31,
+      "detail": "8HZ323J4YFMUG"
+    },
+    {
+      "at": "2026-11-02T20:56:04.646Z",
+      "kind": "paid",
+      "gameId": "g015",
+      "number": 31,
+      "detail": {
+        "seconds": 40.8,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:56:10.500Z",
+      "kind": "fold",
+      "gameId": "g066",
+      "number": 32,
+      "detail": [
+        "off-v",
+        "off-w",
+        "off-x"
+      ]
+    },
+    {
+      "at": "2026-11-02T20:56:16.747Z",
+      "kind": "payout_created",
+      "gameId": "g076",
+      "number": 33,
+      "detail": "4SNJ7PCP9KLVY"
+    },
+    {
+      "at": "2026-11-02T20:56:51.071Z",
+      "kind": "paid",
+      "gameId": "g076",
+      "number": 33,
+      "detail": {
+        "seconds": 39.5,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:57:00.292Z",
+      "kind": "payout_created",
+      "gameId": "g056",
+      "number": 34,
+      "detail": "DFP93Z2TQBDM6"
+    },
+    {
+      "at": "2026-11-02T20:57:34.715Z",
+      "kind": "paid",
+      "gameId": "g056",
+      "number": 34,
+      "detail": {
+        "seconds": 41.9,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:57:41.980Z",
+      "kind": "payout_created",
+      "gameId": "g047",
+      "number": 35,
+      "detail": "YYMA2X4PMP3J8"
+    },
+    {
+      "at": "2026-11-02T20:58:16.136Z",
+      "kind": "paid",
+      "gameId": "g047",
+      "number": 35,
+      "detail": {
+        "seconds": 39.3,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:58:22.643Z",
+      "kind": "payout_created",
+      "gameId": "g064",
+      "number": 36,
+      "detail": "3EGC6JPXEK4WU"
+    },
+    {
+      "at": "2026-11-02T20:58:56.837Z",
+      "kind": "paid",
+      "gameId": "g064",
+      "number": 36,
+      "detail": {
+        "seconds": 39.9,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:59:03.896Z",
+      "kind": "payout_created",
+      "gameId": "g063",
+      "number": 37,
+      "detail": "VELM6ZMHM95MJ"
+    },
+    {
+      "at": "2026-11-02T20:59:38.027Z",
+      "kind": "paid",
+      "gameId": "g063",
+      "number": 37,
+      "detail": {
+        "seconds": 40.2,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T20:59:44.708Z",
+      "kind": "payout_created",
+      "gameId": "g003",
+      "number": 38,
+      "detail": "6KMS7TY4AR5WS"
+    },
+    {
+      "at": "2026-11-02T21:00:17.389Z",
+      "kind": "paid",
+      "gameId": "g003",
+      "number": 38,
+      "detail": {
+        "seconds": 39,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:00:29.628Z",
+      "kind": "payout_created",
+      "gameId": "g019",
+      "number": 39,
+      "detail": "6V46RQYXHK57L"
+    },
+    {
+      "at": "2026-11-02T21:01:01.768Z",
+      "kind": "paid",
+      "gameId": "g019",
+      "number": 39,
+      "detail": {
+        "seconds": 43.6,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:01:08.132Z",
+      "kind": "fold",
+      "gameId": "g025",
+      "number": 40,
+      "detail": [
+        "off-v",
+        "off-w",
+        "off-x"
+      ]
+    },
+    {
+      "at": "2026-11-02T21:01:14.552Z",
+      "kind": "payout_created",
+      "gameId": "g027",
+      "number": 41,
+      "detail": "BHUKBUWHP949A"
+    },
+    {
+      "at": "2026-11-02T21:01:48.985Z",
+      "kind": "paid",
+      "gameId": "g027",
+      "number": 41,
+      "detail": {
+        "seconds": 38.8,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:01:56.056Z",
+      "kind": "payout_created",
+      "gameId": "g079",
+      "number": 42,
+      "detail": "2Z5TV24JXLKAU"
+    },
+    {
+      "at": "2026-11-02T21:02:28.837Z",
+      "kind": "paid",
+      "gameId": "g079",
+      "number": 42,
+      "detail": {
+        "seconds": 39,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:02:36.546Z",
+      "kind": "payout_created",
+      "gameId": "g077",
+      "number": 43,
+      "detail": "MLS6DP4FAVX5E"
+    },
+    {
+      "at": "2026-11-02T21:03:10.588Z",
+      "kind": "paid",
+      "gameId": "g077",
+      "number": 43,
+      "detail": {
+        "seconds": 40.2,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:03:17.105Z",
+      "kind": "payout_created",
+      "gameId": "g005",
+      "number": 44,
+      "detail": "S9C26657WUH3J"
+    },
+    {
+      "at": "2026-11-02T21:03:51.246Z",
+      "kind": "paid",
+      "gameId": "g005",
+      "number": 44,
+      "detail": {
+        "seconds": 39.4,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:03:58.785Z",
+      "kind": "payout_created",
+      "gameId": "g029",
+      "number": 45,
+      "detail": "ERX9SQ98SKUJ4"
+    },
+    {
+      "at": "2026-11-02T21:04:30.626Z",
+      "kind": "paid",
+      "gameId": "g029",
+      "number": 45,
+      "detail": {
+        "seconds": 38.7,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:04:36.650Z",
+      "kind": "payout_created",
+      "gameId": "g013",
+      "number": 46,
+      "detail": "LFAKGE7VLNGSW"
+    },
+    {
+      "at": "2026-11-02T21:05:12.895Z",
+      "kind": "paid",
+      "gameId": "g013",
+      "number": 46,
+      "detail": {
+        "seconds": 40.4,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:05:23.176Z",
+      "kind": "payout_created",
+      "gameId": "g060",
+      "number": 47,
+      "detail": "EBVKAN38WVXCA"
+    },
+    {
+      "at": "2026-11-02T21:05:57.421Z",
+      "kind": "paid",
+      "gameId": "g060",
+      "number": 47,
+      "detail": {
+        "seconds": 43.1,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:06:03.789Z",
+      "kind": "payout_created",
+      "gameId": "g067",
+      "number": 48,
+      "detail": "37XSGDW5QUK8A"
+    },
+    {
+      "at": "2026-11-02T21:06:37.688Z",
+      "kind": "paid",
+      "gameId": "g067",
+      "number": 48,
+      "detail": {
+        "seconds": 39.6,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:06:46.455Z",
+      "kind": "payout_created",
+      "gameId": "g048",
+      "number": 49,
+      "detail": "EW3FBEMJQFZ7Y"
+    },
+    {
+      "at": "2026-11-02T21:07:20.114Z",
+      "kind": "paid",
+      "gameId": "g048",
+      "number": 49,
+      "detail": {
+        "seconds": 42.3,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:07:28.482Z",
+      "kind": "payout_created",
+      "gameId": "g057",
+      "number": 50,
+      "detail": "MPCZGQERDQ3NA"
+    },
+    {
+      "at": "2026-11-02T21:08:02.454Z",
+      "kind": "paid",
+      "gameId": "g057",
+      "number": 50,
+      "detail": {
+        "seconds": 40.9,
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:08:51.893Z",
+      "kind": "settled",
+      "detail": {
+        "officialId": "off-u",
+        "batch": "BQ3CCATM4VDEG",
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:09:25.009Z",
+      "kind": "settled",
+      "detail": {
+        "officialId": "off-v",
+        "batch": "BEB3987TR6YLN",
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:10:00.646Z",
+      "kind": "settled",
+      "detail": {
+        "officialId": "off-w",
+        "batch": "5R4LJLCHNJ4J6",
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:10:35.405Z",
+      "kind": "settled",
+      "detail": {
+        "officialId": "off-x",
+        "batch": "RRPAYMRPEH72Q",
+        "status": "SUCCESS"
+      }
+    },
+    {
+      "at": "2026-11-02T21:11:30.814Z",
+      "kind": "payout_created",
+      "gameId": "g018",
+      "number": 9,
+      "detail": "7MA3YARPKH8N6"
+    },
+    {
+      "at": "2026-11-02T21:12:03.247Z",
+      "kind": "paid",
+      "gameId": "g018",
+      "number": 9,
+      "detail": {
+        "seconds": 39.7,
+        "status": "SUCCESS"
+      }
+    }
+  ]
+}

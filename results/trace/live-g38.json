@@ -1,0 +1,374 @@
+{
+  "game": {
+    "id": "g003",
+    "number": 38,
+    "division": "Novice",
+    "matchup": "Westbrook v Hilltop",
+    "court": "Gym F",
+    "start": "2026-05-16T15:15",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T20:59:38.031Z",
+  "paypalMode": "live",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "pay_now",
+    "items": [
+      {
+        "official_id": "off-p",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-q",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-r",
+        "role": "table",
+        "amount": 25
+      }
+    ],
+    "fold_official_ids": [],
+    "reason": "Game 38 is final at 55 to 30 and it wasn't a forfeit. The sheet has all three officials: two refs (P, Q) and a table official (R). All three asked to be paid per game, and PayPal shows nothing paid for this game, so each is paid from the card: refs $45, table $25.",
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    }
+  },
+  "blockedBy": null,
+  "guard": {
+    "ok": true,
+    "checked": [
+      "3 item(s) against 3 on the card",
+      "total 115.00 against the per-game cap 200.00",
+      "every amount equals the rate card"
+    ]
+  },
+  "payout": {
+    "senderBatchId": "northside-2026-sat1-g38",
+    "batchId": "6KMS7TY4AR5WS",
+    "status": "SUCCESS",
+    "completedAt": "2026-11-02T21:00:17Z",
+    "secondsFromBuzzer": 39,
+    "items": [
+      {
+        "official_id": "off-p",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-p@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T21:00:09Z"
+      },
+      {
+        "official_id": "off-q",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-q@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T21:00:09Z"
+      },
+      {
+        "official_id": "off-r",
+        "role": "table",
+        "amount": "25.00",
+        "receiver": "official-r@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T21:00:09Z"
+      }
+    ]
+  },
+  "hold": null,
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 2,
+    "input_tokens": 7063,
+    "output_tokens": 538,
+    "ms": 6067,
+    "endedBy": "terminal"
+  },
+  "trace": [
+    {
+      "t": "2026-11-02T20:59:39.915Z",
+      "ms": 1884,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 2891,
+        "output_tokens": 113
+      }
+    },
+    {
+      "t": "2026-11-02T20:59:39.915Z",
+      "ms": 1884,
+      "kind": "tool",
+      "name": "read_game_sheet",
+      "input": {},
+      "output": {
+        "game": {
+          "number": 38,
+          "division": "Novice",
+          "matchup": "Westbrook v Hilltop",
+          "court": "Gym F",
+          "venue": "Northside Collegiate",
+          "start": "2026-05-16T15:15",
+          "status": "final",
+          "score": "55 to 30",
+          "note": null,
+          "bye": false
+        },
+        "previous_status": "scheduled",
+        "officials": [
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-p",
+              "label": "Official P",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-q",
+              "label": "Official Q",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "table",
+            "official": {
+              "id": "off-r",
+              "label": "Official R",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2026-11-02T20:59:39.915Z",
+      "ms": 1884,
+      "kind": "tool",
+      "name": "read_rate_card",
+      "input": {},
+      "output": {
+        "currency": "CAD",
+        "per_game": {
+          "referee": 45,
+          "table": 25
+        },
+        "officials_per_game": {
+          "referees": 2,
+          "table": 1
+        },
+        "forfeit": {
+          "rule": "show_up_fee_only",
+          "show_up_fee": null
+        },
+        "bye": {
+          "rule": "no_officials_no_pay"
+        }
+      }
+    },
+    {
+      "t": "2026-11-02T20:59:39.916Z",
+      "ms": 1885,
+      "kind": "tool",
+      "name": "check_paypal_for_game",
+      "input": {},
+      "output": {
+        "already_paid": false,
+        "sender_batch_id": "northside-2026-sat1-g38",
+        "checked": "no batch recorded for this game; PayPal also refuses a repeat of this batch id for 30 days"
+      }
+    },
+    {
+      "t": "2026-11-02T20:59:39.916Z",
+      "ms": 1885,
+      "kind": "tool",
+      "name": "officials_day_schedule",
+      "input": {},
+      "output": [
+        {
+          "id": "off-p",
+          "label": "Official P",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 22,
+              "start": "10:15",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 30,
+              "start": "12:45",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 38,
+              "start": "15:15",
+              "court": "Gym F",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 46,
+              "start": "16:30",
+              "court": "Gym E",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 46,
+            "start": "16:30",
+            "court": "Gym E",
+            "minutes_after_this_one_started": 75
+          }
+        },
+        {
+          "id": "off-q",
+          "label": "Official Q",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 22,
+              "start": "10:15",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 30,
+              "start": "12:45",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 38,
+              "start": "15:15",
+              "court": "Gym F",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 46,
+              "start": "16:30",
+              "court": "Gym E",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 46,
+            "start": "16:30",
+            "court": "Gym E",
+            "minutes_after_this_one_started": 75
+          }
+        },
+        {
+          "id": "off-r",
+          "label": "Official R",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 22,
+              "start": "10:15",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 38,
+              "start": "15:15",
+              "court": "Gym F",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 46,
+              "start": "16:30",
+              "court": "Gym E",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 46,
+            "start": "16:30",
+            "court": "Gym E",
+            "minutes_after_this_one_started": 75
+          }
+        }
+      ]
+    },
+    {
+      "t": "2026-11-02T20:59:44.098Z",
+      "ms": 6067,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 4172,
+        "output_tokens": 425
+      }
+    },
+    {
+      "t": "2026-11-02T20:59:44.098Z",
+      "ms": 6067,
+      "kind": "tool",
+      "name": "decide",
+      "input": {
+        "choice": "pay_now",
+        "items": [
+          {
+            "official_id": "off-p",
+            "role": "referee",
+            "amount": 45
+          },
+          {
+            "official_id": "off-q",
+            "role": "referee",
+            "amount": 45
+          },
+          {
+            "official_id": "off-r",
+            "role": "table",
+            "amount": 25
+          }
+        ],
+        "fold_official_ids": [],
+        "reason": "Game 38 is final at 55 to 30 and it wasn't a forfeit. The sheet has all three officials: two refs (P, Q) and a table official (R). All three asked to be paid per game, and PayPal shows nothing paid for this game, so each is paid from the card: refs $45, table $25.",
+        "flags": {
+          "forfeit": false,
+          "official_missing": false,
+          "already_paid": false,
+          "amount_uncertain": false,
+          "reopened_score": false
+        }
+      },
+      "output": {
+        "recorded": true,
+        "choice": "pay_now"
+      }
+    }
+  ],
+  "outcome": "paid"
+}

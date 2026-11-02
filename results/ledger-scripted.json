@@ -1,0 +1,1085 @@
+{
+  "slug": "northside-2026",
+  "payouts": {
+    "northside-2026-20261102-204636-g17": {
+      "gameId": "g053",
+      "number": 17,
+      "senderBatchId": "northside-2026-20261102-204636-g17",
+      "batchId": "Y5MM9T7CJSCWY",
+      "status": "SUCCESS",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-a@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:47:09Z"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:47:10Z"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com",
+          "status": "UNCLAIMED",
+          "timeProcessed": "2026-11-02T20:47:09Z"
+        }
+      ],
+      "finalAt": "2026-11-02T20:46:36.783Z",
+      "createdAt": "2026-11-02T20:46:43.642Z",
+      "decidedBy": "agent",
+      "provisional": true,
+      "completedAt": "2026-11-02T20:47:17Z",
+      "secondsFromBuzzer": 40.2
+    },
+    "northside-2026-sat1-g17": {
+      "gameId": "g053",
+      "number": 17,
+      "senderBatchId": "northside-2026-sat1-g17",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "sb-mmwys29394507@personal.example.com"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.406Z",
+      "createdAt": "2026-11-02T21:10:48.407Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g18": {
+      "gameId": "g068",
+      "number": 18,
+      "senderBatchId": "northside-2026-sat1-g18",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-d",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-d@example.com"
+        },
+        {
+          "official_id": "off-e",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-e@example.com"
+        },
+        {
+          "official_id": "off-f",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-f@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.411Z",
+      "createdAt": "2026-11-02T21:10:48.411Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g19": {
+      "gameId": "g073",
+      "number": 19,
+      "senderBatchId": "northside-2026-sat1-g19",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-g",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-g@example.com"
+        },
+        {
+          "official_id": "off-h",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-h@example.com"
+        },
+        {
+          "official_id": "off-i",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-i@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.415Z",
+      "createdAt": "2026-11-02T21:10:48.415Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g20": {
+      "gameId": "g006",
+      "number": 20,
+      "senderBatchId": "northside-2026-sat1-g20",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-j",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-j@example.com"
+        },
+        {
+          "official_id": "off-k",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-k@example.com"
+        },
+        {
+          "official_id": "off-l",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-l@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.417Z",
+      "createdAt": "2026-11-02T21:10:48.417Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g21": {
+      "gameId": "g039",
+      "number": 21,
+      "senderBatchId": "northside-2026-sat1-g21",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-m",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-m@example.com"
+        },
+        {
+          "official_id": "off-n",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-n@example.com"
+        },
+        {
+          "official_id": "off-o",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-o@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.420Z",
+      "createdAt": "2026-11-02T21:10:48.420Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g22": {
+      "gameId": "g062",
+      "number": 22,
+      "senderBatchId": "northside-2026-sat1-g22",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-p",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-p@example.com"
+        },
+        {
+          "official_id": "off-q",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-q@example.com"
+        },
+        {
+          "official_id": "off-r",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-r@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.426Z",
+      "createdAt": "2026-11-02T21:10:48.426Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g23": {
+      "gameId": "g069",
+      "number": 23,
+      "senderBatchId": "northside-2026-sat1-g23",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-s",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-s@example.com"
+        },
+        {
+          "official_id": "off-t",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-t@example.com"
+        },
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.429Z",
+      "createdAt": "2026-11-02T21:10:48.429Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g24": {
+      "gameId": "g028",
+      "number": 24,
+      "senderBatchId": "northside-2026-sat1-g24",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com"
+        },
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com"
+        },
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.432Z",
+      "createdAt": "2026-11-02T21:10:48.432Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g25": {
+      "gameId": "g020",
+      "number": 25,
+      "senderBatchId": "northside-2026-sat1-g25",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "sb-mmwys29394507@personal.example.com"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.434Z",
+      "createdAt": "2026-11-02T21:10:48.434Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g27": {
+      "gameId": "g026",
+      "number": 27,
+      "senderBatchId": "northside-2026-sat1-g27",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-g",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-g@example.com"
+        },
+        {
+          "official_id": "off-h",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-h@example.com"
+        },
+        {
+          "official_id": "off-i",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-i@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.440Z",
+      "createdAt": "2026-11-02T21:10:48.440Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g28": {
+      "gameId": "g081",
+      "number": 28,
+      "senderBatchId": "northside-2026-sat1-g28",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-j",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-j@example.com"
+        },
+        {
+          "official_id": "off-k",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-k@example.com"
+        },
+        {
+          "official_id": "off-l",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-l@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.443Z",
+      "createdAt": "2026-11-02T21:10:48.443Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g29": {
+      "gameId": "g084",
+      "number": 29,
+      "senderBatchId": "northside-2026-sat1-g29",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-m",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-m@example.com"
+        },
+        {
+          "official_id": "off-n",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-n@example.com"
+        },
+        {
+          "official_id": "off-o",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-o@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.445Z",
+      "createdAt": "2026-11-02T21:10:48.446Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g31": {
+      "gameId": "g015",
+      "number": 31,
+      "senderBatchId": "northside-2026-sat1-g31",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-s",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-s@example.com"
+        },
+        {
+          "official_id": "off-t",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-t@example.com"
+        },
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.451Z",
+      "createdAt": "2026-11-02T21:10:48.452Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g32": {
+      "gameId": "g066",
+      "number": 32,
+      "senderBatchId": "northside-2026-sat1-g32",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com"
+        },
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com"
+        },
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.454Z",
+      "createdAt": "2026-11-02T21:10:48.454Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g33": {
+      "gameId": "g076",
+      "number": 33,
+      "senderBatchId": "northside-2026-sat1-g33",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "sb-mmwys29394507@personal.example.com"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.457Z",
+      "createdAt": "2026-11-02T21:10:48.457Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g34": {
+      "gameId": "g056",
+      "number": 34,
+      "senderBatchId": "northside-2026-sat1-g34",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-d",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-d@example.com"
+        },
+        {
+          "official_id": "off-e",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-e@example.com"
+        },
+        {
+          "official_id": "off-f",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-f@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.460Z",
+      "createdAt": "2026-11-02T21:10:48.460Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g35": {
+      "gameId": "g047",
+      "number": 35,
+      "senderBatchId": "northside-2026-sat1-g35",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-g",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-g@example.com"
+        },
+        {
+          "official_id": "off-h",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-h@example.com"
+        },
+        {
+          "official_id": "off-i",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-i@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.462Z",
+      "createdAt": "2026-11-02T21:10:48.462Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g36": {
+      "gameId": "g064",
+      "number": 36,
+      "senderBatchId": "northside-2026-sat1-g36",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-j",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-j@example.com"
+        },
+        {
+          "official_id": "off-k",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-k@example.com"
+        },
+        {
+          "official_id": "off-l",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-l@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.465Z",
+      "createdAt": "2026-11-02T21:10:48.465Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g37": {
+      "gameId": "g063",
+      "number": 37,
+      "senderBatchId": "northside-2026-sat1-g37",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-m",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-m@example.com"
+        },
+        {
+          "official_id": "off-n",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-n@example.com"
+        },
+        {
+          "official_id": "off-o",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-o@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.467Z",
+      "createdAt": "2026-11-02T21:10:48.467Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g38": {
+      "gameId": "g003",
+      "number": 38,
+      "senderBatchId": "northside-2026-sat1-g38",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-p",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-p@example.com"
+        },
+        {
+          "official_id": "off-q",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-q@example.com"
+        },
+        {
+          "official_id": "off-r",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-r@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.471Z",
+      "createdAt": "2026-11-02T21:10:48.471Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g39": {
+      "gameId": "g019",
+      "number": 39,
+      "senderBatchId": "northside-2026-sat1-g39",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-s",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-s@example.com"
+        },
+        {
+          "official_id": "off-t",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-t@example.com"
+        },
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.474Z",
+      "createdAt": "2026-11-02T21:10:48.474Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g40": {
+      "gameId": "g025",
+      "number": 40,
+      "senderBatchId": "northside-2026-sat1-g40",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com"
+        },
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com"
+        },
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.476Z",
+      "createdAt": "2026-11-02T21:10:48.476Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g41": {
+      "gameId": "g027",
+      "number": 41,
+      "senderBatchId": "northside-2026-sat1-g41",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "sb-mmwys29394507@personal.example.com"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.479Z",
+      "createdAt": "2026-11-02T21:10:48.479Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g42": {
+      "gameId": "g079",
+      "number": 42,
+      "senderBatchId": "northside-2026-sat1-g42",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-d",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-d@example.com"
+        },
+        {
+          "official_id": "off-e",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-e@example.com"
+        },
+        {
+          "official_id": "off-f",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-f@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.482Z",
+      "createdAt": "2026-11-02T21:10:48.482Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g43": {
+      "gameId": "g077",
+      "number": 43,
+      "senderBatchId": "northside-2026-sat1-g43",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-g",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-g@example.com"
+        },
+        {
+          "official_id": "off-h",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-h@example.com"
+        },
+        {
+          "official_id": "off-i",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-i@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.485Z",
+      "createdAt": "2026-11-02T21:10:48.485Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g44": {
+      "gameId": "g005",
+      "number": 44,
+      "senderBatchId": "northside-2026-sat1-g44",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-j",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-j@example.com"
+        },
+        {
+          "official_id": "off-k",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-k@example.com"
+        },
+        {
+          "official_id": "off-l",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-l@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.488Z",
+      "createdAt": "2026-11-02T21:10:48.488Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g45": {
+      "gameId": "g029",
+      "number": 45,
+      "senderBatchId": "northside-2026-sat1-g45",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-m",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-m@example.com"
+        },
+        {
+          "official_id": "off-n",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-n@example.com"
+        },
+        {
+          "official_id": "off-o",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-o@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.491Z",
+      "createdAt": "2026-11-02T21:10:48.491Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g46": {
+      "gameId": "g013",
+      "number": 46,
+      "senderBatchId": "northside-2026-sat1-g46",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-p",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-p@example.com"
+        },
+        {
+          "official_id": "off-q",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-q@example.com"
+        },
+        {
+          "official_id": "off-r",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-r@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.494Z",
+      "createdAt": "2026-11-02T21:10:48.494Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g47": {
+      "gameId": "g060",
+      "number": 47,
+      "senderBatchId": "northside-2026-sat1-g47",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-s",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-s@example.com"
+        },
+        {
+          "official_id": "off-t",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-t@example.com"
+        },
+        {
+          "official_id": "off-u",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-u@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.496Z",
+      "createdAt": "2026-11-02T21:10:48.496Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g48": {
+      "gameId": "g067",
+      "number": 48,
+      "senderBatchId": "northside-2026-sat1-g48",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-v",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-v@example.com"
+        },
+        {
+          "official_id": "off-w",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-w@example.com"
+        },
+        {
+          "official_id": "off-x",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-x@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.498Z",
+      "createdAt": "2026-11-02T21:10:48.498Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g49": {
+      "gameId": "g048",
+      "number": 49,
+      "senderBatchId": "northside-2026-sat1-g49",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-a",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "sb-mmwys29394507@personal.example.com"
+        },
+        {
+          "official_id": "off-b",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-b@example.com"
+        },
+        {
+          "official_id": "off-c",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-c@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.501Z",
+      "createdAt": "2026-11-02T21:10:48.501Z",
+      "decidedBy": "script",
+      "provisional": true
+    },
+    "northside-2026-sat1-g50": {
+      "gameId": "g057",
+      "number": 50,
+      "senderBatchId": "northside-2026-sat1-g50",
+      "batchId": null,
+      "status": "DRY_RUN",
+      "items": [
+        {
+          "official_id": "off-d",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-d@example.com"
+        },
+        {
+          "official_id": "off-e",
+          "role": "referee",
+          "amount": "45.00",
+          "receiver": "official-e@example.com"
+        },
+        {
+          "official_id": "off-f",
+          "role": "table",
+          "amount": "25.00",
+          "receiver": "official-f@example.com"
+        }
+      ],
+      "finalAt": "2026-11-02T21:10:48.503Z",
+      "createdAt": "2026-11-02T21:10:48.503Z",
+      "decidedBy": "script",
+      "provisional": true
+    }
+  },
+  "holds": {
+    "g023": {
+      "gameId": "g023",
+      "number": 26,
+      "at": "2026-11-02T21:10:48.438Z",
+      "reason": "guard blocked the payout: the card says hold: forfeit: the card pays a show-up fee only and its amount is not set",
+      "question": "Game 26: the agent wanted to pay but the gate stopped it (the card says hold: forfeit: the card pays a show-up fee only and its amount is not set). What should be paid?",
+      "flags": {
+        "forfeit": true,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "guard"
+    },
+    "g040": {
+      "gameId": "g040",
+      "number": 30,
+      "at": "2026-11-02T21:10:48.448Z",
+      "reason": "guard blocked the payout: the card says hold: table missing from the sheet",
+      "question": "Game 30: the agent wanted to pay but the gate stopped it (the card says hold: table missing from the sheet). What should be paid?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": true,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "guard"
+    }
+  },
+  "folds": {},
+  "events": [
+    {
+      "at": "2026-11-02T21:10:48.438Z",
+      "kind": "guard_block",
+      "gameId": "g023",
+      "number": 26,
+      "detail": "the card says hold: forfeit: the card pays a show-up fee only and its amount is not set"
+    },
+    {
+      "at": "2026-11-02T21:10:48.448Z",
+      "kind": "guard_block",
+      "gameId": "g040",
+      "number": 30,
+      "detail": "the card says hold: table missing from the sheet"
+    }
+  ]
+}

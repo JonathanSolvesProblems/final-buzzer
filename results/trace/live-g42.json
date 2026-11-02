@@ -1,0 +1,402 @@
+{
+  "game": {
+    "id": "g079",
+    "number": 42,
+    "division": "Juvenile Boys",
+    "matchup": "Stonebridge v Riverside",
+    "court": "Lakeside 2",
+    "start": "2026-05-16T15:15",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T21:01:48.990Z",
+  "paypalMode": "live",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "pay_now",
+    "reason": "Game 42 is final at 59 to 34, not a forfeit, and the sheet is complete: two refs (D, E) and table official F, all paid per game. PayPal shows nothing paid for this game, so each is paid from the card: refs $45, table official $25.",
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    },
+    "items": [
+      {
+        "official_id": "off-d",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-e",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-f",
+        "role": "table",
+        "amount": 25
+      }
+    ],
+    "fold_official_ids": null
+  },
+  "blockedBy": null,
+  "guard": {
+    "ok": true,
+    "checked": [
+      "3 item(s) against 3 on the card",
+      "total 115.00 against the per-game cap 200.00",
+      "every amount equals the rate card"
+    ]
+  },
+  "payout": {
+    "senderBatchId": "northside-2026-sat1-g42",
+    "batchId": "2Z5TV24JXLKAU",
+    "status": "SUCCESS",
+    "completedAt": "2026-11-02T21:02:28Z",
+    "secondsFromBuzzer": 39,
+    "items": [
+      {
+        "official_id": "off-d",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-d@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T21:02:19Z"
+      },
+      {
+        "official_id": "off-e",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-e@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T21:02:21Z"
+      },
+      {
+        "official_id": "off-f",
+        "role": "table",
+        "amount": "25.00",
+        "receiver": "official-f@example.com",
+        "status": "UNCLAIMED",
+        "timeProcessed": "2026-11-02T21:02:19Z"
+      }
+    ]
+  },
+  "hold": null,
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 2,
+    "input_tokens": 7240,
+    "output_tokens": 537,
+    "ms": 6303,
+    "endedBy": "terminal"
+  },
+  "trace": [
+    {
+      "t": "2026-11-02T21:01:50.930Z",
+      "ms": 1940,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 2899,
+        "output_tokens": 113
+      }
+    },
+    {
+      "t": "2026-11-02T21:01:50.930Z",
+      "ms": 1940,
+      "kind": "tool",
+      "name": "read_game_sheet",
+      "input": {},
+      "output": {
+        "game": {
+          "number": 42,
+          "division": "Juvenile Boys",
+          "matchup": "Stonebridge v Riverside",
+          "court": "Lakeside 2",
+          "venue": "Lakeside College",
+          "start": "2026-05-16T15:15",
+          "status": "final",
+          "score": "59 to 34",
+          "note": null,
+          "bye": false
+        },
+        "previous_status": "scheduled",
+        "officials": [
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-d",
+              "label": "Official D",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-e",
+              "label": "Official E",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "table",
+            "official": {
+              "id": "off-f",
+              "label": "Official F",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2026-11-02T21:01:50.930Z",
+      "ms": 1940,
+      "kind": "tool",
+      "name": "read_rate_card",
+      "input": {},
+      "output": {
+        "currency": "CAD",
+        "per_game": {
+          "referee": 45,
+          "table": 25
+        },
+        "officials_per_game": {
+          "referees": 2,
+          "table": 1
+        },
+        "forfeit": {
+          "rule": "show_up_fee_only",
+          "show_up_fee": null
+        },
+        "bye": {
+          "rule": "no_officials_no_pay"
+        }
+      }
+    },
+    {
+      "t": "2026-11-02T21:01:50.930Z",
+      "ms": 1940,
+      "kind": "tool",
+      "name": "check_paypal_for_game",
+      "input": {},
+      "output": {
+        "already_paid": false,
+        "sender_batch_id": "northside-2026-sat1-g42",
+        "checked": "no batch recorded for this game; PayPal also refuses a repeat of this batch id for 30 days"
+      }
+    },
+    {
+      "t": "2026-11-02T21:01:50.930Z",
+      "ms": 1940,
+      "kind": "tool",
+      "name": "officials_day_schedule",
+      "input": {},
+      "output": [
+        {
+          "id": "off-d",
+          "label": "Official D",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 18,
+              "start": "09:00",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 26,
+              "start": "11:30",
+              "court": "Gym D",
+              "status": "forfeit",
+              "this_game": false
+            },
+            {
+              "number": 34,
+              "start": "14:00",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 42,
+              "start": "15:15",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 50,
+              "start": "17:45",
+              "court": "Gym EF",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 50,
+            "start": "17:45",
+            "court": "Gym EF",
+            "minutes_after_this_one_started": 150
+          }
+        },
+        {
+          "id": "off-e",
+          "label": "Official E",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 18,
+              "start": "09:00",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 26,
+              "start": "11:30",
+              "court": "Gym D",
+              "status": "forfeit",
+              "this_game": false
+            },
+            {
+              "number": 34,
+              "start": "14:00",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 42,
+              "start": "15:15",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 50,
+              "start": "17:45",
+              "court": "Gym EF",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 50,
+            "start": "17:45",
+            "court": "Gym EF",
+            "minutes_after_this_one_started": 150
+          }
+        },
+        {
+          "id": "off-f",
+          "label": "Official F",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 18,
+              "start": "09:00",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 26,
+              "start": "11:30",
+              "court": "Gym D",
+              "status": "forfeit",
+              "this_game": false
+            },
+            {
+              "number": 34,
+              "start": "14:00",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 42,
+              "start": "15:15",
+              "court": "Lakeside 2",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 50,
+              "start": "17:45",
+              "court": "Gym EF",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 50,
+            "start": "17:45",
+            "court": "Gym EF",
+            "minutes_after_this_one_started": 150
+          }
+        }
+      ]
+    },
+    {
+      "t": "2026-11-02T21:01:55.293Z",
+      "ms": 6303,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 4341,
+        "output_tokens": 424
+      }
+    },
+    {
+      "t": "2026-11-02T21:01:55.293Z",
+      "ms": 6303,
+      "kind": "tool",
+      "name": "decide",
+      "input": {
+        "choice": "pay_now",
+        "reason": "Game 42 is final at 59 to 34, not a forfeit, and the sheet is complete: two refs (D, E) and table official F, all paid per game. PayPal shows nothing paid for this game, so each is paid from the card: refs $45, table official $25.",
+        "flags": {
+          "forfeit": false,
+          "official_missing": false,
+          "already_paid": false,
+          "amount_uncertain": false,
+          "reopened_score": false
+        },
+        "items": [
+          {
+            "official_id": "off-d",
+            "role": "referee",
+            "amount": 45
+          },
+          {
+            "official_id": "off-e",
+            "role": "referee",
+            "amount": 45
+          },
+          {
+            "official_id": "off-f",
+            "role": "table",
+            "amount": 25
+          }
+        ],
+        "fold_official_ids": null
+      },
+      "output": {
+        "recorded": true,
+        "choice": "pay_now"
+      }
+    }
+  ],
+  "outcome": "paid"
+}

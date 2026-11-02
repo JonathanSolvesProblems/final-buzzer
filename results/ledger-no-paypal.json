@@ -1,0 +1,757 @@
+{
+  "slug": "northside-2026",
+  "payouts": {},
+  "holds": {
+    "g053": {
+      "gameId": "g053",
+      "number": 17,
+      "at": "2026-11-02T21:11:17.252Z",
+      "reason": "Game 17 is final at 57–47. The sheet is complete: 2 refs (A, B) and 1 table official (C), all paid per game. By the card that's $45 per ref and $25 for the table, $115 in total. I couldn't check PayPal for this game because PayPal is switched off, so I can't tell whether it's already paid, and nothing can be sent anyway. Held.",
+      "question": "Game 17 (Bayview v Highland) is final and the sheet is complete. Pay $115 total: $45 each to refs A and B and $25 to table official C? PayPal couldn't be checked, so please confirm it isn't already paid there first.",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g068": {
+      "gameId": "g068",
+      "number": 18,
+      "at": "2026-11-02T21:11:24.535Z",
+      "reason": "Game 18 is final 58 to 48 and the sheet is complete: two refs and one table official, all paid per game, so the card gives $45 per ref and $25 for the table official. PayPal couldn't be checked because it is switched off for this run, so I can't confirm the game isn't already paid. I'm holding it and paying nobody.",
+      "question": "Game 18 is final and the sheet is complete, but I couldn't check PayPal to see if it's already paid. Pay Official D and Official E $45 each as refs and Official F $25 as table official ($115 CAD in total) once PayPal is back?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g073": {
+      "gameId": "g073",
+      "number": 19,
+      "at": "2026-11-02T21:11:31.071Z",
+      "reason": "Game 19 is final at 59 to 30 and the sheet is complete: two refs at $45 and a table official at $25, $115 in total. I couldn't check PayPal to see if this game was already paid because PayPal is switched off right now, so I'm holding it and nothing was sent.",
+      "question": "Game 19 (Hilltop v Crescent) is final and the sheet is complete, but PayPal was off so I couldn't check whether it was already paid. Nothing was sent. Pay Official G and Official H $45 each as refs and Official I $25 as table official ($115 CAD) once PayPal is back on and shows nothing for this game?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g006": {
+      "gameId": "g006",
+      "number": 20,
+      "at": "2026-11-02T21:11:38.415Z",
+      "reason": "Game 20 is final at 60 to 31. The sheet is complete (refs J and K, table official L, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal to see whether this game was already paid, because PayPal is switched off, so I'm holding it rather than risk paying twice.",
+      "question": "Game 20 (Harbour v Granite 3) is final, but I couldn't check PayPal for an earlier payment. Should I pay refs J and K $45 each and table official L $25 ($115 CAD) once PayPal is back on, or has this game already been paid?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g039": {
+      "gameId": "g039",
+      "number": 21,
+      "at": "2026-11-02T21:11:44.631Z",
+      "reason": "Game 21 is final at 61–32 and the sheet is complete: refs M and N, table official O, all paid per game. The card gives $45 per ref and $25 for the table official. I couldn't check PayPal because it's switched off for this run, so I can't confirm the game hasn't already been paid, and nothing can be sent anyway. Held.",
+      "question": "Game 21 (Northside v Cedar) is final and the sheet is complete, but I couldn't reach PayPal to check whether it's already paid. Once PayPal is back, should I pay refs M and N $45 each and table official O $25 (CAD 115 total)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g062": {
+      "gameId": "g062",
+      "number": 22,
+      "at": "2026-11-02T21:11:52.256Z",
+      "reason": "Game 22 is final at 62-33, the sheet is complete (two refs P and Q, table official R, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal because it is switched off for this run, so I can't confirm the game hasn't already been paid, and nothing can be sent anyway. Held, nobody paid.",
+      "question": "Game 22 (Riverside v Glenview) is final but I couldn't check PayPal, so nothing was paid. Pay refs P and Q $45 each and table official R $25 ($115 CAD) once PayPal is back and shows nothing for this game?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g069": {
+      "gameId": "g069",
+      "number": 23,
+      "at": "2026-11-02T21:11:58.557Z",
+      "reason": "Game 23 is final 40–34 and the sheet is full: refs S and T at $45 each, and table official U at $25, who waits for end of day because U has game 31 later. Nobody was paid because PayPal was switched off, so I couldn't check whether this game was already paid or send any money.",
+      "question": "I couldn't reach PayPal for Game 23 (Brookside v Eastgate), so I couldn't check whether it was already paid. Nothing was sent. Pay refs S and T $45 each now, and add table official U's $25 to the end-of-day pay, once PayPal is back?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g028": {
+      "gameId": "g028",
+      "number": 24,
+      "at": "2026-11-02T21:12:07.379Z",
+      "reason": "Game 24 sheet is complete (2 refs, 1 table official), final 41-35, not a forfeit, and the card gives ref $45 and table $25. But I couldn't check PayPal because it's switched off, so I can't confirm this game isn't already paid. Also, the game was on May 16 and only went final Nov 2, so that day's end-of-day pay for these three officials has long passed. Held, nobody paid.",
+      "question": "Game 24 (May 16) only went final today and PayPal couldn't be checked. Were refs V and W and table official X already paid for it in their May 16 end-of-day pay? If not, pay them now, $115 total (V $45, W $45, X $25)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g020": {
+      "gameId": "g020",
+      "number": 25,
+      "at": "2026-11-02T21:12:19.170Z",
+      "reason": "Game 25 is final at 42 to 36 with a full sheet: two refs (A, B) and one table official (C), all paid per game. That comes to $115 off the card. But PayPal couldn't be checked, so I can't confirm this game hasn't already been paid, and nothing can be sent right now. Held.",
+      "question": "Game 25 is final with a full sheet: $45 to each ref (A and B) and $25 to the table official (C), $115 in total. PayPal couldn't be checked or used, so nothing was sent. Once PayPal is back and shows nothing for this game, pay $115?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g023": {
+      "gameId": "g023",
+      "number": 26,
+      "at": "2026-11-02T21:12:24.238Z",
+      "reason": "Game 26 (Lakeshore 2 v Beacon) went final by forfeit with a full sheet: two refs and a table official. The card pays only a show-up fee for a forfeit, and that fee isn't set, so nobody was paid and the game is held. PayPal couldn't be checked either because it's switched off.",
+      "question": "Game 26 was a forfeit. Pay the show-up fee (amount not on the card) or pay in full, $115?",
+      "flags": {
+        "forfeit": true,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": true,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g026": {
+      "gameId": "g026",
+      "number": 27,
+      "at": "2026-11-02T21:12:30.420Z",
+      "reason": "Game 27 is final 44 to 38 and the sheet is complete: two refs (G, H) and table official I, all paid per game. The card says $45 per ref and $25 for the table. But PayPal is switched off, so I couldn't check whether this game was already paid, and nothing can be sent anyway. Held.",
+      "question": "Game 27 (Lakeshore 3 v Granite 3) is final, but PayPal was off so I couldn't check if it's already paid or send anything. Once PayPal is back, pay refs G and H $45 each and table official I $25 ($115 CAD total)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g081": {
+      "gameId": "g081",
+      "number": 28,
+      "at": "2026-11-02T21:12:37.054Z",
+      "reason": "Game 28 is final 45 to 39 with a full sheet (refs J and K, table official L, all paid per game; card says $45 per ref and $25 for the table). PayPal could not be checked because it is switched off in this run, so I can't confirm the game hasn't already been paid. Held, and nobody was paid.",
+      "question": "Game 28 (Stonebridge v Kingsway) is final but PayPal couldn't be checked, so we don't know if it's already paid. It was scheduled for May 16 but marked final on Nov 2. Once PayPal shows nothing for it, pay refs J and K $45 each and table official L $25 ($115 CAD)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g084": {
+      "gameId": "g084",
+      "number": 29,
+      "at": "2026-11-02T21:12:44.107Z",
+      "reason": "Game 29 is final at 46 to 40 and the sheet is complete: two refs (M, N) and table official O, all paid per game, so that's $45, $45 and $25 from the card. But PayPal could not be checked, so I can't confirm the game wasn't already paid. Held and nothing sent.",
+      "question": "Game 29 (Crescent v Eastgate) is final but PayPal couldn't be checked, so nothing was sent. Pay refs M and N $45 each and table official O $25 (CAD $115) once PayPal confirms the game isn't already paid?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g040": {
+      "gameId": "g040",
+      "number": 30,
+      "at": "2026-11-02T21:12:49.734Z",
+      "reason": "Game 30 is final 47 to 41, but the sheet has two refs (P and Q) and no table official. PayPal couldn't be checked this time, so nothing was paid and the game is held for Sam.",
+      "question": "Game 30 has no table official on the sheet. Who was on the table, or pay the two refs only ($45 each)? Note: PayPal couldn't be checked, so make sure it's not already paid before sending anything.",
+      "flags": {
+        "forfeit": false,
+        "official_missing": true,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g015": {
+      "gameId": "g015",
+      "number": 31,
+      "at": "2026-11-02T21:12:56.600Z",
+      "reason": "Game 31 is final 48 to 42 and the sheet is complete: refs S and T, table official U. Nobody was paid because PayPal couldn't be checked: its tools are switched off, so I can't confirm the game hasn't already been paid. If PayPal shows nothing: S and T $45 each now, U ($25 table) waits for end of day since U has game 39 later.",
+      "question": "Game 31 couldn't be checked on PayPal because PayPal is switched off. Is it unpaid? If so: refs S and T get $45 each now, and table official U's $25 waits for U's end-of-day pay.",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g066": {
+      "gameId": "g066",
+      "number": 32,
+      "at": "2026-11-02T21:13:06.348Z",
+      "reason": "Game 32 is final 49 to 43, the sheet is complete and the card gives $45 per ref and $25 for the table official. All three officials asked for end-of-day pay and have game 40 later. But I couldn't check PayPal for this game, so I can't confirm it hasn't already been paid. The game also went final on 2 Nov, months after its 16 May date.",
+      "question": "Game 32 (final 2 Nov, scheduled 16 May): I couldn't check PayPal to see if it's already paid. Should refs V and W ($45 each) and table official X ($25) go into their end-of-day pay?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g076": {
+      "gameId": "g076",
+      "number": 33,
+      "at": "2026-11-02T21:13:13.485Z",
+      "reason": "Game 33 is final at 50 to 44. The sheet is complete (two refs and one table official, all paid per game) and the card gives refs $45 and the table official $25. PayPal couldn't be checked because it's switched off, so I can't confirm this game hasn't already been paid, and nothing can be sent anyway. Held.",
+      "question": "Game 33 (Crescent v Summit) is final, but PayPal is switched off, so I couldn't check whether it was already paid and couldn't pay it. Pay Official A $45 (ref), Official B $45 (ref) and Official C $25 (table official), $115 in total, once PayPal is back and shows nothing for this game?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g056": {
+      "gameId": "g056",
+      "number": 34,
+      "at": "2026-11-02T21:13:21.295Z",
+      "reason": "Game 34 is final 51 to 45. The sheet is complete (refs D and E, table official F, all paid per game), and the card gives $45 per ref and $25 for the table official. I couldn't check PayPal to see if this game was already paid, so it's held and nobody was paid.",
+      "question": "Game 34 (Fairview v Bayview) is final, but I couldn't check PayPal and nothing was sent. Pay refs D and E $45 each and table official F $25 ($115 CAD) once PayPal shows nothing for this game?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g047": {
+      "gameId": "g047",
+      "number": 35,
+      "at": "2026-11-02T21:13:29.528Z",
+      "reason": "Game 35 is final 52–46 and the sheet is complete (refs G and H, table official I, all paid per game), so the card gives $45 per ref and $25 for the table. But PayPal couldn't be checked, so I can't confirm this game hasn't already been paid. It's held and nothing was sent.",
+      "question": "Game 35 (scheduled May 16, marked final Nov 2) is owed $115: refs G and H $45 each, table official I $25. PayPal couldn't be checked, so nothing was sent. Pay it once you've confirmed on PayPal it wasn't already paid?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g064": {
+      "gameId": "g064",
+      "number": 36,
+      "at": "2026-11-02T21:13:36.741Z",
+      "reason": "Game 36 is final, 53 to 47, and the sheet is complete: refs J and K and table official L, all paid per game. By the card that's $45, $45 and $25. But PayPal was switched off, so I couldn't check whether this game was already paid, and nothing could be sent. Held.",
+      "question": "Game 36 is final and the sheet is complete. Refs J and K get $45 each and table official L gets $25, $115 in all. PayPal was off, so I couldn't check whether this game was already paid, and nothing was sent. Pay the $115 once PayPal is back on and shows nothing for game 36?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g063": {
+      "gameId": "g063",
+      "number": 37,
+      "at": "2026-11-02T21:13:45.105Z",
+      "reason": "Game 37 is final at 54 to 48 and the sheet is complete: refs M and N at $45 each and table official O at $25, all paid per game. I couldn't check PayPal because PayPal is switched off right now, so I can't confirm the game hasn't already been paid, and I can't pay anyone. Held.",
+      "question": "Game 37 is final and the sheet is complete (refs M and N $45 each, table official O $25, total $115 CAD), but PayPal is switched off, so I couldn't check whether it's already paid or send anything. Pay the $115 by hand once you've checked PayPal?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g003": {
+      "gameId": "g003",
+      "number": 38,
+      "at": "2026-11-02T21:13:51.508Z",
+      "reason": "Game 38 is final at 55–30 and the sheet is complete: refs P and Q at $45 each and Official R on the table at $25. We can't see PayPal from here, so we can't tell whether this game is already paid, and nothing can be sent. The game is held.",
+      "question": "Game 38 (Westbrook v Hilltop) is final and the sheet is complete, but PayPal was offline, so we couldn't check whether it's already paid and nothing was sent. Pay refs P and Q $45 each and table official R $25 (CAD) once PayPal is back?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g019": {
+      "gameId": "g019",
+      "number": 39,
+      "at": "2026-11-02T21:13:58.867Z",
+      "reason": "Game 39 is final, 56 to 31. The sheet is complete: refs S and T, and U on the table. The card pays $45 per ref and $25 for the table. I couldn't check PayPal because it's switched off, so I can't confirm this game hasn't already been paid, and nothing could be sent anyway. Held.",
+      "question": "Game 39 is final with a complete sheet, but I couldn't check PayPal, so I don't know if it's already been paid. Once PayPal is back, should I pay refs S and T $45 each now and put U's $25 on the table into U's end-of-day payout (U has game 47 at 16:30)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g025": {
+      "gameId": "g025",
+      "number": 40,
+      "at": "2026-11-02T21:14:13.170Z",
+      "reason": "Game 40 is final 57–32 and the sheet is full: 2 refs and a table official. By the card that's $45 per ref and $25 for the table. I couldn't check PayPal to see if this game was already paid. Also, the game was played May 16 but only marked final Nov 2, so that day's end-of-day pay may already have gone out. Held, nobody paid.",
+      "question": "Game 40 (May 16, 15:15) was only marked final on Nov 2, and I couldn't check PayPal. All 3 officials asked to be paid at the end of the day and had game 48 next. Should I put them in that day's end-of-day pay (refs $45 each, table $25, $115 total) once PayPal shows game 40 hasn't been paid?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g027": {
+      "gameId": "g027",
+      "number": 41,
+      "at": "2026-11-02T21:14:19.543Z",
+      "reason": "Game 41 is final at 58–33 with a full sheet (2 refs, 1 table official, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal because it's switched off on this run, so I can't confirm the game hasn't already been paid. Held.",
+      "question": "Game 41 (Ridgeway v Lakeshore 5) is final and the sheet is full, but I couldn't check PayPal to see if it was already paid. Can you check PayPal for Game 41? If nothing is there, should I pay the two refs $45 each and the table official $25 (CAD 115)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g079": {
+      "gameId": "g079",
+      "number": 42,
+      "at": "2026-11-02T21:14:26.386Z",
+      "reason": "Game 42 is final 59–34 and the sheet is complete: two refs (D, E) and one table official (F), all paid per game. The card gives $45 per ref and $25 for the table official, $115 in total. PayPal was switched off, so I couldn't check whether this game was already paid, and I'm holding it rather than risk paying it twice.",
+      "question": "Game 42 is final and the sheet is complete (refs D and E at $45 each, table official F at $25, $115 total), but PayPal couldn't be checked. Once PayPal is back, pay $115 if it shows nothing for this game?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g077": {
+      "gameId": "g077",
+      "number": 43,
+      "at": "2026-11-02T21:14:37.865Z",
+      "reason": "Game 43 is final at 60 to 35. The sheet is complete (refs G and H, table official I, all paid per game, none with a later game), and the card gives $45 per ref and $25 for the table official, $115 in all. PayPal couldn't be checked because PayPal is switched off for this run, so I can't confirm the game hasn't already been paid. Nobody was paid, and the game is held.",
+      "question": "Game 43 couldn't be checked on PayPal (PayPal is off right now), so nothing was sent. Pay refs G and H $45 each and table official I $25 ($115 CAD) once PayPal confirms the game isn't already paid?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g005": {
+      "gameId": "g005",
+      "number": 44,
+      "at": "2026-11-02T21:14:44.914Z",
+      "reason": "Game 44 is final, 61 to 36, and the sheet is complete: refs J and K at $45 each and table official L at $25, all paid per game with no later games. I couldn't check PayPal because it's switched off, so I can't tell whether this game was already paid. It was also marked final in November for a game scheduled in May. So it's held, and nothing was sent.",
+      "question": "Game 44 (Ridgeway v Harbour, May 16) was only marked final on Nov 2, and I couldn't check PayPal to see if it was already paid. Is it unpaid, so I should pay refs J and K $45 each and table official L $25 ($115 CAD)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g029": {
+      "gameId": "g029",
+      "number": 45,
+      "at": "2026-11-02T21:14:52.480Z",
+      "reason": "Game 45 is final, 62 to 37, and the sheet is complete: refs M and N, table official O, all paid per game with no later games. The card gives $45 per ref and $25 for the table, $115 in total. But PayPal could not be checked because PayPal access is switched off in this run, so I can't confirm the game isn't already paid. The game was also scheduled for May 16 and only marked final on Nov 2. Held.",
+      "question": "Game 45 (May 16, marked final Nov 2) is owed $115 total: $45 each to refs M and N, $25 to table official O. I couldn't check PayPal to see if it was already paid. Was it paid already, or should I send the $115 once PayPal is back?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g013": {
+      "gameId": "g013",
+      "number": 46,
+      "at": "2026-11-02T21:14:59.730Z",
+      "reason": "Game 46 is final at 40 to 38 and the sheet is complete: refs P and Q at $45 each and table official R at $25. But PayPal could not be checked or used, so I can't confirm the game hasn't already been paid. Held, and nobody was paid.",
+      "question": "Game 46 (Lakeshore v Northside) is final with a full sheet. PayPal was switched off, so I couldn't check whether it was already paid or send anything. Should I pay refs P and Q $45 each and table official R $25 once PayPal is back and shows nothing for this game?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g060": {
+      "gameId": "g060",
+      "number": 47,
+      "at": "2026-11-02T21:15:08.647Z",
+      "reason": "Game 47 is final, 41 to 39, with a full sheet: refs S and T, Official U on the table. Nobody has another game today, so everyone would be paid now ($45 per ref, $25 for the table). But PayPal was switched off, so I couldn't check whether this game was already paid, and nothing can be sent. Held.",
+      "question": "Game 47 (May 16, 16:30) only went final today, Nov 2, and I couldn't check PayPal to see whether it was already paid. Nothing was sent. Pay refs S and T $45 each and table official U $25 (CAD $115 total) once PayPal is back on, if it isn't already paid?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g067": {
+      "gameId": "g067",
+      "number": 48,
+      "at": "2026-11-02T21:15:15.757Z",
+      "reason": "Game 48 is final 42 to 40, and the sheet is complete: two refs (V, W) and table official X. None of them has a later game today, so all three are owed now: refs $45 each and table $25, $115 CAD in total. PayPal was switched off, so I couldn't check whether this game was already paid, and nothing could be sent. Held, not paid.",
+      "question": "Game 48: PayPal couldn't be checked or used, so nothing was paid. Once PayPal is back and shows no payment for this game, pay refs V and W $45 each and table official X $25 ($115 CAD)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g048": {
+      "gameId": "g048",
+      "number": 49,
+      "at": "2026-11-02T21:15:23.381Z",
+      "reason": "Game 49 is final 43 to 41 and the sheet is full (two refs and a table official, all paid per game, none with a later game). But I couldn't check PayPal to see if this game was already paid, because PayPal is switched off right now, so nothing was paid. Also, the game was scheduled for May 16 but only went final on Nov 2.",
+      "question": "Game 49 (scheduled May 16, marked final Nov 2): PayPal couldn't be checked, so nothing was paid. Once PayPal shows no payment for this game, pay the two refs $45 each and the table official $25 (CAD 115 total)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    },
+    "g057": {
+      "gameId": "g057",
+      "number": 50,
+      "at": "2026-11-02T21:15:30.510Z",
+      "reason": "Game 50 (Highland v Hilltop, 44–42) is final and the sheet is complete: two refs (D, E) and one table official (F), all paid per game. But I couldn't check PayPal to see whether this game was already paid, because PayPal is switched off, so I'm holding it and paying nobody.",
+      "question": "Game 50 is final with a full sheet, but I couldn't check PayPal to see if it was already paid. Once PayPal is back, should I pay refs D and E $45 each and table official F $25 (CAD 115 total)?",
+      "flags": {
+        "forfeit": false,
+        "official_missing": false,
+        "already_paid": false,
+        "amount_uncertain": false,
+        "reopened_score": false
+      },
+      "by": "agent"
+    }
+  },
+  "folds": {},
+  "events": [
+    {
+      "at": "2026-11-02T21:11:17.252Z",
+      "kind": "hold",
+      "gameId": "g053",
+      "number": 17,
+      "detail": "Game 17 is final at 57–47. The sheet is complete: 2 refs (A, B) and 1 table official (C), all paid per game. By the card that's $45 per ref and $25 for the table, $115 in total. I couldn't check PayPal for this game because PayPal is switched off, so I can't tell whether it's already paid, and nothing can be sent anyway. Held."
+    },
+    {
+      "at": "2026-11-02T21:11:24.535Z",
+      "kind": "hold",
+      "gameId": "g068",
+      "number": 18,
+      "detail": "Game 18 is final 58 to 48 and the sheet is complete: two refs and one table official, all paid per game, so the card gives $45 per ref and $25 for the table official. PayPal couldn't be checked because it is switched off for this run, so I can't confirm the game isn't already paid. I'm holding it and paying nobody."
+    },
+    {
+      "at": "2026-11-02T21:11:31.071Z",
+      "kind": "hold",
+      "gameId": "g073",
+      "number": 19,
+      "detail": "Game 19 is final at 59 to 30 and the sheet is complete: two refs at $45 and a table official at $25, $115 in total. I couldn't check PayPal to see if this game was already paid because PayPal is switched off right now, so I'm holding it and nothing was sent."
+    },
+    {
+      "at": "2026-11-02T21:11:38.415Z",
+      "kind": "hold",
+      "gameId": "g006",
+      "number": 20,
+      "detail": "Game 20 is final at 60 to 31. The sheet is complete (refs J and K, table official L, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal to see whether this game was already paid, because PayPal is switched off, so I'm holding it rather than risk paying twice."
+    },
+    {
+      "at": "2026-11-02T21:11:44.631Z",
+      "kind": "hold",
+      "gameId": "g039",
+      "number": 21,
+      "detail": "Game 21 is final at 61–32 and the sheet is complete: refs M and N, table official O, all paid per game. The card gives $45 per ref and $25 for the table official. I couldn't check PayPal because it's switched off for this run, so I can't confirm the game hasn't already been paid, and nothing can be sent anyway. Held."
+    },
+    {
+      "at": "2026-11-02T21:11:52.256Z",
+      "kind": "hold",
+      "gameId": "g062",
+      "number": 22,
+      "detail": "Game 22 is final at 62-33, the sheet is complete (two refs P and Q, table official R, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal because it is switched off for this run, so I can't confirm the game hasn't already been paid, and nothing can be sent anyway. Held, nobody paid."
+    },
+    {
+      "at": "2026-11-02T21:11:58.557Z",
+      "kind": "hold",
+      "gameId": "g069",
+      "number": 23,
+      "detail": "Game 23 is final 40–34 and the sheet is full: refs S and T at $45 each, and table official U at $25, who waits for end of day because U has game 31 later. Nobody was paid because PayPal was switched off, so I couldn't check whether this game was already paid or send any money."
+    },
+    {
+      "at": "2026-11-02T21:12:07.379Z",
+      "kind": "hold",
+      "gameId": "g028",
+      "number": 24,
+      "detail": "Game 24 sheet is complete (2 refs, 1 table official), final 41-35, not a forfeit, and the card gives ref $45 and table $25. But I couldn't check PayPal because it's switched off, so I can't confirm this game isn't already paid. Also, the game was on May 16 and only went final Nov 2, so that day's end-of-day pay for these three officials has long passed. Held, nobody paid."
+    },
+    {
+      "at": "2026-11-02T21:12:19.170Z",
+      "kind": "hold",
+      "gameId": "g020",
+      "number": 25,
+      "detail": "Game 25 is final at 42 to 36 with a full sheet: two refs (A, B) and one table official (C), all paid per game. That comes to $115 off the card. But PayPal couldn't be checked, so I can't confirm this game hasn't already been paid, and nothing can be sent right now. Held."
+    },
+    {
+      "at": "2026-11-02T21:12:24.238Z",
+      "kind": "hold",
+      "gameId": "g023",
+      "number": 26,
+      "detail": "Game 26 (Lakeshore 2 v Beacon) went final by forfeit with a full sheet: two refs and a table official. The card pays only a show-up fee for a forfeit, and that fee isn't set, so nobody was paid and the game is held. PayPal couldn't be checked either because it's switched off."
+    },
+    {
+      "at": "2026-11-02T21:12:30.420Z",
+      "kind": "hold",
+      "gameId": "g026",
+      "number": 27,
+      "detail": "Game 27 is final 44 to 38 and the sheet is complete: two refs (G, H) and table official I, all paid per game. The card says $45 per ref and $25 for the table. But PayPal is switched off, so I couldn't check whether this game was already paid, and nothing can be sent anyway. Held."
+    },
+    {
+      "at": "2026-11-02T21:12:37.054Z",
+      "kind": "hold",
+      "gameId": "g081",
+      "number": 28,
+      "detail": "Game 28 is final 45 to 39 with a full sheet (refs J and K, table official L, all paid per game; card says $45 per ref and $25 for the table). PayPal could not be checked because it is switched off in this run, so I can't confirm the game hasn't already been paid. Held, and nobody was paid."
+    },
+    {
+      "at": "2026-11-02T21:12:44.108Z",
+      "kind": "hold",
+      "gameId": "g084",
+      "number": 29,
+      "detail": "Game 29 is final at 46 to 40 and the sheet is complete: two refs (M, N) and table official O, all paid per game, so that's $45, $45 and $25 from the card. But PayPal could not be checked, so I can't confirm the game wasn't already paid. Held and nothing sent."
+    },
+    {
+      "at": "2026-11-02T21:12:49.734Z",
+      "kind": "hold",
+      "gameId": "g040",
+      "number": 30,
+      "detail": "Game 30 is final 47 to 41, but the sheet has two refs (P and Q) and no table official. PayPal couldn't be checked this time, so nothing was paid and the game is held for Sam."
+    },
+    {
+      "at": "2026-11-02T21:12:56.601Z",
+      "kind": "hold",
+      "gameId": "g015",
+      "number": 31,
+      "detail": "Game 31 is final 48 to 42 and the sheet is complete: refs S and T, table official U. Nobody was paid because PayPal couldn't be checked: its tools are switched off, so I can't confirm the game hasn't already been paid. If PayPal shows nothing: S and T $45 each now, U ($25 table) waits for end of day since U has game 39 later."
+    },
+    {
+      "at": "2026-11-02T21:13:06.348Z",
+      "kind": "hold",
+      "gameId": "g066",
+      "number": 32,
+      "detail": "Game 32 is final 49 to 43, the sheet is complete and the card gives $45 per ref and $25 for the table official. All three officials asked for end-of-day pay and have game 40 later. But I couldn't check PayPal for this game, so I can't confirm it hasn't already been paid. The game also went final on 2 Nov, months after its 16 May date."
+    },
+    {
+      "at": "2026-11-02T21:13:13.485Z",
+      "kind": "hold",
+      "gameId": "g076",
+      "number": 33,
+      "detail": "Game 33 is final at 50 to 44. The sheet is complete (two refs and one table official, all paid per game) and the card gives refs $45 and the table official $25. PayPal couldn't be checked because it's switched off, so I can't confirm this game hasn't already been paid, and nothing can be sent anyway. Held."
+    },
+    {
+      "at": "2026-11-02T21:13:21.295Z",
+      "kind": "hold",
+      "gameId": "g056",
+      "number": 34,
+      "detail": "Game 34 is final 51 to 45. The sheet is complete (refs D and E, table official F, all paid per game), and the card gives $45 per ref and $25 for the table official. I couldn't check PayPal to see if this game was already paid, so it's held and nobody was paid."
+    },
+    {
+      "at": "2026-11-02T21:13:29.528Z",
+      "kind": "hold",
+      "gameId": "g047",
+      "number": 35,
+      "detail": "Game 35 is final 52–46 and the sheet is complete (refs G and H, table official I, all paid per game), so the card gives $45 per ref and $25 for the table. But PayPal couldn't be checked, so I can't confirm this game hasn't already been paid. It's held and nothing was sent."
+    },
+    {
+      "at": "2026-11-02T21:13:36.741Z",
+      "kind": "hold",
+      "gameId": "g064",
+      "number": 36,
+      "detail": "Game 36 is final, 53 to 47, and the sheet is complete: refs J and K and table official L, all paid per game. By the card that's $45, $45 and $25. But PayPal was switched off, so I couldn't check whether this game was already paid, and nothing could be sent. Held."
+    },
+    {
+      "at": "2026-11-02T21:13:45.105Z",
+      "kind": "hold",
+      "gameId": "g063",
+      "number": 37,
+      "detail": "Game 37 is final at 54 to 48 and the sheet is complete: refs M and N at $45 each and table official O at $25, all paid per game. I couldn't check PayPal because PayPal is switched off right now, so I can't confirm the game hasn't already been paid, and I can't pay anyone. Held."
+    },
+    {
+      "at": "2026-11-02T21:13:51.508Z",
+      "kind": "hold",
+      "gameId": "g003",
+      "number": 38,
+      "detail": "Game 38 is final at 55–30 and the sheet is complete: refs P and Q at $45 each and Official R on the table at $25. We can't see PayPal from here, so we can't tell whether this game is already paid, and nothing can be sent. The game is held."
+    },
+    {
+      "at": "2026-11-02T21:13:58.867Z",
+      "kind": "hold",
+      "gameId": "g019",
+      "number": 39,
+      "detail": "Game 39 is final, 56 to 31. The sheet is complete: refs S and T, and U on the table. The card pays $45 per ref and $25 for the table. I couldn't check PayPal because it's switched off, so I can't confirm this game hasn't already been paid, and nothing could be sent anyway. Held."
+    },
+    {
+      "at": "2026-11-02T21:14:13.170Z",
+      "kind": "hold",
+      "gameId": "g025",
+      "number": 40,
+      "detail": "Game 40 is final 57–32 and the sheet is full: 2 refs and a table official. By the card that's $45 per ref and $25 for the table. I couldn't check PayPal to see if this game was already paid. Also, the game was played May 16 but only marked final Nov 2, so that day's end-of-day pay may already have gone out. Held, nobody paid."
+    },
+    {
+      "at": "2026-11-02T21:14:19.543Z",
+      "kind": "hold",
+      "gameId": "g027",
+      "number": 41,
+      "detail": "Game 41 is final at 58–33 with a full sheet (2 refs, 1 table official, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal because it's switched off on this run, so I can't confirm the game hasn't already been paid. Held."
+    },
+    {
+      "at": "2026-11-02T21:14:26.386Z",
+      "kind": "hold",
+      "gameId": "g079",
+      "number": 42,
+      "detail": "Game 42 is final 59–34 and the sheet is complete: two refs (D, E) and one table official (F), all paid per game. The card gives $45 per ref and $25 for the table official, $115 in total. PayPal was switched off, so I couldn't check whether this game was already paid, and I'm holding it rather than risk paying it twice."
+    },
+    {
+      "at": "2026-11-02T21:14:37.865Z",
+      "kind": "hold",
+      "gameId": "g077",
+      "number": 43,
+      "detail": "Game 43 is final at 60 to 35. The sheet is complete (refs G and H, table official I, all paid per game, none with a later game), and the card gives $45 per ref and $25 for the table official, $115 in all. PayPal couldn't be checked because PayPal is switched off for this run, so I can't confirm the game hasn't already been paid. Nobody was paid, and the game is held."
+    },
+    {
+      "at": "2026-11-02T21:14:44.914Z",
+      "kind": "hold",
+      "gameId": "g005",
+      "number": 44,
+      "detail": "Game 44 is final, 61 to 36, and the sheet is complete: refs J and K at $45 each and table official L at $25, all paid per game with no later games. I couldn't check PayPal because it's switched off, so I can't tell whether this game was already paid. It was also marked final in November for a game scheduled in May. So it's held, and nothing was sent."
+    },
+    {
+      "at": "2026-11-02T21:14:52.480Z",
+      "kind": "hold",
+      "gameId": "g029",
+      "number": 45,
+      "detail": "Game 45 is final, 62 to 37, and the sheet is complete: refs M and N, table official O, all paid per game with no later games. The card gives $45 per ref and $25 for the table, $115 in total. But PayPal could not be checked because PayPal access is switched off in this run, so I can't confirm the game isn't already paid. The game was also scheduled for May 16 and only marked final on Nov 2. Held."
+    },
+    {
+      "at": "2026-11-02T21:14:59.730Z",
+      "kind": "hold",
+      "gameId": "g013",
+      "number": 46,
+      "detail": "Game 46 is final at 40 to 38 and the sheet is complete: refs P and Q at $45 each and table official R at $25. But PayPal could not be checked or used, so I can't confirm the game hasn't already been paid. Held, and nobody was paid."
+    },
+    {
+      "at": "2026-11-02T21:15:08.647Z",
+      "kind": "hold",
+      "gameId": "g060",
+      "number": 47,
+      "detail": "Game 47 is final, 41 to 39, with a full sheet: refs S and T, Official U on the table. Nobody has another game today, so everyone would be paid now ($45 per ref, $25 for the table). But PayPal was switched off, so I couldn't check whether this game was already paid, and nothing can be sent. Held."
+    },
+    {
+      "at": "2026-11-02T21:15:15.757Z",
+      "kind": "hold",
+      "gameId": "g067",
+      "number": 48,
+      "detail": "Game 48 is final 42 to 40, and the sheet is complete: two refs (V, W) and table official X. None of them has a later game today, so all three are owed now: refs $45 each and table $25, $115 CAD in total. PayPal was switched off, so I couldn't check whether this game was already paid, and nothing could be sent. Held, not paid."
+    },
+    {
+      "at": "2026-11-02T21:15:23.381Z",
+      "kind": "hold",
+      "gameId": "g048",
+      "number": 49,
+      "detail": "Game 49 is final 43 to 41 and the sheet is full (two refs and a table official, all paid per game, none with a later game). But I couldn't check PayPal to see if this game was already paid, because PayPal is switched off right now, so nothing was paid. Also, the game was scheduled for May 16 but only went final on Nov 2."
+    },
+    {
+      "at": "2026-11-02T21:15:30.510Z",
+      "kind": "hold",
+      "gameId": "g057",
+      "number": 50,
+      "detail": "Game 50 (Highland v Hilltop, 44–42) is final and the sheet is complete: two refs (D, E) and one table official (F), all paid per game. But I couldn't check PayPal to see whether this game was already paid, because PayPal is switched off, so I'm holding it and paying nobody."
+    }
+  ]
+}

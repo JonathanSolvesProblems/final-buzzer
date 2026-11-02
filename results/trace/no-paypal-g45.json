@@ -1,0 +1,297 @@
+{
+  "game": {
+    "id": "g029",
+    "number": 45,
+    "division": "Mini Boys",
+    "matchup": "Lakeshore 4 v Lakeshore 5",
+    "court": "Gym D",
+    "start": "2026-05-16T16:30",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T21:14:44.928Z",
+  "paypalMode": "off",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "hold",
+    "reason": "Game 45 is final, 62 to 37, and the sheet is complete: refs M and N, table official O, all paid per game with no later games. The card gives $45 per ref and $25 for the table, $115 in total. But PayPal could not be checked because PayPal access is switched off in this run, so I can't confirm the game isn't already paid. The game was also scheduled for May 16 and only marked final on Nov 2. Held.",
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    },
+    "question_for_treasurer": "Game 45 (May 16, marked final Nov 2) is owed $115 total: $45 each to refs M and N, $25 to table official O. I couldn't check PayPal to see if it was already paid. Was it paid already, or should I send the $115 once PayPal is back?"
+  },
+  "blockedBy": null,
+  "guard": null,
+  "payout": null,
+  "hold": {
+    "question": "Game 45 (May 16, marked final Nov 2) is owed $115 total: $45 each to refs M and N, $25 to table official O. I couldn't check PayPal to see if it was already paid. Was it paid already, or should I send the $115 once PayPal is back?",
+    "reason": "Game 45 is final, 62 to 37, and the sheet is complete: refs M and N, table official O, all paid per game with no later games. The card gives $45 per ref and $25 for the table, $115 in total. But PayPal could not be checked because PayPal access is switched off in this run, so I can't confirm the game isn't already paid. The game was also scheduled for May 16 and only marked final on Nov 2. Held."
+  },
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 2,
+    "input_tokens": 7007,
+    "output_tokens": 599,
+    "ms": 7552,
+    "endedBy": "terminal"
+  },
+  "trace": [
+    {
+      "t": "2026-11-02T21:14:46.738Z",
+      "ms": 1809,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 2901,
+        "output_tokens": 113
+      }
+    },
+    {
+      "t": "2026-11-02T21:14:46.738Z",
+      "ms": 1810,
+      "kind": "tool",
+      "name": "read_game_sheet",
+      "input": {},
+      "output": {
+        "game": {
+          "number": 45,
+          "division": "Mini Boys",
+          "matchup": "Lakeshore 4 v Lakeshore 5",
+          "court": "Gym D",
+          "venue": "Northside Collegiate",
+          "start": "2026-05-16T16:30",
+          "status": "final",
+          "score": "62 to 37",
+          "note": null,
+          "bye": false
+        },
+        "previous_status": "scheduled",
+        "officials": [
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-m",
+              "label": "Official M",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-n",
+              "label": "Official N",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "table",
+            "official": {
+              "id": "off-o",
+              "label": "Official O",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2026-11-02T21:14:46.739Z",
+      "ms": 1810,
+      "kind": "tool",
+      "name": "read_rate_card",
+      "input": {},
+      "output": {
+        "currency": "CAD",
+        "per_game": {
+          "referee": 45,
+          "table": 25
+        },
+        "officials_per_game": {
+          "referees": 2,
+          "table": 1
+        },
+        "forfeit": {
+          "rule": "show_up_fee_only",
+          "show_up_fee": null
+        },
+        "bye": {
+          "rule": "no_officials_no_pay"
+        }
+      }
+    },
+    {
+      "t": "2026-11-02T21:14:46.739Z",
+      "ms": 1810,
+      "kind": "tool",
+      "name": "check_paypal_for_game",
+      "input": {},
+      "output": {
+        "isError": true,
+        "errorCategory": "permission",
+        "isRetryable": false,
+        "message": "PayPal tools are switched off in this run. Nothing can be checked or paid."
+      }
+    },
+    {
+      "t": "2026-11-02T21:14:46.739Z",
+      "ms": 1810,
+      "kind": "tool",
+      "name": "officials_day_schedule",
+      "input": {},
+      "output": [
+        {
+          "id": "off-m",
+          "label": "Official M",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 21,
+              "start": "10:15",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 29,
+              "start": "11:30",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 37,
+              "start": "14:00",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 45,
+              "start": "16:30",
+              "court": "Gym D",
+              "status": "final",
+              "this_game": true
+            }
+          ],
+          "next_game": null
+        },
+        {
+          "id": "off-n",
+          "label": "Official N",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 21,
+              "start": "10:15",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 29,
+              "start": "11:30",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 37,
+              "start": "14:00",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 45,
+              "start": "16:30",
+              "court": "Gym D",
+              "status": "final",
+              "this_game": true
+            }
+          ],
+          "next_game": null
+        },
+        {
+          "id": "off-o",
+          "label": "Official O",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 21,
+              "start": "10:15",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 29,
+              "start": "11:30",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 37,
+              "start": "14:00",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 45,
+              "start": "16:30",
+              "court": "Gym D",
+              "status": "final",
+              "this_game": true
+            }
+          ],
+          "next_game": null
+        }
+      ]
+    },
+    {
+      "t": "2026-11-02T21:14:52.480Z",
+      "ms": 7551,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 4106,
+        "output_tokens": 486
+      }
+    },
+    {
+      "t": "2026-11-02T21:14:52.480Z",
+      "ms": 7551,
+      "kind": "tool",
+      "name": "decide",
+      "input": {
+        "choice": "hold",
+        "reason": "Game 45 is final, 62 to 37, and the sheet is complete: refs M and N, table official O, all paid per game with no later games. The card gives $45 per ref and $25 for the table, $115 in total. But PayPal could not be checked because PayPal access is switched off in this run, so I can't confirm the game isn't already paid. The game was also scheduled for May 16 and only marked final on Nov 2. Held.",
+        "flags": {
+          "forfeit": false,
+          "official_missing": false,
+          "already_paid": false,
+          "amount_uncertain": false,
+          "reopened_score": false
+        },
+        "question_for_treasurer": "Game 45 (May 16, marked final Nov 2) is owed $115 total: $45 each to refs M and N, $25 to table official O. I couldn't check PayPal to see if it was already paid. Was it paid already, or should I send the $115 once PayPal is back?"
+      },
+      "output": {
+        "recorded": true,
+        "choice": "hold"
+      }
+    }
+  ],
+  "outcome": "held"
+}

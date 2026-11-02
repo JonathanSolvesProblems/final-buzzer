@@ -1,0 +1,94 @@
+{
+  "game": {
+    "id": "g048",
+    "number": 49,
+    "division": "Bantam Boys",
+    "matchup": "Summit v Meadowvale",
+    "court": "Gym CD",
+    "start": "2026-05-16T17:45",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T21:10:48.501Z",
+  "paypalMode": "dry",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "pay_now",
+    "reason": "scripted: pay everyone on the sheet at the card rate whenever a game ends",
+    "items": [
+      {
+        "official_id": "off-a",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-b",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-c",
+        "role": "table",
+        "amount": 25
+      }
+    ],
+    "fold_official_ids": [],
+    "question_for_treasurer": null,
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    }
+  },
+  "blockedBy": null,
+  "guard": {
+    "ok": true,
+    "checked": [
+      "3 item(s) against 3 on the card",
+      "total 115.00 against the per-game cap 200.00",
+      "every amount equals the rate card"
+    ]
+  },
+  "payout": {
+    "senderBatchId": "northside-2026-sat1-g49",
+    "batchId": null,
+    "status": "DRY_RUN",
+    "completedAt": null,
+    "secondsFromBuzzer": null,
+    "items": [
+      {
+        "official_id": "off-a",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "sb-mmwys29394507@personal.example.com"
+      },
+      {
+        "official_id": "off-b",
+        "role": "referee",
+        "amount": "45.00",
+        "receiver": "official-b@example.com"
+      },
+      {
+        "official_id": "off-c",
+        "role": "table",
+        "amount": "25.00",
+        "receiver": "official-c@example.com"
+      }
+    ]
+  },
+  "hold": null,
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "scripted",
+    "calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "ms": 0,
+    "endedBy": "script"
+  },
+  "trace": [],
+  "outcome": "dry"
+}

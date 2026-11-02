@@ -1,0 +1,312 @@
+{
+  "game": {
+    "id": "g047",
+    "number": 35,
+    "division": "Bantam Boys",
+    "matchup": "Granite 3 v Meadowvale",
+    "court": "Gym EF",
+    "start": "2026-05-16T14:00",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T21:13:21.340Z",
+  "paypalMode": "off",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "hold",
+    "reason": "Game 35 is final 52–46 and the sheet is complete (refs G and H, table official I, all paid per game), so the card gives $45 per ref and $25 for the table. But PayPal couldn't be checked, so I can't confirm this game hasn't already been paid. It's held and nothing was sent.",
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    },
+    "question_for_treasurer": "Game 35 (scheduled May 16, marked final Nov 2) is owed $115: refs G and H $45 each, table official I $25. PayPal couldn't be checked, so nothing was sent. Pay it once you've confirmed on PayPal it wasn't already paid?"
+  },
+  "blockedBy": null,
+  "guard": null,
+  "payout": null,
+  "hold": {
+    "question": "Game 35 (scheduled May 16, marked final Nov 2) is owed $115: refs G and H $45 each, table official I $25. PayPal couldn't be checked, so nothing was sent. Pay it once you've confirmed on PayPal it wasn't already paid?",
+    "reason": "Game 35 is final 52–46 and the sheet is complete (refs G and H, table official I, all paid per game), so the card gives $45 per ref and $25 for the table. But PayPal couldn't be checked, so I can't confirm this game hasn't already been paid. It's held and nothing was sent."
+  },
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 2,
+    "input_tokens": 7121,
+    "output_tokens": 576,
+    "ms": 8188,
+    "endedBy": "terminal"
+  },
+  "trace": [
+    {
+      "t": "2026-11-02T21:13:24.307Z",
+      "ms": 2967,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 2898,
+        "output_tokens": 113
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:24.308Z",
+      "ms": 2967,
+      "kind": "tool",
+      "name": "read_game_sheet",
+      "input": {},
+      "output": {
+        "game": {
+          "number": 35,
+          "division": "Bantam Boys",
+          "matchup": "Granite 3 v Meadowvale",
+          "court": "Gym EF",
+          "venue": "Northside Collegiate",
+          "start": "2026-05-16T14:00",
+          "status": "final",
+          "score": "52 to 46",
+          "note": null,
+          "bye": false
+        },
+        "previous_status": "scheduled",
+        "officials": [
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-g",
+              "label": "Official G",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-h",
+              "label": "Official H",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "table",
+            "official": {
+              "id": "off-i",
+              "label": "Official I",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:24.308Z",
+      "ms": 2967,
+      "kind": "tool",
+      "name": "read_rate_card",
+      "input": {},
+      "output": {
+        "currency": "CAD",
+        "per_game": {
+          "referee": 45,
+          "table": 25
+        },
+        "officials_per_game": {
+          "referees": 2,
+          "table": 1
+        },
+        "forfeit": {
+          "rule": "show_up_fee_only",
+          "show_up_fee": null
+        },
+        "bye": {
+          "rule": "no_officials_no_pay"
+        }
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:24.308Z",
+      "ms": 2967,
+      "kind": "tool",
+      "name": "check_paypal_for_game",
+      "input": {},
+      "output": {
+        "isError": true,
+        "errorCategory": "permission",
+        "isRetryable": false,
+        "message": "PayPal tools are switched off in this run. Nothing can be checked or paid."
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:24.309Z",
+      "ms": 2968,
+      "kind": "tool",
+      "name": "officials_day_schedule",
+      "input": {},
+      "output": [
+        {
+          "id": "off-g",
+          "label": "Official G",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 19,
+              "start": "09:00",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 27,
+              "start": "11:30",
+              "court": "Gym E",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 35,
+              "start": "14:00",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 43,
+              "start": "15:15",
+              "court": "Lakeside 1",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 43,
+            "start": "15:15",
+            "court": "Lakeside 1",
+            "minutes_after_this_one_started": 75
+          }
+        },
+        {
+          "id": "off-h",
+          "label": "Official H",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 19,
+              "start": "09:00",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 27,
+              "start": "11:30",
+              "court": "Gym E",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 35,
+              "start": "14:00",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 43,
+              "start": "15:15",
+              "court": "Lakeside 1",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 43,
+            "start": "15:15",
+            "court": "Lakeside 1",
+            "minutes_after_this_one_started": 75
+          }
+        },
+        {
+          "id": "off-i",
+          "label": "Official I",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 19,
+              "start": "09:00",
+              "court": "Lakeside 1",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 27,
+              "start": "11:30",
+              "court": "Gym E",
+              "status": "final",
+              "this_game": false
+            },
+            {
+              "number": 35,
+              "start": "14:00",
+              "court": "Gym EF",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 43,
+              "start": "15:15",
+              "court": "Lakeside 1",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 43,
+            "start": "15:15",
+            "court": "Lakeside 1",
+            "minutes_after_this_one_started": 75
+          }
+        }
+      ]
+    },
+    {
+      "t": "2026-11-02T21:13:29.528Z",
+      "ms": 8187,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 4223,
+        "output_tokens": 463
+      }
+    },
+    {
+      "t": "2026-11-02T21:13:29.528Z",
+      "ms": 8187,
+      "kind": "tool",
+      "name": "decide",
+      "input": {
+        "choice": "hold",
+        "reason": "Game 35 is final 52–46 and the sheet is complete (refs G and H, table official I, all paid per game), so the card gives $45 per ref and $25 for the table. But PayPal couldn't be checked, so I can't confirm this game hasn't already been paid. It's held and nothing was sent.",
+        "flags": {
+          "forfeit": false,
+          "official_missing": false,
+          "already_paid": false,
+          "amount_uncertain": false,
+          "reopened_score": false
+        },
+        "question_for_treasurer": "Game 35 (scheduled May 16, marked final Nov 2) is owed $115: refs G and H $45 each, table official I $25. PayPal couldn't be checked, so nothing was sent. Pay it once you've confirmed on PayPal it wasn't already paid?"
+      },
+      "output": {
+        "recorded": true,
+        "choice": "hold"
+      }
+    }
+  ],
+  "outcome": "held"
+}

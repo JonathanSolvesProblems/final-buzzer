@@ -1,0 +1,63 @@
+{
+  "game": {
+    "id": "g040",
+    "number": 30,
+    "division": "Bantam Girls",
+    "matchup": "Pinecrest v Glenview",
+    "court": "Gym CD",
+    "start": "2026-05-16T12:45",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T21:10:48.448Z",
+  "paypalMode": "dry",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "pay_now",
+    "reason": "scripted: pay everyone on the sheet at the card rate whenever a game ends",
+    "items": [
+      {
+        "official_id": "off-p",
+        "role": "referee",
+        "amount": 45
+      },
+      {
+        "official_id": "off-q",
+        "role": "referee",
+        "amount": 45
+      }
+    ],
+    "fold_official_ids": [],
+    "question_for_treasurer": null,
+    "flags": {
+      "forfeit": false,
+      "official_missing": true,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    }
+  },
+  "blockedBy": "guard",
+  "guard": {
+    "ok": false,
+    "checked": [],
+    "reason": "the card says hold: table missing from the sheet"
+  },
+  "payout": null,
+  "hold": {
+    "question": "Game 30: the agent wanted to pay but the gate stopped it (the card says hold: table missing from the sheet). What should be paid?",
+    "reason": "guard blocked the payout: the card says hold: table missing from the sheet"
+  },
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "scripted",
+    "calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "ms": 0,
+    "endedBy": "script"
+  },
+  "trace": [],
+  "outcome": "blocked"
+}

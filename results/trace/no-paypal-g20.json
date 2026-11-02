@@ -1,0 +1,312 @@
+{
+  "game": {
+    "id": "g006",
+    "number": 20,
+    "division": "Novice",
+    "matchup": "Harbour v Granite 3",
+    "court": "Gym CD",
+    "start": "2026-05-16T10:15",
+    "status": "final",
+    "note": ""
+  },
+  "finalAt": "2026-11-02T21:11:31.075Z",
+  "paypalMode": "off",
+  "provisionalRateCard": true,
+  "decision": {
+    "choice": "hold",
+    "reason": "Game 20 is final at 60 to 31. The sheet is complete (refs J and K, table official L, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal to see whether this game was already paid, because PayPal is switched off, so I'm holding it rather than risk paying twice.",
+    "flags": {
+      "forfeit": false,
+      "official_missing": false,
+      "already_paid": false,
+      "amount_uncertain": false,
+      "reopened_score": false
+    },
+    "question_for_treasurer": "Game 20 (Harbour v Granite 3) is final, but I couldn't check PayPal for an earlier payment. Should I pay refs J and K $45 each and table official L $25 ($115 CAD) once PayPal is back on, or has this game already been paid?"
+  },
+  "blockedBy": null,
+  "guard": null,
+  "payout": null,
+  "hold": {
+    "question": "Game 20 (Harbour v Granite 3) is final, but I couldn't check PayPal for an earlier payment. Should I pay refs J and K $45 each and table official L $25 ($115 CAD) once PayPal is back on, or has this game already been paid?",
+    "reason": "Game 20 is final at 60 to 31. The sheet is complete (refs J and K, table official L, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal to see whether this game was already paid, because PayPal is switched off, so I'm holding it rather than risk paying twice."
+  },
+  "folded": [],
+  "error": null,
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 2,
+    "input_tokens": 7118,
+    "output_tokens": 607,
+    "ms": 7340,
+    "endedBy": "terminal"
+  },
+  "trace": [
+    {
+      "t": "2026-11-02T21:11:33.005Z",
+      "ms": 1930,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 2891,
+        "output_tokens": 113
+      }
+    },
+    {
+      "t": "2026-11-02T21:11:33.005Z",
+      "ms": 1930,
+      "kind": "tool",
+      "name": "read_game_sheet",
+      "input": {},
+      "output": {
+        "game": {
+          "number": 20,
+          "division": "Novice",
+          "matchup": "Harbour v Granite 3",
+          "court": "Gym CD",
+          "venue": "Northside Collegiate",
+          "start": "2026-05-16T10:15",
+          "status": "final",
+          "score": "60 to 31",
+          "note": null,
+          "bye": false
+        },
+        "previous_status": "scheduled",
+        "officials": [
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-j",
+              "label": "Official J",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "referee",
+            "official": {
+              "id": "off-k",
+              "label": "Official K",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          },
+          {
+            "role": "table",
+            "official": {
+              "id": "off-l",
+              "label": "Official L",
+              "payout_preference": "per_game",
+              "paypal": "o***@example.com"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2026-11-02T21:11:33.005Z",
+      "ms": 1930,
+      "kind": "tool",
+      "name": "read_rate_card",
+      "input": {},
+      "output": {
+        "currency": "CAD",
+        "per_game": {
+          "referee": 45,
+          "table": 25
+        },
+        "officials_per_game": {
+          "referees": 2,
+          "table": 1
+        },
+        "forfeit": {
+          "rule": "show_up_fee_only",
+          "show_up_fee": null
+        },
+        "bye": {
+          "rule": "no_officials_no_pay"
+        }
+      }
+    },
+    {
+      "t": "2026-11-02T21:11:33.005Z",
+      "ms": 1930,
+      "kind": "tool",
+      "name": "check_paypal_for_game",
+      "input": {},
+      "output": {
+        "isError": true,
+        "errorCategory": "permission",
+        "isRetryable": false,
+        "message": "PayPal tools are switched off in this run. Nothing can be checked or paid."
+      }
+    },
+    {
+      "t": "2026-11-02T21:11:33.005Z",
+      "ms": 1930,
+      "kind": "tool",
+      "name": "officials_day_schedule",
+      "input": {},
+      "output": [
+        {
+          "id": "off-j",
+          "label": "Official J",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 20,
+              "start": "10:15",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 28,
+              "start": "11:30",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 36,
+              "start": "14:00",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 44,
+              "start": "16:30",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 28,
+            "start": "11:30",
+            "court": "Lakeside 2",
+            "minutes_after_this_one_started": 75
+          }
+        },
+        {
+          "id": "off-k",
+          "label": "Official K",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 20,
+              "start": "10:15",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 28,
+              "start": "11:30",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 36,
+              "start": "14:00",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 44,
+              "start": "16:30",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 28,
+            "start": "11:30",
+            "court": "Lakeside 2",
+            "minutes_after_this_one_started": 75
+          }
+        },
+        {
+          "id": "off-l",
+          "label": "Official L",
+          "payout_preference": "per_game",
+          "games_today": [
+            {
+              "number": 20,
+              "start": "10:15",
+              "court": "Gym CD",
+              "status": "final",
+              "this_game": true
+            },
+            {
+              "number": 28,
+              "start": "11:30",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 36,
+              "start": "14:00",
+              "court": "Lakeside 2",
+              "status": "scheduled",
+              "this_game": false
+            },
+            {
+              "number": 44,
+              "start": "16:30",
+              "court": "Gym C",
+              "status": "scheduled",
+              "this_game": false
+            }
+          ],
+          "next_game": {
+            "number": 28,
+            "start": "11:30",
+            "court": "Lakeside 2",
+            "minutes_after_this_one_started": 75
+          }
+        }
+      ]
+    },
+    {
+      "t": "2026-11-02T21:11:38.415Z",
+      "ms": 7340,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 4227,
+        "output_tokens": 494
+      }
+    },
+    {
+      "t": "2026-11-02T21:11:38.415Z",
+      "ms": 7340,
+      "kind": "tool",
+      "name": "decide",
+      "input": {
+        "choice": "hold",
+        "reason": "Game 20 is final at 60 to 31. The sheet is complete (refs J and K, table official L, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal to see whether this game was already paid, because PayPal is switched off, so I'm holding it rather than risk paying twice.",
+        "flags": {
+          "forfeit": false,
+          "official_missing": false,
+          "already_paid": false,
+          "amount_uncertain": false,
+          "reopened_score": false
+        },
+        "question_for_treasurer": "Game 20 (Harbour v Granite 3) is final, but I couldn't check PayPal for an earlier payment. Should I pay refs J and K $45 each and table official L $25 ($115 CAD) once PayPal is back on, or has this game already been paid?"
+      },
+      "output": {
+        "recorded": true,
+        "choice": "hold"
+      }
+    }
+  ],
+  "outcome": "held"
+}
