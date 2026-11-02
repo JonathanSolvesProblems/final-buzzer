@@ -12,7 +12,7 @@
     "board": "node --env-file=.env src/server.ts",
     "live": "node --env-file=.env src/cli/live.ts",
     "replay": "node --env-file=.env src/cli/replay.ts",
-    "test": "node --test src/agent/guards.test.ts src/app/feed.test.ts src/agent/replan.test.ts",
+    "test": "node --test src/agent/loop.test.ts src/agent/guards.test.ts src/app/feed.test.ts src/agent/replan.test.ts",
     "typecheck": "tsc --noEmit",
     "check": "node src/cli/check-claims.ts"
   },

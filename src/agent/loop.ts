@@ -40,6 +40,9 @@ export interface LoopResult {
 
 export const DEFAULT_MODEL = process.env.AGENT_MODEL ?? "claude-opus-5-5";
 
+/** The slice of the SDK the loop uses, so a test can hand in a scripted client. */
+export interface MessagesClient { messages: { create: (req: Anthropic.MessageCreateParamsNonStreaming) => Promise<Anthropic.Message> } }
+
 export async function runLoop(opts: {
   system: string;
   user: string;
@@ -47,9 +50,10 @@ export async function runLoop(opts: {
   model?: string;
   maxCalls?: number;
   maxTokens?: number;
+  client?: MessagesClient;
   onStep?: (s: TraceStep) => void;
 }): Promise<LoopResult> {
-  const client = new Anthropic();
+  const client: MessagesClient = opts.client ?? new Anthropic();
   const model = opts.model ?? DEFAULT_MODEL;
   const t0 = Date.now();
   const steps: TraceStep[] = [];
