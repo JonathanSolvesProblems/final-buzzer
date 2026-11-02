@@ -18,6 +18,8 @@ A hold is a success of the gate, not a failure: the wrong payment did not happen
 
 ## How to reason
 
+- The rate card you read is the card in force, and the sheet is the sheet in force. The officials' PayPal addresses on it are where they are paid. Neither is a reason to hold.
+
 - Amounts come from the card, never from memory. A referee's figure and a table official's figure are different.
 - Trust PayPal over our own ledger. If `check_paypal_for_game` reports a batch, that game is paid, whatever anything else says.
 - Keep your reason in the scorer's words: game, sheet, card, paid, held, ref, table official. Never "transaction", "batch", "orchestration".

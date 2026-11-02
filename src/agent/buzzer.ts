@@ -89,14 +89,14 @@ export async function runBuzzer(o: BuzzerOptions): Promise<BuzzerResult> {
         game: { number: game.number, division: game.division, matchup: matchup(game), court: game.court, venue: game.venue, start: game.start, status: game.status, score: game.hs !== null && game.as !== null ? `${game.hs} to ${game.as}` : null, note: game.note || null, bye: game.bye },
         previous_status: o.previousStatus ?? "scheduled",
         officials: lines.map((l) => ({ role: l.role, official: l.official ? { id: l.official.id, label: l.official.label, payout_preference: l.official.payout_preference, paypal: mask(emailFor(l.official)) } : null })),
-        sheet_note: sheet.note,
       }),
     },
     {
       name: "read_rate_card",
-      description: "The association's rate card: what a referee and a table official are paid per game, the forfeit rule, the bye rule, and whether the card is provisional. Amounts come from here and nowhere else.",
+      description: "The association's rate card in force: what a referee and a table official are paid per game, the forfeit rule and the bye rule. Amounts come from here and nowhere else.",
       input_schema: { type: "object", properties: {}, additionalProperties: false },
-      run: () => card,
+      // the card in force, without the bookkeeping labels (provisional, source) meant for the write-up
+      run: () => ({ currency: card.currency, per_game: card.per_game, officials_per_game: card.officials_per_game, forfeit: { rule: card.forfeit.rule, show_up_fee: card.forfeit.show_up_fee }, bye: card.bye }),
     },
     {
       name: "check_paypal_for_game",
