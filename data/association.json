@@ -1,0 +1,10 @@
+{
+  "name": "Northside Youth Basketball",
+  "short": "Northside",
+  "city": "Montreal",
+  "treasurer": "Sam",
+  "composite": true,
+  "note": "A labelled composite. The role is real: one volunteer who runs a youth basketball association's tournament, scores games from a phone, and settles the money afterwards. The person, the association, its venues and its teams are not real; the tournament's shape (88 games over a weekend, 8 divisions, 12 courts, 52 teams) follows a real invitational.",
+  "officials_per_game": { "referees": 2, "table": 1 },
+  "business_email": "northside-business@example.com"
+}

@@ -1,0 +1,73 @@
+{
+  "slug": "northside-2026",
+  "payouts": {},
+  "holds": {
+    "g053": {
+      "gameId": "g053",
+      "number": 17,
+      "at": "2026-11-02T20:14:58.155Z",
+      "reason": "the agent could not decide: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CgeiR5M7aDpxBhpRoCjDT\"}",
+      "question": "Game 17: the agent did not reach a decision. Pay in full, 115.00?",
+      "flags": {},
+      "by": "guard"
+    },
+    "g023": {
+      "gameId": "g023",
+      "number": 26,
+      "at": "2026-11-02T20:14:58.902Z",
+      "reason": "the agent could not decide: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CgeiR8yPxuvLXwPbCKBQg\"}",
+      "question": "Game 26: the agent did not reach a decision. Pay in full, 115.00?",
+      "flags": {},
+      "by": "guard"
+    },
+    "g040": {
+      "gameId": "g040",
+      "number": 30,
+      "at": "2026-11-02T20:14:59.645Z",
+      "reason": "the agent could not decide: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CgeiRC99dYYEJ5gtRDaEw\"}",
+      "question": "Game 30: the agent did not reach a decision. Pay in full, 115.00?",
+      "flags": {},
+      "by": "guard"
+    },
+    "g044": {
+      "gameId": "g044",
+      "number": 7,
+      "at": "2026-11-02T20:15:00.540Z",
+      "reason": "the agent could not decide: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CgeiRFtcwUuGhNRpeao52\"}",
+      "question": "Game 7: the agent did not reach a decision. Pay in full, 115.00?",
+      "flags": {},
+      "by": "guard"
+    }
+  },
+  "folds": {},
+  "events": [
+    {
+      "at": "2026-11-02T20:14:58.155Z",
+      "kind": "hold",
+      "gameId": "g053",
+      "number": 17,
+      "detail": "the agent could not decide: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CgeiR5M7aDpxBhpRoCjDT\"}"
+    },
+    {
+      "at": "2026-11-02T20:14:58.902Z",
+      "kind": "hold",
+      "gameId": "g023",
+      "number": 26,
+      "detail": "the agent could not decide: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CgeiR8yPxuvLXwPbCKBQg\"}"
+    },
+    {
+      "at": "2026-11-02T20:14:59.645Z",
+      "kind": "hold",
+      "gameId": "g040",
+      "number": 30,
+      "detail": "the agent could not decide: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CgeiRC99dYYEJ5gtRDaEw\"}"
+    },
+    {
+      "at": "2026-11-02T20:15:00.540Z",
+      "kind": "hold",
+      "gameId": "g044",
+      "number": 7,
+      "detail": "the agent could not decide: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CgeiRFtcwUuGhNRpeao52\"}"
+    }
+  ]
+}

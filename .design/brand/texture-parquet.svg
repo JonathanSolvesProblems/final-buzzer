@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <!-- Parquet: squares of maple laid with alternating grain, as on the Garden floor (found detail 18).
+       Sixteen squares, grain lines at uneven spacing and low opacity, so the repeat is not read. -->
+  <defs>
+    <pattern id="h" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M0 6H48M0 15H48M0 21H48M0 31H48M0 38H48M0 44H48" stroke="#2b2721" stroke-opacity="0.035" stroke-width="1"/>
+      <path d="M0 11H29M16 27H48M0 34H21M30 41H48" stroke="#2b2721" stroke-opacity="0.02" stroke-width="1"/>
+    </pattern>
+    <pattern id="v" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M7 0V48M13 0V48M23 0V48M28 0V48M37 0V48M43 0V48" stroke="#2b2721" stroke-opacity="0.035" stroke-width="1"/>
+      <path d="M10 0V29M33 19V48M40 0V21M18 30V48" stroke="#2b2721" stroke-opacity="0.02" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <g>
+    <rect x="0" y="0" width="48" height="48" fill="url(#h)"/><rect x="48" y="0" width="48" height="48" fill="url(#v)"/><rect x="96" y="0" width="48" height="48" fill="url(#h)"/><rect x="144" y="0" width="48" height="48" fill="url(#v)"/>
+    <rect x="0" y="48" width="48" height="48" fill="url(#v)"/><rect x="48" y="48" width="48" height="48" fill="url(#h)"/><rect x="96" y="48" width="48" height="48" fill="url(#v)"/><rect x="144" y="48" width="48" height="48" fill="url(#h)"/>
+    <rect x="0" y="96" width="48" height="48" fill="url(#h)"/><rect x="48" y="96" width="48" height="48" fill="url(#v)"/><rect x="96" y="96" width="48" height="48" fill="url(#h)"/><rect x="144" y="96" width="48" height="48" fill="url(#v)"/>
+    <rect x="0" y="144" width="48" height="48" fill="url(#v)"/><rect x="48" y="144" width="48" height="48" fill="url(#h)"/><rect x="96" y="144" width="48" height="48" fill="url(#v)"/><rect x="144" y="144" width="48" height="48" fill="url(#h)"/>
+  </g>
+  <path d="M48 0V192M96 0V192M144 0V192M0 48H192M0 96H192M0 144H192" stroke="#2b2721" stroke-opacity="0.04" stroke-width="1"/>
+  <path d="M0 97H192M97 0V192" stroke="#f8f3e3" stroke-opacity="0.18" stroke-width="1"/>
+</svg>

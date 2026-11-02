@@ -1,0 +1,18 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+
+# private planning and process files, never published
+PHASE0.md
+DEMO-SCRIPT.md
+.claude/
+.design/*
+!.design/brand/
+!.design/type/
+.design/brand/art/*.raw.png
+.design/brand/art/*.webp
+.design/brand/art/*.gen.json
+tmp/
+prototype/

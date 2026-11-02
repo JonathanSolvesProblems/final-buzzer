@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Final Buzzer brand sheet</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+@font-face { font-family: "Alumni Sans"; src: url("../type/AlumniSans.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Schibsted Grotesk"; src: url("../type/SchibstedGrotesk.ttf") format("truetype"); font-weight: 400 900; font-display: swap; }
+:root { --floor:#E3D5A6; --housing:#2B2721; --flap:#F3EDD6; --flap-lo:#E7DFC4; --ink:#2B2721; --muted:#574E40; --yellow:#E8B830; --yellow-lo:#D9A920; --split:#15120F; --black-face:#3F3931; --ghost:#B0A68F; --keyline:#5E574B; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--floor); color: var(--ink); font-family: "Schibsted Grotesk", sans-serif; font-size: 15px; line-height: 1.45; }
+.num { font-family: "Alumni Sans", sans-serif; font-feature-settings: "tnum"; }
+.page { max-width: 1180px; margin: 0 auto; padding: 32px 20px 64px; }
+h2 { font-weight: 700; font-size: 22px; margin: 44px 0 12px; line-height: 1.2; }
+p { max-width: 68ch; text-wrap: pretty; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.sw { height: 92px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 13px; clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px); }
+.sw b { font-family: "Alumni Sans", sans-serif; font-size: 22px; font-weight: 700; }
+.refs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.refs figure { margin: 0; }
+.refs img { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px); }
+.refs figcaption { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.marks { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.board { background: var(--housing); color: var(--flap); padding: 18px 20px; border-radius: 14px; box-shadow: 0 2px 0 var(--split); }
+.spec { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.spec small { display: block; color: var(--muted); font-size: 12px; margin-top: 4px; font-family: "Schibsted Grotesk", sans-serif; font-weight: 400; }
+.digits { display: inline-flex; gap: 5px; filter: drop-shadow(0 2px 0 var(--split)); }
+.digit { position: relative; width: 74px; height: 104px; background: linear-gradient(180deg, var(--yellow) 0 50%, var(--yellow-lo) 50%); color: var(--housing); font-family: "Alumni Sans", sans-serif; font-weight: 800; font-size: 98px; line-height: 112px; text-align: center; clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px); }
+.digit::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--split); }
+.tiles { display: flex; gap: 10px; flex-wrap: wrap; }
+.flap { position: relative; width: 170px; height: 56px; --bg: var(--black-face); --fg: var(--flap); }
+.flap .face { position: absolute; inset: 0; background: var(--bg); color: var(--fg); padding: 4px 9px; clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px); overflow: hidden; }
+.flap .face::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--split); }
+.flap .vs { position: relative; z-index: 1; font-weight: 600; font-size: 13px; display: block; }
+.flap .note { position: absolute; z-index: 1; left: 9px; right: 9px; bottom: 6px; display: flex; gap: 6px; align-items: center; font-size: 12px; font-weight: 600; color: var(--ghost); }
+.flap .note .num { font-size: 15px; font-weight: 700; }
+.flap.sched { --bg: var(--keyline); --fg: var(--ghost); }
+.flap.sched .face::before { content: ""; position: absolute; inset: 1px; background: var(--housing); clip-path: polygon(3px 0, calc(100% - 3px) 0, 100% 3px, 100% calc(100% - 3px), calc(100% - 3px) 100%, 3px 100%, 0 calc(100% - 3px), 0 3px); }
+.flap.live .face { padding-left: 13px; box-shadow: inset 4px 0 0 var(--flap); }
+.flap.live .note { left: 13px; color: var(--flap); }
+.flap.paid { --bg: linear-gradient(180deg, var(--flap) 0 50%, var(--flap-lo) 50%); --fg: var(--housing); }
+.flap.paid .note { color: var(--housing); }
+.bar { flex: 1; height: 4px; background: rgba(43,39,33,.14); position: relative; }
+.bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--housing); }
+.flap.held .face.top { --bg: var(--flap); --fg: var(--housing); clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% 50%, 0 50%, 0 4px); }
+.flap.held .face.bottom { clip-path: polygon(0 calc(50% + 2px), 100% calc(50% + 2px), 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px)); transform: translateY(2px); }
+.flap.held .face.bottom .vs, .flap.held .face.top .note { visibility: hidden; }
+.flap.held .face.bottom .note { color: var(--flap); }
+.cap { font-size: 12px; color: var(--ghost); margin-top: 6px; }
+.icons { display: flex; gap: 18px; flex-wrap: wrap; }
+.icons svg { width: 28px; height: 28px; color: var(--ink); }
+.icons figure { margin: 0; text-align: center; font-size: 11px; color: var(--muted); }
+.voice li { margin: 4px 0; }
+.art { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+.art img { width: 360px; max-width: 100%; aspect-ratio: 3/2; object-fit: contain; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 760px) { .refs, .spec, .two { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 style="margin:0 0 6px"><img src="wordmark.svg" alt="Final Buzzer" width="380" height="75" style="display:block;max-width:100%;height:auto"></h1>
+  <p>Brand sheet, 27 October 2026, direction A. The tabletop flip scoreboard at mid-court: one dark board on a lit maple floor. Cream flaps for games, yellow flaps for the one number that matters. Family dimensional-tactile. One theme.</p>
+
+  <h2>The world it came from</h2>
+  <div class="refs">
+    <figure><img src="../refs/tableau-de-score-basketball-3.jpg" alt="A tabletop scoreboard with ghost digits"><figcaption>The tabletop board: warm black housing, rounded, ghost digits that show their shape before they are lit.</figcaption></figure>
+    <figure><img src="../refs/flip-scoreboard-1.jpg" alt="A flip scoreboard with cream flaps and a yellow row"><figcaption>Cream flaps with dog-eared corners on black; the "to win" row on yellow flaps. Two colours of flap, two kinds of number.</figcaption></figure>
+    <figure><img src="../refs/basketball-game-clock-0.jpg" alt="A maple gym floor under a game clock"><figcaption>The floor: lit maple, the colour the board sits on.</figcaption></figure>
+  </div>
+
+  <h2>Colour</h2>
+  <div class="row">
+    <div class="sw" style="background:#E3D5A6;color:#2B2721;box-shadow:inset 0 0 0 1px #CDBB83"><b>#E3D5A6</b>maple floor (the page)</div>
+    <div class="sw" style="background:#2B2721;color:#F3EDD6"><b>#2B2721</b>the housing (the board, ink)</div>
+    <div class="sw" style="background:#F3EDD6;color:#2B2721"><b>#F3EDD6</b>the cream flap (paid, the decision)</div>
+    <div class="sw" style="background:#E8B830;color:#2B2721"><b>#E8B830</b>yellow flap: the headline number only</div>
+    <div class="sw" style="background:#3F3931;color:#F3EDD6"><b>#3F3931</b>black face (in play)</div>
+    <div class="sw" style="background:#5E574B;color:#F3EDD6"><b>#5E574B</b>keyline (ghost flaps, not started)</div>
+  </div>
+  <div class="two" style="margin-top:14px">
+    <p><b>One theme.</b> A dark-room variant was built and cut: the board is one object and stays dark either way, so the variant changed only the margin, and four critics in a row read that as unfinished. Northside's maroon #79242F belongs to the club's own pages, not to this board.</p>
+    <p><b>Refused.</b> Red and green LED digits, glow, slate greys, pure white, pills, discs, blur, a chat panel, stat cards, tracked-caps labels over numbers, triangles as decoration.</p>
+  </div>
+
+  <h2>Type</h2>
+  <div class="spec">
+    <div class="board">
+      <div class="digits" aria-label="30"><span class="digit">3</span><span class="digit">0</span></div>
+      <small style="color:#B0A68F">Alumni Sans 800 on yellow flaps: the one number. Alumni is for the wordmark and numerals only.</small>
+      <p class="num" style="font-size:30px;font-weight:700;margin:16px 0 0">16 <span style="font-family:'Schibsted Grotesk';font-size:15px;font-weight:400;color:#B0A68F">of 34 games paid</span> &nbsp;$1,840 <span style="font-family:'Schibsted Grotesk';font-size:15px;font-weight:400;color:#B0A68F">paid out</span></p>
+      <small style="color:#B0A68F">Every other count: a line of Alumni numerals with words in Schibsted.</small>
+    </div>
+    <div>
+      <p style="font-size:24px;font-weight:700;line-height:1.2;margin:0">Game <span class="num" style="font-size:29px">9</span> is held for Sam<small>Schibsted Grotesk 700: headings, sentence case, no full stop</small></p>
+      <p style="font-size:15px">Game 34 final, Fairview v Bayview. Three officials on the sheet, all on the card. Paid $115.<small>Schibsted Grotesk 400: body and the agent's lines</small></p>
+    </div>
+  </div>
+
+  <h2>Wordmark and mark</h2>
+  <div class="marks">
+    <img src="wordmark.svg" alt="Final Buzzer wordmark" width="480" height="95" style="max-width:100%;height:auto">
+    <div class="board"><img src="wordmark-cream.svg" alt="" width="320" height="64" style="display:block;max-width:100%;height:auto"></div>
+    <img src="mark.svg" alt="The mark: the split B on a chamfered plate" width="96" height="96">
+    <img src="icon.svg" alt="Favicon: two flaps on the plate" width="32" height="32">
+  </div>
+  <p>Alumni Sans 800, set as one path per glyph, a plain B. The mark carries the cut: the B split below its waist bar like a flap, its lower half caught a few units low. The mark lives on app icons and the favicon; the header carries the wordmark alone.</p>
+
+  <h2>The device: a game in its four states</h2>
+  <div class="board">
+    <div class="tiles">
+      <div class="flap sched"><div class="face"><span class="vs">Lakeshore 1 v Meadowvale</span><span class="note">Mini Boys</span></div></div>
+      <div class="flap live"><div class="face"><span class="vs">Fo3 v Matrix</span><span class="note">In play</span></div></div>
+      <div class="flap paid"><div class="face"><span class="vs">Mumba v We Xl</span><span class="note"><span class="num">29 s</span><span class="bar"><i style="width:48%"></i></span></span></div></div>
+      <div class="flap held"><div class="face top"><span class="vs">Lakeshore 2 v Beacon</span><span class="note"></span></div><div class="face bottom"><span class="vs"></span><span class="note">Forfeit, held</span></div></div>
+    </div>
+    <p class="cap">Ghost: not started (the shape before it is lit). Cream edge: in play. Cream: paid, the bar is seconds to payout out of 60. Caught mid-flip: held for Sam. No hue carries a state; the flip is the one motion.</p>
+  </div>
+
+  <h2>Illustration in cut felt</h2>
+  <div class="art">
+    <img src="art/anchor.png" alt="A tabletop scoreboard made of cut felt. Illustration made with AI.">
+    <p>Cut-felt appliqué with running stitches, the way a gym's pennants and chenille patches are made. Generated locally on Z-Image Turbo from one art direction. It never sits on the board screen: it belongs to empty, error and first-run states and the share image, with the credit "Illustrations made with AI, held to one art direction".</p>
+  </div>
+
+  <h2>Icons in one hand</h2>
+  <p>Not used on the board yet; kept for the game detail and the error states.</p>
+  <div class="icons" id="icons"></div>
+
+  <h2>Voice: the scorer at the table</h2>
+  <ul class="voice">
+    <li>Every official paid at the final buzzer</li>
+    <li>Game 9 is held for Sam. Nothing is paid until you choose.</li>
+    <li>No games on this court today.</li>
+    <li>PayPal did not answer. Game 41 stays owed, and the next try is at 10:40.</li>
+    <li>Paid $115 to Official A, B and C.</li>
+  </ul>
+  <p>The banned phrases are in voice.md and checked by charter.json. The laws are in CHARTER.md.</p>
+  <footer style="margin-top:32px;font-size:12px;color:var(--muted)">Illustrations made with AI, held to one art direction.</footer>
+</div>
+<script>
+fetch("icons.svg").then(r => r.text()).then(t => {
+  const d = new DOMParser().parseFromString(t, "image/svg+xml");
+  const box = document.getElementById("icons");
+  d.querySelectorAll("symbol").forEach(s => {
+    const f = document.createElement("figure");
+    f.innerHTML = `<svg viewBox="0 0 24 24">${s.innerHTML}</svg><figcaption>${s.id.replace("ic-", "")}</figcaption>`;
+    const svg = f.querySelector("svg");
+    for (const a of s.attributes) if (a.name !== "id" && a.name !== "viewBox") svg.setAttribute(a.name, a.value);
+    box.appendChild(f);
+  });
+}).catch(() => {});
+</script>
+</body>
+</html>

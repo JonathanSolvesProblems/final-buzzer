@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Final Buzzer: the board</title>
+<meta name="description" content="Northside's tournament money on one board: every official paid at the final buzzer.">
+<meta property="og:title" content="Final Buzzer">
+<meta property="og:description" content="Every official paid at the final buzzer. A youth basketball tournament's money, run by an agent on PayPal.">
+<meta property="og:image" content="/og.png">
+<meta name="theme-color" content="#E3D5A6">
+<link rel="icon" href="/brand/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/brand/apple-touch-icon-180.png">
+<link rel="stylesheet" href="/vendor/bryntum/scheduler.css">
+<link rel="stylesheet" href="/vendor/bryntum/fontawesome/css/fontawesome.css">
+<link rel="stylesheet" href="/vendor/bryntum/fontawesome/css/solid.css">
+<link rel="stylesheet" href="/board.css">
+</head>
+<body>
+<a class="skip" href="#board">Skip to the board</a>
+<div class="page">
+  <header class="table-top">
+    <a class="lockup" href="/" aria-label="Final Buzzer">
+      <img class="wm" src="/brand/wordmark.svg" alt="Final Buzzer" width="137" height="27">
+    </a>
+    <nav class="days" aria-label="Tournament days" id="days"></nav>
+    <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">The board</a><a href="/money.html">The money</a></nav>
+    <div class="right">
+      <span class="clock num" id="clock">--:--</span>
+      <span class="who" id="who-line">Reading the board</span>
+      <span class="source" id="source">live, every 3 s</span>
+    </div>
+  </header>
+
+  <main class="housing" id="board" tabindex="-1">
+    <h1 class="sr">The board</h1>
+    <div class="topline">
+      <p class="printed"><b id="club">Northside Youth Basketball</b><span class="long" id="event-name">Northside Invitational 2026</span><span id="day-name">Saturday 16 May</span></p>
+      <ul class="legend" aria-label="How to read the board">
+        <li><i class="l-sched"></i>Not started</li>
+        <li><i class="l-live"></i>In play</li>
+        <li title="The bar is the seconds from buzzer to payout, out of 60"><i class="l-paid"></i>Paid</li>
+        <li><i class="l-held"></i>Held for Sam</li>
+        <li><i class="l-fold"></i>Folds to end of day</li>
+      </ul>
+    </div>
+    <section class="scoreline" aria-label="Today so far">
+      <aside class="hold" id="held-card" aria-labelledby="held-title" hidden>
+        <div class="top">
+          <h2 id="held-title">Held for Sam</h2>
+          <p id="held-text"></p>
+          <p id="held-why"></p>
+          <p id="held-staged"></p>
+        </div>
+        <div class="bottom">
+          <button class="btn" type="button" id="pay-full">Pay in full</button>
+          <button class="btn second" type="button" id="pay-showup">Pay the show-up fee</button>
+          <button class="btn second" type="button" id="pay-nobody">Pay nobody</button>
+          <small id="held-note"></small>
+        </div>
+      </aside>
+      <div class="figures">
+        <div class="speed">
+          <div class="digits" aria-hidden="true"><span class="digit num" id="p1">-</span><span class="digit num" id="p2">-</span></div>
+          <div class="words">
+            <strong><span class="sr" id="secs-sr"></span>seconds from buzzer to payout</strong>
+            <span id="last-game" aria-live="polite">No payout yet today.</span>
+          </div>
+        </div>
+        <p class="tally">
+          <span class="fig"><span class="num" id="paid-n">0</span> of <span id="of">0</span> games paid</span>
+          <span class="fig"><span class="num money" id="money">$0</span> paid out</span>
+          <span class="fig"><span class="num" id="median">0</span> s median today</span>
+        </p>
+        <p class="via" id="via">Paid through PayPal Payouts, with test money in this replay.</p>
+        <p class="sr" id="count-line" aria-live="polite"></p>
+      </div>
+    </section>
+    <h2 class="sr">Courts</h2>
+    <div id="courts" class="courts" role="region" aria-label="Games by court and start time"></div>
+    <div class="phone" id="phone"></div>
+  </main>
+
+  <div class="below">
+    <section aria-labelledby="entries-h">
+      <h2 id="entries-h">What the agent did</h2>
+      <ol class="entries" id="entries"></ol>
+    </section>
+    <section class="rate" aria-labelledby="rate-h">
+      <h2 id="rate-h">Provisional rate card</h2>
+      <div id="rate"></div>
+    </section>
+  </div>
+
+  <footer id="foot">Replay of the real 2026 schedule with PayPal test money. Officials are labelled A to X. Scores are replay values.</footer>
+</div>
+<script type="module" src="/board.js"></script>
+</body>
+</html>

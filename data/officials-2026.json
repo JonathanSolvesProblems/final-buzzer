@@ -1,0 +1,783 @@
+{
+  "generated": "2026-11-02T20:13:35.248Z",
+  "note": "Generated sheet. Sam's real assignments have not arrived; officials are labelled A to X with sandbox addresses. Replace emails through OFFICIAL_<LETTER>_EMAIL in .env.",
+  "staged": {
+    "missing_table_official": {
+      "gameId": "g040",
+      "number": 30,
+      "start": "2026-05-16T12:45",
+      "court": "Gym CD"
+    },
+    "forfeit": {
+      "gameId": "g023",
+      "number": 26,
+      "start": "2026-05-16T11:30",
+      "court": "Gym D",
+      "note": "The replay driver marks this game as a forfeit. The real game was not forfeited."
+    }
+  },
+  "officials": [
+    {
+      "id": "off-a",
+      "label": "Official A",
+      "email": "official-a@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-b",
+      "label": "Official B",
+      "email": "official-b@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-c",
+      "label": "Official C",
+      "email": "official-c@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-d",
+      "label": "Official D",
+      "email": "official-d@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-e",
+      "label": "Official E",
+      "email": "official-e@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-f",
+      "label": "Official F",
+      "email": "official-f@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-g",
+      "label": "Official G",
+      "email": "official-g@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-h",
+      "label": "Official H",
+      "email": "official-h@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-i",
+      "label": "Official I",
+      "email": "official-i@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-j",
+      "label": "Official J",
+      "email": "official-j@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-k",
+      "label": "Official K",
+      "email": "official-k@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-l",
+      "label": "Official L",
+      "email": "official-l@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-m",
+      "label": "Official M",
+      "email": "official-m@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-n",
+      "label": "Official N",
+      "email": "official-n@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-o",
+      "label": "Official O",
+      "email": "official-o@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-p",
+      "label": "Official P",
+      "email": "official-p@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-q",
+      "label": "Official Q",
+      "email": "official-q@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-r",
+      "label": "Official R",
+      "email": "official-r@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-s",
+      "label": "Official S",
+      "email": "official-s@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-t",
+      "label": "Official T",
+      "email": "official-t@example.com",
+      "payout_preference": "per_game"
+    },
+    {
+      "id": "off-u",
+      "label": "Official U",
+      "email": "official-u@example.com",
+      "payout_preference": "end_of_day"
+    },
+    {
+      "id": "off-v",
+      "label": "Official V",
+      "email": "official-v@example.com",
+      "payout_preference": "end_of_day"
+    },
+    {
+      "id": "off-w",
+      "label": "Official W",
+      "email": "official-w@example.com",
+      "payout_preference": "end_of_day"
+    },
+    {
+      "id": "off-x",
+      "label": "Official X",
+      "email": "official-x@example.com",
+      "payout_preference": "end_of_day"
+    }
+  ],
+  "assignments": {
+    "g022": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g016": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g002": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g051": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g004": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g024": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g044": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g071": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g018": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g055": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g012": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g043": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g059": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g072": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g080": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g050": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g053": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g068": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g073": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g006": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g039": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g062": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g069": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g028": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g020": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g023": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g026": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g081": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g084": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g040": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": null
+    },
+    "g015": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g066": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g076": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g056": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g047": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g064": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g063": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g003": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g019": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g025": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g027": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g079": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g077": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g005": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g029": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g013": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g060": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g067": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g048": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g057": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g014": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g001": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g054": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g021": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g061": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g082": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g033": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g035": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g030": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g031": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g070": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g049": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g011": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g007": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g008": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g034": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g075": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g074": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g009": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g032": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g052": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g083": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g036": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g037": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g046": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g087": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g041": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g042": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g086": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g085": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    },
+    "g010": {
+      "referees": [
+        "off-a",
+        "off-b"
+      ],
+      "table": "off-c"
+    },
+    "g017": {
+      "referees": [
+        "off-d",
+        "off-e"
+      ],
+      "table": "off-f"
+    },
+    "g038": {
+      "referees": [
+        "off-g",
+        "off-h"
+      ],
+      "table": "off-i"
+    },
+    "g058": {
+      "referees": [
+        "off-j",
+        "off-k"
+      ],
+      "table": "off-l"
+    },
+    "g045": {
+      "referees": [
+        "off-m",
+        "off-n"
+      ],
+      "table": "off-o"
+    },
+    "g065": {
+      "referees": [
+        "off-p",
+        "off-q"
+      ],
+      "table": "off-r"
+    },
+    "g078": {
+      "referees": [
+        "off-s",
+        "off-t"
+      ],
+      "table": "off-u"
+    },
+    "g088": {
+      "referees": [
+        "off-v",
+        "off-w"
+      ],
+      "table": "off-x"
+    }
+  }
+}

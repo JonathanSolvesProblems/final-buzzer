@@ -1,0 +1,48 @@
+# Render blueprint: the board and webhook receiver as a web service, the daily chase as a cron job.
+# Secrets are set in the Render dashboard, never here. results/ lives on a small disk so the ledger
+# survives deploys.
+services:
+  - type: web
+    name: final-buzzer
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: node src/server.ts
+    healthCheckPath: /api/rate-card
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.0
+      - key: PAYPAL_ENV
+        value: sandbox
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: LEDGER
+        value: /var/data/ledger.json
+    disk:
+      name: results
+      mountPath: /var/data
+      sizeGB: 1
+
+  - type: cron
+    name: final-buzzer-chase
+    runtime: node
+    schedule: "0 13 * * *"      # 9:00 Montreal, every day
+    buildCommand: npm ci
+    startCommand: node src/cli/chase.ts
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.0
+      - key: PAYPAL_ENV
+        value: sandbox
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false

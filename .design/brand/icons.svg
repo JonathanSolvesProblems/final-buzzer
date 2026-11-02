@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <!-- Final Buzzer icon set. One hand: 24 px grid, 2 px stroke, square caps and joins, corners
+       chamfered at 45 degrees like the flaps. Drawn from the marks on the scorer's table.
+       Use: <svg class="ic"><use href="icons.svg#ic-whistle"/></svg> -->
+  <symbol id="ic-flap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M5 3h14l2 2v6H3V5z"/><path d="M3 13h18v6l-2 2H5l-2-2z"/>
+  </symbol>
+  <symbol id="ic-possession" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M4 4l16 8-16 8z"/>
+  </symbol>
+  <symbol id="ic-whistle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M3 13l2-2h9l2-5h4v4l-3 1v3l-3 5H8l-2-2z"/><path d="M8 11v-1"/>
+  </symbol>
+  <symbol id="ic-sheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M6 3h12l2 2v16H6z"/><path d="M3 7h3M3 11h3M3 15h3M3 19h3"/><path d="M10 9h6M10 13h6M10 17h4"/>
+  </symbol>
+  <symbol id="ic-court" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M3 4h18v16H3z"/><path d="M12 4v16"/><path d="M3 9h4v6H3M21 9h-4v6h4"/>
+  </symbol>
+  <symbol id="ic-buzzer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M7 3h10l2 2v8l-2 2H7l-2-2V5z"/><path d="M12 7v4h3"/><path d="M9 19h6M10 15v4M14 15v4"/>
+  </symbol>
+  <symbol id="ic-official" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M8 4l4 2 4-2 4 3-2 4h-2v10H8V11H6L4 7z"/><path d="M10 11v8M14 11v8"/>
+  </symbol>
+  <symbol id="ic-team" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M9 4h6l5 3-2 4h-2v10H8V11H6L4 7z"/><path d="M12 4v4"/>
+  </symbol>
+  <symbol id="ic-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M5 3h14v18l-2-2-2 2-2-2-2 2-2-2-2 2-2-2z"/><path d="M9 8h6M9 12h6M9 16h4"/>
+  </symbol>
+  <symbol id="ic-refund" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M20 7H8L5 10l3 3h12"/><path d="M8 7L5 10l3 3"/><path d="M20 7v10H9"/>
+  </symbol>
+  <symbol id="ic-hold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M7 4h4v16H7zM13 4h4v16h-4z"/>
+  </symbol>
+  <symbol id="ic-hoop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M4 3h16v10H4z"/><path d="M8 13h8v2l-1 6H9l-1-6z"/><path d="M9 15l6 6M15 15l-6 6"/>
+  </symbol>
+  <symbol id="ic-fee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M4 6h16v12H4z"/><path d="M12 8v8M9.5 10h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4"/>
+  </symbol>
+  <symbol id="ic-strip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M2 8h20v8H2z"/><path d="M7 8v8M12 8v8M17 8v8"/><path d="M3.5 15l3-6M8.5 15l3-6"/>
+  </symbol>
+</svg>

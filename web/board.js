@@ -1,0 +1,268 @@
+/* The board: the real tournament document on a Bryntum Scheduler, every game a flap tile whose face
+   is its money state from the agent's ledger. Polls the ledger, so a payout made by the agent flips
+   the tile while you watch. Sam's tap on a held game posts to the server, which pays through the
+   same gate and the same PayPal call as the agent. */
+import { Scheduler, StringHelper } from "/vendor/bryntum/scheduler.module.js";
+
+const GAME_MINUTES = 75;
+const enc = (s) => StringHelper.encodeHtml(String(s ?? ""));
+const $ = (id) => document.getElementById(id);
+const money = (n) => "$" + Number(n).toLocaleString("en-CA", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+const hhmm = (d) => `${d.getHours()}:${String(d.getMinutes()).padStart(2, "0")}`;
+const SHORT = {};
+const sh = (t) => SHORT[t] ?? t;
+
+const [doc, sheet, card] = await Promise.all([get("/api/tournament"), get("/api/sheet"), get("/api/rate-card")]);
+const T = normalise(doc);
+const days = [...new Set(T.games.map((g) => g.start.slice(0, 10)))].sort();
+let day = days.find((d) => d.endsWith("05-16")) ?? days[0];
+let ledger = { payouts: {}, holds: {}, folds: {}, events: [] };
+let replay = null;
+const flipped = new Set();
+
+/* ---- the document, numbered the way the agent numbers it (start, then court order) ---- */
+function normalise(doc) {
+  const order = new Map(doc.courts.map((c, i) => [c.id, i]));
+  const name = new Map(doc.courts.map((c) => [c.id, /^\d+$/.test(c.name) ? `${(c.venue ?? "").replace("Lakeside College", "Lakeside")} ${c.name}` : c.name]));
+  const games = [];
+  for (const d of doc.divisions) {
+    const team = new Map(d.teams.map((t) => [t.id, t.name]));
+    for (const g of d.games) {
+      if (!g.start || !g.courtId) continue;
+      games.push({ id: g.id, courtId: g.courtId, number: 0, division: d.name, stage: g.stage, home: g.homeId ? team.get(g.homeId) ?? null : null, away: g.awayId ? team.get(g.awayId) ?? null : null, court: name.get(g.courtId) ?? g.courtId, start: g.start, status: g.status, bye: Boolean(g.bye) });
+    }
+  }
+  games.sort((a, b) => a.start.localeCompare(b.start) || order.get(a.courtId) - order.get(b.courtId));
+  games.forEach((g, i) => { g.number = i + 1; });
+  return { slug: doc.slug, name: doc.name, games, courts: doc.courts.map((c) => ({ id: c.id, name: name.get(c.id), venue: c.venue ?? "" })) };
+}
+const matchup = (g) => g.home && g.away ? `${g.home} v ${g.away}` : g.stage;
+
+/* ---- money state per game, from the ledger ---- */
+function stateOf(g) {
+  const payout = Object.values(ledger.payouts).find((p) => p.gameId === g.id && !p.senderBatchId.endsWith("-showup"));
+  const showup = Object.values(ledger.payouts).find((p) => p.gameId === g.id && p.senderBatchId.endsWith("-showup"));
+  const hold = ledger.holds[g.id];
+  const folds = Object.values(ledger.folds).flat().filter((f) => f.gameId === g.id);
+  const p = payout ?? showup;
+  if (hold) return { kind: "held", hold };
+  if (p && (p.status === "SUCCESS" || p.status === "DRY_RUN")) return { kind: "paid", payout: p, folds, dry: p.status === "DRY_RUN" };
+  if (p && (p.status === "PENDING" || p.status === "PROCESSING")) return { kind: "paying", payout: p };
+  if (p && p.status.startsWith("ERROR")) return { kind: "held", hold: { reason: `PayPal did not pay: ${p.status}`, question: null, at: p.createdAt } };
+  if (folds.length) return { kind: "folded", folds };
+  return { kind: "scheduled" };
+}
+/** The replay's clock: the latest game the agent acted on, plus a game's length. */
+function cursor() {
+  const acted = ledger.events.filter((e) => e.gameId).map((e) => T.games.find((g) => g.id === e.gameId)).filter(Boolean);
+  if (!acted.length) return null;
+  const latest = acted.reduce((a, b) => (a.start > b.start ? a : b));
+  return new Date(new Date(latest.start).getTime() + GAME_MINUTES * 60000);
+}
+function kindWithClock(g, now) {
+  const s = stateOf(g);
+  if (s.kind !== "scheduled" || !now) return s;
+  const st = new Date(g.start).getTime();
+  if (st <= now.getTime() && now.getTime() < st + GAME_MINUTES * 60000) return { kind: "live" };
+  return s;
+}
+
+/* ---- the tile ---- */
+function noteHTML(g, s) {
+  if (s.kind === "paid") {
+    const secs = s.payout.secondsFromBuzzer;
+    if (s.payout.decidedBy === "treasurer") return `<span class="note">Paid, Sam's call</span>`;
+    if (secs == null) return `<span class="note">Paid${s.dry ? ", dry run" : ""}</span>`;
+    return `<span class="note"><span class="num">${secs}&#8239;s</span><span class="bar"><i style="--w:${Math.min(100, (secs / 60) * 100).toFixed(0)}%"></i></span></span>`;
+  }
+  if (s.kind === "paying") return `<span class="note">Paying through PayPal</span>`;
+  if (s.kind === "held") return `<span class="note">${enc(s.hold.flags?.forfeit ? "Forfeit, held" : "Held for Sam")}</span>`;
+  if (s.kind === "folded") return `<span class="note">Folds to end of day</span>`;
+  if (s.kind === "live") return `<span class="note">In play</span>`;
+  return `<span class="note">${enc(sentence(g.division))}</span>`;
+}
+const vsHTML = (g) => g.home ? `<span>${enc(sh(g.home))}</span><span>v ${enc(sh(g.away))}</span>` : `<span>${enc(sentence(g.stage))}</span>`;
+const sentence = (s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+function tileHTML(g, s) {
+  const face = (cls) => `<div class="face ${cls}" aria-hidden="true"><span class="vs">${vsHTML(g)}</span>${noteHTML(g, s)}</div>`;
+  return `<div class="flap ${s.kind}${flipped.has(g.id) ? " just-flipped" : ""}">${s.kind === "held" ? face("top") + face("bottom") : face("top")}</div>`;
+}
+const label = (g, s) => `Game ${g.number}, ${g.division.toLowerCase()}, ${matchup(g)}, ${g.court}, ${g.start.slice(11)}, ${({ paid: "final, officials paid", paying: "final, paying", held: "held for Sam", folded: "final, folds to end of day", live: "in play", scheduled: "not started" })[s.kind]}`;
+
+/* ---- the scheduler ---- */
+const dayStart = (d) => { const first = T.games.filter((g) => g.start.startsWith(d)).map((g) => g.start.slice(11)).sort()[0] ?? "09:00"; return new Date(`${d}T${first.slice(0, 2)}:00`); };
+const dayEnd = (d) => { const last = T.games.filter((g) => g.start.startsWith(d)).map((g) => g.start.slice(11)).sort().at(-1) ?? "18:00"; const h = Number(last.slice(0, 2)) + 2; return new Date(`${d}T${String(h).padStart(2, "0")}:00`); };
+/** Only the courts with a game that day: the real document books different gyms on different days. */
+const courtsOn = (d) => T.courts.filter((c) => T.games.some((g) => g.courtId === c.id && g.start.startsWith(d)));
+const scheduler = new Scheduler({
+  appendTo: "courts",
+  startDate: dayStart(day), endDate: dayEnd(day),
+  viewPreset: { base: "hourAndDay", tickWidth: 84, headers: [{ unit: "hour", dateFormat: "H:mm" }] },
+  columns: [{ text: "Court", field: "name", width: 104, htmlEncode: false, renderer: ({ record }) => `<div class="court">${enc(record.name)}<small>${enc(record.venue.split(" ")[0])}</small></div>` }],
+  resources: courtsOn(day),
+  events: T.games.map((g) => ({ id: g.id, resourceId: g.courtId, name: matchup(g), startDate: g.start, duration: GAME_MINUTES, durationUnit: "minute" })),
+  rowHeight: 52, barMargin: 2, readOnly: true, eventStyle: null, eventColor: null, autoHeight: true,
+  // the board wears its own surface, not a Bryntum theme; without this the component fetches one from a CDN
+  detectCSSCompatibilityIssues: false,
+  features: { eventTooltip: false, eventEdit: false, eventDragCreate: false, eventDrag: false, eventResize: false, eventMenu: false, scheduleMenu: false, cellMenu: false, headerMenu: false, cellEdit: false, regionResize: false, scheduleTooltip: false, timeRanges: { showCurrentTimeLine: false, showHeaderElements: true } },
+  eventRenderer({ eventRecord, renderData }) {
+    const g = T.games.find((x) => x.id === eventRecord.id);
+    const s = kindWithClock(g, cursor());
+    renderData.ariaLabel = label(g, s);
+    renderData.eventStyle = null;
+    return tileHTML(g, s);
+  },
+});
+scheduler.element.addEventListener("click", (e) => {
+  const el = e.target.closest(".b-sch-event-wrap"); if (!el) return;
+  const rec = scheduler.resolveEventRecord(el); if (!rec) return;
+  const g = T.games.find((x) => x.id === rec.id); const s = kindWithClock(g, cursor());
+  $("count-line").textContent = label(g, s);
+});
+
+/* ---- the header, the figures, the decision ---- */
+function renderDays() {
+  const names = { "2026-05-14": "Thu", "2026-05-15": "Fri", "2026-05-16": "Sat", "2026-05-17": "Sun" };
+  $("days").innerHTML = days.map((d) => `<button class="day" type="button" data-day="${d}" aria-label="${new Date(d + "T12:00").toLocaleDateString("en-CA", { weekday: "long", day: "numeric", month: "long" })}"${d === day ? ' aria-current="date"' : ""}>${names[d] ?? d.slice(5)}<span class="num">${Number(d.slice(8))}</span></button>`).join("");
+  $("days").querySelectorAll(".day").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day; scheduler.resourceStore.data = courtsOn(day); scheduler.setTimeSpan(dayStart(day), dayEnd(day)); render(); }));
+}
+function render() {
+  renderDays();
+  const dayGames = T.games.filter((g) => g.start.startsWith(day));
+  const now = cursor();
+  $("day-name").textContent = new Date(day + "T12:00").toLocaleDateString("en-CA", { weekday: "long", day: "numeric", month: "long" });
+  $("clock").textContent = now && now.toISOString().slice(0, 10) === day ? hhmm(now) : "--:--";
+  scheduler.features.timeRanges.store.removeAll();
+  if (now && now.toISOString().slice(0, 10) === day) scheduler.features.timeRanges.store.add({ id: "now", startDate: now, name: hhmm(now), cls: "now-line" });
+  scheduler.refreshRows?.();
+
+  const states = dayGames.map((g) => ({ g, s: kindWithClock(g, now) }));
+  const paid = states.filter((x) => x.s.kind === "paid");
+  const secs = paid.map((x) => x.s.payout.secondsFromBuzzer).filter((v) => v != null);
+  const dollars = paid.reduce((sum, x) => sum + x.s.payout.items.reduce((a, i) => a + Number(i.amount), 0), 0);
+  $("paid-n").textContent = paid.length; $("of").textContent = dayGames.length;
+  $("money").textContent = money(dollars);
+  $("median").textContent = secs.length ? median(secs) : 0;
+  const last = Object.values(ledger.payouts).filter((p) => p.status === "SUCCESS" && p.secondsFromBuzzer != null && dayGames.some((g) => g.id === p.gameId)).sort((a, b) => (b.completedAt ?? "").localeCompare(a.completedAt ?? ""))[0];
+  if (last) {
+    const ss = String(Math.round(last.secondsFromBuzzer)).padStart(2, "0").slice(-2);
+    setDigit("p1", ss[0]); setDigit("p2", ss[1]);
+    const g = T.games.find((x) => x.id === last.gameId);
+    $("secs-sr").textContent = `${last.secondsFromBuzzer} `;
+    $("last-game").textContent = `Last game${last.provisional ? ", provisional card" : ""}. Game ${g.number}, ${matchup(g)}, ${g.court}: ${last.items.length} officials, $${last.items.reduce((a, i) => a + Number(i.amount), 0).toFixed(0)}. PayPal batch ${last.batchId}.`;
+  } else { setDigit("p1", "0"); setDigit("p2", "0"); $("last-game").textContent = paid.length ? "Paid in a dry run: PayPal was not called, so there is no time to show." : "No payout yet today."; }
+  $("p1").classList.toggle("ghosted", !last); $("p2").classList.toggle("ghosted", !last);
+  $("via").textContent = replay?.paypal === "sandbox" || Object.values(ledger.payouts).some((p) => p.batchId) ? "Paid through PayPal Payouts, with test money in this replay." : "Paid through PayPal Payouts.";
+  $("count-line").textContent = `${paid.length} of ${dayGames.length} games paid, ${money(dollars)} paid out.`;
+
+  const holds = Object.values(ledger.holds).filter((h) => dayGames.some((g) => g.id === h.gameId)).sort((a, b) => a.at.localeCompare(b.at));
+  const card = $("held-card");
+  $("who-line").innerHTML = holds.length ? `Next decision: <b>Sam</b>, ${holds.length} game${holds.length > 1 ? "s" : ""}` : `<b>No decision waiting</b>`;
+  if (holds.length) {
+    const h = holds[0]; const g = T.games.find((x) => x.id === h.gameId);
+    card.hidden = false;
+    $("held-title").innerHTML = `Game <span class="num">${g.number}</span> is held for Sam`;
+    $("held-text").textContent = h.question ?? `${matchup(g)}, ${g.court}. ${h.reason}`;
+    $("held-why").textContent = h.question ? h.reason : "";
+    $("held-staged").textContent = sheet.staged?.forfeit?.gameId === g.id ? "Staged for this replay: the real game was not forfeited." : sheet.staged?.missing_table_official?.gameId === g.id ? "Staged for this replay: the real sheet is Sam's." : "";
+    const full = Number(card_total(g));
+    $("pay-full").textContent = `Pay in full, $${full}`;
+    const noShowUp = card.dataset.showup === "none";
+    $("pay-showup").disabled = noShowUp;
+    $("held-note").textContent = lastAnswer ?? (noShowUp ? "The show-up fee has no amount on the rate card yet, so that button waits for Sam's card." : "");
+  } else card.hidden = true;
+
+  renderPhone(dayGames, now);
+  renderEntries();
+  flipped.clear();
+}
+function card_total(g) { const a = sheet.assignments[g.id]; if (!a) return 0; return (a.referees.filter(Boolean).length * card.per_game.referee) + (a.table ? card.per_game.table : 0); }
+function median(xs) { const s = [...xs].sort((a, b) => a - b), m = s.length >> 1; return s.length % 2 ? s[m] : Math.round(((s[m - 1] + s[m]) / 2) * 10) / 10; }
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function setDigit(id, v) {
+  const el = $(id); if (el.textContent === v) return;
+  if (reduced || !el.dataset.ready) { el.textContent = v; el.dataset.ready = "1"; return; }
+  el.animate([{ transform: "rotateX(0)" }, { transform: "rotateX(-90deg)" }], { duration: 180, easing: "cubic-bezier(.6,0,.2,1)" }).finished.then(() => { el.textContent = v; el.animate([{ transform: "rotateX(90deg)" }, { transform: "rotateX(0)" }], { duration: 240, easing: "cubic-bezier(.22,.9,.32,1.04)" }); });
+}
+function renderPhone(dayGames, now) {
+  const row = (g, s) => `<li aria-label="${enc(label(g, s))}"><b>${enc(matchup(g))}</b><span class="when">${g.start.slice(11)} ${enc(g.court)}</span><small>${enc(sentence(g.division))}</small></li>`;
+  const live = dayGames.filter((g) => kindWithClock(g, now).kind === "live"), later = dayGames.filter((g) => kindWithClock(g, now).kind === "scheduled");
+  const done = dayGames.map((g) => ({ g, s: kindWithClock(g, now) })).filter((x) => ["paid", "paying", "held", "folded"].includes(x.s.kind));
+  $("phone").innerHTML =
+    `<h3>In play <span class="num">${live.length}</span></h3><ul class="prows">${live.map((g) => row(g, { kind: "live" })).join("") || "<li><small>Nothing in play.</small></li>"}</ul>` +
+    `<h3>Next up <span class="num">${later.length}</span></h3><ul class="prows later">${later.slice(0, 4).map((g) => row(g, { kind: "scheduled" })).join("")}</ul>` +
+    `<h3>Final <span class="num">${done.length}</span></h3><ul class="minis">${done.map(({ g, s }) => `<li class="${s.kind}" aria-label="${enc(label(g, s))}"><span>Game <b class="num">${g.number}</b></span><span>${s.kind === "held" ? "Held" : s.kind === "folded" ? "Folds" : s.payout?.secondsFromBuzzer != null ? s.payout.secondsFromBuzzer + " s" : "Paid"}</span></li>`).join("")}</ul>`;
+}
+function renderEntries() {
+  const byId = new Map(T.games.map((g) => [g.id, g]));
+  const lines = ledger.events.slice(-6).reverse().map((e) => {
+    const g = byId.get(e.gameId); const t = new Date(e.at); const when = `<time class="num">${hhmm(t)}</time>`;
+    const G = g ? `Game ${g.number}, ${enc(matchup(g))}` : "";
+    const d = e.detail;
+    switch (e.kind) {
+      case "paid": return `${when}<span>${G} final. Three officials on the sheet, all on the card. Paid, ${d?.seconds ?? "?"} seconds after the buzzer.</span>`;
+      case "hold": return `${when}<span><b>Held ${G.toLowerCase()}</b>: ${enc(String(d ?? ""))}</span>`;
+      case "guard_block": return `${when}<span><b>The gate stopped a payout on ${G.toLowerCase()}</b>: ${enc(String(d ?? ""))}</span>`;
+      case "paypal_duplicate": return `${when}<span><b>PayPal refused a second payout on ${G.toLowerCase()}</b>; nothing was sent twice.</span>`;
+      case "fold": return `${when}<span>${G}: folded for ${enc((d ?? []).join(", "))} until the end of the day.</span>`;
+      case "payout_created": return `${when}<span>${G}: payout sent to PayPal, batch ${enc(String(d ?? ""))}.</span>`;
+      case "treasurer_paid": return `${when}<span>${G}: Sam chose ${enc(String(d?.choice ?? "").replace("_", " "))}; paid through PayPal.</span>`;
+      case "treasurer_pay_nobody": return `${when}<span>${G}: Sam chose to pay nobody.</span>`;
+      case "paypal_error": return `${when}<span>${G}: PayPal did not pay: ${enc(String(d ?? ""))}</span>`;
+      case "no_paypal": return `${when}<span>${G}: PayPal switched off in this run; nothing could be sent.</span>`;
+      default: return `${when}<span>${G} ${enc(e.kind)}</span>`;
+    }
+  });
+  $("entries").innerHTML = lines.join("") || `<li><time class="num">--:--</time><span>Nothing yet. The agent writes here as games go final.</span></li>`;
+}
+function renderRate() {
+  const c = card;
+  $("rate").innerHTML = `<p><b>$${c.per_game.referee} a ref, $${c.per_game.table} a table official, per game.</b> Two refs and one table official on every game, so a full game pays $${c.per_game.referee * 2 + c.per_game.table}.</p>` +
+    `<p>On a forfeit the card pays a show-up fee only, so the agent stops and hands the game to Sam. Show-up fee: ${c.forfeit.show_up_fee == null ? "not set yet" : "$" + c.forfeit.show_up_fee}.</p>` +
+    `<p>${c.provisional ? "Provisional until Sam sends his own card." : "Sam's card."} Officials appear as Official A, B and C until they agree to be named.</p>`;
+  $("held-card").dataset.showup = c.forfeit.show_up_fee == null ? "none" : "set";
+  $("rate-h").textContent = c.provisional ? "Provisional rate card" : "The rate card";
+}
+
+/* ---- Sam's tap ---- */
+let lastAnswer = null;
+for (const [id, choice] of [["pay-full", "pay_full"], ["pay-showup", "pay_show_up"], ["pay-nobody", "pay_nobody"]]) {
+  $(id).addEventListener("click", async () => {
+    const holds = Object.values(ledger.holds).sort((a, b) => a.at.localeCompare(b.at)); if (!holds.length) return;
+    const gameId = holds[0].gameId;
+    $("source").textContent = "paying through PayPal"; $("source").classList.add("busy");
+    for (const b of ["pay-full", "pay-showup", "pay-nobody"]) $(b).disabled = true;
+    let out;
+    try {
+      const res = await fetch(`/api/holds/${encodeURIComponent(gameId)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ choice }) });
+      out = await res.json();
+    } catch (e) { out = { ok: false, message: `The board could not reach the server: ${e.message}` }; }
+    lastAnswer = out.message;
+    $("held-note").textContent = out.message;
+    $("source").textContent = "live, every 3 s"; $("source").classList.remove("busy");
+    for (const b of ["pay-full", "pay-showup", "pay-nobody"]) $(b).disabled = false;
+    if (out.ok) { flipped.add(gameId); await poll(); setTimeout(() => { lastAnswer = null; }, 8000); }
+  });
+}
+
+/* ---- polling: the agent writes the ledger, the board reads it ---- */
+let lastText = "";
+async function poll() {
+  try {
+    const [l, r] = await Promise.all([fetch("/api/ledger").then((x) => x.text()), fetch("/api/replay").then((x) => x.json()).catch(() => null)]);
+    replay = r;
+    if (l !== lastText) {
+      const next = JSON.parse(l) || { payouts: {}, holds: {}, folds: {}, events: [] };
+      for (const p of Object.values(next.payouts ?? {})) if (p.status === "SUCCESS" && ledger.payouts[p.senderBatchId]?.status !== "SUCCESS") flipped.add(p.gameId);
+      ledger = next; lastText = l; render();
+    }
+  } catch (e) { $("source").textContent = "ledger unreadable"; }
+}
+async function get(url) { const r = await fetch(url); if (!r.ok) throw new Error(`${url}: ${r.status}`); return r.json(); }
+
+renderRate();
+$("event-name").textContent = T.name;
+$("club").textContent = doc.association ?? "Northside Youth Basketball";
+await poll();
+render();
+setInterval(poll, 2500);

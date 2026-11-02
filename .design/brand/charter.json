@@ -1,0 +1,19 @@
+{
+  "allow_fonts": ["Alumni Sans", "Schibsted Grotesk"],
+  "banned_fonts": ["Inter", "Space Grotesk", "Manrope", "Instrument Serif", "EB Garamond", "Oswald", "Bebas Neue", "Roboto"],
+  "banned_words": ["AI-powered", "seamless", "payout batch", "orchestration", "leverage", "workflow", "transaction id", "empower", "unlock", "effortless"],
+  "banned_hex": ["#ff0000", "#22c55e", "#ef4444", "#3b82f6", "#0070ba", "#003087", "#f8fafc", "#0f172a", "#1e293b", "#ffffff", "#000000", "#7c3aed", "#ff671d"],
+  "allow_hex": [],
+  "title_punctuation": "forbid",
+  "max_tracked_caps_rules": 2,
+  "allow_long_dashes": false,
+  "forbid_regex": [
+    {"pattern": "class=\"[^\"]*eyebrow", "why": "no eyebrow labels above titles"},
+    {"pattern": "class=\"[^\"]*avatar", "why": "the agent has no avatar; it writes on the sheet"},
+    {"pattern": "border-radius:\\s*(9999px|999px|50%)", "why": "no pills and no discs; corners are chamfered or 14 px"},
+    {"pattern": "box-shadow:[^;]*\\b\\d+px\\s+\\d+px\\s+(?:[1-9]\\d*)px", "why": "depth is material; blur is always 0"},
+    {"pattern": "(?i)\\b(payout batch|orchestrat|AI-powered|seamless)\\b", "why": "the scorer's words only"},
+    {"pattern": "(?i)progress-bar|<progress", "why": "progress is the slashed number strip"},
+    {"pattern": "(?i)\\bbadge\\b", "why": "the possession arrow is the only needs-you signal"}
+  ]
+}

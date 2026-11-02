@@ -1,0 +1,18 @@
+{
+  "association": "Northside Youth Basketball",
+  "season": "Northside Invitational 2026",
+  "currency": "CAD",
+  "provisional": true,
+  "source": "Placeholder until Sam sends the association's own card. Every amount on screen and in results/ is marked provisional while this flag is true.",
+  "per_game": {
+    "referee": 45.00,
+    "table": 25.00
+  },
+  "officials_per_game": { "referees": 2, "table": 1 },
+  "forfeit": {
+    "rule": "show_up_fee_only",
+    "show_up_fee": null,
+    "note": "On a forfeit the card pays a show-up fee only. The amount is not set, so a forfeit cannot be paid without Sam."
+  },
+  "bye": { "rule": "no_officials_no_pay" }
+}

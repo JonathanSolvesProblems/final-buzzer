@@ -1,0 +1,761 @@
+{
+  "generated": "2026-11-02T20:13:35.386Z",
+  "note": "Teams are the real entries in the 2026 document. Manager addresses, payment dates, the reply and the waitlist are staged for the chase replay and labelled here.",
+  "invoices_sent_on": "2026-04-10",
+  "teams": [
+    {
+      "id": "novice-westbrook",
+      "division": "Novice",
+      "name": "Westbrook",
+      "manager_email": "team-novice-westbrook@example.com",
+      "manager_name": "Westbrook team manager"
+    },
+    {
+      "id": "novice-hilltop",
+      "division": "Novice",
+      "name": "Hilltop",
+      "manager_email": "team-novice-hilltop@example.com",
+      "manager_name": "Hilltop team manager"
+    },
+    {
+      "id": "novice-maple-hill",
+      "division": "Novice",
+      "name": "Maple Hill",
+      "manager_email": "team-novice-maple-hill@example.com",
+      "manager_name": "Maple Hill team manager"
+    },
+    {
+      "id": "novice-harbour",
+      "division": "Novice",
+      "name": "Harbour",
+      "manager_email": "team-novice-harbour@example.com",
+      "manager_name": "Harbour team manager"
+    },
+    {
+      "id": "novice-granite-3",
+      "division": "Novice",
+      "name": "Granite 3",
+      "manager_email": "team-novice-granite-3@example.com",
+      "manager_name": "Granite 3 team manager"
+    },
+    {
+      "id": "novice-ridgeway",
+      "division": "Novice",
+      "name": "Ridgeway",
+      "manager_email": "team-novice-ridgeway@example.com",
+      "manager_name": "Ridgeway team manager"
+    },
+    {
+      "id": "mini-girls-lakeshore",
+      "division": "Mini Girls",
+      "name": "Lakeshore",
+      "manager_email": "team-mini-girls-lakeshore@example.com",
+      "manager_name": "Lakeshore team manager"
+    },
+    {
+      "id": "mini-girls-pinecrest",
+      "division": "Mini Girls",
+      "name": "Pinecrest",
+      "manager_email": "team-mini-girls-pinecrest@example.com",
+      "manager_name": "Pinecrest team manager"
+    },
+    {
+      "id": "mini-girls-northside",
+      "division": "Mini Girls",
+      "name": "Northside",
+      "manager_email": "team-mini-girls-northside@example.com",
+      "manager_name": "Northside team manager"
+    },
+    {
+      "id": "mini-girls-maple-hill",
+      "division": "Mini Girls",
+      "name": "Maple Hill",
+      "manager_email": "team-mini-girls-maple-hill@example.com",
+      "manager_name": "Maple Hill team manager"
+    },
+    {
+      "id": "mini-boys-lakeshore-1",
+      "division": "Mini Boys",
+      "name": "Lakeshore 1",
+      "manager_email": "team-mini-boys-lakeshore-1@example.com",
+      "manager_name": "Lakeshore 1 team manager"
+    },
+    {
+      "id": "mini-boys-westbrook",
+      "division": "Mini Boys",
+      "name": "Westbrook",
+      "manager_email": "team-mini-boys-westbrook@example.com",
+      "manager_name": "Westbrook team manager"
+    },
+    {
+      "id": "mini-boys-meadowvale",
+      "division": "Mini Boys",
+      "name": "Meadowvale",
+      "manager_email": "team-mini-boys-meadowvale@example.com",
+      "manager_name": "Meadowvale team manager"
+    },
+    {
+      "id": "mini-boys-beacon",
+      "division": "Mini Boys",
+      "name": "Beacon",
+      "manager_email": "team-mini-boys-beacon@example.com",
+      "manager_name": "Beacon team manager"
+    },
+    {
+      "id": "mini-boys-lakeshore-2",
+      "division": "Mini Boys",
+      "name": "Lakeshore 2",
+      "manager_email": "team-mini-boys-lakeshore-2@example.com",
+      "manager_name": "Lakeshore 2 team manager"
+    },
+    {
+      "id": "mini-boys-maple-hill",
+      "division": "Mini Boys",
+      "name": "Maple Hill",
+      "manager_email": "team-mini-boys-maple-hill@example.com",
+      "manager_name": "Maple Hill team manager"
+    },
+    {
+      "id": "mini-boys-lakeshore-3",
+      "division": "Mini Boys",
+      "name": "Lakeshore 3",
+      "manager_email": "team-mini-boys-lakeshore-3@example.com",
+      "manager_name": "Lakeshore 3 team manager"
+    },
+    {
+      "id": "mini-boys-granite-3",
+      "division": "Mini Boys",
+      "name": "Granite 3",
+      "manager_email": "team-mini-boys-granite-3@example.com",
+      "manager_name": "Granite 3 team manager"
+    },
+    {
+      "id": "mini-boys-bayview",
+      "division": "Mini Boys",
+      "name": "Bayview",
+      "manager_email": "team-mini-boys-bayview@example.com",
+      "manager_name": "Bayview team manager"
+    },
+    {
+      "id": "mini-boys-lakeshore-4",
+      "division": "Mini Boys",
+      "name": "Lakeshore 4",
+      "manager_email": "team-mini-boys-lakeshore-4@example.com",
+      "manager_name": "Lakeshore 4 team manager"
+    },
+    {
+      "id": "mini-boys-lakeshore-5",
+      "division": "Mini Boys",
+      "name": "Lakeshore 5",
+      "manager_email": "team-mini-boys-lakeshore-5@example.com",
+      "manager_name": "Lakeshore 5 team manager"
+    },
+    {
+      "id": "mini-boys-ridgeway",
+      "division": "Mini Boys",
+      "name": "Ridgeway",
+      "manager_email": "team-mini-boys-ridgeway@example.com",
+      "manager_name": "Ridgeway team manager"
+    },
+    {
+      "id": "bantam-girls-cedar",
+      "division": "Bantam Girls",
+      "name": "Cedar",
+      "manager_email": "team-bantam-girls-cedar@example.com",
+      "manager_name": "Cedar team manager"
+    },
+    {
+      "id": "bantam-girls-pinecrest",
+      "division": "Bantam Girls",
+      "name": "Pinecrest",
+      "manager_email": "team-bantam-girls-pinecrest@example.com",
+      "manager_name": "Pinecrest team manager"
+    },
+    {
+      "id": "bantam-girls-glenview",
+      "division": "Bantam Girls",
+      "name": "Glenview",
+      "manager_email": "team-bantam-girls-glenview@example.com",
+      "manager_name": "Glenview team manager"
+    },
+    {
+      "id": "bantam-girls-northside",
+      "division": "Bantam Girls",
+      "name": "Northside",
+      "manager_email": "team-bantam-girls-northside@example.com",
+      "manager_name": "Northside team manager"
+    },
+    {
+      "id": "bantam-boys-summit",
+      "division": "Bantam Boys",
+      "name": "Summit",
+      "manager_email": "team-bantam-boys-summit@example.com",
+      "manager_name": "Summit team manager"
+    },
+    {
+      "id": "bantam-boys-granite-3",
+      "division": "Bantam Boys",
+      "name": "Granite 3",
+      "manager_email": "team-bantam-boys-granite-3@example.com",
+      "manager_name": "Granite 3 team manager"
+    },
+    {
+      "id": "bantam-boys-meadowvale",
+      "division": "Bantam Boys",
+      "name": "Meadowvale",
+      "manager_email": "team-bantam-boys-meadowvale@example.com",
+      "manager_name": "Meadowvale team manager"
+    },
+    {
+      "id": "bantam-boys-maple-hill",
+      "division": "Bantam Boys",
+      "name": "Maple Hill",
+      "manager_email": "team-bantam-boys-maple-hill@example.com",
+      "manager_name": "Maple Hill team manager"
+    },
+    {
+      "id": "bantam-boys-fairview",
+      "division": "Bantam Boys",
+      "name": "Fairview",
+      "manager_email": "team-bantam-boys-fairview@example.com",
+      "manager_name": "Fairview team manager"
+    },
+    {
+      "id": "bantam-boys-bayview",
+      "division": "Bantam Boys",
+      "name": "Bayview",
+      "manager_email": "team-bantam-boys-bayview@example.com",
+      "manager_name": "Bayview team manager"
+    },
+    {
+      "id": "bantam-boys-highland",
+      "division": "Bantam Boys",
+      "name": "Highland",
+      "manager_email": "team-bantam-boys-highland@example.com",
+      "manager_name": "Highland team manager"
+    },
+    {
+      "id": "bantam-boys-hilltop",
+      "division": "Bantam Boys",
+      "name": "Hilltop",
+      "manager_email": "team-bantam-boys-hilltop@example.com",
+      "manager_name": "Hilltop team manager"
+    },
+    {
+      "id": "cadet-girls-granite-3",
+      "division": "Cadet Girls",
+      "name": "Granite 3",
+      "manager_email": "team-cadet-girls-granite-3@example.com",
+      "manager_name": "Granite 3 team manager"
+    },
+    {
+      "id": "cadet-girls-glenview",
+      "division": "Cadet Girls",
+      "name": "Glenview",
+      "manager_email": "team-cadet-girls-glenview@example.com",
+      "manager_name": "Glenview team manager"
+    },
+    {
+      "id": "cadet-girls-bayview",
+      "division": "Cadet Girls",
+      "name": "Bayview",
+      "manager_email": "team-cadet-girls-bayview@example.com",
+      "manager_name": "Bayview team manager"
+    },
+    {
+      "id": "cadet-girls-riverside",
+      "division": "Cadet Girls",
+      "name": "Riverside",
+      "manager_email": "team-cadet-girls-riverside@example.com",
+      "manager_name": "Riverside team manager"
+    },
+    {
+      "id": "cadet-boys-granite-3",
+      "division": "Cadet Boys",
+      "name": "Granite 3",
+      "manager_email": "team-cadet-boys-granite-3@example.com",
+      "manager_name": "Granite 3 team manager"
+    },
+    {
+      "id": "cadet-boys-brookside",
+      "division": "Cadet Boys",
+      "name": "Brookside",
+      "manager_email": "team-cadet-boys-brookside@example.com",
+      "manager_name": "Brookside team manager"
+    },
+    {
+      "id": "cadet-boys-oakridge",
+      "division": "Cadet Boys",
+      "name": "Oakridge",
+      "manager_email": "team-cadet-boys-oakridge@example.com",
+      "manager_name": "Oakridge team manager"
+    },
+    {
+      "id": "cadet-boys-eastgate",
+      "division": "Cadet Boys",
+      "name": "Eastgate",
+      "manager_email": "team-cadet-boys-eastgate@example.com",
+      "manager_name": "Eastgate team manager"
+    },
+    {
+      "id": "cadet-boys-summit",
+      "division": "Cadet Boys",
+      "name": "Summit",
+      "manager_email": "team-cadet-boys-summit@example.com",
+      "manager_name": "Summit team manager"
+    },
+    {
+      "id": "cadet-boys-crescent",
+      "division": "Cadet Boys",
+      "name": "Crescent",
+      "manager_email": "team-cadet-boys-crescent@example.com",
+      "manager_name": "Crescent team manager"
+    },
+    {
+      "id": "cadet-boys-hilltop",
+      "division": "Cadet Boys",
+      "name": "Hilltop",
+      "manager_email": "team-cadet-boys-hilltop@example.com",
+      "manager_name": "Hilltop team manager"
+    },
+    {
+      "id": "cadet-boys-riverside",
+      "division": "Cadet Boys",
+      "name": "Riverside",
+      "manager_email": "team-cadet-boys-riverside@example.com",
+      "manager_name": "Riverside team manager"
+    },
+    {
+      "id": "juvenile-boys-kingsway",
+      "division": "Juvenile Boys",
+      "name": "Kingsway",
+      "manager_email": "team-juvenile-boys-kingsway@example.com",
+      "manager_name": "Kingsway team manager"
+    },
+    {
+      "id": "juvenile-boys-stonebridge",
+      "division": "Juvenile Boys",
+      "name": "Stonebridge",
+      "manager_email": "team-juvenile-boys-stonebridge@example.com",
+      "manager_name": "Stonebridge team manager"
+    },
+    {
+      "id": "juvenile-boys-riverside",
+      "division": "Juvenile Boys",
+      "name": "Riverside",
+      "manager_email": "team-juvenile-boys-riverside@example.com",
+      "manager_name": "Riverside team manager"
+    },
+    {
+      "id": "juvenile-boys-crescent",
+      "division": "Juvenile Boys",
+      "name": "Crescent",
+      "manager_email": "team-juvenile-boys-crescent@example.com",
+      "manager_name": "Crescent team manager"
+    },
+    {
+      "id": "juvenile-boys-eastgate",
+      "division": "Juvenile Boys",
+      "name": "Eastgate",
+      "manager_email": "team-juvenile-boys-eastgate@example.com",
+      "manager_name": "Eastgate team manager"
+    },
+    {
+      "id": "juvenile-boys-maple-hill",
+      "division": "Juvenile Boys",
+      "name": "Maple Hill",
+      "manager_email": "team-juvenile-boys-maple-hill@example.com",
+      "manager_name": "Maple Hill team manager"
+    }
+  ],
+  "staged": {
+    "payments": [
+      {
+        "team_id": "novice-westbrook",
+        "on": "2026-05-02",
+        "amount": "full",
+        "method": "e-transfer after a reminder",
+        "staged": true
+      },
+      {
+        "team_id": "novice-hilltop",
+        "on": "2026-04-19",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "novice-maple-hill",
+        "on": "2026-04-14",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "novice-harbour",
+        "on": "2026-04-21",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "novice-granite-3",
+        "on": "2026-04-16",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "novice-ridgeway",
+        "on": "2026-04-23",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-girls-lakeshore",
+        "on": "2026-04-18",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-girls-pinecrest",
+        "on": "2026-04-13",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-girls-northside",
+        "on": "2026-04-20",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-girls-maple-hill",
+        "on": "2026-05-02",
+        "amount": "full",
+        "method": "e-transfer after a reminder",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-lakeshore-1",
+        "on": "2026-04-22",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-westbrook",
+        "on": "2026-04-17",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-meadowvale",
+        "on": "2026-04-12",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-beacon",
+        "on": "2026-04-19",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-lakeshore-2",
+        "on": "2026-04-14",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-maple-hill",
+        "on": "2026-04-21",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-lakeshore-3",
+        "on": "2026-04-16",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-granite-3",
+        "on": "2026-04-23",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-bayview",
+        "on": "2026-05-02",
+        "amount": "full",
+        "method": "e-transfer after a reminder",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-lakeshore-4",
+        "on": "2026-04-13",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-lakeshore-5",
+        "on": "2026-04-20",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "mini-boys-ridgeway",
+        "on": "2026-04-15",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-girls-cedar",
+        "on": "2026-04-22",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-girls-pinecrest",
+        "on": "2026-04-17",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-girls-glenview",
+        "on": "2026-04-12",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-girls-northside",
+        "on": "2026-04-19",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-boys-granite-3",
+        "on": "2026-05-02",
+        "amount": "full",
+        "method": "e-transfer after a reminder",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-boys-meadowvale",
+        "on": "2026-04-16",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-boys-maple-hill",
+        "on": "2026-04-23",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-boys-fairview",
+        "on": "2026-04-18",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-boys-bayview",
+        "on": "2026-04-13",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-boys-highland",
+        "on": "2026-04-20",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "bantam-boys-hilltop",
+        "on": "2026-04-15",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-girls-granite-3",
+        "on": "2026-04-22",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-girls-glenview",
+        "on": "2026-04-17",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-girls-bayview",
+        "on": "2026-05-02",
+        "amount": "full",
+        "method": "e-transfer after a reminder",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-girls-riverside",
+        "on": "2026-04-19",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-boys-brookside",
+        "on": "2026-04-21",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-boys-oakridge",
+        "on": "2026-04-16",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-boys-eastgate",
+        "on": "2026-04-23",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-boys-summit",
+        "on": "2026-04-18",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-boys-crescent",
+        "on": "2026-04-13",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-boys-hilltop",
+        "on": "2026-04-20",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-boys-riverside",
+        "on": "2026-05-02",
+        "amount": "full",
+        "method": "e-transfer after a reminder",
+        "staged": true
+      },
+      {
+        "team_id": "juvenile-boys-kingsway",
+        "on": "2026-04-22",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "juvenile-boys-stonebridge",
+        "on": "2026-04-17",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "juvenile-boys-riverside",
+        "on": "2026-04-12",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "juvenile-boys-crescent",
+        "on": "2026-04-19",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "juvenile-boys-eastgate",
+        "on": "2026-04-14",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "juvenile-boys-maple-hill",
+        "on": "2026-04-21",
+        "amount": "full",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-boys-granite-3",
+        "on": "2026-04-16",
+        "amount": "deposit",
+        "method": "e-transfer",
+        "staged": true
+      },
+      {
+        "team_id": "cadet-boys-granite-3",
+        "on": "2026-05-13",
+        "amount": "balance",
+        "method": "e-transfer",
+        "staged": true
+      }
+    ],
+    "reply_asks_to_split": {
+      "team_id": "cadet-boys-granite-3",
+      "team": "Granite 3",
+      "division": "Cadet Boys",
+      "on": "2026-04-14",
+      "reply": "Hi, can we pay in two parts? Half now and the rest closer to the tournament. Thanks."
+    },
+    "silent_with_waitlist": {
+      "team_id": "bantam-boys-summit",
+      "team": "Summit",
+      "division": "Bantam Boys",
+      "note": "No reply to the invoice or any reminder."
+    }
+  },
+  "waitlist": [
+    {
+      "id": "bantam-boys-waitlist-1",
+      "division": "Bantam Boys",
+      "name": "Waitlist team 1 (staged)",
+      "manager_email": "team-bantam-boys-waitlist-1@example.com",
+      "manager_name": "Waitlist team 1 manager"
+    }
+  ]
+}

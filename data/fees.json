@@ -1,0 +1,16 @@
+{
+  "association": "Northside Youth Basketball",
+  "season": "Northside Invitational 2026",
+  "currency": "CAD",
+  "provisional": true,
+  "source": "Placeholder until Sam confirms the entry fee. The real fee is not on the public pages.",
+  "entry_fee_per_team": 350.00,
+  "deposit_share": 0.5,
+  "deadline": "2026-05-01",
+  "reminder": { "every_days": 3, "max": 3 },
+  "release": { "after_days_past_deadline": 7, "note": "A spot is released to the waitlist only after the deadline has passed by this many days and the manager has not replied." },
+  "refund_policy": {
+    "game_not_played": "pro rata: entry fee divided by the games the team was scheduled to play, times the games not played",
+    "note": "Applied when a gym closes and a game cannot be re-planned. Placeholder wording until Sam's own policy."
+  }
+}
