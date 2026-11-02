@@ -41,6 +41,14 @@ export async function connectPayPalMcp(groups: string[]): Promise<PayPalMcp> {
     const text = (res.content as Array<{ type: string; text?: string }>).filter((c) => c.type === "text").map((c) => c.text ?? "").join("\n");
     let parsed: unknown = text;
     try { parsed = JSON.parse(text); } catch { /* the server answers prose for some calls */ }
+    // the toolkit reports some HTTP failures as a normal result with ok:false; treat them as errors too
+    const failed = parsed && typeof parsed === "object" && (parsed as any).ok === false;
+    if (failed) {
+      const status = Number((parsed as any).status ?? 0);
+      const message = String((parsed as any).message ?? text).slice(0, 500);
+      return { isError: true, errorCategory: status === 401 || status === 403 ? "permission" : status >= 500 ? "transient" : "validation", isRetryable: status >= 500, details: parsed,
+        message: status === 403 ? `${message} In the sandbox app, the matching feature (Invoicing, Transaction Search) must be ticked under Features.` : message };
+    }
     if (res.isError) {
       return { isError: true, errorCategory: /permission|unauthori[sz]ed|403/i.test(text) ? "permission" : /not found|invalid|required/i.test(text) ? "validation" : "business", isRetryable: false, message: text.slice(0, 500), details: parsed };
     }
