@@ -1,13 +1,13 @@
 """Functional check of the served board (web/ on src/server.ts, dry ledger).
 
-Starts from a copy of the dry ledger with game 26 held, loads the board, taps "Pay in full" on the
+Starts from the fixture ledger (two holds the agent wrote on the staged games), loads the board, taps "Pay in full" on the
 held game, and expects: the server answers ok, the hold disappears, the tile flips to paid, the count
 moves. Usage: start the server with LEDGER=tmp/ledger-test.json, then  py tmp/test_web_board.py
 """
 import json, shutil, sys
 from playwright.sync_api import sync_playwright
 
-shutil.copyfile("results/ledger-dry.json", "tmp/ledger-test.json")
+shutil.copyfile("tests/fixtures/ledger-holds.json", "tmp/ledger-test.json")
 fails = []
 with sync_playwright() as p:
     b = p.chromium.launch(); pg = b.new_page(viewport={"width": 1280, "height": 720})
