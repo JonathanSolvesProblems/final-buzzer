@@ -1,0 +1,9 @@
+node_modules
+.env
+.env.*
+!.env.example
+.git
+tmp
+results/live
+results/trace
+*.log

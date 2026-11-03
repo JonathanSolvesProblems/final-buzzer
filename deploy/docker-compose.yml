@@ -1,0 +1,62 @@
+# Lives at ~/experimental-projects/final-buzzer/docker-compose.yml on the OVH box, next to app/ (a
+# clone of this repository) and .env (secrets, chmod 600).
+#
+# "app" serves the board, the money board, the scorer's page and the PayPal webhook receiver. It
+# joins the shared `web` network and is routed by the box's Traefik (entrypoint websecure,
+# certresolver le), the same pattern as the other experimental projects. "agent" is the agent on
+# duty: it watches app's tournament document over the stack's own network and pays as games go
+# final. Both share one volume, so the ledger the agent writes is the ledger the board reads.
+#
+# Resource caps: this box runs production apps; neither service may crowd them.
+services:
+  app:
+    build:
+      context: ./app
+    image: final-buzzer:latest
+    container_name: final-buzzer
+    env_file: .env
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 0.5
+    volumes:
+      - data:/data
+    networks:
+      - web
+      - internal
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: web
+      traefik.http.routers.final-buzzer.rule: Host(`finalbuzzer.jonathansolvesproblems.com`)
+      traefik.http.routers.final-buzzer.entrypoints: websecure
+      traefik.http.routers.final-buzzer.tls.certresolver: le
+      traefik.http.services.final-buzzer.loadbalancer.server.port: "4173"
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+
+  agent:
+    image: final-buzzer:latest
+    container_name: final-buzzer-agent
+    env_file: .env
+    environment:
+      TOURNAMENT_URL: http://app:4173/api/tournament
+    command: ["node", "src/cli/watch.ts"]
+    restart: unless-stopped
+    depends_on: [app]
+    mem_limit: 384m
+    cpus: 0.5
+    volumes:
+      - data:/data
+    networks:
+      - internal
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+
+volumes:
+  data:
+
+networks:
+  web:
+    external: true
+  internal: {}

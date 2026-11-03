@@ -16,6 +16,7 @@ import { loadSheet, loadRateCard } from "../agent/sheet.ts";
 import { loadLedger, saveLedger } from "../ledger.ts";
 import { runBuzzer, type PayPalMode } from "../agent/buzzer.ts";
 import { summarise } from "./report.ts";
+import { spendModelRun } from "../budget.ts";
 
 const docUrl = process.env.TOURNAMENT_URL ?? "http://localhost:4173/api/tournament";
 const paypal = ((process.argv.includes("--paypal") ? process.argv[process.argv.indexOf("--paypal") + 1] : undefined) ?? (process.env.PAYPAL_CLIENT_ID ? "live" : "dry")) as PayPalMode;
@@ -44,6 +45,8 @@ for (;;) {
     const previousStatus = wasFinal.has(g.id) && before === "scheduled" ? "final" : before;
     wasFinal.add(g.id);
     const finalAt = g.finalAt ? new Date(g.finalAt) : new Date();
+    const budget = await spendModelRun(`game ${g.number}`);
+    if (!budget.ok) { console.log(`  ${budget.message}`); continue; }
     const ledger = await loadLedger(ledgerPath, t.slug);
     console.log(`${finalAt.toISOString()} game ${g.number} ${g.status}: ${g.home} v ${g.away}, ${g.court}`);
     const r = await runBuzzer({ tournament: t, game: g, sheet, card, ledger, finalAt, runId, paypal, previousStatus,

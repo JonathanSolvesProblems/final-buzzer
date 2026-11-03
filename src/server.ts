@@ -14,6 +14,7 @@ import { loadLedger, saveLedger } from "./ledger.ts";
 import { resolveHold, type TreasurerChoice } from "./agent/resolve.ts";
 import { handleWebhook } from "./webhooks.ts";
 import { runClosure } from "./agent/closure.ts";
+import { spendModelRun } from "./budget.ts";
 
 const require = createRequire(import.meta.url);
 const PORT = Number(process.env.PORT ?? 4173);
@@ -92,6 +93,8 @@ const server = createServer(async (req, res) => {
     if (req.method === "POST" && path === "/api/replan") {
       const body = JSON.parse(await readBody(req) || "{}");
       if (!body.court || !body.from) return json(res, 400, { ok: false, message: "court and from (HH:MM) are required" });
+      const budget = await spendModelRun("replan");
+      if (!budget.ok) return json(res, 429, { ok: false, message: budget.message });
       const r = await runClosure({ closure: { day: String(body.day ?? "2026-05-16"), court: String(body.court), from: String(body.from) }, paypal: PAYPAL_MODE, runId: process.env.RUN_ID ?? "live", docPath: DOC, apply: true });
       const { trace, ...plan } = r;
       return json(res, 200, { ok: true, ...plan, steps: trace.filter((s) => s.kind === "tool").map((s) => ({ name: s.name, input: s.input, ok: (s.output as any)?.ok })) });

@@ -30,7 +30,7 @@ The decision is a tool call with a schema (`src/agent/decision.ts`), never prose
 - **Claude** (`@anthropic-ai/sdk`, `src/agent/loop.ts`): the loop runs on `stop_reason`, with a terminal decision tool.
 - **Bryntum Scheduler** (`web/board.js`): the court-by-time board. Every game is a flap tile whose face is its money state, read from the agent's ledger every few seconds.
 - **AG Grid** (`web/money.js`): the treasurer's money board, every payout, hold and invoice.
-- **Render** (`render.yaml`): the board and webhook receiver as a web service, the daily chase as a cron job.
+- **Hosting** (`Dockerfile`, `deploy/`): two containers from one image on a small VPS behind Traefik with HTTPS. One serves the board, the money board, the scorer's page and the PayPal webhook receiver; the other is the agent on duty, paying as games go final. A daily cap on agent runs keeps a public demo from spending without limit.
 
 Everything runs on the PayPal sandbox with test money. Nothing here has touched a real balance.
 
