@@ -111,7 +111,7 @@ scheduler.element.addEventListener("click", (e) => {
 function renderDays() {
   const names = { "2026-05-14": "Thu", "2026-05-15": "Fri", "2026-05-16": "Sat", "2026-05-17": "Sun" };
   $("days").innerHTML = days.map((d) => `<button class="day" type="button" data-day="${d}" aria-label="${new Date(d + "T12:00").toLocaleDateString("en-CA", { weekday: "long", day: "numeric", month: "long" })}"${d === day ? ' aria-current="date"' : ""}>${names[d] ?? d.slice(5)}<span class="num">${Number(d.slice(8))}</span></button>`).join("");
-  $("days").querySelectorAll(".day").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day; scheduler.resourceStore.data = courtsOn(day); scheduler.setTimeSpan(dayStart(day), dayEnd(day)); render(); }));
+  $("days").querySelectorAll(".day").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day; scheduler.resourceStore.data = courtsOn(day); scheduler.setTimeSpan(dayStart(day), dayEnd(day)); renderClosure(); render(); }));
 }
 function render() {
   renderDays();

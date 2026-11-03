@@ -2,6 +2,8 @@
 
 Every official paid at the final buzzer. A youth basketball tournament's money, run by an agent on PayPal.
 
+**Live demo: https://finalbuzzer.jonathansolvesproblems.com** (the board) · [/score.html](https://finalbuzzer.jonathansolvesproblems.com/score.html) (score a game and watch the agent pay) · [/money.html](https://finalbuzzer.jonathansolvesproblems.com/money.html) (every payout and invoice). PayPal sandbox, test money.
+
 Sam runs a youth basketball association. Its invitational is 88 games over a weekend, two referees and a table official on every game, 52 teams paying an entry fee. After last year's tournament the officials were paid by hand, one e-transfer at a time, and some teams never paid at all.
 
 Final Buzzer is the association's treasurer as an agent. When a game goes final on the scorer's phone, the agent reads the game sheet, the rate card and PayPal's own record, decides whether to pay now, hold for Sam, or fold into an end-of-day batch, and pays the officials through PayPal Payouts. Before the tournament it invoices every team through PayPal Invoicing and chases the ones that stall: a reminder, a deposit-and-balance split, or the spot released to the waitlist. When a gym closes it re-plans the day against the schedule's own rules and refunds, pro rata, the games that cannot be played. Claude makes each of those choices; code enforces the rate card; PayPal confirms the money.
