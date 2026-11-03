@@ -90,6 +90,19 @@ Seconds are PayPal's batch completion time minus the moment the score was saved.
 
 **With a fixed rule in place of the agent** (`results/ablation-scripted.json`, a dry run from the same starting state): the rule would have paid the re-saved game a second time, and ignored the four officials who asked to be paid once a day. The forfeit and the missing official it could not pay either, because the code gate refuses them whoever decides: those two catches belong to the gate, the duplicate and the end-of-day preference to the agent.
 
+**Entry fees** (`results/chase.json`, `results/invoices.json`): all 52 teams invoiced through PayPal's MCP server, then the chase replayed day by day from 10 April to 12 May against the sandbox, with staged payments recorded on each invoice as e-transfers.
+
+| | Result |
+|---|---|
+| Teams paid | 50 of 52 by the deadline or soon after |
+| Reminders | 32, sent through PayPal's `send_invoice_reminder`, never more than three per invoice, never two within three days |
+| Split | 1: the manager asked to pay in two parts, so the invoice was cancelled and replaced by a deposit (paid two days later) and a $175 balance, which was then chased on its own due date |
+| Released | 1: a manager who never answered three reminders, a week past the deadline, with a team waiting in that division. The invoice was cancelled and the waitlisted team invoiced |
+| Held for Sam | 0 |
+| Model cost | about $2.25 for 114 model calls |
+
+A first run of the chase found two faults, both fixed before this run: after a split the agent kept reading the cancelled original invoice, and it split a manager who had never asked for a plan.
+
 `npm run check` fails if any figure in this section stops matching those files.
 
 ## Licence
