@@ -24,7 +24,12 @@ const runId = process.env.RUN_ID ?? new Date().toISOString().slice(0, 16).replac
 const ledgerPath = process.env.LEDGER ?? `results/ledger${paypal === "live" ? "" : "-" + paypal}.json`;
 const sheet = await loadSheet(); const card = await loadRateCard();
 
-let t = (await loadFromUrl(docUrl, { auth: process.env.TOURNAMENT_AUTH }))!;
+// the scorer's app may still be starting (in the deployed stack the two containers start together)
+let t = null as Awaited<ReturnType<typeof loadFromUrl>>;
+for (let attempt = 1; !t; attempt++) {
+  try { t = await loadFromUrl(docUrl, { auth: process.env.TOURNAMENT_AUTH }); }
+  catch (e) { if (attempt === 1 || attempt % 10 === 0) console.log(`waiting for ${docUrl}: ${(e as Error).message}`); await new Promise((r) => setTimeout(r, 2000)); }
+}
 const seen = new Map<string, string>(t.games.map((g) => [g.id, g.status]));
 const wasFinal = new Set<string>(t.games.filter((g) => g.status !== "scheduled").map((g) => g.id));
 console.log(`watching ${docUrl} (version ${t.version}), ${t.games.length} games, paypal ${paypal}, run ${runId}, ledger ${ledgerPath}`);
