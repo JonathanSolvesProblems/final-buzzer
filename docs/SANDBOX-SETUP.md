@@ -12,9 +12,11 @@ needs. Nothing here touches a real PayPal balance.
      88 games at $115 each, $10,120, and the default $5,000 USD account runs dry.
 3. Apps & Credentials, make sure the toggle says **Sandbox**, then **Create App**:
    - Name: Final Buzzer. Type: Merchant. Sandbox business account: the one you just made.
-   - On the app page, under **Features**, tick **Payouts**. Without it every payout answers
-     "not authorized".
+   - On the app page, under **Features**, tick **Payouts**, **Invoicing** and **Transaction
+     Search**, then Save. Without them those calls answer "insufficient permissions".
    - Copy **Client ID** and **Secret** into `.env` as `PAYPAL_CLIENT_ID` and `PAYPAL_CLIENT_SECRET`.
+   - Put the business account's own email in `.env` as `PAYPAL_BUSINESS_EMAIL`. PayPal sends an
+     invoice only when the invoicer email belongs to the account behind the app.
 
 ## 2. Three officials who can receive money
 
@@ -50,6 +52,15 @@ and writes `results/first-live-run.json`. The batch id in it can be looked up in
 under the business account's Activity.
 
 ## If something refuses
+
+- **You ticked a feature and it still says "insufficient permissions".** PayPal hands back the same
+  access token until it expires (about nine hours), and that token keeps the scopes it was issued
+  with. Ending it makes the next request mint a fresh one with the new scopes:
+  `POST /v1/oauth2/token/terminate` with `token=<access token>&token_type_hint=ACCESS_TOKEN`,
+  authenticated with the client id and secret.
+- `User is not associated with paypal based on invoicer email`: `PAYPAL_BUSINESS_EMAIL` is missing
+  or is not the business account's email.
+- `Invoice number length should be less than 25 characters`: invoice numbers are capped at 24.
 
 - `PayPal refused the payout for lack of permission`: Payouts is not ticked on the app.
 - `balance cannot cover this payout`: raise the business account's balance in Sandbox Accounts.

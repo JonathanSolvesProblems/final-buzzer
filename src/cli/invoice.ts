@@ -23,9 +23,10 @@ try {
     if (limit && n >= limit) break;
     const r: TeamRecord = records[t.id] ?? {
       team_id: t.id, team: t.name, division: t.division, manager_email: t.manager_email, manager_name: t.manager_name,
-      invoice_id: null, invoice_number: `NYB2026-${t.id.toUpperCase()}`, amount: fees.entry_fee_per_team.toFixed(2), currency: fees.currency,
+      invoice_id: null, invoice_number: `NYB26-${String(teams.teams.indexOf(t) + 1).padStart(3, "0")}`, amount: fees.entry_fee_per_team.toFixed(2), currency: fees.currency,
       status: "draft", sent_at: null, due_date: fees.deadline, reminders: [], replies: [], history: "no record",
     };
+    if (!r.invoice_id) r.invoice_number = `NYB26-${String(teams.teams.indexOf(t) + 1).padStart(3, "0")}`; // PayPal caps invoice numbers at 24 characters
     records[t.id] = r;
     if (r.invoice_id && r.status !== "draft") { continue; }
     n++;

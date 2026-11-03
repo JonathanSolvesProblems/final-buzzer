@@ -143,7 +143,7 @@ export async function runChase(o: ChaseOptions): Promise<ChaseResult> {
     if (cancel?.isError) return { ...base, decision, outcome: "error", hold: { question: null, reason: cancel.message } };
     const kids: string[] = [];
     for (const [label, value, due] of [["deposit", deposit, today], ["balance", balance, mondayBefore("2026-05-14")]] as const) {
-      const created: any = await act("create_invoice", invoiceArgs(r, fees, `${r.invoice_number}-${label.toUpperCase()}`, value, `${r.division} entry fee, ${label}`, due));
+      const created: any = await act("create_invoice", invoiceArgs(r, fees, `${r.invoice_number}-${label === "deposit" ? "D" : "B"}`, value, `${r.division} entry fee, ${label}`, due));
       const id = invoiceIdFrom(created);
       if (!id) return { ...base, decision, outcome: "error", hold: { question: null, reason: `PayPal did not return an invoice id for the ${label}: ${JSON.stringify(created).slice(0, 300)}` } };
       const sent: any = await act("send_invoice", { invoice_id: id, send_to_recipient: true, note: `Hi ${r.manager_name}, here is the ${label} for the ${r.division} entry fee.` });
@@ -157,7 +157,7 @@ export async function runChase(o: ChaseOptions): Promise<ChaseResult> {
   const next = waitlist.find((w) => w.division === r.division)!;
   const cancel: any = await act("cancel_sent_invoice", { invoice_id: r.invoice_id, note: `The ${r.division} spot has been released: the entry fee was not paid by the deadline.`, send_to_recipient: true });
   if (cancel?.isError) return { ...base, decision, outcome: "error", hold: { question: null, reason: cancel.message } };
-  const created: any = await act("create_invoice", invoiceArgs({ ...r, team: next.name, manager_email: next.manager_email, manager_name: next.manager_name }, fees, `NYB2026-${next.id.toUpperCase()}`, Number(r.amount), `${r.division} entry fee`, addDays(today, 5)));
+  const created: any = await act("create_invoice", invoiceArgs({ ...r, team: next.name, manager_email: next.manager_email, manager_name: next.manager_name }, fees, `NYB26-W${String(waitlist.indexOf(next) + 1).padStart(2, "0")}`, Number(r.amount), `${r.division} entry fee`, addDays(today, 5)));
   const id = invoiceIdFrom(created);
   if (!id) return { ...base, decision, outcome: "error", hold: { question: null, reason: `PayPal did not return an invoice id for the waitlisted team: ${JSON.stringify(created).slice(0, 300)}` } };
   const sent: any = await act("send_invoice", { invoice_id: id, send_to_recipient: true, note: `A ${r.division} spot has opened at the Northside Invitational. Pay this invoice within five days to take it.` });
