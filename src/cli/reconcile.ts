@@ -25,8 +25,9 @@ const start = args.since ? new Date(String(args.since)) : new Date(end.getTime()
 const mcp = await connectPayPalMcp(["transactions.list"]);
 const rows: any[] = [];
 try {
-  for (let page = 1; page <= 10; page++) {
-    const res: any = await mcp.call("list_transactions", { start_date: start.toISOString().replace(/\.\d{3}Z$/, "Z"), end_date: end.toISOString().replace(/\.\d{3}Z$/, "Z"), page, page_size: 500, transaction_status: "S" });
+  // a payout to an address with no PayPal account stays pending (P) until claimed; a claimed one is S
+  for (const status of ["S", "P"]) for (let page = 1; page <= 10; page++) {
+    const res: any = await mcp.call("list_transactions", { start_date: start.toISOString().replace(/\.\d{3}Z$/, "Z"), end_date: end.toISOString().replace(/\.\d{3}Z$/, "Z"), page, page_size: 500, transaction_status: status });
     if (res?.isError) { console.error(res.message); break; }
     const details = res.transaction_details ?? res.transactions ?? [];
     rows.push(...details);
@@ -34,22 +35,23 @@ try {
   }
 } finally { await mcp.close(); }
 
-// payouts show as transactions with the payout item id as the transaction id; match through each batch's items
-const byTxn = new Map<string, any>();
-for (const r of rows) { const id = r.transaction_info?.transaction_id; if (id) byTxn.set(id, r); }
+// a payout item shows in the search as a T0001 row whose custom_field is our sender_item_id
+const byItem = new Map<string, any>();
+for (const r of rows) { const i = r.transaction_info; if (i?.transaction_event_code === "T0001" && i.custom_field) byItem.set(i.custom_field, r); }
 const matched: any[] = []; const pending: any[] = [];
 for (const p of Object.values(ledger.payouts)) {
   if (!p.batchId) continue;
   const live = await getPayout(p.batchId);
   if (isPayoutError(live)) { pending.push({ senderBatchId: p.senderBatchId, batchId: p.batchId, reason: live.message }); continue; }
   for (const it of live.items) {
-    const t = it.transactionId ? byTxn.get(it.transactionId) : null;
-    (t ? matched : pending).push({ senderBatchId: p.senderBatchId, game: p.number, item: it.senderItemId, amount: it.amount, currency: it.currency, payout_status: it.status, transaction_id: it.transactionId ?? null, in_transaction_search: Boolean(t), paypal_amount: t?.transaction_info?.transaction_amount?.value ?? null, paypal_time: t?.transaction_info?.transaction_initiation_date ?? null });
+    const t = byItem.get(it.senderItemId) ?? null;
+    (t ? matched : pending).push({ senderBatchId: p.senderBatchId, game: p.number, item: it.senderItemId, amount: it.amount, currency: it.currency, payout_status: it.status, transaction_id: it.transactionId ?? null, in_transaction_search: Boolean(t), paypal_amount: t?.transaction_info?.transaction_amount?.value ?? null, paypal_fee: t?.transaction_info?.fee_amount?.value ?? null, paypal_status: t?.transaction_info?.transaction_status ?? null, paypal_time: t?.transaction_info?.transaction_initiation_date ?? null });
   }
 }
 const dollars = matched.reduce((s, m) => s + Math.abs(Number(m.paypal_amount ?? m.amount)), 0);
-const games = new Set(matched.map((m) => m.game)).size;
-const out = { at: new Date().toISOString(), window: { start: start.toISOString(), end: end.toISOString() }, transactions_listed: rows.length, matched_items: matched.length, games_confirmed_by_paypal: games, dollars_confirmed_by_paypal: Math.round(dollars * 100) / 100, not_yet_in_transaction_search: pending.length, matched, pending, note: "Dollars and games here come from PayPal's transaction search and payout records, not from the agent's ledger." };
+const games = new Set(matched.filter((m) => m.game).map((m) => m.game)).size; // evening batches carry no game number
+const fees = matched.reduce((s, m) => s + Math.abs(Number(m.paypal_fee ?? 0)), 0);
+const out = { at: new Date().toISOString(), window: { start: start.toISOString(), end: end.toISOString() }, transactions_listed: rows.length, matched_items: matched.length, games_confirmed_by_paypal: games, dollars_confirmed_by_paypal: Math.round(dollars * 100) / 100, payout_fees: Math.round(fees * 100) / 100, not_yet_in_transaction_search: pending.length, matched, pending, note: "Dollars and games here come from PayPal's transaction search and payout records, not from the agent's ledger." };
 await mkdir("results", { recursive: true });
 await writeFile("results/reconcile.json", JSON.stringify(out, null, 2) + "\n");
-console.log(`PayPal lists ${rows.length} transactions in the window; ${matched.length} payout items matched across ${games} games, $${out.dollars_confirmed_by_paypal}; ${pending.length} item(s) not yet in transaction search. written results/reconcile.json`);
+console.log(`PayPal lists ${rows.length} transactions in the window; ${matched.length} payout items matched across ${games} games, $${out.dollars_confirmed_by_paypal} (PayPal fees $${out.payout_fees}); ${pending.length} item(s) not yet in transaction search. written results/reconcile.json`);

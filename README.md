@@ -86,6 +86,8 @@ Officials paid a median of 40.2 s after the final buzzer: Saturday's 34 games re
 
 Seconds are PayPal's batch completion time minus the moment the score was saved. Amounts are test money on a provisional rate card.
 
+**Read back from PayPal, not from the agent's ledger** (`results/reconcile.json`, through the MCP server's `list_transactions`): all 99 payout items the ledger holds appear in PayPal's transaction search, matched by item id, across 30 games and the four evening batches: $3,795 CAD, with $31.68 in PayPal payout fees. That total covers the replay, the evening batch and the two single-game runs.
+
 **With PayPal switched off** (`results/ablation-no-paypal.json`): the agent held all 34 games. It could not check PayPal's record of a game, so it paid nobody rather than risk paying twice.
 
 **With a fixed rule in place of the agent** (`results/ablation-scripted.json`, a dry run from the same starting state): the rule would have paid the re-saved game a second time, and ignored the four officials who asked to be paid once a day. The forfeit and the missing official it could not pay either, because the code gate refuses them whoever decides: those two catches belong to the gate, the duplicate and the end-of-day preference to the agent.
