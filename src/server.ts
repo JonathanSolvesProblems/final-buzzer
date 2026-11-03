@@ -19,7 +19,8 @@ import { spendModelRun } from "./budget.ts";
 const require = createRequire(import.meta.url);
 const PORT = Number(process.env.PORT ?? 4173);
 const LEDGER = process.env.LEDGER ?? "results/ledger.json";
-const PAYPAL_MODE = (process.env.PAYPAL_CLIENT_ID ? "live" : "dry") as "live" | "dry";
+// PAYPAL_MODE=dry keeps Sam's tap off PayPal even when .env carries sandbox keys (the board test uses it)
+const PAYPAL_MODE = (process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_MODE !== "dry" ? "live" : "dry") as "live" | "dry";
 
 /** Sam's tap on a held game: POST /api/holds/<gameId> {"choice":"pay_full"|"pay_show_up"|"pay_nobody"} */
 async function treasurerDecides(gameId: string, choice: TreasurerChoice) {

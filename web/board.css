@@ -29,12 +29,14 @@
 * { box-sizing: border-box; }
 html { background: var(--floor); }
 body { margin: 0; min-height: 100dvh; color: var(--ink); background: var(--floor); font-family: var(--body); font-size: 15px; line-height: 1.45; font-feature-settings: "kern"; }
-.num { font-family: var(--display); font-feature-settings: "tnum", "kern"; font-variant-numeric: tabular-nums; }
-.num.money { font-feature-settings: "kern"; font-variant-numeric: normal; }
+/* proportional figures: Alumni Sans sets its comma and point on the tabular width, which opens gaps in
+   "$3,145" and "40.2"; only the flap digits, which never carry punctuation, are tabular */
+.num { font-family: var(--display); font-feature-settings: "kern"; }
+.digit { font-variant-numeric: tabular-nums; }
 ::selection { background: var(--housing); color: var(--flap); }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .housing :focus-visible { outline-color: var(--flap); }
-.day:focus-visible, .btn:focus-visible { outline: 2px solid currentColor; outline-offset: -5px; }
+.pick button:focus-visible, .btn:focus-visible, .pop > summary:focus-visible { outline: 2px solid currentColor; outline-offset: -5px; }
 main:focus { outline: none; }
 button { font: inherit; color: inherit; }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--flap); color: var(--housing); padding: 8px 12px; }
@@ -46,22 +48,32 @@ button { font: inherit; color: inherit; }
 .table-top { display: flex; align-items: center; gap: 24px; min-height: 56px; }
 .lockup { display: flex; align-items: center; line-height: 0; text-decoration: none; }
 .lockup .wm { height: 27px; width: auto; display: block; }
-.days { display: flex; gap: 4px; }
-.day { font-weight: 600; font-size: 13px; line-height: 1; padding: 8px 10px; border: 0; background: transparent; color: var(--ink-muted); cursor: pointer; clip-path: var(--chamfer-3); }
-.day .num { font-size: 15px; font-weight: 700; margin-left: 4px; }
-.day[aria-current="date"] { background: var(--housing); color: var(--flap); cursor: default; }
-.right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
-.clock { font-size: 22px; font-weight: 600; line-height: 1; color: var(--ink-muted); }
-.who { font-size: 13px; color: var(--ink-muted); white-space: nowrap; }
-.who b { color: var(--ink); font-weight: 700; }
-.source { font-size: 12px; color: var(--ink-muted); padding: 6px 10px; border: 1px solid var(--floor-line); clip-path: var(--chamfer-3); white-space: nowrap; }
-.source.busy { color: var(--ink); border-color: var(--ink); }
+/* one status line: live, and who the next decision waits on */
+.status { margin: 0 0 0 auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-muted); white-space: nowrap; }
+.status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-muted); flex: none; }
+.status.busy .dot { background: var(--ink); animation: pulse 1s ease-in-out infinite alternate; }
+@keyframes pulse { to { opacity: .3; } }
+
+/* pickers inside the housing: days on the board, days and courts on the scorer's phone */
+.pick { display: flex; flex-wrap: wrap; gap: 4px; }
+.pick button { border: 0; background: transparent; color: var(--ghost); font-weight: 600; font-size: 13px; line-height: 1; padding: 8px 10px; min-height: 36px; cursor: pointer; clip-path: var(--chamfer-3); }
+.pick button .num { font-size: 15px; font-weight: 700; margin-left: 4px; }
+.pick button:hover { color: var(--flap); }
+.pick button[aria-current="date"], .pick button[aria-pressed="true"] { background: var(--flap); color: var(--housing); cursor: default; }
 
 /* the board */
 .housing { position: relative; margin-top: 4px; color: var(--flap); background: var(--housing); border-radius: 14px; padding: 14px 16px 14px; box-shadow: 0 2px 0 var(--split); }
-.topline { display: flex; align-items: center; gap: 16px; margin: 0 0 6px; }
-.printed { margin: 0; font-size: 13px; font-weight: 500; color: var(--ghost); display: flex; gap: 16px; white-space: nowrap; }
+.topline { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; }
+.topline .days { margin-right: auto; }
+.printed { margin: 0; font-size: 13px; font-weight: 500; color: var(--ghost); display: flex; flex-wrap: wrap; gap: 2px 16px; }
 .printed b { color: var(--flap); font-weight: 600; }
+
+/* the two rare things, folded away: the key and the gym closure */
+.pop { position: relative; }
+.pop > summary { list-style: none; cursor: pointer; font-size: 12px; font-weight: 600; color: var(--ghost); padding: 8px 10px; min-height: 36px; display: flex; align-items: center; clip-path: var(--chamfer-3); }
+.pop > summary::-webkit-details-marker { display: none; }
+.pop > summary:hover, .pop[open] > summary { color: var(--flap); background: var(--black-face); }
+.pop > :not(summary) { position: absolute; right: 0; top: calc(100% + 4px); z-index: 20; background: var(--black-face); padding: 12px 14px; clip-path: var(--chamfer); box-shadow: 0 2px 0 var(--split); }
 .scoreline { display: grid; grid-template-columns: minmax(0, 1fr) 470px; gap: 24px; align-items: center; padding: 0 0 12px; border-bottom: 1px solid var(--rim); margin-bottom: 6px; }
 .scoreline:has(> .hold[hidden]) { grid-template-columns: 1fr; }
 
@@ -69,9 +81,15 @@ button { font: inherit; color: inherit; }
 .hold .top { background: var(--flap); color: var(--housing); padding: 10px 16px 10px; clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%, 0 4px); }
 .hold h2 { margin: 0 0 3px; font-size: 18px; font-weight: 700; line-height: 1.2; }
 .hold h2 .num { font-size: 22px; }
-.hold .top p { margin: 0; font-size: 13px; line-height: 1.45; text-wrap: pretty; }
-.hold .top p + p { margin-top: 3px; color: var(--ink-muted); }
-.hold .bottom { background: var(--black-face); margin-top: 2px; transform: translateY(2px); padding: 8px 12px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px)); display: grid; grid-template-columns: auto auto auto 1fr; gap: 8px; align-items: center; }
+.hold h2 small { margin-left: 10px; font-size: 12px; font-weight: 600; color: var(--ink-muted); }
+.hold .top p { margin: 0; font-size: 14px; line-height: 1.45; text-wrap: pretty; }
+.hold .why { margin-top: 4px; font-size: 12px; color: var(--ink-muted); }
+.hold .why summary { cursor: pointer; font-weight: 600; width: max-content; }
+.hold .why p { font-size: 12px; margin-top: 3px; }
+.hold .why p:empty { display: none; }
+.hold .bottom { background: var(--black-face); margin-top: 2px; transform: translateY(2px); padding: 8px 12px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px)); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.hold .bottom [hidden] { display: none; }
+.hold .bottom small { flex-basis: 100%; }
 .hold .bottom small { grid-column: 1 / -1; font-size: 12px; color: var(--ghost); }
 .hold .bottom small:empty { display: none; }
 .btn { border: 0; background: var(--flap); color: var(--housing); font-weight: 600; font-size: 13px; padding: 9px 16px; cursor: pointer; min-height: 40px; clip-path: var(--chamfer); }
@@ -88,21 +106,24 @@ button { font: inherit; color: inherit; }
 .digit { position: relative; width: 50px; height: 70px; background: linear-gradient(180deg, var(--yellow) 0 50%, var(--yellow-lo) 50% 100%); color: var(--housing); clip-path: var(--chamfer); font-family: var(--display); font-weight: 800; font-size: 66px; line-height: 75px; text-align: center; }
 .digit::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--split); }
 .digit.ghosted { color: rgba(43,39,33,.22); }
-.hold .top p#held-why:empty, .hold .top p#held-staged:empty { display: none; }
+/* while a decision waits on Sam, the yellow steps back so the held card leads */
+.scoreline:has(> .hold:not([hidden])) .digits { opacity: .6; }
+.scoreline:has(> .hold:not([hidden])) .speed .words strong { color: var(--ghost); }
 .speed .words { min-width: 0; }
 .speed .words strong { display: block; font-size: 18px; font-weight: 700; line-height: 1.2; text-wrap: balance; }
-.speed .words span { display: block; font-size: 13px; color: var(--ghost); line-height: 1.4; margin-top: 2px; text-wrap: pretty; min-height: 2.8em; }
+.speed .words span { display: block; font-size: 13px; color: var(--ghost); line-height: 1.4; margin-top: 2px; text-wrap: pretty; }
 .tally { margin: 0; font-size: 13px; color: var(--ghost); display: flex; flex-wrap: wrap; gap: 2px 16px; }
 .tally .fig { white-space: nowrap; }
 .tally .num { font-size: 22px; font-weight: 700; color: var(--flap); margin-right: 3px; }
-.via { margin: 0; font-size: 13px; color: var(--ghost); }
 
 /* the court grid: a Bryntum Scheduler on the housing */
 .courts { min-height: 120px; }
 .courts .b-scheduler, .courts .b-grid-body-container, .courts .b-grid-header-container, .courts .b-grid-subgrid, .courts .b-grid-header, .courts .b-grid-row, .courts .b-grid-cell, .courts .b-timeline-subgrid, .courts .b-sch-timeaxis-cell, .courts .b-grid-splitter, .courts .b-grid-panel-body { background: var(--housing) !important; color: var(--flap); border-color: var(--rim) !important; box-shadow: none !important; }
 .courts .b-scheduler { border: 0; font-family: var(--body); }
 .courts .b-grid-header-container { border-bottom: 1px solid var(--rim) !important; }
-.courts .b-grid-header .b-grid-header-text, .courts .b-sch-header-timeaxis-cell { font-family: var(--display); font-weight: 600; font-size: 16px; color: var(--ghost); }
+.courts .b-grid-header .b-grid-header-text, .courts .b-sch-header-time-axis-cell, .courts .b-sch-header-time-axis-cell .b-sch-header-text { font-family: var(--display); font-weight: 600; font-size: 17px; color: var(--flap) !important; }
+/* the hour sits on its line, at the left edge of its column, so a 10:15 start reads as a quarter past */
+.courts .b-sch-header-time-axis-cell { background: var(--housing) !important; border-color: var(--rim) !important; justify-content: flex-start; padding-left: 4px; }
 .courts .b-grid-header .b-grid-header-text { font-family: var(--body); font-size: 11px; font-weight: 500; }
 .courts .b-sch-header-timeaxis-cell { border-color: var(--rim) !important; }
 .courts .b-grid-row { border-bottom: 1px solid rgba(61,55,48,.6) !important; }
@@ -125,7 +146,7 @@ button { font: inherit; color: inherit; }
 .courts .b-timeaxis .b-sch-timerange.now-line { background: transparent; }
 
 /* a flap tile, four states, four shapes */
-.flap { position: relative; width: 100%; height: 100%; --face-bg: var(--black-face); --face-ink: var(--flap); }
+.flap { position: relative; width: calc(100% - 3px); height: 100%; --face-bg: var(--black-face); --face-ink: var(--flap); }
 .flap .face { position: absolute; inset: 0; background: var(--face-bg); color: var(--face-ink); padding: 2px 7px 0; clip-path: var(--chamfer); overflow: hidden; }
 .flap .face::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--split); opacity: .85; }
 .flap .vs { position: relative; z-index: 1; display: block; font-weight: 600; font-size: 11px; line-height: 11px; white-space: nowrap; overflow: hidden; }
@@ -144,8 +165,6 @@ button { font: inherit; color: inherit; }
 .flap.paid .note { color: var(--housing); }
 .flap.paying { --face-bg: linear-gradient(180deg, var(--flap) 0 50%, var(--flap-lo) 50%); --face-ink: var(--housing); }
 .flap.paying .note { color: var(--ink-muted); }
-.bar { flex: 1; height: 4px; background: rgba(43,39,33,.14); position: relative; }
-.bar i { position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); background: var(--housing); }
 .flap.held .face.top { --face-bg: var(--flap); --face-ink: var(--housing); clip-path: var(--top-half); }
 .flap.held .face.bottom { clip-path: polygon(0 calc(50% + 2px), 100% calc(50% + 2px), 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px)); transform: translateY(2px); }
 .flap.held .face.bottom .note { color: var(--flap); }
@@ -153,13 +172,13 @@ button { font: inherit; color: inherit; }
 .flap.just-flipped .face { animation: settle 420ms cubic-bezier(.22,.9,.32,1.04) both; }
 @keyframes settle { from { transform: rotateX(70deg); opacity: .4; } to { transform: none; opacity: 1; } }
 
-/* the legend printed along the top of the board */
-.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0 0 0 auto; padding: 0; list-style: none; font-size: 11px; color: var(--ghost); }
+/* the key, folded behind "Key" */
+.key .legend { display: grid; gap: 8px; width: max-content; margin: 0; list-style: none; font-size: 12px; color: var(--flap); }
 .legend li { display: flex; align-items: center; gap: 8px; }
 .legend i { position: relative; flex: none; width: 24px; height: 14px; display: block; clip-path: var(--chamfer-3); }
 .legend .l-sched { background: var(--keyline); } .legend .l-sched::before { content: ""; position: absolute; inset: 1px; background: var(--housing); clip-path: var(--chamfer-3); }
 .legend .l-live { background: var(--black-face); box-shadow: inset 4px 0 0 var(--flap); }
-.legend .l-paid { background: var(--flap); } .legend .l-paid::before { content: ""; position: absolute; left: 4px; bottom: 4px; height: 2px; width: 11px; background: var(--housing); }
+.legend .l-paid { background: linear-gradient(180deg, var(--flap) 0 50%, var(--flap-lo) 50%); }
 .legend .l-held { background: linear-gradient(180deg, var(--flap) 0 50%, var(--black-face) 50%); }
 .legend .l-fold { background: var(--black-face); box-shadow: inset 0 -3px 0 var(--ghost); }
 
@@ -195,22 +214,19 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
 @media (max-width: 1100px) {
   .scoreline { grid-template-columns: 1fr; gap: 16px; }
   .below { grid-template-columns: 1fr; }
-  .printed .long { display: none; }
 }
 @media (max-width: 900px) {
-  .table-top { flex-wrap: wrap; gap: 8px 12px; padding: 8px 0; }
-  .lockup { padding: 9px 0; }
+  .table-top { flex-wrap: wrap; gap: 4px 12px; padding: 8px 0; }
+  .lockup { padding: 6px 0; }
   .lockup .wm { height: 24px; }
-  .right { margin-left: auto; }
-  .clock, .who { display: none; }
-  .days { order: 3; flex-basis: 100%; }
-  .day, .btn { min-height: 44px; }
+  .nav { order: 3; flex-basis: 100%; margin-left: -10px; }
+  .pick button, .btn, .pop > summary { min-height: 44px; }
   .housing { padding: 12px 10px; margin-left: -6px; margin-right: -6px; }
   .topline { flex-wrap: wrap; }
+  .key { display: none; }
   .digit { width: 42px; height: 60px; font-size: 56px; line-height: 64px; }
-  .hold .bottom { grid-template-columns: 1fr 1fr; }
-  .hold .bottom .btn:first-child { grid-column: 1 / -1; }
-  .courts, .legend { display: none; }
+  .hold .bottom .btn:first-child { flex-basis: 100%; }
+  .courts { display: none; }
   .phone { display: block; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -219,16 +235,15 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
 }
 
 /* page links */
-.nav { display: flex; gap: 2px; }
+.nav { display: flex; gap: 2px; margin-left: 8px; }
 .nav a { color: var(--ink-muted); text-decoration: none; font-size: 13px; font-weight: 600; padding: 8px 10px; clip-path: var(--chamfer-3); }
 .nav a[aria-current] { background: var(--housing); color: var(--flap); }
-@media (max-width: 900px) { .nav { order: 4; } }
 
-/* a gym closes: the control on the board's printed line, and the plan the agent comes back with */
-.close { display: flex; align-items: center; gap: 6px; margin-left: auto; }
-.close select { font: 600 12px/1 var(--body); color: var(--flap); background: var(--black-face); border: 0; padding: 7px 8px; clip-path: var(--chamfer-3); min-height: 32px; }
-.close .btn { min-height: 32px; padding: 6px 10px; font-size: 12px; }
-.topline .legend { margin-left: 0; }
+/* a gym closes: the form behind "Close a gym", and the plan the agent comes back with */
+.close { display: grid; grid-template-columns: auto auto; gap: 8px 10px; align-items: center; width: max-content; }
+.close label { font-size: 12px; color: var(--ghost); }
+.close select { font: 600 13px/1 var(--body); color: var(--housing); background: var(--flap); border: 0; padding: 8px; clip-path: var(--chamfer-3); min-height: 36px; }
+.close .btn { grid-column: 1 / -1; }
 .plan { margin: 0 0 10px; background: var(--black-face); color: var(--flap); padding: 10px 14px 12px; clip-path: var(--chamfer); }
 .plan h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
 .plan h3 { margin: 10px 0 4px; font-size: 12px; font-weight: 600; color: var(--ghost); }
@@ -239,7 +254,3 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
 .flap.final .note { color: var(--flap); left: 11px; }
 .flap.unplayed { --face-bg: var(--keyline); --face-ink: var(--ghost); }
 .flap.unplayed .face::before { content: ""; position: absolute; inset: 1px; background: var(--housing); clip-path: var(--chamfer-3); }
-@media (max-width: 900px) { .close { margin-left: 0; flex-wrap: wrap; } }
-.close { justify-content: flex-end; margin: -2px 0 8px; }
-.close .close-label { font-size: 12px; color: var(--ghost); margin-right: 4px; }
-.close .btn { white-space: nowrap; }

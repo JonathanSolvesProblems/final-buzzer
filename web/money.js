@@ -11,21 +11,23 @@ const theme = agGrid.themeQuartz.withParams({
   backgroundColor: "#2B2721", foregroundColor: "#F3EDD6", headerBackgroundColor: "#2B2721", headerTextColor: "#B0A68F",
   borderColor: "#3D3730", rowBorder: { color: "#3D3730" }, rowHoverColor: "#353028", selectedRowBackgroundColor: "#353028",
   fontFamily: "Schibsted Grotesk, Georgia, sans-serif", fontSize: 13, headerFontSize: 11, spacing: 6, borderRadius: 0, wrapperBorderRadius: 0, wrapperBorder: false,
-  accentColor: "#E8B830", oddRowBackgroundColor: "#2B2721", headerColumnResizeHandleColor: "#3D3730", cellHorizontalPadding: 10,
+  accentColor: "#E8B830", oddRowBackgroundColor: "#2B2721", headerColumnResizeHandleColor: "transparent", headerColumnBorder: false, columnBorder: false, cellHorizontalPadding: 10,
 });
+// on a phone the grids keep the columns a treasurer reads first; the rest are on the wide board
+const narrow = matchMedia("(max-width: 700px)");
 const common = { theme, domLayout: "autoHeight", rowHeight: 40, headerHeight: 32, suppressCellFocus: true, defaultColDef: { resizable: true, sortable: true, flex: 1, minWidth: 90 }, animateRows: true };
 const chip = (text, cls) => `<span class="chip ${cls}">${text}</span>`;
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 const payouts = agGrid.createGrid($("payouts"), { ...common, columnDefs: [
-  { headerName: "Game", field: "number", maxWidth: 80, cellClass: "num" },
-  { headerName: "Matchup", field: "matchup", minWidth: 180 },
+  { headerName: "Game", field: "number", maxWidth: 64, minWidth: 52, cellClass: "num" },
+  { headerName: "Matchup", field: "matchup", minWidth: 140 },
   { headerName: "Court", field: "court", maxWidth: 110, cellClass: "quiet" },
   { headerName: "Officials", field: "officials", minWidth: 150, cellClass: "quiet" },
-  { headerName: "Paid", field: "amount", maxWidth: 110, cellClass: "num", valueFormatter: (p) => money(p.value) },
-  { headerName: "Seconds after the buzzer", field: "seconds", maxWidth: 170, cellClass: "num", valueFormatter: (p) => p.value == null ? "" : p.value },
+  { headerName: "Paid", field: "amount", maxWidth: 110, minWidth: 76, cellClass: "num", valueFormatter: (p) => money(p.value) },
+  { headerName: "Seconds", headerTooltip: "Seconds from the final buzzer to PayPal's confirmation", field: "seconds", maxWidth: 110, minWidth: 70, cellClass: "num", valueFormatter: (p) => p.value == null ? "" : p.value },
   { headerName: "Decided by", field: "decidedBy", maxWidth: 120, cellRenderer: (p) => p.value === "treasurer" ? chip("Sam", "treasurer") : p.value === "script" ? chip("script", "") : chip("agent", "") },
-  { headerName: "PayPal", field: "status", minWidth: 180, cellRenderer: (p) => `${chip(esc(p.value), p.value === "SUCCESS" ? "paid" : "")} <span class="quiet" style="font-size:11px">${esc(p.data.batchId ?? "")}</span>` },
+  { headerName: "PayPal", field: "status", minWidth: 180, cellRenderer: (p) => `${chip(esc(p.value === "SUCCESS" ? "Confirmed" : p.value), p.value === "SUCCESS" ? "paid" : "")} <span class="quiet" style="font-size:11px">${esc(p.data.batchId ?? "")}</span>` },
 ] });
 const holds = agGrid.createGrid($("holds"), { ...common, columnDefs: [
   { headerName: "Game", field: "number", maxWidth: 80, cellClass: "num" },
@@ -62,8 +64,14 @@ async function poll() {
   const ipaid = irow.filter((r) => r.status === "paid");
   $("m-invoices").textContent = irow.length ? `${ipaid.length} paid, ${money(ipaid.reduce((s, r) => s + Number(r.amount), 0))} in; ${irow.filter((r) => r.status === "sent" || r.status === "split").length} open` : "";
   const dollarsOut = paid.reduce((s, p) => s + p.amount, 0), dollarsIn = ipaid.reduce((s, r) => s + Number(r.amount), 0);
-  $("sums").innerHTML = `<span><span class="num">${money(dollarsIn).replace(".00", "")}</span> entry fees in</span><span><span class="num">${money(dollarsOut).replace(".00", "")}</span> officials paid out</span><span><span class="num">${hrow.length}</span> waiting on Sam</span><span><span class="num">${Object.values(ledger.folds).flat().length}</span> folded to end of day</span>`;
+  $("sums").innerHTML = `<span><span class="num">${money(dollarsIn).replace(".00", "")}</span> entry fees in</span><span><span class="num">${money(dollarsOut).replace(".00", "")}</span> paid to officials, all days</span><span><span class="num">${hrow.length}</span> waiting on Sam</span><span><span class="num">${Object.values(ledger.folds).flat().length}</span> folded to end of day</span>`;
 }
-$("event-name").textContent = T.name;
+function fit() {
+  const wide = !narrow.matches;
+  payouts.setColumnsVisible(["court", "officials", "decidedBy", "status"], wide);
+  holds.setColumnsVisible(["reason", "by"], wide);
+  invoices.setColumnsVisible(["division", "invoice_number", "reminders", "invoice_id"], wide);
+}
+narrow.addEventListener("change", fit); fit();
 await poll();
 setInterval(poll, 3000);

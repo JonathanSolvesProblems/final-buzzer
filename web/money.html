@@ -30,8 +30,6 @@
 .chip.treasurer { background: var(--yellow); color: var(--housing); }
 .money-page .sums { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; font-size: 13px; color: var(--ghost); }
 .money-page .sums .num { font-size: 22px; color: var(--flap); font-weight: 700; margin-right: 3px; }
-.nav a { color: var(--ink-muted); text-decoration: none; font-size: 13px; padding: 8px 10px; }
-.nav a[aria-current] { background: var(--housing); color: var(--flap); clip-path: var(--chamfer-3); }
 .empty { color: var(--ghost); font-size: 13px; margin: 6px 0 0; }
 </style>
 </head>
@@ -40,12 +38,12 @@
 <div class="page">
   <header class="table-top">
     <a class="lockup" href="/" aria-label="Final Buzzer"><img class="wm" src="/brand/wordmark.svg" alt="Final Buzzer" width="137" height="27"></a>
-    <nav class="nav" aria-label="Pages"><a href="/">The board</a><a href="/money.html" aria-current="page">The money</a></nav>
-    <div class="right"><span class="source" id="source">live, every 3 s</span></div>
+    <nav class="nav" aria-label="Pages"><a href="/">The board</a><a href="/score.html">Score a game</a><a href="/money.html" aria-current="page">The money</a></nav>
+    <p class="status"><i class="dot" aria-hidden="true"></i><span id="source">Live</span></p>
   </header>
   <main class="housing" id="board" tabindex="-1">
     <h1 class="sr">The money</h1>
-    <div class="topline"><p class="printed"><b>Northside Youth Basketball</b><span class="long" id="event-name">Northside Invitational 2026</span><span>Every dollar, read from the ledger PayPal confirmed</span></p></div>
+    <div class="topline"><p class="printed"><b>Every run, every day</b><span>Each payout as PayPal confirmed it. The board counts one day at a time.</span></p></div>
     <p class="sums" id="sums"></p>
     <h2 class="sec">Officials' pay <span class="num" id="n-payouts">0</span><span class="m" id="m-payouts"></span></h2>
     <div class="grid" id="payouts"></div>
@@ -57,7 +55,7 @@
     <div class="grid" id="invoices"></div>
     <p class="empty" id="invoices-empty" hidden>No invoices yet. The chase writes here once the teams are invoiced.</p>
   </main>
-  <footer>Amounts are sandbox test money. The rate card and the entry fee are provisional until Sam confirms them. Grids by AG Grid.</footer>
+  <footer>Northside Youth Basketball is a labelled composite. Amounts are PayPal sandbox test money, on a provisional rate card and entry fee.</footer>
 </div>
 <script src="/vendor/ag-grid/dist/ag-grid-community.min.js"></script>
 <script type="module" src="/money.js"></script>

@@ -2,7 +2,9 @@
 
 Starts from the fixture ledger (two holds the agent wrote on the staged games), loads the board, taps "Pay in full" on the
 held game, and expects: the server answers ok, the hold disappears, the tile flips to paid, the count
-moves. Usage: start the server with LEDGER=tmp/ledger-test.json, then  py tmp/test_web_board.py
+moves. Usage: start the server with
+  LEDGER=tmp/ledger-test.json TOURNAMENT_FILE=tmp/tournament-test.json PAYPAL_MODE=dry node src/server.ts
+then  py tests/board.test.py
 """
 import json, shutil, sys
 from playwright.sync_api import sync_playwright

@@ -1,7 +1,7 @@
 /* The scorer's phone: the one input the whole system turns on. A save here bumps the document's
    version, stamps the save time on the game, and the agent on duty (src/cli/watch.ts) takes it from
    there. The ledger is polled so the row shows when the officials were paid. */
-import { normalise, matchup, sentence, get } from "/feed.js";
+import { normalise, matchup, sentence, get, heldNote } from "/feed.js";
 
 const $ = (id) => document.getElementById(id);
 let T = normalise(await get("/api/tournament"));
@@ -16,14 +16,15 @@ function render() {
   $("days").innerHTML = days.map((d) => `<button type="button" data-day="${d}" aria-pressed="${d === day}">${names[d] ?? d} <span class="num">${Number(d.slice(8))}</span></button>`).join("");
   $("days").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day; court = "all"; render(); }));
   const dayGames = T.games.filter((g) => g.start.startsWith(day));
-  const courts = [...new Set(dayGames.map((g) => g.court))];
+  const courts = [...new Set(dayGames.map((g) => g.court))].sort((a, b) => a.localeCompare(b, "en", { numeric: true }));
   $("courts").innerHTML = [`<button type="button" data-court="all" aria-pressed="${court === "all"}">All courts</button>`, ...courts.map((c) => `<button type="button" data-court="${c}" aria-pressed="${court === c}">${c}</button>`)].join("");
   $("courts").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { court = b.dataset.court; render(); }));
   const list = dayGames.filter((g) => court === "all" || g.court === court);
   $("games").innerHTML = list.map((g) => {
     const p = Object.values(ledger.payouts).find((x) => x.gameId === g.id && (x.status === "SUCCESS" || x.status === "DRY_RUN"));
     const h = ledger.holds[g.id];
-    const state = g.status === "scheduled" ? "" : p ? `<span class="state paid">Officials paid${p.secondsFromBuzzer != null ? ", " + p.secondsFromBuzzer + " s after the buzzer" : ""}</span>` : h ? `<span class="state">Held for the treasurer</span>` : `<span class="state">${sentence(g.status)}${g.hs != null ? ` ${g.hs} to ${g.as}` : ""}, agent working</span>`;
+    // the ledger first, as on the board: a game the agent paid or held reads that way whatever the document says
+    const state = h ? `<span class="state">${heldNote(h)}</span>` : p ? `<span class="state paid">Officials paid${p.secondsFromBuzzer != null ? ", " + p.secondsFromBuzzer + " s after the buzzer" : ""}</span>` : g.status === "scheduled" ? "" : `<span class="state">${sentence(g.status)}${g.hs != null ? ` ${g.hs} to ${g.as}` : ""}, agent working</span>`;
     const isOpen = open === g.id;
     return `<li class="${isOpen ? "open" : ""}" data-id="${g.id}">
       <b>${matchup(g)}</b><span class="when">${g.start.slice(11)} ${g.court}</span>

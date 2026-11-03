@@ -23,45 +23,48 @@
     <a class="lockup" href="/" aria-label="Final Buzzer">
       <img class="wm" src="/brand/wordmark.svg" alt="Final Buzzer" width="137" height="27">
     </a>
-    <nav class="days" aria-label="Tournament days" id="days"></nav>
-    <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">The board</a><a href="/money.html">The money</a></nav>
-    <div class="right">
-      <span class="clock num" id="clock">--:--</span>
-      <span class="who" id="who-line">Reading the board</span>
-      <span class="source" id="source">live, every 3 s</span>
-    </div>
+    <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">The board</a><a href="/score.html">Score a game</a><a href="/money.html">The money</a></nav>
+    <p class="status"><i class="dot" aria-hidden="true"></i><span id="source">Live</span></p>
   </header>
 
   <main class="housing" id="board" tabindex="-1">
     <h1 class="sr">The board</h1>
     <div class="topline">
-      <p class="printed"><b id="club">Northside Youth Basketball</b><span class="long" id="event-name">Northside Invitational 2026</span><span id="day-name">Saturday 16 May</span></p>
-      <ul class="legend" aria-label="How to read the board">
-        <li><i class="l-sched"></i>Not started</li>
-        <li><i class="l-live"></i>In play</li>
-        <li title="The bar is the seconds from buzzer to payout, out of 60"><i class="l-paid"></i>Paid</li>
-        <li><i class="l-held"></i>Held for Sam</li>
-        <li><i class="l-fold"></i>Folds to end of day</li>
-      </ul>
+      <nav class="pick days" aria-label="Tournament days" id="days"></nav>
+      <details class="pop key">
+        <summary>Key</summary>
+        <ul class="legend" aria-label="How to read the board">
+          <li><i class="l-sched"></i>Not started</li>
+          <li><i class="l-live"></i>In play</li>
+          <li><i class="l-paid"></i>Paid, seconds after the buzzer</li>
+          <li><i class="l-held"></i>Held for Sam</li>
+          <li><i class="l-fold"></i>Folds to end of day</li>
+        </ul>
+      </details>
+      <details class="pop closer" id="closer">
+        <summary>Close a gym</summary>
+        <form class="close" id="close" aria-label="Close a court">
+          <label for="close-court">Court</label><select id="close-court"></select>
+          <label for="close-from">From</label><select id="close-from"></select>
+          <button class="btn" type="submit">Re-plan the day</button>
+        </form>
+      </details>
     </div>
-    <form class="close" id="close" aria-label="Close a court">
-      <span class="close-label">A gym closes?</span>
-      <label class="sr" for="close-court">Court</label><select id="close-court"></select>
-      <label class="sr" for="close-from">From</label><select id="close-from"></select>
-      <button class="btn second" type="submit">Close it</button>
-    </form>
     <section class="plan" id="plan" aria-live="polite" hidden></section>
     <section class="scoreline" aria-label="Today so far">
       <aside class="hold" id="held-card" aria-labelledby="held-title" hidden>
         <div class="top">
           <h2 id="held-title">Held for Sam</h2>
           <p id="held-text"></p>
-          <p id="held-why"></p>
-          <p id="held-staged"></p>
+          <details class="why">
+            <summary>The agent's note</summary>
+            <p id="held-why"></p>
+            <p id="held-staged"></p>
+          </details>
         </div>
         <div class="bottom">
           <button class="btn" type="button" id="pay-full">Pay in full</button>
-          <button class="btn second" type="button" id="pay-showup">Pay the show-up fee</button>
+          <button class="btn second" type="button" id="pay-showup" hidden>Pay the show-up fee</button>
           <button class="btn second" type="button" id="pay-nobody">Pay nobody</button>
           <small id="held-note"></small>
         </div>
@@ -76,10 +79,8 @@
         </div>
         <p class="tally">
           <span class="fig"><span class="num" id="paid-n">0</span> of <span id="of">0</span> games paid</span>
-          <span class="fig"><span class="num money" id="money">$0</span> paid out</span>
-          <span class="fig"><span class="num" id="median">0</span> s median today</span>
+          <span class="fig"><span class="num" id="money">$0</span> <span id="money-day">paid out</span></span>
         </p>
-        <p class="via" id="via">Paid through PayPal Payouts, with test money in this replay.</p>
         <p class="sr" id="count-line" aria-live="polite"></p>
       </div>
     </section>
@@ -99,7 +100,7 @@
     </section>
   </div>
 
-  <footer id="foot">Replay of the real 2026 schedule with PayPal test money. Officials are labelled A to X. Scores are replay values.</footer>
+  <footer id="foot"><span id="club">Northside Youth Basketball</span> is a labelled composite. A real 88-game schedule, replayed with PayPal sandbox test money. Officials are labelled A to X.</footer>
 </div>
 <script type="module" src="/board.js"></script>
 </body>

@@ -71,7 +71,7 @@ Ablations: `replay.ts --paypal off` runs the same day with PayPal removed (the a
 
 ## What it cannot do
 
-It cannot pay an amount that is not on the rate card. It cannot pay a forfeit's show-up fee until the card carries one. It cannot report a payout PayPal has not confirmed. It cannot move a game onto a team that played within two hours, or a pool game past its division's first playoff.
+It cannot pay an amount that is not on the rate card. It cannot pay a forfeit's show-up fee until the card carries one. It cannot pay a game PayPal already shows paid, not even on Sam's tap: the board offers only "nothing more", and `src/agent/resolve.ts` refuses a second payment. It cannot report a payout PayPal has not confirmed. It cannot move a game onto a team that played within two hours, or a pool game past its division's first playoff.
 
 ## Results
 

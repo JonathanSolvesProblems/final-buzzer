@@ -3,7 +3,7 @@
    the tile while you watch. Sam's tap on a held game posts to the server, which pays through the
    same gate and the same PayPal call as the agent. */
 import { Scheduler, StringHelper } from "/vendor/bryntum/scheduler.module.js";
-import { normalise, matchup, sentence, get, GAME_MINUTES } from "/feed.js";
+import { normalise, matchup, sentence, get, heldNote, GAME_MINUTES } from "/feed.js";
 
 const enc = (s) => StringHelper.encodeHtml(String(s ?? ""));
 const $ = (id) => document.getElementById(id);
@@ -58,10 +58,10 @@ function noteHTML(g, s) {
     const secs = s.payout.secondsFromBuzzer;
     if (s.payout.decidedBy === "treasurer") return `<span class="note">Paid, Sam's call</span>`;
     if (secs == null) return `<span class="note">Paid${s.dry ? ", dry run" : ""}</span>`;
-    return `<span class="note"><span class="num">${secs}&#8239;s</span><span class="bar"><i style="--w:${Math.min(100, (secs / 60) * 100).toFixed(0)}%"></i></span></span>`;
+    return `<span class="note"><span class="num">${secs}&#8239;s</span></span>`;
   }
   if (s.kind === "paying") return `<span class="note">Paying through PayPal</span>`;
-  if (s.kind === "held") return `<span class="note">${enc(s.hold.flags?.forfeit ? "Forfeit, held" : "Held for Sam")}</span>`;
+  if (s.kind === "held") return `<span class="note">${heldNote(s.hold)}</span>`;
   if (s.kind === "folded") return `<span class="note">Folds to end of day</span>`;
   if (s.kind === "live") return `<span class="note">In play</span>`;
   if (s.kind === "final") return `<span class="note">${enc(g.status === "forfeit" ? "Forfeit" : "Final")}${g.hs != null ? ` ${g.hs} to ${g.as}` : ""}, agent working</span>`;
@@ -80,12 +80,12 @@ const label = (g, s) => `Game ${g.number}, ${g.division.toLowerCase()}, ${matchu
 const dayStart = (d) => { const first = T.games.filter((g) => g.start.startsWith(d)).map((g) => g.start.slice(11)).sort()[0] ?? "09:00"; return new Date(`${d}T${first.slice(0, 2)}:00`); };
 const dayEnd = (d) => { const last = T.games.filter((g) => g.start.startsWith(d)).map((g) => g.start.slice(11)).sort().at(-1) ?? "18:00"; const h = Number(last.slice(0, 2)) + 2; return new Date(`${d}T${String(h).padStart(2, "0")}:00`); };
 /** Only the courts with a game that day: the real document books different gyms on different days. */
-const courtsOn = (d) => T.courts.filter((c) => T.games.some((g) => g.courtId === c.id && g.start.startsWith(d)));
+const courtsOn = (d) => T.courts.filter((c) => T.games.some((g) => g.courtId === c.id && g.start.startsWith(d))).sort((a, b) => a.name.localeCompare(b.name, "en", { numeric: true }));
 const scheduler = new Scheduler({
   appendTo: "courts",
   startDate: dayStart(day), endDate: dayEnd(day),
   viewPreset: { base: "hourAndDay", tickWidth: 84, headers: [{ unit: "hour", dateFormat: "H:mm" }] },
-  columns: [{ text: "Court", field: "name", width: 104, htmlEncode: false, renderer: ({ record }) => `<div class="court">${enc(record.name)}<small>${enc(record.venue.split(" ")[0])}</small></div>` }],
+  columns: [{ text: "Court", field: "name", width: 92, htmlEncode: false, renderer: ({ record }) => `<div class="court">${enc(record.name)}</div>` }],
   resources: courtsOn(day),
   events: events(T),
   rowHeight: 52, barMargin: 2, readOnly: true, eventStyle: null, eventColor: null, autoHeight: true,
@@ -100,6 +100,15 @@ const scheduler = new Scheduler({
     return tileHTML(g, s);
   },
 });
+/** The day's hours fill the board's width, so the last game is never cut at the edge. Skipped while
+ * the grid is hidden on a phone, where Bryntum has no width to measure. */
+function fitHours() {
+  const w = $("courts").clientWidth; if (!w) return;
+  const hours = (dayEnd(day) - dayStart(day)) / 3600000;
+  scheduler.tickSize = Math.max(64, Math.floor((w - 94) / hours));
+}
+addEventListener("resize", fitHours);
+fitHours();
 scheduler.element.addEventListener("click", (e) => {
   const el = e.target.closest(".b-sch-event-wrap"); if (!el) return;
   const rec = scheduler.resolveEventRecord(el); if (!rec) return;
@@ -111,14 +120,12 @@ scheduler.element.addEventListener("click", (e) => {
 function renderDays() {
   const names = { "2026-05-14": "Thu", "2026-05-15": "Fri", "2026-05-16": "Sat", "2026-05-17": "Sun" };
   $("days").innerHTML = days.map((d) => `<button class="day" type="button" data-day="${d}" aria-label="${new Date(d + "T12:00").toLocaleDateString("en-CA", { weekday: "long", day: "numeric", month: "long" })}"${d === day ? ' aria-current="date"' : ""}>${names[d] ?? d.slice(5)}<span class="num">${Number(d.slice(8))}</span></button>`).join("");
-  $("days").querySelectorAll(".day").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day; scheduler.resourceStore.data = courtsOn(day); scheduler.setTimeSpan(dayStart(day), dayEnd(day)); renderClosure(); render(); }));
+  $("days").querySelectorAll(".day").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day; scheduler.resourceStore.data = courtsOn(day); scheduler.setTimeSpan(dayStart(day), dayEnd(day)); fitHours(); renderClosure(); render(); }));
 }
 function render() {
   renderDays();
   const dayGames = T.games.filter((g) => g.start.startsWith(day));
   const now = cursor();
-  $("day-name").textContent = new Date(day + "T12:00").toLocaleDateString("en-CA", { weekday: "long", day: "numeric", month: "long" });
-  $("clock").textContent = now && now.toISOString().slice(0, 10) === day ? hhmm(now) : "--:--";
   scheduler.features.timeRanges.store.removeAll();
   if (now && now.toISOString().slice(0, 10) === day) scheduler.features.timeRanges.store.add({ id: "now", startDate: now, name: hhmm(now), cls: "now-line" });
   scheduler.refreshRows?.();
@@ -129,39 +136,57 @@ function render() {
   const dollars = paid.reduce((sum, x) => sum + x.s.payout.items.reduce((a, i) => a + Number(i.amount), 0), 0);
   $("paid-n").textContent = paid.length; $("of").textContent = dayGames.length;
   $("money").textContent = money(dollars);
-  $("median").textContent = secs.length ? median(secs) : 0;
+  $("money-day").textContent = `paid out ${new Date(day + "T12:00").toLocaleDateString("en-CA", { weekday: "long" })}`;
   const last = Object.values(ledger.payouts).filter((p) => p.status === "SUCCESS" && p.secondsFromBuzzer != null && dayGames.some((g) => g.id === p.gameId)).sort((a, b) => (b.completedAt ?? "").localeCompare(a.completedAt ?? ""))[0];
   if (last) {
     const ss = String(Math.round(last.secondsFromBuzzer)).padStart(2, "0").slice(-2);
     setDigit("p1", ss[0]); setDigit("p2", ss[1]);
     const g = T.games.find((x) => x.id === last.gameId);
     $("secs-sr").textContent = `${last.secondsFromBuzzer} `;
-    $("last-game").textContent = `Last game${last.provisional ? ", provisional card" : ""}. Game ${g.number}, ${matchup(g)}, ${g.court}: ${last.items.length} officials, $${last.items.reduce((a, i) => a + Number(i.amount), 0).toFixed(0)}. PayPal batch ${last.batchId}.`;
+    $("last-game").textContent = `Game ${g.number}, the latest, at ${last.secondsFromBuzzer} s. Median today ${median(secs)} s.`;
   } else { setDigit("p1", "0"); setDigit("p2", "0"); $("last-game").textContent = paid.length ? "Paid in a dry run: PayPal was not called, so there is no time to show." : "No payout yet today."; }
   $("p1").classList.toggle("ghosted", !last); $("p2").classList.toggle("ghosted", !last);
-  $("via").textContent = replay?.paypal === "sandbox" || Object.values(ledger.payouts).some((p) => p.batchId) ? "Paid through PayPal Payouts, with test money in this replay." : "Paid through PayPal Payouts.";
   $("count-line").textContent = `${paid.length} of ${dayGames.length} games paid, ${money(dollars)} paid out.`;
 
   const holds = Object.values(ledger.holds).filter((h) => dayGames.some((g) => g.id === h.gameId)).sort((a, b) => a.at.localeCompare(b.at));
   const card = $("held-card");
-  $("who-line").innerHTML = holds.length ? `Next decision: <b>Sam</b>, ${holds.length} game${holds.length > 1 ? "s" : ""}` : `<b>No decision waiting</b>`;
   if (holds.length) {
     const h = holds[0]; const g = T.games.find((x) => x.id === h.gameId);
-    card.hidden = false;
-    $("held-title").innerHTML = `Game <span class="num">${g.number}</span> is held for Sam`;
-    $("held-text").textContent = h.question ?? `${matchup(g)}, ${g.court}. ${h.reason}`;
-    $("held-why").textContent = h.question ? h.reason : "";
-    $("held-staged").textContent = sheet.staged?.forfeit?.gameId === g.id ? "Staged for this replay: the real game was not forfeited." : sheet.staged?.missing_table_official?.gameId === g.id ? "Staged for this replay: the real sheet is Sam's." : "";
+    const f = h.flags ?? {};
+    card.hidden = false; card.dataset.game = g.id;
+    $("held-title").innerHTML = `Game <span class="num">${g.number}</span> is held for Sam${holds.length > 1 ? `<small>1 of ${holds.length}</small>` : ""}`;
+    $("held-text").textContent = holdLine(h, g);
+    $("held-why").textContent = h.reason ?? "";
+    $("held-staged").textContent = sheet.staged?.forfeit?.gameId === g.id ? "Staged for this replay: the real game was not forfeited." : sheet.staged?.missing_table_official?.gameId === g.id ? "Staged for this replay: the table official was taken off this game's sheet." : "";
     const full = Number(card_total(g));
-    $("pay-full").textContent = `Pay in full, $${full}`;
-    const noShowUp = card.dataset.showup === "none";
-    $("pay-showup").disabled = noShowUp;
-    $("held-note").textContent = lastAnswer ?? (noShowUp ? "The show-up fee has no amount on the rate card yet, so that button waits for Sam's card." : "");
+    const a = sheet.assignments[g.id];
+    // a game PayPal already paid offers no second payment, on the board and in resolve.ts
+    $("pay-full").hidden = !!f.already_paid;
+    $("pay-full").textContent = f.official_missing && a ? `Pay the ${a.referees.filter(Boolean).length + (a.table ? 1 : 0)} on the sheet, $${full}` : `Pay in full, $${full}`;
+    $("pay-showup").hidden = card.dataset.showup === "none" || !f.forfeit;
+    $("pay-nobody").textContent = f.already_paid ? "Right, nothing more" : "Pay nobody";
+    $("pay-nobody").classList.toggle("second", !f.already_paid);
+    $("held-note").textContent = lastAnswer ?? "";
   } else card.hidden = true;
 
   renderPhone(dayGames, now);
   renderEntries();
   flipped.clear();
+}
+/** The held card's one line, built from the hold's flags, the sheet, the card and the ledger, so every
+ * clause is a field. The agent's own words stay one tap away, under "The agent's note". */
+function holdLine(h, g) {
+  const f = h.flags ?? {};
+  if (f.already_paid) {
+    const p = Object.values(ledger.payouts).find((x) => x.gameId === g.id && x.status === "SUCCESS");
+    return p ? `PayPal already shows this game paid: $${p.items.reduce((s, i) => s + Number(i.amount), 0)} to ${p.items.length} officials. Nothing more was sent.` : "PayPal already shows this game paid. Nothing more was sent.";
+  }
+  if (f.forfeit) return `${matchup(g)} was a forfeit. The rate card pays a show-up fee for a forfeit, but has no amount for it yet.`;
+  if (f.official_missing) {
+    const a = sheet.assignments[g.id];
+    return a && !a.table ? `${matchup(g)} has no table official on the sheet. Pay who is on it, or tell the agent who sat at the table.` : `${matchup(g)} is missing an official on the sheet.`;
+  }
+  return h.question ?? h.reason;
 }
 function card_total(g) { const a = sheet.assignments[g.id]; if (!a) return 0; return (a.referees.filter(Boolean).length * card.per_game.referee) + (a.table ? card.per_game.table : 0); }
 function median(xs) { const s = [...xs].sort((a, b) => a - b), m = s.length >> 1; return s.length % 2 ? s[m] : Math.round(((s[m - 1] + s[m]) / 2) * 10) / 10; }
@@ -176,9 +201,9 @@ function renderPhone(dayGames, now) {
   const live = dayGames.filter((g) => kindWithClock(g, now).kind === "live"), later = dayGames.filter((g) => kindWithClock(g, now).kind === "scheduled");
   const done = dayGames.map((g) => ({ g, s: kindWithClock(g, now) })).filter((x) => ["paid", "paying", "held", "folded"].includes(x.s.kind));
   $("phone").innerHTML =
-    `<h3>In play <span class="num">${live.length}</span></h3><ul class="prows">${live.map((g) => row(g, { kind: "live" })).join("") || "<li><small>Nothing in play.</small></li>"}</ul>` +
-    `<h3>Next up <span class="num">${later.length}</span></h3><ul class="prows later">${later.slice(0, 4).map((g) => row(g, { kind: "scheduled" })).join("")}</ul>` +
-    `<h3>Final <span class="num">${done.length}</span></h3><ul class="minis">${done.map(({ g, s }) => `<li class="${s.kind}" aria-label="${enc(label(g, s))}"><span>Game <b class="num">${g.number}</b></span><span>${s.kind === "held" ? "Held" : s.kind === "folded" ? "Folds" : s.payout?.secondsFromBuzzer != null ? s.payout.secondsFromBuzzer + " s" : "Paid"}</span></li>`).join("")}</ul>`;
+    (live.length ? `<h3>In play <span class="num">${live.length}</span></h3><ul class="prows">${live.map((g) => row(g, { kind: "live" })).join("")}</ul>` : "") +
+    (later.length ? `<h3>Next up <span class="num">${later.length}</span></h3><ul class="prows later">${later.slice(0, 4).map((g) => row(g, { kind: "scheduled" })).join("")}</ul>` : "") +
+    `<h3>Final <span class="num">${done.length}</span></h3><ul class="minis">${done.map(({ g, s }) => `<li class="${s.kind}" aria-label="${enc(label(g, s))}"><span>Game <b class="num">${g.number}</b></span><span>${s.kind === "held" ? heldNote(s.hold) : s.kind === "folded" ? "Folds" : s.payout?.secondsFromBuzzer != null ? s.payout.secondsFromBuzzer + " s" : "Paid"}</span></li>`).join("")}</ul>`;
 }
 function renderEntries() {
   const byId = new Map(T.games.map((g) => [g.id, g]));
@@ -213,11 +238,11 @@ function renderRate() {
 
 /* ---- Sam's tap ---- */
 let lastAnswer = null;
+function busy(what) { $("source").textContent = what ?? "Live"; $("source").parentElement.classList.toggle("busy", !!what); }
 for (const [id, choice] of [["pay-full", "pay_full"], ["pay-showup", "pay_show_up"], ["pay-nobody", "pay_nobody"]]) {
   $(id).addEventListener("click", async () => {
-    const holds = Object.values(ledger.holds).sort((a, b) => a.at.localeCompare(b.at)); if (!holds.length) return;
-    const gameId = holds[0].gameId;
-    $("source").textContent = "paying through PayPal"; $("source").classList.add("busy");
+    const gameId = $("held-card").dataset.game; if (!gameId || !ledger.holds[gameId]) return;
+    busy("Paying through PayPal");
     for (const b of ["pay-full", "pay-showup", "pay-nobody"]) $(b).disabled = true;
     let out;
     try {
@@ -226,7 +251,7 @@ for (const [id, choice] of [["pay-full", "pay_full"], ["pay-showup", "pay_show_u
     } catch (e) { out = { ok: false, message: `The board could not reach the server: ${e.message}` }; }
     lastAnswer = out.message;
     $("held-note").textContent = out.message;
-    $("source").textContent = "live, every 3 s"; $("source").classList.remove("busy");
+    busy(null);
     for (const b of ["pay-full", "pay-showup", "pay-nobody"]) $(b).disabled = false;
     if (out.ok) { flipped.add(gameId); await poll(); setTimeout(() => { lastAnswer = null; }, 8000); }
   });
@@ -243,19 +268,20 @@ $("close").addEventListener("submit", async (e) => {
   e.preventDefault();
   const court = $("close-court").value, from = $("close-from").value;
   const plan = $("plan");
+  $("closer").open = false;
   plan.hidden = false; plan.innerHTML = `<h2>${enc(court)} closes at ${from}</h2><p class="quiet">The agent is re-planning the rest of the day against the schedule's rules.</p>`;
-  $("source").textContent = "re-planning"; $("source").classList.add("busy");
+  busy("Re-planning");
   let r;
   try { r = await fetch("/api/replan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ court, from, day }) }).then((x) => x.json()); }
   catch (err) { r = { ok: false, message: err.message }; }
-  $("source").textContent = "live, every 3 s"; $("source").classList.remove("busy");
+  busy(null);
   if (!r.ok) { plan.innerHTML += `<p class="quiet">${enc(r.message ?? "The server could not run the re-plan.")}</p>`; return; }
   const byN = new Map(T.games.map((g) => [g.number, g]));
   const moves = r.applied.map((m) => { const g = byN.get(m.game_number); return `<li><b>Game ${m.game_number}</b>, ${enc(g ? matchup(g) : "")}: ${enc(m.from.court)} ${m.from.start} to <b>${enc(m.to.court)} ${m.to.start}</b>${m.reassigned.length ? `, officials reassigned (${m.reassigned.length})` : ""}</li>`; }).join("");
   const lost = r.unplayable.map((u) => `<li><b>Game ${u.game_number}</b>, ${enc(u.teams.join(" v "))}: not played. ${enc(u.reason)}</li>`).join("");
   const refunds = r.refunds.map((f) => `<li>${enc(f.team)} (${enc(f.division)}): $${f.amount} ${f.currency}, ${enc(f.rule)}${f.via ? `, through PayPal ${enc(f.via)}` : ""}: ${enc(f.status)}</li>`).join("");
   plan.innerHTML = `<h2>${enc(court)} closed at ${from}</h2><p>${enc(r.summary ?? "")}</p>` +
-    (moves ? `<h3>Moved</h3><ul>${moves}</ul>` : "") + (lost ? `<h3>Cannot be played</h3><ul>${lost}</ul>` : "") + (refunds ? `<h3>Refunds, pro rata by the fee rule</h3><ul>${refunds}</ul>` : "") +
+    (moves ? `<h3>Moved</h3><ul>${moves}</ul>` : "") + (lost ? `<h3>Cannot be played</h3><ul>${lost}</ul>` : "") + (refunds ? `<h3>Refunds pro rata by the fee rule</h3><ul>${refunds}</ul>` : "") +
     (r.rejected.length ? `<h3>Moves the rules refused</h3><ul>${r.rejected.map((x) => `<li>Game ${x.game_number} to ${enc(x.wanted.court)} ${x.wanted.start}: ${enc(x.problems.join("; "))}</li>`).join("")}</ul>` : "") +
     `<p class="quiet">${r.loop.calls} model calls, ${r.steps.filter((s) => s.name === "check_move").length} placements checked, ${Math.round(r.loop.ms / 1000)} s.</p>`;
   await poll();
@@ -279,12 +305,11 @@ async function poll() {
       ledger = next; lastText = l; changed = true;
     }
     if (changed) render();
-  } catch (e) { $("source").textContent = "ledger unreadable"; }
+  } catch (e) { $("source").textContent = "Ledger unreadable"; }
 }
 
 renderRate();
 renderClosure();
-$("event-name").textContent = T.name;
 $("club").textContent = T.association || "Northside Youth Basketball";
 await poll();
 render();

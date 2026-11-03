@@ -19,4 +19,6 @@ export function normalise(doc) {
 }
 export const matchup = (g) => g.home && g.away ? `${g.home} v ${g.away}` : g.stage;
 export const sentence = (s) => String(s).charAt(0).toUpperCase() + String(s).slice(1).toLowerCase();
+/** A held game's two words, the same on the board, the phone board and the scorer's page. */
+export const heldNote = (h) => h.flags?.already_paid ? "Already paid" : h.flags?.forfeit ? "Forfeit, held" : "Held for Sam";
 export async function get(url) { const r = await fetch(url); if (!r.ok) throw new Error(`${url}: ${r.status}`); return r.json(); }

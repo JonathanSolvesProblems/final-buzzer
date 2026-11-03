@@ -28,12 +28,15 @@ export async function resolveHold(o: { tournament: Tournament; game: Game; sheet
   const base = { gameId: game.id, number: game.number, choice: o.choice };
   if (!hold) return { ...base, ok: false, message: `Game ${game.number} is not held.` };
   const tapAt = new Date();
+  const alreadyPaid = !!hold.flags?.already_paid;
 
   if (o.choice === "pay_nobody") {
     delete ledger.holds[game.id];
     event(ledger, "treasurer_pay_nobody", { gameId: game.id, number: game.number });
-    return { ...base, ok: true, message: `Game ${game.number}: nobody is paid, on Sam's word.` };
+    return { ...base, ok: true, message: alreadyPaid ? `Game ${game.number}: confirmed, nothing more sent.` : `Game ${game.number}: nobody is paid, on Sam's word.` };
   }
+  // PayPal already shows this game paid: a second payout under a new batch id would pay the officials twice
+  if (alreadyPaid) return { ...base, ok: false, message: `PayPal already shows game ${game.number} paid, so paying again would pay twice. Confirm that nothing more is owed instead.` };
   if (o.choice === "pay_show_up") {
     if (card.forfeit.show_up_fee === null) return { ...base, ok: false, message: "The show-up fee has no amount on the rate card yet, so it cannot be paid. Pay in full, pay nobody, or add the amount to the card." };
   }
