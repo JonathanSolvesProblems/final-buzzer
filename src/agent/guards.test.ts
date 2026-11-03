@@ -22,7 +22,7 @@ const sheet: Sheet = {
 };
 const game = (over: Partial<Game> = {}): Game => ({
   id: "g1", courtId: "c1", number: 1, division: "Mini boys", stage: "pool", home: "A", away: "B", court: "Gym C", venue: "", start: "2026-05-16T11:30",
-  status: "final", hs: 50, as: 40, note: "", bye: false, finalAt: null, ...over,
+  status: "final", hs: 50, as: 40, note: "", bye: false, finalAt: null, feeds: [], ...over,
 });
 const flags = { forfeit: false, official_missing: false, already_paid: false, amount_uncertain: false, reopened_score: false };
 const payAll: Decision = { choice: "pay_now", reason: "t", flags, items: [

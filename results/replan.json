@@ -1,0 +1,781 @@
+{
+  "at": "2026-11-03T13:09:15.873Z",
+  "paypal": "sandbox",
+  "closure": {
+    "day": "2026-05-17",
+    "court": "Gym E",
+    "from": "09:00"
+  },
+  "affected": [
+    54,
+    60,
+    66,
+    71,
+    74,
+    78,
+    82,
+    84,
+    86,
+    88
+  ],
+  "summary": "All four finals, the Mini Boys semi and Bantam Girls pool game move to Gym F at their original times, the two Mini Boys quarter-finals go to 12:45 (Gym F and Lakeside 2), and Bantam Boys pool game 71 moves to Lakeside 1 at 16:30. Only Mini Boys pool game 54 (Lakeshore 2 v Maple Hill) cannot be played because no slot exists before the division's 10:15 playoffs, so both teams get the rule refund.",
+  "applied": [
+    {
+      "game_number": 82,
+      "from": {
+        "court": "Gym EF",
+        "start": "16:30"
+      },
+      "to": {
+        "court": "Gym F",
+        "start": "16:30"
+      },
+      "officials": [
+        "off-d",
+        "off-e",
+        "off-f"
+      ],
+      "reassigned": []
+    },
+    {
+      "game_number": 84,
+      "from": {
+        "court": "Gym EF",
+        "start": "17:45"
+      },
+      "to": {
+        "court": "Gym F",
+        "start": "17:45"
+      },
+      "officials": [
+        "off-j",
+        "off-k",
+        "off-l"
+      ],
+      "reassigned": []
+    },
+    {
+      "game_number": 86,
+      "from": {
+        "court": "Gym EF",
+        "start": "19:00"
+      },
+      "to": {
+        "court": "Gym F",
+        "start": "19:00"
+      },
+      "officials": [
+        "off-p",
+        "off-q",
+        "off-r"
+      ],
+      "reassigned": []
+    },
+    {
+      "game_number": 88,
+      "from": {
+        "court": "Gym EF",
+        "start": "20:15"
+      },
+      "to": {
+        "court": "Gym F",
+        "start": "20:15"
+      },
+      "officials": [
+        "off-v",
+        "off-w",
+        "off-x"
+      ],
+      "reassigned": []
+    },
+    {
+      "game_number": 74,
+      "from": {
+        "court": "Gym EF",
+        "start": "14:00"
+      },
+      "to": {
+        "court": "Gym F",
+        "start": "14:00"
+      },
+      "officials": [
+        "off-d",
+        "off-e",
+        "off-f"
+      ],
+      "reassigned": []
+    },
+    {
+      "game_number": 60,
+      "from": {
+        "court": "Gym E",
+        "start": "10:15"
+      },
+      "to": {
+        "court": "Gym F",
+        "start": "12:45"
+      },
+      "officials": [
+        "off-j",
+        "off-k",
+        "off-l"
+      ],
+      "reassigned": []
+    },
+    {
+      "game_number": 66,
+      "from": {
+        "court": "Gym E",
+        "start": "11:30"
+      },
+      "to": {
+        "court": "Lakeside 2",
+        "start": "12:45"
+      },
+      "officials": [
+        "off-d",
+        "off-e",
+        "off-f"
+      ],
+      "reassigned": []
+    },
+    {
+      "game_number": 78,
+      "from": {
+        "court": "Gym EF",
+        "start": "15:15"
+      },
+      "to": {
+        "court": "Gym F",
+        "start": "15:15"
+      },
+      "officials": [
+        "off-p",
+        "off-q",
+        "off-r"
+      ],
+      "reassigned": []
+    },
+    {
+      "game_number": 71,
+      "from": {
+        "court": "Gym EF",
+        "start": "12:45"
+      },
+      "to": {
+        "court": "Lakeside 1",
+        "start": "16:30"
+      },
+      "officials": [
+        "off-s",
+        "off-t",
+        "off-u"
+      ],
+      "reassigned": []
+    }
+  ],
+  "rejected": [],
+  "unplayable": [
+    {
+      "game_number": 54,
+      "reason": "Mini Boys pool game: no free slot exists before the division's first playoff (10:15), and every later slot is rejected by the order rule.",
+      "teams": [
+        "Lakeshore 2",
+        "Maple Hill"
+      ]
+    }
+  ],
+  "refunds": [
+    {
+      "game_number": 54,
+      "team": "Lakeshore 2",
+      "division": "Mini Boys",
+      "rule": "CAD 350 / 2 games",
+      "amount": "175.00",
+      "currency": "CAD",
+      "provisional_fee": true,
+      "via": "payout",
+      "status": "SUCCESS",
+      "ref": "6GDKCDGHFPB74"
+    },
+    {
+      "game_number": 54,
+      "team": "Maple Hill",
+      "division": "Mini Boys",
+      "rule": "CAD 350 / 2 games",
+      "amount": "175.00",
+      "currency": "CAD",
+      "provisional_fee": true,
+      "via": "payout",
+      "status": "SUCCESS",
+      "ref": "EJ7UMRX2TVNLG"
+    }
+  ],
+  "fee_rule": {
+    "game_not_played": "pro rata: entry fee divided by the games the team was scheduled to play, times the games not played",
+    "note": "Applied when a gym closes and a game cannot be re-planned. Placeholder wording until Sam's own policy."
+  },
+  "loop": {
+    "model": "claude-opus-5-5",
+    "calls": 4,
+    "input_tokens": 16687,
+    "output_tokens": 2716,
+    "ms": 26083,
+    "endedBy": "terminal"
+  },
+  "document_version": null,
+  "trace": [
+    {
+      "t": "2026-11-03T13:08:02.859Z",
+      "ms": 2944,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 1996,
+        "output_tokens": 51
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:02.860Z",
+      "ms": 2944,
+      "kind": "tool",
+      "name": "read_closure",
+      "input": {},
+      "output": {
+        "closure": {
+          "day": "2026-05-17",
+          "court": "Gym E",
+          "from": "09:00"
+        },
+        "affected": [
+          {
+            "number": 54,
+            "division": "Mini Boys",
+            "stage": "pool",
+            "matchup": "Lakeshore 2 v Maple Hill",
+            "court": "Gym E",
+            "start": "09:00",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "number": 60,
+            "division": "Mini Boys",
+            "stage": "quarter",
+            "matchup": "quarter",
+            "court": "Gym E",
+            "start": "10:15",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "number": 66,
+            "division": "Mini Boys",
+            "stage": "quarter",
+            "matchup": "quarter",
+            "court": "Gym E",
+            "start": "11:30",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "number": 71,
+            "division": "Bantam Boys",
+            "stage": "pool",
+            "matchup": "Fairview v Hilltop",
+            "court": "Gym EF",
+            "start": "12:45",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "number": 74,
+            "division": "Mini Boys",
+            "stage": "semi",
+            "matchup": "semi",
+            "court": "Gym EF",
+            "start": "14:00",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "number": 78,
+            "division": "Bantam Girls",
+            "stage": "pool",
+            "matchup": "Pinecrest v Northside",
+            "court": "Gym EF",
+            "start": "15:15",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "number": 82,
+            "division": "Mini Girls",
+            "stage": "final",
+            "matchup": "final",
+            "court": "Gym EF",
+            "start": "16:30",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "number": 84,
+            "division": "Bantam Boys",
+            "stage": "final",
+            "matchup": "final",
+            "court": "Gym EF",
+            "start": "17:45",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "number": 86,
+            "division": "Cadet Girls",
+            "stage": "final",
+            "matchup": "final",
+            "court": "Gym EF",
+            "start": "19:00",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "number": 88,
+            "division": "Juvenile Boys",
+            "stage": "final",
+            "matchup": "final",
+            "court": "Gym EF",
+            "start": "20:15",
+            "venue": "Northside Collegiate"
+          }
+        ],
+        "order_of_priority": "final, semi, quarter, placement, pool"
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:02.860Z",
+      "ms": 2944,
+      "kind": "tool",
+      "name": "free_slots",
+      "input": {},
+      "output": {
+        "slots": [
+          {
+            "court": "Gym F",
+            "courtId": "c003",
+            "start": "12:45",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Lakeside 2",
+            "courtId": "c011",
+            "start": "12:45",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Gym F",
+            "courtId": "c003",
+            "start": "14:00",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Gym F",
+            "courtId": "c003",
+            "start": "15:15",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Gym F",
+            "courtId": "c003",
+            "start": "16:30",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Lakeside 1",
+            "courtId": "c012",
+            "start": "16:30",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Lakeside 2",
+            "courtId": "c011",
+            "start": "16:30",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Gym F",
+            "courtId": "c003",
+            "start": "17:45",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Lakeside 1",
+            "courtId": "c012",
+            "start": "17:45",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Lakeside 2",
+            "courtId": "c011",
+            "start": "17:45",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Gym F",
+            "courtId": "c003",
+            "start": "19:00",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Lakeside 1",
+            "courtId": "c012",
+            "start": "19:00",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Lakeside 2",
+            "courtId": "c011",
+            "start": "19:00",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Gym F",
+            "courtId": "c003",
+            "start": "20:15",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Lakeside 1",
+            "courtId": "c012",
+            "start": "20:15",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Lakeside 2",
+            "courtId": "c011",
+            "start": "20:15",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Gym C",
+            "courtId": "c004",
+            "start": "21:30",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Gym CD",
+            "courtId": "c002",
+            "start": "21:30",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Gym D",
+            "courtId": "c005",
+            "start": "21:30",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Gym F",
+            "courtId": "c003",
+            "start": "21:30",
+            "venue": "Northside Collegiate"
+          },
+          {
+            "court": "Lakeside 1",
+            "courtId": "c012",
+            "start": "21:30",
+            "venue": "Lakeside College"
+          },
+          {
+            "court": "Lakeside 2",
+            "courtId": "c011",
+            "start": "21:30",
+            "venue": "Lakeside College"
+          }
+        ],
+        "note": "Same-venue slots are listed with their venue; moving across venues is allowed but costs the teams travel."
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:11.597Z",
+      "ms": 11681,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 3733,
+        "output_tokens": 1023
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:11.598Z",
+      "ms": 11682,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 82,
+        "court": "Gym F",
+        "start": "16:30"
+      },
+      "output": {
+        "ok": true,
+        "problems": [],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:11.598Z",
+      "ms": 11682,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 84,
+        "court": "Gym F",
+        "start": "17:45"
+      },
+      "output": {
+        "ok": true,
+        "problems": [],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:11.598Z",
+      "ms": 11682,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 86,
+        "court": "Gym F",
+        "start": "19:00"
+      },
+      "output": {
+        "ok": true,
+        "problems": [],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:11.598Z",
+      "ms": 11682,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 88,
+        "court": "Gym F",
+        "start": "20:15"
+      },
+      "output": {
+        "ok": true,
+        "problems": [],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:11.598Z",
+      "ms": 11682,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 74,
+        "court": "Gym F",
+        "start": "14:00"
+      },
+      "output": {
+        "ok": true,
+        "problems": [],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:11.599Z",
+      "ms": 11683,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 60,
+        "court": "Gym F",
+        "start": "12:45"
+      },
+      "output": {
+        "ok": true,
+        "problems": [],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:11.599Z",
+      "ms": 11683,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 66,
+        "court": "Lakeside 2",
+        "start": "12:45"
+      },
+      "output": {
+        "ok": true,
+        "problems": [],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:11.599Z",
+      "ms": 11683,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 78,
+        "court": "Gym F",
+        "start": "15:15"
+      },
+      "output": {
+        "ok": true,
+        "problems": [],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:15.448Z",
+      "ms": 15532,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 5218,
+        "output_tokens": 367
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:15.449Z",
+      "ms": 15533,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 71,
+        "court": "Lakeside 1",
+        "start": "16:30"
+      },
+      "output": {
+        "ok": true,
+        "problems": [],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:15.449Z",
+      "ms": 15533,
+      "kind": "tool",
+      "name": "check_move",
+      "input": {
+        "game_number": 54,
+        "court": "Lakeside 2",
+        "start": "16:30"
+      },
+      "output": {
+        "ok": false,
+        "problems": [
+          "a Mini Boys pool game cannot land after the division's first playoff at 2026-05-17 10:15"
+        ],
+        "officials_to_reassign": 0,
+        "notes": []
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:25.997Z",
+      "ms": 26081,
+      "kind": "model",
+      "text": "",
+      "stop_reason": "tool_use",
+      "usage": {
+        "input_tokens": 5740,
+        "output_tokens": 1275
+      }
+    },
+    {
+      "t": "2026-11-03T13:08:25.997Z",
+      "ms": 26081,
+      "kind": "tool",
+      "name": "decide_replan",
+      "input": {
+        "moves": [
+          {
+            "game_number": 82,
+            "court": "Gym F",
+            "start": "16:30",
+            "reason": "Final; same venue, same time on Gym F.",
+            "officials_to_reassign": 0
+          },
+          {
+            "game_number": 84,
+            "court": "Gym F",
+            "start": "17:45",
+            "reason": "Final; same venue, same time on Gym F.",
+            "officials_to_reassign": 0
+          },
+          {
+            "game_number": 86,
+            "court": "Gym F",
+            "start": "19:00",
+            "reason": "Final; same venue, same time on Gym F.",
+            "officials_to_reassign": 0
+          },
+          {
+            "game_number": 88,
+            "court": "Gym F",
+            "start": "20:15",
+            "reason": "Final; same venue, same time on Gym F.",
+            "officials_to_reassign": 0
+          },
+          {
+            "game_number": 74,
+            "court": "Gym F",
+            "start": "14:00",
+            "reason": "Semi-final; same venue, same time on Gym F.",
+            "officials_to_reassign": 0
+          },
+          {
+            "game_number": 60,
+            "court": "Gym F",
+            "start": "12:45",
+            "reason": "Quarter-final; earliest free slot after closure, same venue, still ahead of the 14:00 semi.",
+            "officials_to_reassign": 0
+          },
+          {
+            "game_number": 66,
+            "court": "Lakeside 2",
+            "start": "12:45",
+            "reason": "Quarter-final; the only other 12:45 slot is at Lakeside, needed to finish before the 14:00 semi (Gym F 12:45 taken by game 60).",
+            "officials_to_reassign": 0
+          },
+          {
+            "game_number": 78,
+            "court": "Gym F",
+            "start": "15:15",
+            "reason": "Pool game; same venue, same time on Gym F.",
+            "officials_to_reassign": 0
+          },
+          {
+            "game_number": 71,
+            "court": "Lakeside 1",
+            "start": "16:30",
+            "reason": "Pool game; no Northside slot left before the Bantam Boys playoffs, earliest accepted slot is Lakeside 1 16:30.",
+            "officials_to_reassign": 0
+          }
+        ],
+        "unplayable": [
+          {
+            "game_number": 54,
+            "reason": "Mini Boys pool game: no free slot exists before the division's first playoff (10:15), and every later slot is rejected by the order rule."
+          }
+        ],
+        "summary": "All four finals, the Mini Boys semi and Bantam Girls pool game move to Gym F at their original times, the two Mini Boys quarter-finals go to 12:45 (Gym F and Lakeside 2), and Bantam Boys pool game 71 moves to Lakeside 1 at 16:30. Only Mini Boys pool game 54 (Lakeshore 2 v Maple Hill) cannot be played because no slot exists before the division's 10:15 playoffs, so both teams get the rule refund."
+      },
+      "output": {
+        "recorded": true,
+        "moves": 9,
+        "unplayable": 1
+      }
+    }
+  ]
+}

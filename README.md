@@ -103,6 +103,16 @@ Seconds are PayPal's batch completion time minus the moment the score was saved.
 
 A first run of the chase found two faults, both fixed before this run: after a split the agent kept reading the cancelled original invoice, and it split a manager who had never asked for a plan.
 
+**A gym closes** (`results/replan.json`): Gym E closes at 9:00 on Sunday. Gym EF is the same floor with the divider down, so its eight games go too: ten games in all, four of them finals.
+
+| | Result |
+|---|---|
+| Games moved | 9 of 10: the finals and the semi-final to Gym F (the half of the floor still open) at their original times, both quarter-finals to 12:45 so they end before the 14:00 semi, one pool game across town to Lakeside |
+| Cannot be played | 1: a Mini Boys pool game at 9:00. Every court is taken before the division's 10:15 playoffs, and a pool game cannot land after them |
+| Refunds | 2 × $175 CAD, one per team, by the fee rule (entry fee divided by the games the team was scheduled to play), paid through PayPal Payouts because both teams had paid by e-transfer |
+
+Every move is re-checked in code before anything changes: free court, both halves of a joined court, team rest of two hours, playoff order. Building this run found two gaps in those rules, both fixed with tests: joined courts sharing a floor with their halves, and playoff games depending on the games that feed them.
+
 `npm run check` fails if any figure in this section stops matching those files.
 
 ## Licence

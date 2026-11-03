@@ -26,6 +26,7 @@ export interface Game {
   note: string;
   bye: boolean;
   finalAt: string | null;  // when the scorer's app saved the final score, if it recorded it
+  feeds: string[];         // ids of the games whose winner or loser plays this one (W:id / L:id)
 }
 
 export interface Tournament {
@@ -75,6 +76,7 @@ export function normalise(doc: RawDoc): Tournament {
         start: g.start,
         status: (g.status === "final" || g.status === "forfeit") ? g.status : "scheduled",
         hs: g.hs, as: g.as, note: g.note ?? "", bye: Boolean(g.bye), finalAt: g.finalAt ?? null,
+        feeds: [g.homeRef, g.awayRef].map((r) => /^[WL]:(.+)$/.exec(r ?? "")?.[1]).filter((x): x is string => Boolean(x)),
       });
     }
   }

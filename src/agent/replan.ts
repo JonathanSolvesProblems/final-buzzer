@@ -38,8 +38,17 @@ const hhmm = (m: number) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${St
 const timeOf = (g: Game) => g.start.slice(11, 16);
 const dayOf = (g: Game) => g.start.slice(0, 10);
 
+/** Joined courts share a floor: "Gym CD" is Gym C and Gym D with the divider up, so it cannot be used
+ *  while either half has a game, and closing one half closes the joined court too. */
+const halves = (name: string): string[] => { const m = /^Gym ([A-Z]{2,})$/.exec(name); return m ? m[1].split("") : (/^Gym ([A-Z])$/.exec(name)?.[1] ? [name.slice(4)] : []); };
+export function shareFloor(a: string, b: string): boolean {
+  if (a === b) return true;
+  const ha = halves(a), hb = halves(b);
+  return ha.length > 0 && hb.length > 0 && ha.some((x) => hb.includes(x));
+}
+
 export function affectedGames(t: Tournament, c: Closure): Game[] {
-  return t.games.filter((g) => dayOf(g) === c.day && g.court === c.court && minutes(timeOf(g)) >= minutes(c.from) && g.status === "scheduled")
+  return t.games.filter((g) => dayOf(g) === c.day && shareFloor(g.court, c.court) && minutes(timeOf(g)) >= minutes(c.from) && g.status === "scheduled")
     .sort((a, b) => a.start.localeCompare(b.start));
 }
 
@@ -51,8 +60,10 @@ export function freeSlots(t: Tournament, c: Closure, courts: Array<{ id: string;
   const grid = [...starts, hhmm(minutes(last) + GAME_MINUTES)].filter((s) => minutes(s) >= minutes(c.from));
   const out: Slot[] = [];
   for (const court of courts) {
-    if (court.name === c.court) continue;
-    const used = new Set(dayGames.filter((g) => g.court === court.name).map(timeOf));
+    if (shareFloor(court.name, c.court)) continue;
+    // games leaving the closed floor free their time on any court they shared it with
+    const moving = (g: Game) => shareFloor(g.court, c.court) && minutes(timeOf(g)) >= minutes(c.from);
+    const used = new Set(dayGames.filter((g) => shareFloor(g.court, court.name) && !moving(g)).map(timeOf));
     const plays = dayGames.some((g) => g.court === court.name);
     if (!plays) continue; // a court with no games that day is not booked for the tournament
     for (const s of grid) if (!used.has(s)) out.push({ court: court.name, courtId: court.id, start: s, venue: court.venue });
@@ -61,12 +72,24 @@ export function freeSlots(t: Tournament, c: Closure, courts: Array<{ id: string;
 }
 
 /** The schedule's own rules, applied to one proposed placement. `taken` holds slots already given to other moves. */
-export function checkMove(t: Tournament, sheet: Sheet, g: Game, court: string, start: string, taken: Set<string> = new Set()): MoveCheck {
+export function checkMove(t: Tournament, sheet: Sheet, g: Game, court: string, start: string, taken: Set<string> = new Set(), closure?: Closure): MoveCheck {
   const problems: string[] = []; const notes: string[] = [];
   const day = dayOf(g);
   const dayGames = t.games.filter((x) => dayOf(x) === day && x.id !== g.id);
   if (!/^\d\d:\d\d$/.test(start)) problems.push(`start ${start} is not a time`);
-  if (dayGames.some((x) => x.court === court && timeOf(x) === start) || taken.has(`${court}@${start}`)) problems.push(`${court} at ${start} is taken`);
+  if (closure && day === closure.day && shareFloor(court, closure.court) && minutes(start) >= minutes(closure.from)) problems.push(`${court} shares a floor with the closed ${closure.court}`);
+  const clash = dayGames.find((x) => shareFloor(x.court, court) && timeOf(x) === start && !(closure && shareFloor(x.court, closure.court) && minutes(timeOf(x)) >= minutes(closure.from)));
+  if (clash) problems.push(clash.court === court ? `${court} at ${start} is taken` : `${court} at ${start} is taken: ${clash.court} shares its floor and has game ${clash.number} then`);
+  else if ([...taken].some((k) => { const [c2, s2] = k.split("@"); return s2 === start && shareFloor(c2, court); })) problems.push(`${court} at ${start} is taken by another move`);
+  // playoff order: the games that feed this one must end before it starts, and the games it feeds must start after it ends
+  const newStart = minutes(start);
+  for (const fid of g.feeds) {
+    const f = t.games.find((x) => x.id === fid);
+    if (f && dayOf(f) === day && minutes(timeOf(f)) + GAME_MINUTES > newStart) problems.push(`game ${g.number} needs the result of game ${f.number}, which ends at ${hhmm(minutes(timeOf(f)) + GAME_MINUTES)}`);
+  }
+  for (const d of t.games.filter((x) => x.feeds.includes(g.id))) {
+    if (dayOf(d) === day && minutes(timeOf(d)) < newStart + GAME_MINUTES) problems.push(`game ${d.number} at ${timeOf(d)} needs this game's result, and a ${start} start ends at ${hhmm(newStart + GAME_MINUTES)}`);
+  }
   const teams = [g.home, g.away].filter(Boolean) as string[];
   for (const team of teams) {
     const other = dayGames.filter((x) => (x.home === team || x.away === team) && x.division === g.division);
@@ -126,9 +149,9 @@ export async function runReplan(o: { tournament: Tournament; sheet: Sheet; court
       run: () => ({ closure, affected: affected.map(view), order_of_priority: "final, semi, quarter, placement, pool" }) },
     { name: "free_slots", description: "Every open court and start time today from the closing time onward, including one extra slot at the end of each court's day. A slot is court plus start (HH:MM).", input_schema: { type: "object", properties: {}, additionalProperties: false },
       run: () => ({ slots, note: "Same-venue slots are listed with their venue; moving across venues is allowed but costs the teams travel." }) },
-    { name: "check_move", description: "Check one placement: game_number to court at start (HH:MM). Returns ok, the problems (taken slot, a team playing within two hours, a pool game after its division's first playoff) and how many of the sheet's officials would need reassigning. Use it before every move you intend to make; a rejected move cannot be chosen.",
+    { name: "check_move", description: "Check one placement: game_number to court at start (HH:MM). Returns ok, the problems (taken slot, a joined court whose halves are in use or closed (Gym CD is Gym C and Gym D), a playoff game placed before the games that feed it end or after the game it feeds starts, a team playing within two hours, a pool game after its division's first playoff) and how many of the sheet's officials would need reassigning. Use it before every move you intend to make; a rejected move cannot be chosen.",
       input_schema: { type: "object", additionalProperties: false, required: ["game_number", "court", "start"], properties: { game_number: { type: "integer" }, court: { type: "string" }, start: { type: "string" } } },
-      run: (i: { game_number: number; court: string; start: string }) => { const g = byNumber.get(i.game_number); if (!g) return { isError: true, errorCategory: "validation", isRetryable: false, message: `game ${i.game_number} is not affected by this closure` }; return checkMove(t, sheet, g, i.court, i.start); } },
+      run: (i: { game_number: number; court: string; start: string }) => { const g = byNumber.get(i.game_number); if (!g) return { isError: true, errorCategory: "validation", isRetryable: false, message: `game ${i.game_number} is not affected by this closure` }; return checkMove(t, sheet, g, i.court, i.start, new Set(), closure); } },
     { ...decideTool, input_schema: decideTool.input_schema as unknown as Record<string, unknown>, terminal: true, run: (d: ReplanDecision) => ({ recorded: true, moves: d.moves.length, unplayable: d.unplayable.length }) },
   ];
   const user = `${closure.court} closes at ${closure.from} on ${closure.day}. ${affected.length} game(s) are affected. Read the closure and the free slots, check each placement, then call decide_replan.`;
@@ -144,7 +167,7 @@ export async function runReplan(o: { tournament: Tournament; sheet: Sheet; court
   for (const m of ranked) {
     const g = byNumber.get(m.game_number);
     if (!g) { result.rejected.push({ game_number: m.game_number, wanted: { court: m.court, start: m.start }, problems: ["not an affected game"] }); continue; }
-    const check = checkMove(t, sheet, g, m.court, m.start, taken);
+    const check = checkMove(t, sheet, g, m.court, m.start, taken, closure);
     if (!check.ok) { result.rejected.push({ game_number: g.number, wanted: { court: m.court, start: m.start }, problems: check.problems }); continue; }
     taken.add(`${m.court}@${m.start}`);
     const a = sheet.assignments[g.id];
