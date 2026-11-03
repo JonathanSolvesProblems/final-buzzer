@@ -33,9 +33,11 @@ try {
     if (args.from) {
       for (const p of teams.staged.payments.filter((x: any) => x.on === today)) {
         const r = records[p.team_id]; if (!r || !r.invoice_id) continue;
-        const target = p.amount === "full" ? r.invoice_id : (r.children?.[p.amount === "deposit" ? 0 : 1] ?? null);
-        if (!target) continue;
-        const value = p.amount === "full" ? r.amount : (Number(r.amount) * (p.amount === "deposit" ? fees.deposit_share : 1 - fees.deposit_share)).toFixed(2);
+        // a full payment goes to the open invoice; a deposit or balance only exists once the team was split
+        const part = p.amount === "deposit" ? r.split?.deposit : p.amount === "balance" ? r.split?.balance : null;
+        if (p.amount !== "full" && !part) continue;
+        const target = part ? part.id : r.invoice_id;
+        const value = part ? part.amount : r.amount;
         if (mcp) {
           const rec = await recordExternalPayment(target, { currency_code: r.currency, value }, today, `${p.method}, recorded by the association (staged for the replay)`);
           if ("isError" in rec) console.log(`${today}  ${r.team}: could not record payment: ${rec.message}`);

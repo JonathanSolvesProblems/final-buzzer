@@ -18,7 +18,8 @@ export interface TeamRecord {
   sent_at: string | null; due_date: string;
   reminders: string[];                   // dates sent
   replies: Array<{ at: string; text: string; staged?: boolean }>;
-  children?: string[];                   // invoice ids of a split
+  children?: string[];                   // invoice ids of a split: [deposit, balance]
+  split?: { original_invoice_id: string; original_number: string; deposit: { id: string; amount: string; due: string }; balance: { id: string; amount: string; due: string } } | null;
   history: string;                       // "no record" until Sam's books arrive
 }
 export interface WaitlistTeam { id: string; division: string; name: string; manager_email: string; manager_name: string }
@@ -106,6 +107,7 @@ export async function runChase(o: ChaseOptions): Promise<ChaseResult> {
       run: () => ({
         today, team: r.team, division: r.division, manager: r.manager_name,
         invoice: { id: r.invoice_id, number: r.invoice_number, amount: r.amount, currency: r.currency, status_in_our_record: r.status, sent_at: r.sent_at, due_date: r.due_date, days_past_due: daysBetween(r.due_date, today) },
+        split: r.split ? { note: "This team asked for a payment plan. The original invoice was cancelled and replaced by a deposit and a balance; the invoice above is the balance still owed.", ...r.split } : null,
         reminders_sent: r.reminders, replies: r.replies.map((x) => ({ at: x.at, text: x.text })),
         history: r.history,
         waitlist_for_division: waitlist.filter((w) => w.division === r.division).map((w) => w.name),
@@ -150,7 +152,11 @@ export async function runChase(o: ChaseOptions): Promise<ChaseResult> {
       if (sent?.isError) return { ...base, decision, outcome: "error", hold: { question: null, reason: sent.message } };
       kids.push(id);
     }
-    r.status = "split"; r.children = kids;
+    // the record now follows the balance: that is what is still owed, and what the next run chases
+    const balanceDue = mondayBefore("2026-05-14");
+    r.split = { original_invoice_id: r.invoice_id!, original_number: r.invoice_number, deposit: { id: kids[0], amount: deposit.toFixed(2), due: today }, balance: { id: kids[1], amount: balance.toFixed(2), due: balanceDue } };
+    r.children = kids; r.status = "split";
+    r.invoice_id = kids[1]; r.invoice_number = `${r.split.original_number}-B`; r.amount = balance.toFixed(2); r.due_date = balanceDue; r.reminders = [];
     return { ...base, decision, outcome: "split" };
   }
   // release
