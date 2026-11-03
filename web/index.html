@@ -8,7 +8,7 @@
 <meta property="og:title" content="Final Buzzer">
 <meta property="og:description" content="Every official paid at the final buzzer. A youth basketball tournament's money, run by an agent on PayPal.">
 <meta property="og:image" content="/og.png">
-<meta name="theme-color" content="#E3D5A6">
+<meta name="theme-color" content="#E9EAEC">
 <link rel="icon" href="/brand/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/brand/apple-touch-icon-180.png">
 <link rel="stylesheet" href="/vendor/bryntum/scheduler.css">
@@ -39,6 +39,7 @@
           <li><i class="l-paid"></i>Paid, seconds after the buzzer</li>
           <li><i class="l-held"></i>Held for Sam</li>
           <li><i class="l-fold"></i>Folds to end of day</li>
+          <li>Tap any game to see who was paid and why</li>
         </ul>
       </details>
       <details class="pop closer" id="closer">
@@ -54,7 +55,7 @@
     <section class="scoreline" aria-label="Today so far">
       <aside class="hold" id="held-card" aria-labelledby="held-title" hidden>
         <div class="top">
-          <h2 id="held-title">Held for Sam</h2>
+          <h2 id="held-title" tabindex="-1">Held for Sam</h2>
           <p id="held-text"></p>
           <details class="why">
             <summary>The agent's note</summary>
@@ -84,6 +85,7 @@
         <p class="sr" id="count-line" aria-live="polite"></p>
       </div>
     </section>
+    <section class="plan game-card" id="game-card" tabindex="-1" aria-live="polite" hidden></section>
     <h2 class="sr">Courts</h2>
     <div id="courts" class="courts" role="region" aria-label="Games by court and start time"></div>
     <div class="phone" id="phone"></div>

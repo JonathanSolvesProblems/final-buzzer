@@ -14,11 +14,11 @@
 
 :root {
   color-scheme: light;
-  --floor: #E3D5A6; --floor-line: rgba(87,78,64,.35);
-  --housing: #2B2721; --rim: #3D3730; --flap: #F3EDD6; --flap-lo: #E7DFC4; --split: #15120F;
-  --black-face: #3F3931; --ghost: #B0A68F; --ghost-lo: #9A907C; --keyline: #7A7264;
-  --yellow: #E8B830; --yellow-lo: #D9A920;
-  --ink: #2B2721; --ink-muted: #574E40;
+  --floor: #E9EAEC; --floor-line: rgba(60,64,72,.25);
+  --housing: #16171A; --rim: #2A2C31; --flap: #F4F5F2; --flap-lo: #E3E5E2; --split: #0A0B0C;
+  --black-face: #2E3036; --ghost: #9EA2AA; --ghost-lo: #868A92; --keyline: #5C6068;
+  --yellow: #F2C230; --yellow-lo: #E0AE1E;
+  --ink: #16171A; --ink-muted: #4A4E56;
   --display: "Alumni Sans", "Arial Narrow", sans-serif;
   --body: "Schibsted Grotesk", Georgia, sans-serif;
   --chamfer: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px);
@@ -93,7 +93,7 @@ button { font: inherit; color: inherit; }
 .hold .bottom small { grid-column: 1 / -1; font-size: 12px; color: var(--ghost); }
 .hold .bottom small:empty { display: none; }
 .btn { border: 0; background: var(--flap); color: var(--housing); font-weight: 600; font-size: 13px; padding: 9px 16px; cursor: pointer; min-height: 40px; clip-path: var(--chamfer); }
-.btn:hover { background: #FFF8E0; }
+.btn:hover { background: #FDFDFB; }
 .btn:active { transform: translateY(1px); }
 .btn.second { background: transparent; color: var(--flap); font-weight: 500; }
 .btn.second:hover { background: var(--housing); }
@@ -105,10 +105,11 @@ button { font: inherit; color: inherit; }
 .digits { display: flex; gap: 4px; filter: drop-shadow(0 2px 0 var(--split)); perspective: 400px; }
 .digit { position: relative; width: 50px; height: 70px; background: linear-gradient(180deg, var(--yellow) 0 50%, var(--yellow-lo) 50% 100%); color: var(--housing); clip-path: var(--chamfer); font-family: var(--display); font-weight: 800; font-size: 66px; line-height: 75px; text-align: center; }
 .digit::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--split); }
-.digit.ghosted { color: rgba(43,39,33,.22); }
-/* while a decision waits on Sam, the yellow steps back so the held card leads */
-.scoreline:has(> .hold:not([hidden])) .digits { opacity: .6; }
+.digit.ghosted { color: rgba(22,23,26,.22); }
+/* while a decision waits on Sam, the words beside the yellow step back so the held card leads (the
+   digits keep their yellow: dimmed on black it turns mustard) */
 .scoreline:has(> .hold:not([hidden])) .speed .words strong { color: var(--ghost); }
+@media (max-width: 900px) { .hold h2 .hint { display: none; } }
 .speed .words { min-width: 0; }
 .speed .words strong { display: block; font-size: 18px; font-weight: 700; line-height: 1.2; text-wrap: balance; }
 .speed .words span { display: block; font-size: 13px; color: var(--ghost); line-height: 1.4; margin-top: 2px; text-wrap: pretty; }
@@ -126,13 +127,13 @@ button { font: inherit; color: inherit; }
 .courts .b-sch-header-time-axis-cell { background: var(--housing) !important; border-color: var(--rim) !important; justify-content: flex-start; padding-left: 4px; }
 .courts .b-grid-header .b-grid-header-text { font-family: var(--body); font-size: 11px; font-weight: 500; }
 .courts .b-sch-header-timeaxis-cell { border-color: var(--rim) !important; }
-.courts .b-grid-row { border-bottom: 1px solid rgba(61,55,48,.6) !important; }
+.courts .b-grid-row { border-bottom: 1px solid rgba(42,44,49,.8) !important; }
 .courts .b-grid-row.b-selected .b-grid-cell, .courts .b-grid-row:hover .b-grid-cell { background: var(--housing) !important; }
 .courts .b-grid-cell { font-size: 13px; font-weight: 700; color: var(--flap); padding: 0 6px 0 2px; display: block; white-space: normal; line-height: 1.15; }
 .courts .b-grid-cell .court { display: flex; flex-direction: column; justify-content: center; height: 100%; }
 .courts .b-grid-cell small { display: block; font-weight: 400; font-size: 11px; color: var(--ghost); line-height: 1.1; margin-top: 2px; }
 .courts .b-grid-splitter { width: 1px !important; min-width: 1px; }
-.courts .b-column-line, .courts .b-column-line-major { border-left: 1px solid rgba(122,114,100,.35) !important; background: transparent !important; }
+.courts .b-column-line, .courts .b-column-line-major { border-left: 1px solid rgba(92,96,104,.4) !important; background: transparent !important; }
 .courts .b-grid-header.b-depth-0 { border-bottom: 0; }
 .courts .b-timeline-subgrid .b-grid-row:nth-child(5) { border-bottom-color: var(--keyline) !important; }
 .courts .b-grid-vertical-scroller, .courts .b-virtual-scrollers { background: var(--housing); }
@@ -250,6 +251,19 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
 .plan p { margin: 0; font-size: 13px; }
 .plan ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.45; }
 .plan .quiet { color: var(--ghost); font-size: 12px; margin-top: 6px; }
+
+/* a tile opens its game */
+.courts .b-sch-event-wrap, .phone [data-game] { cursor: pointer; }
+.courts .b-sch-event-wrap:hover .flap .face { filter: brightness(1.08); }
+.game-card { position: relative; padding-right: 72px; }
+.game-card:focus { outline: none; }
+.game-card .where { color: var(--ghost); font-size: 12px; margin: 0 0 8px; }
+.game-card p + p, .game-card ul + p { margin-top: 6px; }
+.game-card ul { margin: 4px 0 0; }
+.game-card a.btn { display: inline-flex; align-items: center; text-decoration: none; margin-top: 4px; }
+.close-x { position: absolute; top: 8px; right: 8px; border: 0; background: transparent; color: var(--ghost); font-size: 12px; font-weight: 600; padding: 8px 10px; min-height: 36px; cursor: pointer; clip-path: var(--chamfer-3); }
+.close-x:hover { color: var(--flap); background: var(--housing); }
+.hold h2:focus { outline: none; }
 .flap.final .face { padding-left: 11px; box-shadow: inset 4px 0 0 var(--yellow); }
 .flap.final .note { color: var(--flap); left: 11px; }
 .flap.unplayed { --face-bg: var(--keyline); --face-ink: var(--ghost); }

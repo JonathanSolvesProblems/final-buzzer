@@ -4,17 +4,16 @@ Every screen obeys these. Each law is checkable and carries its reason. Machine-
 in `charter.json`, run with `lint_brand.py` after every build step.
 
 ## Colour
-1. **The canvas is plain lit maple, flat.** No grain, no sheen, no paper. Never pure white,
-   never pure black, never a slate or cool grey. Because the thing happens on a gym floor on a
-   Saturday morning (found detail 17), and the board is the only object on it. (Direction A,
-   27 Oct: the parquet grain, the ruled sheet and the felt hero were cut after three blind
-   critics in a row named too many materials.)
-2. **One theme: a warm black board on the lit maple floor.** The board is olive-black, not
-   blue (found detail 1), and nothing on it emits light. A dark-room variant was built and
-   cut on 27 Oct: the board stays dark either way, so the variant changed only the margin
-   and four critics read it as unfinished.
+1. **The canvas is the painted block wall of a gym, flat light grey (#E9EAEC).** No grain, no
+   sheen, no paper. Never pure white, never pure black, never a blue slate. Because the board
+   hangs on the gym wall, and it is the only object there. (3 Nov: the lit maple and the warm
+   olive-black were dropped at the owner's request; he did not like the brown.)
+2. **One theme: a neutral scoreboard-black board (#16171A) on the wall.** Black with no hue,
+   neither warm brown nor console blue, and nothing on it emits light. A dark-room variant was
+   built and cut on 27 Oct: the board stays dark either way, so the variant changed only the
+   margin and four critics read it as unfinished.
 3. **Yellow flaps carry the one number that matters, and nothing else**: seconds from the
-   buzzer to the payout. Cream flaps count. Yellow is a printed flap with dark numerals, only
+   buzzer to the payout. White flaps count. Yellow is a printed flap with dark numerals, only
    ever on the housing, never text on maple, never a button, a border or a state. Because on
    the flip board the "to win" row uses yellow flaps: two colours of flap mean two kinds of
    number (found detail 6). (Replaces ballpoint blue, which read as link blue.)

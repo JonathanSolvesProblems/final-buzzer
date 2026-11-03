@@ -109,12 +109,41 @@ function fitHours() {
 }
 addEventListener("resize", fitHours);
 fitHours();
+/* ---- a tile opens its game: a held game on the held card, any other game in the game card ---- */
+let picked = null;   // the held game on the card, when Sam picked one from the board
+let opened = null;   // the game shown in the game card
+function openGame(id) {
+  const g = T.games.find((x) => x.id === id); if (!g) return;
+  if (ledger.holds[id]) { picked = id; opened = null; render(); $("held-card").scrollIntoView({ block: "nearest", behavior: reduced ? "auto" : "smooth" }); $("held-title").focus(); return; }
+  opened = id; render(); $("game-card").scrollIntoView({ block: "nearest", behavior: reduced ? "auto" : "smooth" }); $("game-card").focus();
+}
 scheduler.element.addEventListener("click", (e) => {
   const el = e.target.closest(".b-sch-event-wrap"); if (!el) return;
-  const rec = scheduler.resolveEventRecord(el); if (!rec) return;
-  const g = T.games.find((x) => x.id === rec.id); const s = kindWithClock(g, cursor());
-  $("count-line").textContent = label(g, s);
+  const rec = scheduler.resolveEventRecord(el); if (rec) openGame(rec.id);
 });
+$("phone").addEventListener("click", (e) => { const li = e.target.closest("[data-game]"); if (li) openGame(li.dataset.game); });
+$("game-card").addEventListener("click", (e) => { if (e.target.closest("#game-close")) { opened = null; render(); } });
+
+const who = (id) => sheet.officials.find((o) => o.id === id)?.label ?? id;
+const roleName = (r) => (r === "referee" ? "referee" : "table official");
+function gameCardHTML(g) {
+  const s = kindWithClock(g, cursor());
+  const head = `<h2>Game <span class="num">${g.number}</span>, ${enc(matchup(g))}</h2><p class="where">${enc(sentence(g.division))}, ${enc(g.court)}, ${g.start.slice(11)}</p>`;
+  const folds = Object.values(ledger.folds).flat().filter((f) => f.gameId === g.id);
+  const foldLine = folds.length ? `<p>${folds.map((f) => `${enc(who(f.official_id))} (${roleName(f.role)}, $${Number(f.amount)})`).join(", ")} asked to be paid once a day, so ${folds.length > 1 ? "their shares go" : "that share goes"} into the evening payout.</p>` : "";
+  let body;
+  if (s.kind === "paid") {
+    const p = s.payout; const total = p.items.reduce((a, i) => a + Number(i.amount), 0);
+    body = `<p><b>Paid $${total} through PayPal Payouts${p.secondsFromBuzzer != null ? `, ${p.secondsFromBuzzer} seconds after the buzzer` : ""}.</b> ${p.decidedBy === "treasurer" ? "Sam made this call." : "The agent decided; the rate card was checked in code before PayPal was called."}</p>` +
+      `<ul>${p.items.map((i) => `<li>${enc(who(i.official_id))}, ${roleName(i.role)}: $${Number(i.amount)}</li>`).join("")}</ul>` + foldLine +
+      (p.batchId ? `<p class="quiet">PayPal batch ${enc(p.batchId)}, ${p.status === "SUCCESS" ? "confirmed by PayPal" : enc(p.status.toLowerCase())}.</p>` : `<p class="quiet">Dry run: PayPal was not called.</p>`);
+  } else if (s.kind === "folded") body = foldLine || "<p>Folds into the end-of-day payout.</p>";
+  else if (s.kind === "paying") body = "<p>Final. The payout is with PayPal, waiting for confirmation.</p>";
+  else if (s.kind === "final") body = "<p>Final on the scorer's phone. The agent is reading the sheet, the rate card and PayPal now.</p>";
+  else if (s.kind === "unplayed") body = `<p>Not played: the court closed and no other court could take it. ${enc(g.note)}</p>`;
+  else body = `<p>${s.kind === "live" ? "In play." : "Not started."} The agent pays the officials the moment the score is saved.</p><p><a class="btn" href="/score.html#${enc(g.id)}">Score this game</a></p>`;
+  return `<button class="close-x" type="button" id="game-close" aria-label="Close the game card">Close</button>${head}${body}`;
+}
 
 /* ---- the header, the figures, the decision ---- */
 function renderDays() {
@@ -151,10 +180,11 @@ function render() {
   const holds = Object.values(ledger.holds).filter((h) => dayGames.some((g) => g.id === h.gameId)).sort((a, b) => a.at.localeCompare(b.at));
   const card = $("held-card");
   if (holds.length) {
-    const h = holds[0]; const g = T.games.find((x) => x.id === h.gameId);
+    const at = Math.max(0, holds.findIndex((x) => x.gameId === picked));
+    const h = holds[at]; const g = T.games.find((x) => x.id === h.gameId);
     const f = h.flags ?? {};
     card.hidden = false; card.dataset.game = g.id;
-    $("held-title").innerHTML = `Game <span class="num">${g.number}</span> is held for Sam${holds.length > 1 ? `<small>1 of ${holds.length}</small>` : ""}`;
+    $("held-title").innerHTML = `Game <span class="num">${g.number}</span> is held for Sam${holds.length > 1 ? `<small>${at + 1} of ${holds.length}<span class="hint">, tap a held tile for another</span></small>` : ""}`;
     $("held-text").textContent = holdLine(h, g);
     $("held-why").textContent = h.reason ?? "";
     $("held-staged").textContent = sheet.staged?.forfeit?.gameId === g.id ? "Staged for this replay: the real game was not forfeited." : sheet.staged?.missing_table_official?.gameId === g.id ? "Staged for this replay: the table official was taken off this game's sheet." : "";
@@ -168,6 +198,10 @@ function render() {
     $("pay-nobody").classList.toggle("second", !f.already_paid);
     $("held-note").textContent = lastAnswer ?? "";
   } else card.hidden = true;
+
+  const og = opened && dayGames.find((g) => g.id === opened);
+  $("game-card").hidden = !og;
+  if (og) $("game-card").innerHTML = gameCardHTML(og);
 
   renderPhone(dayGames, now);
   renderEntries();
@@ -197,13 +231,13 @@ function setDigit(id, v) {
   el.animate([{ transform: "rotateX(0)" }, { transform: "rotateX(-90deg)" }], { duration: 180, easing: "cubic-bezier(.6,0,.2,1)" }).finished.then(() => { el.textContent = v; el.animate([{ transform: "rotateX(90deg)" }, { transform: "rotateX(0)" }], { duration: 240, easing: "cubic-bezier(.22,.9,.32,1.04)" }); });
 }
 function renderPhone(dayGames, now) {
-  const row = (g, s) => `<li aria-label="${enc(label(g, s))}"><b>${enc(matchup(g))}</b><span class="when">${g.start.slice(11)} ${enc(g.court)}</span><small>${enc(sentence(g.division))}</small></li>`;
+  const row = (g, s) => `<li data-game="${g.id}" aria-label="${enc(label(g, s))}"><b>${enc(matchup(g))}</b><span class="when">${g.start.slice(11)} ${enc(g.court)}</span><small>${enc(sentence(g.division))}</small></li>`;
   const live = dayGames.filter((g) => kindWithClock(g, now).kind === "live"), later = dayGames.filter((g) => kindWithClock(g, now).kind === "scheduled");
   const done = dayGames.map((g) => ({ g, s: kindWithClock(g, now) })).filter((x) => ["paid", "paying", "held", "folded"].includes(x.s.kind));
   $("phone").innerHTML =
     (live.length ? `<h3>In play <span class="num">${live.length}</span></h3><ul class="prows">${live.map((g) => row(g, { kind: "live" })).join("")}</ul>` : "") +
     (later.length ? `<h3>Next up <span class="num">${later.length}</span></h3><ul class="prows later">${later.slice(0, 4).map((g) => row(g, { kind: "scheduled" })).join("")}</ul>` : "") +
-    `<h3>Final <span class="num">${done.length}</span></h3><ul class="minis">${done.map(({ g, s }) => `<li class="${s.kind}" aria-label="${enc(label(g, s))}"><span>Game <b class="num">${g.number}</b></span><span>${s.kind === "held" ? heldNote(s.hold) : s.kind === "folded" ? "Folds" : s.payout?.secondsFromBuzzer != null ? s.payout.secondsFromBuzzer + " s" : "Paid"}</span></li>`).join("")}</ul>`;
+    `<h3>Final <span class="num">${done.length}</span></h3><ul class="minis">${done.map(({ g, s }) => `<li class="${s.kind}" data-game="${g.id}" aria-label="${enc(label(g, s))}"><span>Game <b class="num">${g.number}</b></span><span>${s.kind === "held" ? heldNote(s.hold) : s.kind === "folded" ? "Folds" : s.payout?.secondsFromBuzzer != null ? s.payout.secondsFromBuzzer + " s" : "Paid"}</span></li>`).join("")}</ul>`;
 }
 function renderEntries() {
   const byId = new Map(T.games.map((g) => [g.id, g]));

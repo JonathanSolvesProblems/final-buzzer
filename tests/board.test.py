@@ -30,6 +30,15 @@ with sync_playwright() as p:
     led = json.load(open("tmp/ledger-test.json", encoding="utf-8"))
     hugh = [v for v in led["payouts"].values() if v.get("decidedBy") == "treasurer"]
     if not hugh: fails.append("ledger has no payout decided by Sam")
+    # a tile opens its game: a paid one in the game card, a held one on the held card
+    pg.locator(".courts .flap.paid").first.click(); pg.wait_for_timeout(400)
+    if pg.locator("#game-card").is_hidden() or "Paid $" not in pg.inner_text("#game-card"): fails.append("a paid tile did not open its game card")
+    pg.click("#game-close"); pg.wait_for_timeout(300)
+    if not pg.locator("#game-card").is_hidden(): fails.append("the game card did not close")
+    pg.locator(".courts .flap.held").first.click(); pg.wait_for_timeout(400)
+    if "Game 30" not in pg.inner_text("#held-title"): fails.append(f"a held tile did not open on the held card: {pg.inner_text('#held-title')}")
+    pg.locator(".courts .flap.scheduled").first.click(); pg.wait_for_timeout(400)
+    if pg.locator("#game-card a[href^='/score.html#']").count() != 1: fails.append("a game not started has no link to score it")
     if pg.locator("#days .day").count() != 4: fails.append("four day tabs expected")
     pg.click("#days .day >> nth=1"); pg.wait_for_timeout(2500)
     fri = pg.locator(".courts .b-sch-event-wrap").count()

@@ -8,10 +8,10 @@ const T = normalise(doc);
 const byId = new Map(T.games.map((g) => [g.id, g]));
 const money = (n) => "$" + Number(n).toLocaleString("en-CA", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const theme = agGrid.themeQuartz.withParams({
-  backgroundColor: "#2B2721", foregroundColor: "#F3EDD6", headerBackgroundColor: "#2B2721", headerTextColor: "#B0A68F",
-  borderColor: "#3D3730", rowBorder: { color: "#3D3730" }, rowHoverColor: "#353028", selectedRowBackgroundColor: "#353028",
+  backgroundColor: "#16171A", foregroundColor: "#F4F5F2", headerBackgroundColor: "#16171A", headerTextColor: "#9EA2AA",
+  borderColor: "#2A2C31", rowBorder: { color: "#2A2C31" }, rowHoverColor: "#202227", selectedRowBackgroundColor: "#202227",
   fontFamily: "Schibsted Grotesk, Georgia, sans-serif", fontSize: 13, headerFontSize: 11, spacing: 6, borderRadius: 0, wrapperBorderRadius: 0, wrapperBorder: false,
-  accentColor: "#E8B830", oddRowBackgroundColor: "#2B2721", headerColumnResizeHandleColor: "transparent", headerColumnBorder: false, columnBorder: false, cellHorizontalPadding: 10,
+  accentColor: "#F2C230", oddRowBackgroundColor: "#16171A", headerColumnResizeHandleColor: "transparent", headerColumnBorder: false, columnBorder: false, cellHorizontalPadding: 10,
 });
 // on a phone the grids keep the columns a treasurer reads first; the rest are on the wide board
 const narrow = matchMedia("(max-width: 700px)");

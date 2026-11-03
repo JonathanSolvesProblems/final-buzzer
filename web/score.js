@@ -10,6 +10,9 @@ const days = [...new Set(T.games.map((g) => g.start.slice(0, 10)))].sort();
 let day = days.find((d) => d.endsWith("05-16")) ?? days[0];
 let court = "all";
 let open = null;
+// the board's "Score this game" lands here as /score.html#<game id>
+const linked = T.games.find((g) => g.id === decodeURIComponent(location.hash.slice(1)));
+if (linked) { day = linked.start.slice(0, 10); open = linked.id; }
 const names = { "2026-05-14": "Thu", "2026-05-15": "Fri", "2026-05-16": "Sat", "2026-05-17": "Sun" };
 
 function render() {
@@ -60,4 +63,5 @@ async function poll() {
   } catch { /* the next poll will try again */ }
 }
 render();
+if (linked) document.querySelector(`[data-id="${linked.id}"]`)?.scrollIntoView({ block: "center" });
 setInterval(poll, 2500);
