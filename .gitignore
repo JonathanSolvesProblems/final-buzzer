@@ -7,6 +7,7 @@ node_modules/
 # private planning and process files, never published
 PHASE0.md
 DEMO-SCRIPT.md
+SUBMISSION.md
 .claude/
 .design/*
 !.design/brand/
