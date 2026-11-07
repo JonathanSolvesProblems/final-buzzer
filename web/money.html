@@ -24,13 +24,20 @@
 .money-page .ag-row .ag-cell .chip { vertical-align: middle; }
 .money-page .ag-cell-auto-height .chip { display: inline-block; margin-top: 2px; }
 .money-page .chips { display: flex; gap: 6px; }
-.chip { display: inline-block; padding: 2px 7px; font-size: 11px; font-weight: 600; clip-path: var(--chamfer-3); background: var(--black-face); color: var(--flap); }
+.chip { display: inline-block; align-self: center; line-height: 16px; height: auto; padding: 2px 7px; font-size: 11px; font-weight: 600; clip-path: var(--chamfer-3); background: var(--black-face); color: var(--flap); }
 .chip.paid { background: var(--flap); color: var(--housing); }
 .chip.held { background: linear-gradient(180deg, var(--flap) 0 50%, var(--black-face) 50%); color: var(--housing); }
 .chip.treasurer { background: var(--yellow); color: var(--housing); }
 .money-page .sums { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; font-size: 13px; color: var(--ghost); }
 .money-page .sums .num { font-size: 22px; color: var(--flap); font-weight: 700; margin-right: 3px; }
 .empty { color: var(--ghost); font-size: 13px; margin: 6px 0 0; }
+.money-page h2.sec .export { margin-left: auto; min-height: 32px; padding: 6px 10px; font-size: 12px; color: var(--ghost); }
+.money-page h2.sec .export:hover { color: var(--flap); }
+.find { margin-left: auto; width: min(320px, 100%); font: 500 13px/1 var(--body); color: var(--housing); background: var(--flap); border: 0; padding: 9px 12px; clip-path: var(--chamfer-3); }
+.find::placeholder { color: var(--keyline); }
+.money-page .ag-row.opens { cursor: pointer; }
+.money-page .ag-row-pinned .ag-cell { font-weight: 700; color: var(--flap); }
+@media (max-width: 700px) { .money-page h2.sec { flex-wrap: wrap; } .money-page h2.sec .export { display: none; } .money-page .topline { flex-wrap: wrap; } .find { width: 100%; margin-left: 0; } }
 </style>
 </head>
 <body class="money-page">
@@ -43,15 +50,16 @@
   </header>
   <main class="housing" id="board" tabindex="-1">
     <h1 class="sr">The money</h1>
-    <div class="topline"><p class="printed"><b>Every run, every day</b><span>Each payout as PayPal confirmed it. The board counts one day at a time.</span></p></div>
+    <div class="topline"><p class="printed"><b>Every run, every day</b><span>Each payout as PayPal confirmed it. The board counts one day at a time.</span></p>
+      <label class="sr" for="find">Find a team, an official or a PayPal id</label><input class="find" id="find" type="search" placeholder="Find a team, an official, a PayPal id" autocomplete="off"></div>
     <p class="sums" id="sums"></p>
-    <h2 class="sec">Officials' pay <span class="num" id="n-payouts">0</span><span class="m" id="m-payouts"></span></h2>
+    <h2 class="sec">Officials' pay <span class="num" id="n-payouts">0</span><span class="m" id="m-payouts"></span><button class="btn second export" type="button" id="export-pay">Export for the accountant</button></h2>
     <div class="grid" id="payouts"></div>
     <p class="empty" id="payouts-empty" hidden>No payout yet. The agent writes here as games go final.</p>
     <h2 class="sec">Held for Sam <span class="num" id="n-holds">0</span></h2>
     <div class="grid" id="holds"></div>
     <p class="empty" id="holds-empty" hidden>Nothing held.</p>
-    <h2 class="sec">Entry fees <span class="num" id="n-invoices">0</span><span class="m" id="m-invoices"></span></h2>
+    <h2 class="sec">Entry fees <span class="num" id="n-invoices">0</span><span class="m" id="m-invoices"></span><button class="btn second export" type="button" id="export-fees">Export for the accountant</button></h2>
     <div class="grid" id="invoices"></div>
     <p class="empty" id="invoices-empty" hidden>No invoices yet. The chase writes here once the teams are invoiced.</p>
   </main>

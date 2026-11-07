@@ -12,6 +12,20 @@ Sam and Northside Youth Basketball are a labelled composite. The role is real: o
 
 Built for the PayPal AI Hackathon, November 2026, by [Jonathan Andrei](https://jonathansolvesproblems.com).
 
+## How to run it
+
+Node 24 (it runs the TypeScript directly, no build step). Checked on a clean clone, 7 November 2026:
+
+```
+git clone https://github.com/JonathanSolvesProblems/final-buzzer.git
+cd final-buzzer
+npm install
+npm test          # 31 tests: the money gate, the feed, the re-plan rules, Sam's tap
+npm run board     # http://localhost:4173/  the board, /score.html, /money.html
+```
+
+With no keys the board serves the committed results read-only. To have the agent pay live on the PayPal sandbox, add a sandbox app and a Claude key (`copy .env.example .env`, steps in `docs/SANDBOX-SETUP.md`), then run `node src/cli/watch.ts` beside the board and score a game on `/score.html`. Every other command is under [All commands](#all-commands).
+
 ## What the agent decides, and where
 
 | Moment | The model chooses between | Code |
@@ -30,16 +44,15 @@ The decision is a tool call with a schema (`src/agent/decision.ts`), never prose
 - **Invoicing** (REST, `src/paypal/invoicing.ts`): recording e-transfers against an invoice, which is how most clubs still pay.
 - **Webhooks** (`src/webhooks.ts`): payout batches and invoice payments update the ledger as PayPal reports them, signature-verified when a webhook id is configured.
 - **Claude** (`@anthropic-ai/sdk`, `src/agent/loop.ts`): the loop runs on `stop_reason`, with a terminal decision tool.
-- **Bryntum Scheduler** (`web/board.js`): the court-by-time board. Every game is a flap tile whose face is its money state, read from the agent's ledger every few seconds.
-- **AG Grid** (`web/money.js`): the treasurer's money board, every payout, hold and invoice.
+- **Bryntum Scheduler** (`web/board.js`): the court-by-time board. Every game is a flap tile whose face is its money state, read from the agent's ledger every few seconds. A tile opens its game: who was paid, how much, the PayPal batch; a held tile opens Sam's decision; a game not started links to the scorer's page. "Close a gym" sends the agent's re-plan back onto the same grid.
+- **AG Grid** (`web/money.js`): the treasurer's money board, every payout, hold and invoice. Rows keep their identity across polls, so a payout that lands while Sam watches flashes in place; a pinned total row carries the dollars and the median seconds; one search runs across all three grids; "Export for the accountant" writes the officials' pay and the entry fees to CSV; a row opens its game on the board.
 - **Hosting** (`Dockerfile`, `deploy/`): two containers from one image on a small VPS behind Traefik with HTTPS. One serves the board, the money board, the scorer's page and the PayPal webhook receiver; the other is the agent on duty, paying as games go final. A daily cap on agent runs keeps a public demo from spending without limit.
 
 Everything runs on the PayPal sandbox with test money. Nothing here has touched a real balance.
 
-## Run it
+## All commands
 
 ```
-npm install
 copy .env.example .env         # the sandbox app and the Claude key, see docs/SANDBOX-SETUP.md
 node src/cli/build-sheet.ts    # the officials' sheet for the 88 games
 node src/cli/build-teams.ts    # the teams to invoice

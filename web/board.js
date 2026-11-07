@@ -112,8 +112,10 @@ fitHours();
 /* ---- a tile opens its game: a held game on the held card, any other game in the game card ---- */
 let picked = null;   // the held game on the card, when Sam picked one from the board
 let opened = null;   // the game shown in the game card
+function setDay(d) { day = d; scheduler.resourceStore.data = courtsOn(day); scheduler.setTimeSpan(dayStart(day), dayEnd(day)); fitHours(); renderClosure(); }
 function openGame(id) {
   const g = T.games.find((x) => x.id === id); if (!g) return;
+  if (!g.start.startsWith(day)) setDay(g.start.slice(0, 10));
   if (ledger.holds[id]) { picked = id; opened = null; render(); $("held-card").scrollIntoView({ block: "nearest", behavior: reduced ? "auto" : "smooth" }); $("held-title").focus(); return; }
   opened = id; render(); $("game-card").scrollIntoView({ block: "nearest", behavior: reduced ? "auto" : "smooth" }); $("game-card").focus();
 }
@@ -122,6 +124,9 @@ scheduler.element.addEventListener("click", (e) => {
   const rec = scheduler.resolveEventRecord(el); if (rec) openGame(rec.id);
 });
 $("phone").addEventListener("click", (e) => { const li = e.target.closest("[data-game]"); if (li) openGame(li.dataset.game); });
+$("entries").addEventListener("click", (e) => { const li = e.target.closest("[data-game]"); if (li) openGame(li.dataset.game); });
+// the scorer's "Watch it on the board" lands here as /#<game id>
+addEventListener("hashchange", () => openGame(decodeURIComponent(location.hash.slice(1))));
 $("game-card").addEventListener("click", (e) => { if (e.target.closest("#game-close")) { opened = null; render(); } });
 
 const who = (id) => sheet.officials.find((o) => o.id === id)?.label ?? id;
@@ -149,7 +154,7 @@ function gameCardHTML(g) {
 function renderDays() {
   const names = { "2026-05-14": "Thu", "2026-05-15": "Fri", "2026-05-16": "Sat", "2026-05-17": "Sun" };
   $("days").innerHTML = days.map((d) => `<button class="day" type="button" data-day="${d}" aria-label="${new Date(d + "T12:00").toLocaleDateString("en-CA", { weekday: "long", day: "numeric", month: "long" })}"${d === day ? ' aria-current="date"' : ""}>${names[d] ?? d.slice(5)}<span class="num">${Number(d.slice(8))}</span></button>`).join("");
-  $("days").querySelectorAll(".day").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day; scheduler.resourceStore.data = courtsOn(day); scheduler.setTimeSpan(dayStart(day), dayEnd(day)); fitHours(); renderClosure(); render(); }));
+  $("days").querySelectorAll(".day").forEach((b) => b.addEventListener("click", () => { setDay(b.dataset.day); render(); }));
 }
 function render() {
   renderDays();
@@ -241,16 +246,20 @@ function renderPhone(dayGames, now) {
 }
 function renderEntries() {
   const byId = new Map(T.games.map((g) => [g.id, g]));
-  const lines = ledger.events.slice(-6).reverse().map((e) => {
-    const g = byId.get(e.gameId); const t = new Date(e.at); const when = `<time class="num">${hhmm(t)}</time>`;
+  // "payout_created" is the step before "paid"; the log keeps the outcome only
+  const recent = ledger.events.filter((e) => e.kind !== "payout_created").slice(-6).reverse();
+  const lines = recent.map((e) => {
+    const g = byId.get(e.gameId); const t = new Date(e.at);
+    const when = `<time class="num" datetime="${enc(e.at)}" title="${enc(t.toLocaleString("en-CA"))}">${hhmm(t)}</time>`;
     const G = g ? `Game ${g.number}, ${enc(matchup(g))}` : "";
     const d = e.detail;
+    const p = g && Object.values(ledger.payouts).find((x) => x.gameId === g.id && x.status === "SUCCESS");
     switch (e.kind) {
-      case "paid": return `${when}<span>${G} final. Three officials on the sheet, all on the card. Paid, ${d?.seconds ?? "?"} seconds after the buzzer.</span>`;
+      case "paid": return `${when}<span>${G} final. ${p ? `$${p.items.reduce((a, i) => a + Number(i.amount), 0)} to ${p.items.length} officials, all on the card. ` : ""}Paid ${d?.seconds ?? "?"} seconds after the buzzer.</span>`;
       case "hold": return `${when}<span><b>Held ${G.toLowerCase()}</b>: ${enc(String(d ?? ""))}</span>`;
       case "guard_block": return `${when}<span><b>The gate stopped a payout on ${G.toLowerCase()}</b>: ${enc(String(d ?? ""))}</span>`;
       case "paypal_duplicate": return `${when}<span><b>PayPal refused a second payout on ${G.toLowerCase()}</b>; nothing was sent twice.</span>`;
-      case "fold": return `${when}<span>${G}: folded for ${enc((d ?? []).join(", "))} until the end of the day.</span>`;
+      case "fold": return `${when}<span>${G}: ${enc((d ?? []).map(who).join(", "))} paid with the evening payout, as they asked.</span>`;
       case "payout_created": return `${when}<span>${G}: payout sent to PayPal, batch ${enc(String(d ?? ""))}.</span>`;
       case "treasurer_paid": return `${when}<span>${G}: Sam chose ${enc(String(d?.choice ?? "").replace("_", " "))}; paid through PayPal.</span>`;
       case "treasurer_pay_nobody": return `${when}<span>${G}: Sam chose to pay nobody.</span>`;
@@ -259,7 +268,7 @@ function renderEntries() {
       default: return `${when}<span>${G} ${enc(e.kind)}</span>`;
     }
   });
-  $("entries").innerHTML = lines.join("") || `<li><time class="num">--:--</time><span>Nothing yet. The agent writes here as games go final.</span></li>`;
+  $("entries").innerHTML = lines.map((html, i) => `<li${recent[i].gameId ? ` data-game="${enc(recent[i].gameId)}"` : ""}>${html}</li>`).join("") || `<li><time class="num">--:--</time><span>Nothing yet. The agent writes here as games go final.</span></li>`;
 }
 function renderRate() {
   const c = card;
@@ -347,4 +356,5 @@ renderClosure();
 $("club").textContent = T.association || "Northside Youth Basketball";
 await poll();
 render();
+if (location.hash.length > 1) openGame(decodeURIComponent(location.hash.slice(1)));
 setInterval(poll, 2500);

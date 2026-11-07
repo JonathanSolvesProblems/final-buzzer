@@ -253,7 +253,8 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
 .plan .quiet { color: var(--ghost); font-size: 12px; margin-top: 6px; }
 
 /* a tile opens its game */
-.courts .b-sch-event-wrap, .phone [data-game] { cursor: pointer; }
+.courts .b-sch-event-wrap, .phone [data-game], .entries [data-game] { cursor: pointer; }
+.entries [data-game]:hover span { text-decoration: underline; text-decoration-color: var(--floor-line); }
 .courts .b-sch-event-wrap:hover .flap .face { filter: brightness(1.08); }
 .game-card { position: relative; padding-right: 72px; }
 .game-card:focus { outline: none; }
