@@ -12,7 +12,7 @@ ssh "$HOST" "mkdir -p ~/$DIR && cd ~/$DIR && if [ -d app/.git ]; then git -C app
 scp deploy/docker-compose.yml "$HOST:~/$DIR/docker-compose.yml"
 
 # the deployment's env: the local secrets plus the public settings, written with mode 600
-{ grep -E '^(ANTHROPIC_API_KEY|AGENT_MODEL|PAYPAL_ENV|PAYPAL_CLIENT_ID|PAYPAL_CLIENT_SECRET|PAYPAL_BUSINESS_EMAIL|PAYPAL_WEBHOOK_ID|PAYOUT_CURRENCY|OFFICIAL_[A-X]_EMAIL)=' .env
+{ grep -E '^(ANTHROPIC_API_KEY|AGENT_MODEL|PAYPAL_ENV|PAYPAL_CLIENT_ID|PAYPAL_CLIENT_SECRET|PAYPAL_BUSINESS_EMAIL|PAYPAL_WEBHOOK_ID|PAYOUT_CURRENCY|OFFICIAL_[A-X]_EMAIL|SAM_PIN)=' .env
   echo "MODEL_RUNS_PER_DAY=${MODEL_RUNS_PER_DAY:-40}"
   echo "RUN_ID=public"
 } | ssh "$HOST" "umask 077 && cat > ~/$DIR/.env"

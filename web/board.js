@@ -223,7 +223,7 @@ function holdLine(h, g) {
   if (f.forfeit) return `${matchup(g)} was a forfeit. The rate card pays a show-up fee for a forfeit, but has no amount for it yet.`;
   if (f.official_missing) {
     const a = sheet.assignments[g.id];
-    return a && !a.table ? `${matchup(g)} has no table official on the sheet. Pay who is on it, or tell the agent who sat at the table.` : `${matchup(g)} is missing an official on the sheet.`;
+    return a && !a.table ? `${matchup(g)} has no table official on the sheet. Pay the ${a.referees.filter(Boolean).length} who are on it now, or nobody until the sheet says who sat at the table.` : `${matchup(g)} is missing an official on the sheet.`;
   }
   return h.question ?? h.reason;
 }
@@ -279,23 +279,41 @@ function renderRate() {
   $("rate-h").textContent = c.provisional ? "Provisional rate card" : "The rate card";
 }
 
+/* ---- Sam's PIN: on the public board a tap that pays, or a gym closing, is Sam's call ---- */
+const PIN_KEY = "fb-sam-pin";
+const getPin = () => { try { return sessionStorage.getItem(PIN_KEY) || ""; } catch { return ""; } };
+const setPin = (p) => { try { sessionStorage.setItem(PIN_KEY, p); } catch { /* a private window forgets it on the next load */ } };
+const samHeaders = () => (getPin() ? { "x-sam-pin": getPin() } : {});
+/** Asks for the PIN in place (the held card's note, or the plan card), then retries the action. */
+function askPin(host, message, retry) {
+  host.innerHTML = `<form class="pin"><label>${enc(message)} <input type="password" inputmode="numeric" autocomplete="off" aria-label="Treasurer's PIN" required></label><button class="btn" type="submit">Confirm</button></form>`;
+  const form = host.querySelector("form"), input = form.querySelector("input");
+  form.addEventListener("submit", (e) => { e.preventDefault(); setPin(input.value.trim()); host.textContent = ""; retry(); });
+  input.focus();
+}
+
+/* ---- the status line: live, and whether the agent is on duty ---- */
+let agentText = "Live";
+function busy(what) { $("source").textContent = what ?? agentText; $("source").parentElement.classList.toggle("busy", !!what); }
+const agentLine = (a) => !a ? "Live" : a.ageSeconds < 90 ? "Live, agent on duty" : `Live, agent away since ${new Date(a.at).toLocaleTimeString("en-CA", { hour: "2-digit", minute: "2-digit" })}`;
+
 /* ---- Sam's tap ---- */
 let lastAnswer = null;
-function busy(what) { $("source").textContent = what ?? "Live"; $("source").parentElement.classList.toggle("busy", !!what); }
 for (const [id, choice] of [["pay-full", "pay_full"], ["pay-showup", "pay_show_up"], ["pay-nobody", "pay_nobody"]]) {
   $(id).addEventListener("click", async () => {
     const gameId = $("held-card").dataset.game; if (!gameId || !ledger.holds[gameId]) return;
     busy("Paying through PayPal");
     for (const b of ["pay-full", "pay-showup", "pay-nobody"]) $(b).disabled = true;
-    let out;
+    let out, status = 0;
     try {
-      const res = await fetch(`/api/holds/${encodeURIComponent(gameId)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ choice }) });
-      out = await res.json();
+      const res = await fetch(`/api/holds/${encodeURIComponent(gameId)}`, { method: "POST", headers: { "Content-Type": "application/json", ...samHeaders() }, body: JSON.stringify({ choice }) });
+      status = res.status; out = await res.json();
     } catch (e) { out = { ok: false, message: `The board could not reach the server: ${e.message}` }; }
-    lastAnswer = out.message;
-    $("held-note").textContent = out.message;
     busy(null);
     for (const b of ["pay-full", "pay-showup", "pay-nobody"]) $(b).disabled = false;
+    if (status === 401 && out.needsPin) { askPin($("sam-pin"), out.message, () => $(id).click()); return; }
+    lastAnswer = out.message;
+    $("held-note").textContent = out.message;
     if (out.ok) { flipped.add(gameId); await poll(); setTimeout(() => { lastAnswer = null; }, 8000); }
   });
 }
@@ -314,10 +332,15 @@ $("close").addEventListener("submit", async (e) => {
   $("closer").open = false;
   plan.hidden = false; plan.innerHTML = `<h2>${enc(court)} closes at ${from}</h2><p class="quiet">The agent is re-planning the rest of the day against the schedule's rules.</p>`;
   busy("Re-planning");
-  let r;
-  try { r = await fetch("/api/replan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ court, from, day }) }).then((x) => x.json()); }
+  let r, status = 0;
+  try { const res = await fetch("/api/replan", { method: "POST", headers: { "Content-Type": "application/json", ...samHeaders() }, body: JSON.stringify({ court, from, day }) }); status = res.status; r = await res.json(); }
   catch (err) { r = { ok: false, message: err.message }; }
   busy(null);
+  if (status === 401 && r.needsPin) {
+    plan.innerHTML = `<h2>${enc(court)} closes at ${from}</h2><div class="pin-host"></div>`;
+    askPin(plan.querySelector(".pin-host"), r.message, () => { $("close-court").value = court; $("close-from").value = from; $("close").requestSubmit(); });
+    return;
+  }
   if (!r.ok) { plan.innerHTML += `<p class="quiet">${enc(r.message ?? "The server could not run the re-plan.")}</p>`; return; }
   const byN = new Map(T.games.map((g) => [g.number, g]));
   const moves = r.applied.map((m) => { const g = byN.get(m.game_number); return `<li><b>Game ${m.game_number}</b>, ${enc(g ? matchup(g) : "")}: ${enc(m.from.court)} ${m.from.start} to <b>${enc(m.to.court)} ${m.to.start}</b>${m.reassigned.length ? `, officials reassigned (${m.reassigned.length})` : ""}</li>`; }).join("");
@@ -334,12 +357,15 @@ $("close").addEventListener("submit", async (e) => {
 let lastText = "";
 async function poll() {
   try {
-    const [l, r, d] = await Promise.all([
+    const [l, r, d, a] = await Promise.all([
       fetch("/api/ledger").then((x) => x.text()),
       fetch("/api/replay").then((x) => x.json()).catch(() => null),
       fetch(`/api/tournament?v=${T.version}`).then((x) => (x.status === 304 ? null : x.json())).catch(() => null),
+      fetch("/api/agent").then((x) => x.json()).catch(() => null),
     ]);
     replay = r;
+    agentText = agentLine(a);
+    if (!$("source").parentElement.classList.contains("busy")) $("source").textContent = agentText;
     let changed = false;
     if (d) { T = normalise(d); scheduler.eventStore.data = events(T); scheduler.resourceStore.data = courtsOn(day); renderClosure(); changed = true; }
     if (l !== lastText) {

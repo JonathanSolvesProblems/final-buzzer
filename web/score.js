@@ -4,8 +4,9 @@
 import { normalise, matchup, sentence, get, heldNote } from "/feed.js";
 
 const $ = (id) => document.getElementById(id);
-let T = normalise(await get("/api/tournament"));
-let ledger = { payouts: {}, holds: {}, folds: {} };
+const [doc0, ledger0] = await Promise.all([get("/api/tournament"), fetch("/api/ledger").then((r) => r.json()).catch(() => null)]);
+let T = normalise(doc0);
+let ledger = ledger0 ?? { payouts: {}, holds: {}, folds: {} };
 const days = [...new Set(T.games.map((g) => g.start.slice(0, 10)))].sort();
 let day = days.find((d) => d.endsWith("05-16")) ?? days[0];
 let court = "all";
@@ -48,8 +49,10 @@ function render() {
       if (status === "final" && (hs == null || as == null)) { $("saved").textContent = "Both scores first."; return; }
       const body = status === "forfeit" ? { status, hs: 20, as: 0, note: "forfeit" } : status === "scheduled" ? { status, hs: null, as: null } : { status, hs, as };
       const r = await fetch(`/api/games/${encodeURIComponent(g.id)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then((x) => x.json()).catch((e) => ({ ok: false, message: `The page could not reach the server: ${e.message}` }));
+      const at = r.ok && r.game.finalAt ? new Date(r.game.finalAt).toLocaleTimeString("en-CA") : "";
       notes[g.id] = !r.ok ? esc(r.message) : status === "scheduled" ? "Reopened." :
-        `Saved at ${new Date(r.game.finalAt).toLocaleTimeString("en-CA")}. The agent is on it, usually paid within a minute. <a href="/#${encodeURIComponent(g.id)}">Watch it on the board</a>`;
+        r.budget?.exhausted ? `Saved at ${at}. ${esc(r.budget.message)} The agent holds this game for Sam instead of paying it. <a href="/#${encodeURIComponent(g.id)}">See it on the board</a>` :
+        `Saved at ${at}. The agent is on it, usually paid within a minute. <a href="/#${encodeURIComponent(g.id)}">Watch it on the board</a>`;
       $("saved").innerHTML = notes[g.id];
       T = normalise(await get("/api/tournament"));
       setTimeout(render, 900);
@@ -71,3 +74,5 @@ async function poll() {
 render();
 if (linked) document.querySelector(`[data-id="${linked.id}"]`)?.scrollIntoView({ block: "center" });
 setInterval(poll, 2500);
+// the public demo caps the agent's runs per day; when the cap is reached the page says so before anyone scores
+fetch("/api/budget").then((r) => r.json()).then((b) => { if (b?.exhausted) document.querySelector(".intro").textContent = `${b.message} A game saved now is held for Sam on the board, not paid.`; }).catch(() => {});

@@ -19,6 +19,15 @@ import { event, type Ledger, type LedgerPayout } from "../ledger.ts";
 
 export type PayPalMode = "live" | "dry" | "off";
 
+/** A game that ended with no agent decision: the day's demo budget was spent, or the run itself failed
+ *  before it reached one. The game is held for Sam with the reason, so the board never shows it stuck on
+ *  "agent working", and Sam's tap (resolve.ts) can still pay it without the model. */
+export function holdWithoutRun(ledger: Ledger, game: Game, card: RateCard, reason: string): void {
+  const full = money(card.per_game.referee * card.officials_per_game.referees + card.per_game.table * card.officials_per_game.table);
+  ledger.holds[game.id] = { gameId: game.id, number: game.number, at: new Date().toISOString(), reason, question: `${matchup(game)} went ${game.status}, but the agent did not finish. ${reason} Pay in full, $${full}, or nobody.`, flags: {}, by: "guard" };
+  event(ledger, "hold", { gameId: game.id, number: game.number, detail: reason });
+}
+
 export interface BuzzerOptions {
   tournament: Tournament;
   game: Game;

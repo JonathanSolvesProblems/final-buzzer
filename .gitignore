@@ -3,6 +3,10 @@ node_modules/
 .env.*
 !.env.example
 *.log
+# written while the board and the agent run; the deployed copies live on the server's volume
+results/agent.json
+results/webhooks.jsonl
+results/budget.json
 
 .design/*
 !.design/brand/

@@ -1,14 +1,19 @@
 """Functional check of the served board (web/ on src/server.ts, dry ledger).
 
 Starts from the fixture ledger (two holds the agent wrote on the staged games), loads the board, taps "Pay in full" on the
-held game, and expects: the server answers ok, the hold disappears, the tile flips to paid, the count
-moves. Usage: start the server with
+held game (answering the treasurer's PIN prompt when .env sets SAM_PIN), and expects: the server answers
+ok, the hold disappears, the tile flips to paid, the count moves. Usage: start the server with
   LEDGER=tmp/ledger-test.json TOURNAMENT_FILE=tmp/tournament-test.json PAYPAL_MODE=dry node src/server.ts
-then  py tests/board.test.py
+then  py tests/board.test.py        (tmp/run-board-test.sh does both)
 """
-import json, shutil, sys
+import json, os, re, shutil, sys
 from playwright.sync_api import sync_playwright
 
+def sam_pin():
+    if os.environ.get("SAM_PIN"): return os.environ["SAM_PIN"]
+    try: m = re.search(r"^SAM_PIN=(.*)$", open(".env", encoding="utf-8").read(), re.M); return m.group(1).strip() if m else ""
+    except OSError: return ""
+PIN = sam_pin()
 shutil.copyfile("tests/fixtures/ledger-holds.json", "tmp/ledger-test.json")
 fails = []
 with sync_playwright() as p:
@@ -22,6 +27,9 @@ with sync_playwright() as p:
     if pg.locator("#held-card").is_hidden(): fails.append("held card hidden although a hold exists")
     title = pg.inner_text("#held-title")
     pg.click("#pay-full"); pg.wait_for_timeout(1500)
+    if pg.locator("#sam-pin .pin input").count():   # the public board asks for Sam's PIN first
+        if not PIN: fails.append("the board asked for a PIN but none is known to the test")
+        pg.fill("#sam-pin .pin input", PIN); pg.click("#sam-pin .pin button"); pg.wait_for_timeout(1500)
     note = pg.inner_text("#held-note")
     if "would pay" not in note and "paid" not in note.lower(): fails.append(f"unexpected answer after the tap: {note}")
     pg.wait_for_timeout(3000)

@@ -4,14 +4,18 @@
  *   PAYMENT.PAYOUTSBATCH.SUCCESS / DENIED, PAYMENT.PAYOUTS-ITEM.*  -> the ledger's payout status and times
  *   INVOICING.INVOICE.PAID / CANCELLED                              -> the team's invoice record
  *
- * Every event is appended to results/webhooks.jsonl as received. Signatures are verified with
- * PayPal's verify-webhook-signature when PAYPAL_WEBHOOK_ID is set; without it (local development)
- * the event is applied and marked unverified, never silently trusted as verified.
+ * Every event is appended to the webhook log (WEBHOOK_LOG, results/webhooks.jsonl by default; the board
+ * serves it at /api/webhooks) as received. Signatures are verified with PayPal's
+ * verify-webhook-signature when PAYPAL_WEBHOOK_ID is set; without it (local development) the event
+ * is applied and marked unverified, never silently trusted as verified.
  */
 import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import type { IncomingHttpHeaders } from "node:http";
+import { dirname } from "node:path";
 import { paypalFetch } from "./paypal/auth.ts";
 import { loadLedger, saveLedger, event as ledgerEvent } from "./ledger.ts";
+
+export const WEBHOOK_LOG = process.env.WEBHOOK_LOG ?? "results/webhooks.jsonl";
 
 export interface WebhookOutcome { ok: boolean; verified: boolean | "skipped"; event_type: string; applied: string; }
 
@@ -34,8 +38,8 @@ export async function handleWebhook(headers: IncomingHttpHeaders, rawBody: strin
   const ev = JSON.parse(rawBody);
   const type: string = ev.event_type ?? "unknown";
   const verified = await verify(headers, rawBody).catch(() => false);
-  await mkdir("results", { recursive: true });
-  await appendFile("results/webhooks.jsonl", JSON.stringify({ at: new Date().toISOString(), verified, type, id: ev.id, summary: ev.summary }) + "\n");
+  await mkdir(dirname(WEBHOOK_LOG), { recursive: true });
+  await appendFile(WEBHOOK_LOG, JSON.stringify({ at: new Date().toISOString(), verified, type, id: ev.id, summary: ev.summary }) + "\n");
   if (verified === false) return { ok: false, verified, event_type: type, applied: "rejected: signature did not verify" };
 
   if (type.startsWith("PAYMENT.PAYOUTSBATCH") || type.startsWith("PAYMENT.PAYOUTS-ITEM")) {

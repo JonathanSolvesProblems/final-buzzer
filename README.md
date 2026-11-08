@@ -10,6 +10,8 @@ Final Buzzer is the association's treasurer as an agent. When a game goes final 
 
 Sam and Northside Youth Basketball are a labelled composite. The role is real: one volunteer who scores games from a phone and settles the money afterwards. The association, its venues and its teams are not real; the tournament's shape follows a real 88-game invitational.
 
+Why the buzzer: officials are scarce and leaving. In the 2023 National Officiating Survey (35,813 officials, NASO, reported by the NFHS in November 2023), 18.3% said they are paid what they are worth, and 59% agreed that most new officials quit within their first three years. Slow pay is part of it. In September 2026 the Central Blair Recreation and Park Commission in Altoona, Pennsylvania, told the Altoona Mirror that its referees wait up to two weeks for a cheque to clear, and that it will try cash in pay envelopes this basketball season to recruit and retain them, a step its executive director called "a big red flag" to be hedged with safeguards. The tools an association can buy today collect fees or pay officials from a roster an administrator approves; none of them is an agent that decides at the buzzer. Every number in this file is traced in [devpost/sources.md](devpost/sources.md).
+
 Built for the PayPal AI Hackathon, November 2026, by [Jonathan Andrei](https://jonathansolvesproblems.com).
 
 ## How to run it
@@ -20,11 +22,11 @@ Node 24 (it runs the TypeScript directly, no build step). Checked on a clean clo
 git clone https://github.com/JonathanSolvesProblems/final-buzzer.git
 cd final-buzzer
 npm install
-npm test          # 31 tests: the money gate, the feed, the re-plan rules, Sam's tap
+npm test          # 33 tests: the money gate, the feed, the re-plan rules, Sam's tap, the demo's daily cap
 npm run board     # http://localhost:4173/  the board, /score.html, /money.html
 ```
 
-With no keys the board serves the committed results read-only. To have the agent pay live on the PayPal sandbox, add a sandbox app and a Claude key (`copy .env.example .env`, steps in `docs/SANDBOX-SETUP.md`), then run `node src/cli/watch.ts` beside the board and score a game on `/score.html`. Every other command is under [All commands](#all-commands).
+With no keys the board serves the committed results read-only. To have the agent pay live on the PayPal sandbox, add a sandbox app and a Claude key (`copy .env.example .env`, steps in `docs/SANDBOX-SETUP.md`), then run `node src/cli/watch.ts` beside the board and score a game on `/score.html`. A public copy also sets `SAM_PIN` (the board asks for it before a tap pays or a gym closes; scoring stays open) and `MODEL_RUNS_PER_DAY`. Every other command is under [All commands](#all-commands).
 
 ## What the agent decides, and where
 
@@ -37,16 +39,16 @@ With no keys the board serves the committed results read-only. To have the agent
 
 The decision is a tool call with a schema (`src/agent/decision.ts`), never prose parsed afterwards. Every decision passes through `src/agent/guards.ts` before PayPal is called: amounts must equal the rate card to the cent, people must be on the sheet, caps hold, and a forfeit or a missing official cannot be paid at full rate by anyone but Sam. A re-plan is re-checked move by move against the schedule's rules (team rest, playoff order, free courts) before anything changes. A blocked decision is recorded as a block, with the reason, never rewritten.
 
-## Built on PayPal
+## How the money moves
 
-- **Payouts** (REST, `src/paypal/payouts.ts`): one batch per game, one item per official. The `sender_batch_id` is one per game and PayPal refuses a repeat for thirty days, so a re-saved score cannot pay twice even if the agent's own ledger were lost.
-- **PayPal MCP server** (`@paypal/mcp` over stdio, `src/paypal/mcp.ts`): the agent's hands for invoicing, refunds and transaction search. Each agent gets an allowlist, enforced in code.
-- **Invoicing** (REST, `src/paypal/invoicing.ts`): recording e-transfers against an invoice, which is how most clubs still pay.
-- **Webhooks** (`src/webhooks.ts`): payout batches and invoice payments update the ledger as PayPal reports them, signature-verified when a webhook id is configured.
+- **Payouts** (REST, `src/paypal/payouts.ts`): one batch per game, one item per official. The `sender_batch_id` is one per game within a deployment (the public site runs as `public`) and PayPal refuses a repeat for thirty days, so inside a deployment a re-saved score cannot pay twice even if the agent's own ledger were lost. Across deployments the agent reads the game's recorded batch back from PayPal before it decides, which is how the replay's re-saved game 17 was caught.
+- **PayPal MCP server** (`@paypal/mcp` over stdio, `src/paypal/mcp.ts`): the agent's tool layer for invoicing (create, send, remind, cancel, record a payment), transaction search, and refunds for a team that paid through PayPal. Each agent gets an allowlist, enforced in code. The committed re-plan's two refunded teams had paid by e-transfer, so their refunds went out as payouts; the `create_refund` branch in `src/agent/closure.ts` has not yet run in a result.
+- **Invoicing** (REST, `src/paypal/invoicing.ts`): a payment made outside PayPal (the composite's teams paid by e-transfer) recorded against its invoice, so the invoice is the one record of who has paid.
+- **Webhooks** (`src/webhooks.ts`): payout batches and invoice payments update the ledger as PayPal reports them, signature-verified against the webhook registered for the live site on 8 November 2026. Every event the receiver has seen is listed at [/api/webhooks](https://finalbuzzer.jonathansolvesproblems.com/api/webhooks); until the sandbox app had a webhook, the seconds were read by polling the payout.
 - **Claude** (`@anthropic-ai/sdk`, `src/agent/loop.ts`): the loop runs on `stop_reason`, with a terminal decision tool.
 - **Bryntum Scheduler** (`web/board.js`): the court-by-time board. Every game is a flap tile whose face is its money state, read from the agent's ledger every few seconds. A tile opens its game: who was paid, how much, the PayPal batch; a held tile opens Sam's decision; a game not started links to the scorer's page. "Close a gym" sends the agent's re-plan back onto the same grid.
 - **AG Grid** (`web/money.js`): the treasurer's money board, every payout, hold and invoice. Rows keep their identity across polls, so a payout that lands while Sam watches flashes in place; a pinned total row carries the dollars and the median seconds; one search runs across all three grids; "Export for the accountant" writes the officials' pay and the entry fees to CSV; a row opens its game on the board.
-- **Hosting** (`Dockerfile`, `deploy/`): two containers from one image on a small VPS behind Traefik with HTTPS. One serves the board, the money board, the scorer's page and the PayPal webhook receiver; the other is the agent on duty, paying as games go final. A daily cap on agent runs keeps a public demo from spending without limit.
+- **Hosting** (`Dockerfile`, `deploy/`): two containers from one image on a small VPS behind Traefik with HTTPS. One serves the board, the money board, the scorer's page and the PayPal webhook receiver; the other is the agent on duty, paying as games go final and writing a heartbeat the board shows. A daily cap on agent runs keeps a public demo from spending without limit, and a tap that pays, or a gym closing, asks for the treasurer's PIN.
 
 Everything runs on the PayPal sandbox with test money. Nothing here has touched a real balance.
 
@@ -81,10 +83,11 @@ Ablations: `replay.ts --paypal off` runs the same day with PayPal removed (the a
 - Two game cases are staged and labelled in the sheet file: one forfeit, one game with no table official. The chase replay stages when teams pay, one manager's reply and one waitlisted team, labelled in `data/teams-2026.json`.
 - Scores in the replay are replay values. Seconds from buzzer to payout are PayPal's completion time against the moment the score was saved.
 - The Bryntum build is the trial and prints its watermark.
+- Not built, though planned: checkout for family registration (Orders and the JS SDK), subscriptions for program fees, disputes, and a rate-card editor so the forfeit hold resolves on the board.
 
 ## What it cannot do
 
-It cannot pay an amount that is not on the rate card. It cannot pay a forfeit's show-up fee until the card carries one. It cannot pay a game PayPal already shows paid, not even on Sam's tap: the board offers only "nothing more", and `src/agent/resolve.ts` refuses a second payment. It cannot report a payout PayPal has not confirmed. It cannot move a game onto a team that played within two hours, or a pool game past its division's first playoff.
+It cannot pay an amount that is not on the rate card. It cannot pay a forfeit's show-up fee until the card carries one. It cannot pay a game PayPal already shows paid, not even on Sam's tap: the board offers only "nothing more", and `src/agent/resolve.ts` refuses a second payment. It cannot report a payout PayPal has not confirmed. It cannot move a game onto a team that played within two hours, or a pool game past its division's first playoff. If it cannot run on a game at all (the public demo's daily cap, or a failure), the game is held for Sam with the reason on the board, never left on "agent working" or unpaid in silence.
 
 ## Results
 
@@ -130,7 +133,7 @@ A first run of the chase found two faults, both fixed before this run: after a s
 
 Every move is re-checked in code before anything changes: free court, both halves of a joined court, team rest of two hours, playoff order. Building this run found two gaps in those rules, both fixed with tests: joined courts sharing a floor with their halves, and playoff games depending on the games that feed them.
 
-`npm run check` fails if any figure in this section stops matching those files.
+`npm run check` reads every figure in this section back from those files (the model cost estimates excepted: they are priced from token counts, not measured) and fails when one disagrees.
 
 ## Licence
 

@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { resolveHold, type TreasurerChoice } from "./resolve.ts";
+import { holdWithoutRun } from "./buzzer.ts";
 import type { Game, Tournament } from "../app/feed.ts";
 import type { RateCard, Sheet } from "./sheet.ts";
 import type { Ledger } from "../ledger.ts";
@@ -46,4 +47,19 @@ test("confirming nothing more clears the hold and sends nothing", async () => {
   assert.equal(out.ok, true);
   assert.equal(ledger.holds.g1, undefined);
   assert.equal(Object.keys(ledger.payouts).length, 0);
+});
+test("a game the agent could not run on is held for Sam with the reason, and Sam's tap still pays it", async () => {
+  const ledger: Ledger = { slug: "northside-2026", payouts: {}, holds: {}, folds: {}, events: [] };
+  holdWithoutRun(ledger, game, card, "Today's demo budget of 40 agent runs is used up; it resets at midnight UTC.");
+  const hold = ledger.holds.g1;
+  assert.ok(hold, "the game is held, not left on 'agent working'");
+  assert.equal(hold.by, "guard");
+  assert.match(hold.question ?? "", /did not finish/);
+  assert.match(hold.question ?? "", /demo budget/);
+  assert.match(hold.question ?? "", /115/);
+  assert.equal(ledger.events.at(-1)?.kind, "hold");
+  const out = await tap("pay_full", ledger);
+  assert.equal(out.ok, true, out.message);
+  assert.equal(ledger.holds.g1, undefined);
+  assert.equal(Object.values(ledger.payouts)[0]?.decidedBy, "treasurer");
 });

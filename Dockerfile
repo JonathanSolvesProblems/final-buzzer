@@ -13,7 +13,9 @@ ENV NODE_ENV=production \
     PORT=4173 \
     TOURNAMENT_FILE=/data/tournament-2026.json \
     LEDGER=/data/ledger.json \
-    BUDGET_FILE=/data/budget.json
+    BUDGET_FILE=/data/budget.json \
+    HEARTBEAT_FILE=/data/agent.json \
+    WEBHOOK_LOG=/data/webhooks.jsonl
 
 # The tournament document and the ledger live on a volume, so scores saved on the scorer's page and
 # payouts the agent makes survive a restart. First start seeds them from the published results.
