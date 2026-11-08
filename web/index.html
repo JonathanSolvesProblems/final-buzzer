@@ -15,6 +15,16 @@
 <link rel="stylesheet" href="/vendor/bryntum/fontawesome/css/fontawesome.css">
 <link rel="stylesheet" href="/vendor/bryntum/fontawesome/css/solid.css">
 <link rel="stylesheet" href="/board.css">
+<!-- the board boots: flaps riffle until the ledger is read; the class lifts on its own after 12 s if the board never loads -->
+<script>
+document.documentElement.classList.add("booting");
+setTimeout(() => {
+  const root = document.documentElement; if (!root.classList.contains("booting")) return;
+  root.classList.remove("booting"); window.stopRiffle?.();
+  for (const id of ["p1", "p2"]) { const f = document.getElementById(id); if (f) f.textContent = "-"; }
+  const line = document.getElementById("last-game"); if (line) line.textContent = "The board did not load. Reload the page to try again.";
+}, 12000);
+</script>
 </head>
 <body>
 <a class="skip" href="#board">Skip to the board</a>
@@ -24,7 +34,7 @@
       <img class="wm" src="/brand/wordmark.svg" alt="Final Buzzer" width="137" height="27">
     </a>
     <nav class="nav" aria-label="Pages"><a href="/" aria-current="page">The board</a><a href="/score.html">Score a game</a><a href="/money.html">The money</a></nav>
-    <p class="status"><i class="dot" aria-hidden="true"></i><span id="source">Live</span></p>
+    <p class="status"><i class="dot" aria-hidden="true"></i><span id="source">Connecting</span></p>
   </header>
 
   <main class="housing" id="board" tabindex="-1">
@@ -77,7 +87,7 @@
           <div class="digits" aria-hidden="true"><span class="digit num" id="p1">-</span><span class="digit num" id="p2">-</span></div>
           <div class="words">
             <strong><span class="sr" id="secs-sr"></span>seconds from buzzer to payout</strong>
-            <span id="last-game" aria-live="polite">No payout yet today.</span>
+            <span id="last-game" aria-live="polite">Reading the ledger.</span>
           </div>
         </div>
         <p class="tally">
@@ -106,6 +116,16 @@
 
   <footer id="foot"><span id="club">Northside Youth Basketball</span> is a labelled composite. A real 88-game schedule, replayed with PayPal sandbox test money. Officials are labelled A to X.</footer>
 </div>
+<script>
+/* While the board's code and the ledger load, the two seconds flaps riffle like a scoreboard warming up.
+   board.js calls stopRiffle() on its first paint and flips them onto the real number. */
+(() => {
+  const flaps = [document.getElementById("p1"), document.getElementById("p2")];
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const timer = still ? 0 : setInterval(() => flaps.forEach((f) => { f.textContent = String((Math.random() * 10) | 0); f.dataset.ready = "1"; }), 90);
+  window.stopRiffle = () => clearInterval(timer);
+})();
+</script>
 <script type="module" src="/board.js"></script>
 </body>
 </html>

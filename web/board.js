@@ -19,6 +19,13 @@ let day = days.find((d) => d.endsWith("05-16")) ?? days[0];
 let ledger = { payouts: {}, holds: {}, folds: {}, events: [] };
 let replay = null;
 const flipped = new Set();
+/* the first paint after the ledger is read: tiles flip in across the day, earliest games first */
+let firstPaint = false;
+const bootDelay = (g) => {
+  const span = Math.max(1, dayEnd(day) - dayStart(day));
+  const lane = courtsOn(day).findIndex((c) => c.id === g.courtId);
+  return Math.round(Math.min(1, Math.max(0, (new Date(g.start) - dayStart(day)) / span)) * 760 + Math.max(0, lane) * 45);
+};
 const events = (t) => t.games.map((g) => ({ id: g.id, resourceId: g.courtId, name: matchup(g), startDate: g.start, duration: GAME_MINUTES, durationUnit: "minute" }));
 
 /* ---- money state per game, from the ledger ---- */
@@ -72,7 +79,8 @@ function noteHTML(g, s) {
 const vsHTML = (g) => g.home ? `<span>${enc(sh(g.home))}</span><span>v ${enc(sh(g.away))}</span>` : `<span>${enc(sentence(g.stage))}</span>`;
 function tileHTML(g, s) {
   const face = (cls) => `<div class="face ${cls}" aria-hidden="true"><span class="vs">${vsHTML(g)}</span>${noteHTML(g, s)}</div>`;
-  return `<div class="flap ${s.kind}${flipped.has(g.id) ? " just-flipped" : ""}">${s.kind === "held" ? face("top") + face("bottom") : face("top")}</div>`;
+  const boot = firstPaint ? ` boot-in" style="--d:${bootDelay(g)}ms` : "";
+  return `<div class="flap ${s.kind}${flipped.has(g.id) ? " just-flipped" : ""}${boot}">${s.kind === "held" ? face("top") + face("bottom") : face("top")}</div>`;
 }
 const label = (g, s) => `Game ${g.number}, ${g.division.toLowerCase()}, ${matchup(g)}, ${g.court}, ${g.start.slice(11)}, ${({ paid: "final, officials paid", paying: "final, paying", held: "held for Sam", folded: "final, folds to end of day", live: "in play", final: "final, the agent is working", unplayed: "not played, refunded", scheduled: "not started" })[s.kind]}`;
 
@@ -157,6 +165,7 @@ function renderDays() {
   $("days").querySelectorAll(".day").forEach((b) => b.addEventListener("click", () => { setDay(b.dataset.day); render(); }));
 }
 function render() {
+  window.stopRiffle?.();
   renderDays();
   const dayGames = T.games.filter((g) => g.start.startsWith(day));
   const now = cursor();
@@ -242,7 +251,7 @@ function renderPhone(dayGames, now) {
   $("phone").innerHTML =
     (live.length ? `<h3>In play <span class="num">${live.length}</span></h3><ul class="prows">${live.map((g) => row(g, { kind: "live" })).join("")}</ul>` : "") +
     (later.length ? `<h3>Next up <span class="num">${later.length}</span></h3><ul class="prows later">${later.slice(0, 4).map((g) => row(g, { kind: "scheduled" })).join("")}</ul>` : "") +
-    `<h3>Final <span class="num">${done.length}</span></h3><ul class="minis">${done.map(({ g, s }) => `<li class="${s.kind}" data-game="${g.id}" aria-label="${enc(label(g, s))}"><span>Game <b class="num">${g.number}</b></span><span>${s.kind === "held" ? heldNote(s.hold) : s.kind === "folded" ? "Folds" : s.payout?.secondsFromBuzzer != null ? s.payout.secondsFromBuzzer + " s" : "Paid"}</span></li>`).join("")}</ul>`;
+    `<h3>Final <span class="num">${done.length}</span></h3><ul class="minis">${done.map(({ g, s }, i) => `<li class="${s.kind}${firstPaint ? ` boot-in" style="--d:${Math.min(i * 35, 900)}ms` : ""}" data-game="${g.id}" aria-label="${enc(label(g, s))}"><span>Game <b class="num">${g.number}</b></span><span>${s.kind === "held" ? heldNote(s.hold) : s.kind === "folded" ? "Folds" : s.payout?.secondsFromBuzzer != null ? s.payout.secondsFromBuzzer + " s" : "Paid"}</span></li>`).join("")}</ul>`;
 }
 function renderEntries() {
   const byId = new Map(T.games.map((g) => [g.id, g]));
@@ -370,7 +379,8 @@ async function poll() {
     if (d) { T = normalise(d); scheduler.eventStore.data = events(T); scheduler.resourceStore.data = courtsOn(day); renderClosure(); changed = true; }
     if (l !== lastText) {
       const next = JSON.parse(l) || { payouts: {}, holds: {}, folds: {}, events: [] };
-      for (const p of Object.values(next.payouts ?? {})) if (p.status === "SUCCESS" && ledger.payouts[p.senderBatchId]?.status !== "SUCCESS") flipped.add(p.gameId);
+      // the first read is the whole day arriving, not payouts landing: the boot cascade shows it instead
+      if (lastText) for (const p of Object.values(next.payouts ?? {})) if (p.status === "SUCCESS" && ledger.payouts[p.senderBatchId]?.status !== "SUCCESS") flipped.add(p.gameId);
       ledger = next; lastText = l; changed = true;
     }
     if (changed) render();
@@ -381,6 +391,10 @@ renderRate();
 renderClosure();
 $("club").textContent = T.association || "Northside Youth Basketball";
 await poll();
+firstPaint = true;
 render();
+document.documentElement.classList.remove("booting");
+document.documentElement.classList.add("booted");
+setTimeout(() => { firstPaint = false; }, 1800);
 if (location.hash.length > 1) openGame(decodeURIComponent(location.hash.slice(1)));
 setInterval(poll, 2500);

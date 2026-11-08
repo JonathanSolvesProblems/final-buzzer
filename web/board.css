@@ -239,10 +239,42 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
   .courts { display: none; }
   .phone { display: block; }
 }
+/* booting: the scoreboard warming up. The seconds flaps riffle, the courts show ghost tiles under a
+   passing light, and when the ledger is read every tile flips in across the day, earliest games first. */
+.tally, .below, .courts > *, .phone > * { transition: opacity 420ms ease; }
+.booting .tally, .booting .below, .booting .courts > *, .booting .phone > * { opacity: 0; }
+.booting .status .dot { background: var(--ink); animation: pulse 1s ease-in-out infinite alternate; }
+.booting .digit { animation: riffle 180ms linear infinite; }
+.booting .digit + .digit { animation-delay: -90ms; }
+@keyframes riffle { 50% { transform: rotateX(-38deg); filter: brightness(.9); } }
+.booting .days { width: 212px; height: 36px; background: repeating-linear-gradient(90deg, var(--black-face) 0 49px, transparent 49px 54px); animation: pulse 1s ease-in-out infinite alternate; }
+.booting .courts { position: relative; min-height: 360px; }
+.booting .courts::before, .booting .courts::after { content: ""; position: absolute; left: 0; right: 0; top: 34px; bottom: 0; pointer-events: none; }
+/* six ghost courts, each row's tiles on its own start times, under the hour lines */
+.booting .courts::before {
+  left: 94px; bottom: auto; height: 312px;
+  --tile: repeating-linear-gradient(90deg, var(--rim) 0 132px, transparent 132px 420px);
+  --tile-b: repeating-linear-gradient(90deg, var(--rim) 0 132px, transparent 132px 136px, var(--rim) 136px 268px, transparent 268px 610px);
+  background:
+    var(--tile) 290px 3px / 100% 46px no-repeat, var(--tile-b) 0 55px / 100% 46px no-repeat,
+    var(--tile) 140px 107px / 100% 46px no-repeat, var(--tile-b) 420px 159px / 100% 46px no-repeat,
+    var(--tile) 0 211px / 100% 46px no-repeat, var(--tile-b) 136px 263px / 100% 46px no-repeat,
+    repeating-linear-gradient(180deg, transparent 0 51px, var(--rim) 51px 52px);
+}
+.booting .courts::after { background: linear-gradient(100deg, transparent 35%, rgba(244,245,242,.07) 50%, transparent 65%) 0 0 / 250% 100% no-repeat; animation: sweep 1.4s ease-in-out infinite; }
+@keyframes sweep { from { background-position: 120% 0; } to { background-position: -20% 0; } }
+.booting .phone { position: relative; min-height: 260px; background: repeating-linear-gradient(180deg, var(--black-face) 0 40px, transparent 40px 50px) 0 40px / 100% 200px no-repeat; animation: pulse 1s ease-in-out infinite alternate; }
+/* the day arrives: each tile falls on its hinge like a split flap */
+.flap.boot-in .face, .minis li.boot-in { animation: flap-in 520ms cubic-bezier(.22,.9,.32,1.06) both; animation-delay: var(--d, 0ms); transform-origin: 50% 0; }
+@keyframes flap-in { from { transform: perspective(300px) rotateX(-92deg); opacity: 0; } 35% { opacity: 1; } to { transform: none; opacity: 1; } }
+
 @media (prefers-reduced-motion: reduce) {
   .flap.just-flipped .face { animation: none; }
   .btn:active { transform: none; }
+  .booting .digit, .booting .courts::after, .booting .days, .booting .phone, .booting .status .dot { animation: none; }
+  .flap.boot-in .face, .minis li.boot-in { animation: flap-fade 300ms ease both; animation-delay: 0ms; }
 }
+@keyframes flap-fade { from { opacity: 0; } }
 
 /* page links */
 .nav { display: flex; gap: 2px; margin-left: 8px; }
