@@ -47,6 +47,8 @@ with sync_playwright() as p:
     if "Game 30" not in pg.inner_text("#held-title"): fails.append(f"a held tile did not open on the held card: {pg.inner_text('#held-title')}")
     pg.locator(".courts .flap.scheduled").first.click(); pg.wait_for_timeout(400)
     if pg.locator("#game-card a[href^='/score.html#']").count() != 1: fails.append("a game not started has no link to score it")
+    pg.keyboard.press("Escape"); pg.wait_for_timeout(300)
+    if not pg.locator("#game-card").is_hidden(): fails.append("Esc did not close the game drawer")
     if pg.locator("#days .day").count() != 4: fails.append("four day tabs expected")
     pg.click("#days .day >> nth=1"); pg.wait_for_timeout(2500)
     fri = pg.locator(".courts .b-sch-event-wrap").count()
