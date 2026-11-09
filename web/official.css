@@ -15,7 +15,7 @@
 .rows a:hover { background: var(--black-face); }
 .rows a:focus-visible { outline: 2px solid var(--flap); outline-offset: -2px; }
 .rows .when { grid-row: span 2; font-family: var(--display); font-size: 19px; font-weight: 700; color: var(--flap); line-height: 1; }
-.rows .when small { display: block; font-family: var(--body); font-size: 11px; font-weight: 500; color: var(--ghost); margin-top: 3px; }
+.rows .when small { display: block; font-family: var(--body); font-size: 11px; font-weight: 500; color: var(--ghost); margin-top: 3px; white-space: nowrap; }
 .rows .what { font-size: 15px; font-weight: 700; line-height: 1.25; min-width: 0; }
 .rows .what small { font-weight: 500; color: var(--ghost); font-size: 12px; margin-left: 6px; }
 .rows .state { grid-column: 2 / 3; font-size: 12px; line-height: 1.4; color: var(--ghost); }
