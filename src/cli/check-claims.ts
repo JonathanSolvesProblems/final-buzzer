@@ -35,6 +35,7 @@ const chase = await readJson("results/chase.json");
 const invoices = await readJson("results/invoices.json");
 const replan = await readJson("results/replan.json");
 const settle = await readJson("results/settle-2026-05-16.json");
+const postman = await read("results/postman-run.txt");
 
 /** Every match of `re` in `text` must carry `want` in its capture groups (null skips a group). */
 function figure(name: string, text: string, re: RegExp, want: Array<number | null>, where: string) {
@@ -93,6 +94,17 @@ if (replan) {
 }
 
 // 3. claims that must never appear
+// the public checks: the README's request and assertion counts, and "0 failures", come from newman's last run
+if (postman) {
+  const plain = postman.replace(/│/g, "|");
+  const req = plain.match(/requests\s*\|\s*(\d+)\s*\|\s*(\d+)/), asr = plain.match(/assertions\s*\|\s*(\d+)\s*\|\s*(\d+)/);
+  if (!req || !asr) say("results/postman-run.txt: newman's summary table was not found");
+  else {
+    figure("postman", readme, /(\d+) requests and (\d+) assertions/g, [num(req[1]), num(asr[1])], "results/postman-run.txt");
+    if ((num(asr[2]) > 0 || num(req[2]) > 0) && /0 failures/.test(readme)) say(`README says 0 failures; results/postman-run.txt records ${asr[2]} failed assertions`);
+  }
+}
+
 const banned: Array<[RegExp, string]> = [
   [/real money|live PayPal|production PayPal/i, "the build runs on sandbox test money only"],
   [/\bno human in the loop\b/i, "Sam is in the loop by design"],

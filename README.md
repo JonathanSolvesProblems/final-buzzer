@@ -28,6 +28,8 @@ npm run board     # http://localhost:4173/  the board, /score.html, /money.html
 
 With no keys the board serves the committed results read-only. To have the agent pay live on the PayPal sandbox, add a sandbox app and a Claude key (`copy .env.example .env`, steps in `docs/SANDBOX-SETUP.md`), then run `node src/cli/watch.ts` beside the board and score a game on `/score.html`. A public copy also sets `SAM_PIN` (the board asks for it before a tap pays or a gym closes; scoring stays open) and `MODEL_RUNS_PER_DAY`. Every other command is under [All commands](#all-commands).
 
+The public checks: `npx newman run postman/final-buzzer.postman_collection.json` runs 11 requests and 31 assertions against the live site, read-only (add `--env-var baseUrl=http://localhost:4173` for your own copy): every successful payout carries a PayPal batch id and a completion time, every amount is on the rate card, the agent's run is kept with its payouts, every logged webhook was signature-verified, and Sam's tap and a gym closure are refused without the PIN. The last run is committed as `results/postman-run.txt`, 0 failures.
+
 ## What the agent decides, and where
 
 | Moment | The model chooses between | Code |
@@ -38,6 +40,8 @@ With no keys the board serves the committed results read-only. To have the agent
 | Sam taps a held game | pay in full, pay the show-up fee, pay nobody | `src/agent/resolve.ts` |
 
 The decision is a tool call with a schema (`src/agent/decision.ts`), never prose parsed afterwards. Every decision passes through `src/agent/guards.ts` before PayPal is called: amounts must equal the rate card to the cent, people must be on the sheet, caps hold, and a forfeit or a missing official cannot be paid at full rate by anyone but Sam. A re-plan is re-checked move by move against the schedule's rules (team rest, playoff order, free courts) before anything changes. A blocked decision is recorded as a block, with the reason, never rewritten.
+
+The agent's run stays with the record (`agent` on each ledger payout and hold: what it asked for and when, when it chose). On the board, tapping a paid tile opens the game's drawer with that run on a 60-second ruler: the sheet, the rate card, PayPal's record and the officials' day asked for at about 1.6 s, the choice at about 6 s, the gate's check, and PayPal's confirmation. Records from before this field existed were given theirs from the committed traces (`node src/cli/backfill-agent.ts`).
 
 ## How the money moves
 

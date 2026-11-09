@@ -1,0 +1,116 @@
+{
+  "info": {
+    "name": "Final Buzzer: the public checks",
+    "description": "Runs against the live site (or your own copy with --env-var baseUrl=http://localhost:4173). Every request is read-only or refused: nothing here pays, scores or re-plans. What it asserts: the board and the scorer's page are up; the tournament document holds 88 games; the rate card is $45 a referee and $25 a table official and says it is provisional; every successful payout in the ledger carries a PayPal batch id and a completion time, every amount is on the rate card, and the agent's run (what it asked for, when it chose) is kept with the record; the agent is on duty; the daily cap holds; every webhook the receiver has logged was signature-verified; Sam's taps and closing a gym are refused without the treasurer's PIN, and the held game stays held.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "https://finalbuzzer.jonathansolvesproblems.com" }],
+  "item": [
+    {
+      "name": "The board is up",
+      "request": { "method": "GET", "url": "{{baseUrl}}/" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('200', () => pm.response.to.have.status(200));",
+        "pm.test('it is the board', () => { pm.expect(pm.response.text()).to.include('Final Buzzer'); pm.expect(pm.response.text()).to.include('id=\"courts\"'); });"
+      ] } }]
+    },
+    {
+      "name": "The scorer's page is up",
+      "request": { "method": "GET", "url": "{{baseUrl}}/score.html" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('200', () => pm.response.to.have.status(200));",
+        "pm.test('anyone can score from it', () => pm.expect(pm.response.text()).to.include('Score'));"
+      ] } }]
+    },
+    {
+      "name": "The tournament document",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/tournament" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('200 JSON', () => { pm.response.to.have.status(200); pm.response.to.be.json; });",
+        "const d = pm.response.json();",
+        "const games = d.divisions.flatMap((v) => v.games);",
+        "pm.test('88 games over 4 days', () => { pm.expect(games.length).to.eql(88); pm.expect(new Set(games.map((g) => g.start.slice(0, 10))).size).to.eql(4); });",
+        "pm.test('every game has an id, a start and a status', () => games.forEach((g) => { pm.expect(g.id).to.be.a('string'); pm.expect(g.start).to.match(/^2026-05-1[4-7]T/); pm.expect(['scheduled', 'final', 'forfeit']).to.include(g.status); }));"
+      ] } }]
+    },
+    {
+      "name": "The rate card",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/rate-card" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('200 JSON', () => { pm.response.to.have.status(200); pm.response.to.be.json; });",
+        "const c = pm.response.json();",
+        "pm.test('$45 a referee, $25 a table official', () => { pm.expect(c.per_game.referee).to.eql(45); pm.expect(c.per_game.table).to.eql(25); });",
+        "pm.test('the card says it is provisional', () => pm.expect(c.provisional).to.eql(true));"
+      ] } }]
+    },
+    {
+      "name": "The ledger: every payout confirmed by PayPal, every amount on the card",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/ledger" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('200 JSON', () => { pm.response.to.have.status(200); pm.response.to.be.json; });",
+        "const l = pm.response.json();",
+        "const ok = Object.values(l.payouts).filter((p) => p.status === 'SUCCESS');",
+        "pm.test('at least Saturday\\'s 28 games paid', () => pm.expect(ok.length).to.be.at.least(28));",
+        "pm.test('every successful payout carries a PayPal batch id and a completion time', () => ok.forEach((p) => { pm.expect(p.batchId, p.senderBatchId).to.be.a('string').and.not.empty; pm.expect(p.completedAt, p.senderBatchId).to.be.a('string'); }));",
+        "pm.test('every amount is a rate card figure', () => ok.forEach((p) => p.items.forEach((i) => pm.expect([45, 25], p.senderBatchId).to.include(Number(i.amount)))));",
+        "const agent = ok.filter((p) => p.decidedBy === 'agent' && p.secondsFromBuzzer != null);",
+        "pm.test('the agent\\'s payouts land within a minute of the buzzer (median)', () => { const s = agent.map((p) => p.secondsFromBuzzer).sort((a, b) => a - b); pm.expect(s.length).to.be.at.least(28); pm.expect(s[s.length >> 1]).to.be.below(60); });",
+        "pm.test('the agent\\'s run is kept with its payouts: what it asked for, when it chose', () => { const withRun = agent.filter((p) => p.agent && p.agent.steps && p.agent.steps.some((s) => s.name === 'decide')); pm.expect(withRun.length).to.be.at.least(30); withRun.forEach((p) => pm.expect(p.agent.steps.map((s) => s.name)).to.include.members(['read_game_sheet', 'read_rate_card', 'check_paypal_for_game'])); });",
+        "pm.test('every hold names a reason and who held it', () => Object.values(l.holds).forEach((h) => { pm.expect(h.reason).to.be.a('string').and.not.empty; pm.expect(['agent', 'guard', 'paypal']).to.include(h.by); }));",
+        "pm.test('game 17 is held: PayPal already showed it paid', () => { pm.expect(l.holds.g053).to.be.an('object'); pm.expect(l.holds.g053.flags.already_paid).to.eql(true); });"
+      ] } }]
+    },
+    {
+      "name": "The agent is on duty",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/agent" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('200 JSON', () => { pm.response.to.have.status(200); pm.response.to.be.json; });",
+        "const a = pm.response.json();",
+        "pm.test('a heartbeat under two minutes old, on the PayPal sandbox', () => { pm.expect(a.ageSeconds).to.be.below(120); pm.expect(a.paypal).to.eql('live'); });"
+      ] } }]
+    },
+    {
+      "name": "The daily cap on agent runs",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/budget" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('200 JSON', () => { pm.response.to.have.status(200); pm.response.to.be.json; });",
+        "const b = pm.response.json();",
+        "pm.test('used never exceeds the limit', () => { pm.expect(b.limit).to.be.at.least(1); pm.expect(b.used).to.be.at.most(b.limit); });"
+      ] } }]
+    },
+    {
+      "name": "Every webhook logged was signature-verified",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/webhooks" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('200', () => pm.response.to.have.status(200));",
+        "const lines = pm.response.text().trim().split('\\n').filter(Boolean).map((x) => JSON.parse(x));",
+        "pm.test('at least one event from PayPal', () => pm.expect(lines.length).to.be.at.least(1));",
+        "pm.test('each one verified against the registered webhook', () => lines.forEach((e) => { pm.expect(e.verified, e.id).to.eql(true); pm.expect(e.type).to.match(/^(PAYMENT|INVOICING)\\./); }));"
+      ] } }]
+    },
+    {
+      "name": "Sam's tap is refused without the treasurer's PIN",
+      "request": { "method": "POST", "url": "{{baseUrl}}/api/holds/g053", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"choice\":\"pay_nobody\"}" } },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('401', () => pm.response.to.have.status(401));",
+        "pm.test('it asks for the PIN and does nothing', () => { const r = pm.response.json(); pm.expect(r.ok).to.eql(false); pm.expect(r.needsPin).to.eql(true); });"
+      ] } }]
+    },
+    {
+      "name": "Closing a gym is refused without the treasurer's PIN",
+      "request": { "method": "POST", "url": "{{baseUrl}}/api/replan", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"court\":\"Gym E\",\"from\":\"09:00\",\"day\":\"2026-05-17\"}" } },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('401', () => pm.response.to.have.status(401));",
+        "pm.test('it asks for the PIN', () => pm.expect(pm.response.json().needsPin).to.eql(true));"
+      ] } }]
+    },
+    {
+      "name": "The held game is still held",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/ledger" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('200', () => pm.response.to.have.status(200));",
+        "pm.test('the refused tap changed nothing', () => pm.expect(pm.response.json().holds.g053).to.be.an('object'));"
+      ] } }]
+    }
+  ]
+}
