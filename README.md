@@ -2,7 +2,7 @@
 
 Every official paid at the final buzzer. A youth basketball tournament's money, run by an agent on PayPal.
 
-**Live demo: https://finalbuzzer.jonathansolvesproblems.com** (the board) · [/score.html](https://finalbuzzer.jonathansolvesproblems.com/score.html) (score a game and watch the agent pay) · [/money.html](https://finalbuzzer.jonathansolvesproblems.com/money.html) (every payout and invoice). PayPal sandbox, test money.
+**Live demo: https://finalbuzzer.jonathansolvesproblems.com** (the board) · [/score.html](https://finalbuzzer.jonathansolvesproblems.com/score.html) (score a game and watch the agent pay) · [/money.html](https://finalbuzzer.jonathansolvesproblems.com/money.html) (every payout and invoice) · [/official.html](https://finalbuzzer.jonathansolvesproblems.com/official.html) (one official's weekend, as they see it). PayPal sandbox, test money.
 
 Sam runs a youth basketball association. Its invitational is 88 games over a weekend, two referees and a table official on every game, 52 teams paying an entry fee. After last year's tournament the officials were paid by hand, one e-transfer at a time, and some teams never paid at all.
 
@@ -23,7 +23,7 @@ git clone https://github.com/JonathanSolvesProblems/final-buzzer.git
 cd final-buzzer
 npm install
 npm test          # 33 tests: the money gate, the feed, the re-plan rules, Sam's tap, the demo's daily cap
-npm run board     # http://localhost:4173/  the board, /score.html, /money.html
+npm run board     # http://localhost:4173/  the board, /score.html, /money.html, /official.html
 ```
 
 With no keys the board serves the committed results read-only. To have the agent pay live on the PayPal sandbox, add a sandbox app and a Claude key (`copy .env.example .env`, steps in `docs/SANDBOX-SETUP.md`), then run `node src/cli/watch.ts` beside the board and score a game on `/score.html`. A public copy also sets `SAM_PIN` (the board asks for it before a tap pays or a gym closes; scoring stays open) and `MODEL_RUNS_PER_DAY`. Every other command is under [All commands](#all-commands).
