@@ -38,7 +38,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:47:17Z",
-      "secondsFromBuzzer": 40.2
+      "secondsFromBuzzer": 40.2,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6853,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2185
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2185
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2186
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2186
+          },
+          {
+            "name": "decide",
+            "ms": 6850
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g18": {
       "gameId": "g068",
@@ -77,7 +104,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:48:28Z",
-      "secondsFromBuzzer": 39.8
+      "secondsFromBuzzer": 39.8,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6600,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1702
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1702
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1702
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1702
+          },
+          {
+            "name": "decide",
+            "ms": 6600
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g19": {
       "gameId": "g073",
@@ -116,7 +170,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:49:13Z",
-      "secondsFromBuzzer": 43.5
+      "secondsFromBuzzer": 43.5,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 9762,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2079
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2079
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2079
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2079
+          },
+          {
+            "name": "decide",
+            "ms": 9762
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g20": {
       "gameId": "g006",
@@ -155,7 +236,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:49:56Z",
-      "secondsFromBuzzer": 41.4
+      "secondsFromBuzzer": 41.4,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6796,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2121
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2121
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2121
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2121
+          },
+          {
+            "name": "decide",
+            "ms": 6795
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g21": {
       "gameId": "g039",
@@ -194,7 +302,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:50:36Z",
-      "secondsFromBuzzer": 39.4
+      "secondsFromBuzzer": 39.4,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6014,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1496
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1496
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1496
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1496
+          },
+          {
+            "name": "decide",
+            "ms": 6014
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g22": {
       "gameId": "g062",
@@ -233,7 +368,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:51:17Z",
-      "secondsFromBuzzer": 40.2
+      "secondsFromBuzzer": 40.2,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6859,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2049
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2049
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2049
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2049
+          },
+          {
+            "name": "decide",
+            "ms": 6859
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g23": {
       "gameId": "g069",
@@ -264,7 +426,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:52:04Z",
-      "secondsFromBuzzer": 45.4
+      "secondsFromBuzzer": 45.4,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 12187,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2239
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2239
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2239
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2239
+          },
+          {
+            "name": "decide",
+            "ms": 12187
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g25": {
       "gameId": "g020",
@@ -303,7 +492,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:52:56Z",
-      "secondsFromBuzzer": 39.6
+      "secondsFromBuzzer": 39.6,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6117,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1552
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1552
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1552
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1552
+          },
+          {
+            "name": "decide",
+            "ms": 6116
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g27": {
       "gameId": "g026",
@@ -342,7 +558,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:53:52Z",
-      "secondsFromBuzzer": 45.8
+      "secondsFromBuzzer": 45.8,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 12784,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1968
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1968
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1968
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1968
+          },
+          {
+            "name": "decide",
+            "ms": 12784
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g28": {
       "gameId": "g081",
@@ -381,7 +624,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:54:33Z",
-      "secondsFromBuzzer": 39.8
+      "secondsFromBuzzer": 39.8,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6871,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2093
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2093
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2093
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2093
+          },
+          {
+            "name": "decide",
+            "ms": 6871
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g29": {
       "gameId": "g084",
@@ -420,7 +690,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:55:17Z",
-      "secondsFromBuzzer": 42.1
+      "secondsFromBuzzer": 42.1,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 7817,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2170
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2170
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2170
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2171
+          },
+          {
+            "name": "decide",
+            "ms": 7817
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g31": {
       "gameId": "g015",
@@ -451,7 +748,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:56:03Z",
-      "secondsFromBuzzer": 40.8
+      "secondsFromBuzzer": 40.8,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 7519,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1939
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1939
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1939
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1939
+          },
+          {
+            "name": "decide",
+            "ms": 7518
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g33": {
       "gameId": "g076",
@@ -490,7 +814,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:56:50Z",
-      "secondsFromBuzzer": 39.5
+      "secondsFromBuzzer": 39.5,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 5762,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1573
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1573
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1573
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1574
+          },
+          {
+            "name": "decide",
+            "ms": 5762
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g34": {
       "gameId": "g056",
@@ -529,7 +880,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:57:33Z",
-      "secondsFromBuzzer": 41.9
+      "secondsFromBuzzer": 41.9,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 8289,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2091
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2091
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2091
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2091
+          },
+          {
+            "name": "decide",
+            "ms": 8288
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g35": {
       "gameId": "g047",
@@ -568,7 +946,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:58:14Z",
-      "secondsFromBuzzer": 39.3
+      "secondsFromBuzzer": 39.3,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6643,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1521
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1521
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1521
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1521
+          },
+          {
+            "name": "decide",
+            "ms": 6642
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g36": {
       "gameId": "g064",
@@ -607,7 +1012,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:58:56Z",
-      "secondsFromBuzzer": 39.9
+      "secondsFromBuzzer": 39.9,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 5942,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1693
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1693
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1693
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1694
+          },
+          {
+            "name": "decide",
+            "ms": 5942
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g37": {
       "gameId": "g063",
@@ -646,7 +1078,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T20:59:37Z",
-      "secondsFromBuzzer": 40.2
+      "secondsFromBuzzer": 40.2,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6448,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1811
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1811
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1811
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1812
+          },
+          {
+            "name": "decide",
+            "ms": 6448
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g38": {
       "gameId": "g003",
@@ -685,7 +1144,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:00:17Z",
-      "secondsFromBuzzer": 39
+      "secondsFromBuzzer": 39,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6067,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1884
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1884
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1885
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1885
+          },
+          {
+            "name": "decide",
+            "ms": 6067
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g39": {
       "gameId": "g019",
@@ -716,7 +1202,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:01:01Z",
-      "secondsFromBuzzer": 43.6
+      "secondsFromBuzzer": 43.6,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 11622,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 4336
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 4336
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 4336
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 4336
+          },
+          {
+            "name": "decide",
+            "ms": 11621
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g41": {
       "gameId": "g027",
@@ -755,7 +1268,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:01:47Z",
-      "secondsFromBuzzer": 38.8
+      "secondsFromBuzzer": 38.8,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 5819,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1695
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1695
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1695
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1695
+          },
+          {
+            "name": "decide",
+            "ms": 5818
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g42": {
       "gameId": "g079",
@@ -794,7 +1334,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:02:28Z",
-      "secondsFromBuzzer": 39
+      "secondsFromBuzzer": 39,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6303,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1940
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1940
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1940
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1940
+          },
+          {
+            "name": "decide",
+            "ms": 6303
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g43": {
       "gameId": "g077",
@@ -833,7 +1400,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:03:09Z",
-      "secondsFromBuzzer": 40.2
+      "secondsFromBuzzer": 40.2,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 7123,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2664
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2664
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2664
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2664
+          },
+          {
+            "name": "decide",
+            "ms": 7123
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g44": {
       "gameId": "g005",
@@ -872,7 +1466,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:03:50Z",
-      "secondsFromBuzzer": 39.4
+      "secondsFromBuzzer": 39.4,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 5896,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1610
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1610
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1610
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1611
+          },
+          {
+            "name": "decide",
+            "ms": 5896
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g45": {
       "gameId": "g029",
@@ -911,7 +1532,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:04:30Z",
-      "secondsFromBuzzer": 38.7
+      "secondsFromBuzzer": 38.7,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6977,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2067
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2067
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2067
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2067
+          },
+          {
+            "name": "decide",
+            "ms": 6977
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g46": {
       "gameId": "g013",
@@ -950,7 +1598,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:05:11Z",
-      "secondsFromBuzzer": 40.4
+      "secondsFromBuzzer": 40.4,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 5454,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1770
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1770
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1770
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1770
+          },
+          {
+            "name": "decide",
+            "ms": 5453
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g47": {
       "gameId": "g060",
@@ -989,7 +1664,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:05:56Z",
-      "secondsFromBuzzer": 43.1
+      "secondsFromBuzzer": 43.1,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 9615,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2095
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2095
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2095
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2095
+          },
+          {
+            "name": "decide",
+            "ms": 9615
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g48": {
       "gameId": "g067",
@@ -1028,7 +1730,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:06:37Z",
-      "secondsFromBuzzer": 39.6
+      "secondsFromBuzzer": 39.6,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 5879,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1652
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1652
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1652
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1652
+          },
+          {
+            "name": "decide",
+            "ms": 5879
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g49": {
       "gameId": "g048",
@@ -1067,7 +1796,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:07:20Z",
-      "secondsFromBuzzer": 42.3
+      "secondsFromBuzzer": 42.3,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 8146,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 3203
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 3203
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 3203
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 3203
+          },
+          {
+            "name": "decide",
+            "ms": 8145
+          }
+        ]
+      }
     },
     "northside-2026-sat1-g50": {
       "gameId": "g057",
@@ -1106,7 +1862,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:08:01Z",
-      "secondsFromBuzzer": 40.9
+      "secondsFromBuzzer": 40.9,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 7863,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1927
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1927
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1927
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1927
+          },
+          {
+            "name": "decide",
+            "ms": 7862
+          }
+        ]
+      }
     },
     "northside-2026-sat1-2026-05-16-off-u": {
       "gameId": "",
@@ -1297,7 +2080,34 @@
       "decidedBy": "agent",
       "provisional": true,
       "completedAt": "2026-11-02T21:12:03Z",
-      "secondsFromBuzzer": 39.7
+      "secondsFromBuzzer": 39.7,
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 6218,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 2023
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 2023
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2024
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2024
+          },
+          {
+            "name": "decide",
+            "ms": 6212
+          }
+        ]
+      }
     }
   },
   "holds": {
@@ -1314,7 +2124,34 @@
         "amount_uncertain": false,
         "reopened_score": false
       },
-      "by": "agent"
+      "by": "agent",
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 5772,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1887
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1888
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 2589
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 2589
+          },
+          {
+            "name": "decide",
+            "ms": 5769
+          }
+        ]
+      }
     },
     "g023": {
       "gameId": "g023",
@@ -1329,7 +2166,34 @@
         "amount_uncertain": true,
         "reopened_score": false
       },
-      "by": "agent"
+      "by": "agent",
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 8761,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 4688
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 4688
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 4689
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 4689
+          },
+          {
+            "name": "decide",
+            "ms": 8761
+          }
+        ]
+      }
     },
     "g040": {
       "gameId": "g040",
@@ -1344,7 +2208,34 @@
         "amount_uncertain": false,
         "reopened_score": false
       },
-      "by": "agent"
+      "by": "agent",
+      "agent": {
+        "model": "claude-opus-5-5",
+        "ms": 4327,
+        "calls": 2,
+        "steps": [
+          {
+            "name": "read_game_sheet",
+            "ms": 1756
+          },
+          {
+            "name": "read_rate_card",
+            "ms": 1756
+          },
+          {
+            "name": "check_paypal_for_game",
+            "ms": 1756
+          },
+          {
+            "name": "officials_day_schedule",
+            "ms": 1756
+          },
+          {
+            "name": "decide",
+            "ms": 4326
+          }
+        ]
+      }
     }
   },
   "folds": {

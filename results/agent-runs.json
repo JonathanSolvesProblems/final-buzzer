@@ -1,0 +1,2312 @@
+[
+ {
+  "gameId": "g053",
+  "finalAt": "2026-11-02T20:46:36.783Z",
+  "choice": "pay_now",
+  "reason": "Game 17 Bayview v Highland is final at 52–47, not a forfeit, and the sheet has two refs and a table official. All three want to be paid per game and PayPal shows nothing paid for this game, so both refs get $45 and the table official gets $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6853,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2185
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2185
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2186
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2186
+    },
+    {
+     "name": "decide",
+     "ms": 6850
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g053",
+  "finalAt": "2026-11-02T20:47:42.405Z",
+  "choice": "hold",
+  "reason": "Game 17 is final, 57 to 47, with both refs and the table official on the sheet. But PayPal already shows it paid at 20:47:17Z: 45, 45 and 25 CAD, all still unclaimed. So I held it and sent nothing more.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5772,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1887
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1888
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2589
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2589
+    },
+    {
+     "name": "decide",
+     "ms": 5769
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g068",
+  "finalAt": "2026-11-02T20:47:48.182Z",
+  "choice": "pay_now",
+  "reason": "Game 18 is final at 58 to 48, and it was not a forfeit. The sheet has all three: two refs (D, E) and a table official (F). All three get paid after each game, and PayPal shows nothing paid for this game yet. Paying from the card: $45 per ref and $25 for the table official.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6600,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1702
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1702
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1702
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1702
+    },
+    {
+     "name": "decide",
+     "ms": 6600
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g073",
+  "finalAt": "2026-11-02T20:48:29.528Z",
+  "choice": "pay_now",
+  "reason": "Game 19 is final at 59 to 30 (not a forfeit), and the sheet is complete with two refs and a table official. PayPal shows nothing paid for this game, so each official is paid now at the card rate: refs 45, table official 25.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 9762,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2079
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2079
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2079
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2079
+    },
+    {
+     "name": "decide",
+     "ms": 9762
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g006",
+  "finalAt": "2026-11-02T20:49:14.643Z",
+  "choice": "pay_now",
+  "reason": "Game 20 is final at 60 to 31 and the sheet is full: refs J and K, table official L, all paid per game. Nothing on PayPal shows this game paid, so each is paid from the card: $45 per ref and $25 for the table.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6796,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2121
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2121
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2121
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2121
+    },
+    {
+     "name": "decide",
+     "ms": 6795
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g039",
+  "finalAt": "2026-11-02T20:49:56.554Z",
+  "choice": "pay_now",
+  "reason": "Game 21 (Northside v Cedar) is final 61 to 32. It was not a forfeit, and this is its first final score. The sheet has two refs (M, N) and a table official (O), all paid per game. PayPal shows nothing paid for this game, so each ref gets $45 and the table official gets $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6014,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1496
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1496
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1496
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1496
+    },
+    {
+     "name": "decide",
+     "ms": 6014
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g062",
+  "finalAt": "2026-11-02T20:50:36.839Z",
+  "choice": "pay_now",
+  "reason": "Game 22 is final at 62 to 33, not a forfeit. The sheet has both refs (P and Q) and the table official (R), all paid per game, and PayPal shows nothing paid for this game. Paying the refs $45 each and the table official $25, from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6859,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2049
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2049
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2049
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2049
+    },
+    {
+     "name": "decide",
+     "ms": 6859
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g069",
+  "finalAt": "2026-11-02T20:51:18.649Z",
+  "choice": "pay_now",
+  "reason": "Game 23 is final at 40 to 34 and was never final before. The sheet is complete, and PayPal shows nothing paid for this game. Refs S and T are paid $45 each from the card. Table official U is paid at the end of the day and still has game 31 later today, so U's $25 waits for the end-of-day run.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 12187,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2239
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2239
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2239
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2239
+    },
+    {
+     "name": "decide",
+     "ms": 12187
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g028",
+  "finalAt": "2026-11-02T20:52:05.893Z",
+  "choice": "fold",
+  "reason": "Game 24 is final, 41 to 35, not a forfeit. The sheet is full: refs V and W and table official X. PayPal shows nothing paid for this game. All three asked to be paid at the end of the day and all have game 32 at 12:45 later today, so their pay for this game waits for the end-of-day payout.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 10551,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1835
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1835
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1835
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1835
+    },
+    {
+     "name": "decide",
+     "ms": 10550
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g020",
+  "finalAt": "2026-11-02T20:52:16.448Z",
+  "choice": "pay_now",
+  "reason": "Game 25 (Lakeshore 1 v Westbrook) went final at 42 to 36. It wasn't a forfeit and it's the first time it went final. The sheet has two refs and a table official, all paid per game, and PayPal shows nothing paid for this game, so the refs get $45 each and the table official gets $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6117,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1552
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1552
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1552
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1552
+    },
+    {
+     "name": "decide",
+     "ms": 6116
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g023",
+  "finalAt": "2026-11-02T20:52:57.454Z",
+  "choice": "hold",
+  "reason": "Game 26 went final as a forfeit (20 to 0). The sheet has both refs and the table official, and nothing is paid on PayPal yet. The card pays only a show-up fee for a forfeit, but it doesn't say how much, so I can't work out what to pay.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 8761,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 4688
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 4688
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 4689
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 4689
+    },
+    {
+     "name": "decide",
+     "ms": 8761
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g026",
+  "finalAt": "2026-11-02T20:53:06.218Z",
+  "choice": "pay_now",
+  "reason": "Game 27 is final at 44 to 38. Before this it was only scheduled, so the score was not changed after going final. The sheet has two refs (G, H) and one table official (I), and all three are paid per game. PayPal shows nothing paid for this game. Paid from the card: refs $45 each, table official $25.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 12784,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1968
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1968
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1968
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1968
+    },
+    {
+     "name": "decide",
+     "ms": 12784
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g081",
+  "finalAt": "2026-11-02T20:53:53.206Z",
+  "choice": "pay_now",
+  "reason": "Game 28 is final, 45 to 39, and it was not a forfeit. The sheet is full: refs J and K and table official L, all paid per game. PayPal shows nothing paid for this game, so each is paid the card rate: $45 per ref and $25 for the table.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6871,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2093
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2093
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2093
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2093
+    },
+    {
+     "name": "decide",
+     "ms": 6871
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g084",
+  "finalAt": "2026-11-02T20:54:34.938Z",
+  "choice": "pay_now",
+  "reason": "Game 29 is final at 46–40, not a forfeit. The sheet has two refs and a table official, all paid per game, and PayPal shows nothing paid for this game. Refs get $45 each and the table official gets $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7817,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2170
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2170
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2170
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2171
+    },
+    {
+     "name": "decide",
+     "ms": 7817
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g040",
+  "finalAt": "2026-11-02T20:55:17.838Z",
+  "choice": "hold",
+  "reason": "Game 30 (Pinecrest v Glenview) is final at 47 to 41, but the sheet has only two refs, P and Q, and no table official. Nobody is paid until Sam confirms who was on the table.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 4327,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1756
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1756
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1756
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1756
+    },
+    {
+     "name": "decide",
+     "ms": 4326
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g015",
+  "finalAt": "2026-11-02T20:55:22.177Z",
+  "choice": "pay_now",
+  "reason": "Game 31 ended 48 to 42 and the sheet has two refs and a table official. PayPal shows nothing paid for this game. Refs S and T are paid $45 each from the card. Table official U asked to be paid at the end of the day and still has game 39 at 15:15, so U's $25 goes into the end-of-day payment.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7519,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1939
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1939
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1939
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1939
+    },
+    {
+     "name": "decide",
+     "ms": 7518
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g066",
+  "finalAt": "2026-11-02T20:56:04.657Z",
+  "choice": "fold",
+  "reason": "Game 32 is final at 49 to 43 with both refs and the table official on the sheet, and PayPal shows nothing paid for it. Officials V, W and X all asked to be paid at the end of the day and all have game 40 at 15:15 later today, so their pay for this game waits for the end of the day.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5843,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2046
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2046
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2046
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2046
+    },
+    {
+     "name": "decide",
+     "ms": 5843
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g076",
+  "finalAt": "2026-11-02T20:56:10.508Z",
+  "choice": "pay_now",
+  "reason": "Game 33, Crescent v Summit, is final 50 to 44 with no forfeit, and the sheet is complete with two refs and a table official. All three asked to be paid per game, PayPal shows nothing paid for this game, so it's $45 to each ref and $25 to the table official from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5762,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1573
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1573
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1573
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1574
+    },
+    {
+     "name": "decide",
+     "ms": 5762
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g056",
+  "finalAt": "2026-11-02T20:56:51.138Z",
+  "choice": "pay_now",
+  "reason": "Game 34 is final at 51 to 45, its first time final, and the sheet is full: refs D and E, table official F. All three want to be paid per game. PayPal shows nothing paid for this game, so we pay each ref $45 and the table official $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 8289,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2091
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2091
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2091
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2091
+    },
+    {
+     "name": "decide",
+     "ms": 8288
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g047",
+  "finalAt": "2026-11-02T20:57:34.720Z",
+  "choice": "pay_now",
+  "reason": "Game 35 (Granite 3 v Meadowvale) is final 52 to 46 and isn't a forfeit. The sheet is complete with two refs (G, H) and table official I, all paid per game. PayPal shows nothing paid for this game, so each is paid what the card says: $45 per ref and $25 for the table.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6643,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1521
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1521
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1521
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1521
+    },
+    {
+     "name": "decide",
+     "ms": 6642
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g064",
+  "finalAt": "2026-11-02T20:58:16.147Z",
+  "choice": "pay_now",
+  "reason": "Game 36, Bayview v Riverside, went final 53 to 47 and wasn't a forfeit. The sheet is complete with two refs (J, K) and a table official (L), all paid per game, and PayPal shows nothing paid for this game, so they're paid from the card: refs $45 each and the table official $25.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5942,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1693
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1693
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1693
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1694
+    },
+    {
+     "name": "decide",
+     "ms": 5942
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g063",
+  "finalAt": "2026-11-02T20:58:56.842Z",
+  "choice": "pay_now",
+  "reason": "Game 37 is final at 54 to 48 and was not a forfeit. The sheet has both refs (M, N) and the table official (O), all paid per game. PayPal shows nothing paid for this game, so each is paid the card rate: refs $45, table official $25.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6448,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1811
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1811
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1811
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1812
+    },
+    {
+     "name": "decide",
+     "ms": 6448
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g003",
+  "finalAt": "2026-11-02T20:59:38.031Z",
+  "choice": "pay_now",
+  "reason": "Game 38 is final at 55 to 30 and it wasn't a forfeit. The sheet has all three officials: two refs (P, Q) and a table official (R). All three asked to be paid per game, and PayPal shows nothing paid for this game, so each is paid from the card: refs $45, table $25.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6067,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1884
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1884
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1885
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1885
+    },
+    {
+     "name": "decide",
+     "ms": 6067
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g019",
+  "finalAt": "2026-11-02T21:00:17.414Z",
+  "choice": "pay_now",
+  "reason": "Game 39 is final at 56 to 31. The sheet is complete and the game hasn't been paid. Refs S and T are paid per game at the card's $45 each. Table official U asked to be paid at the end of the day and still has game 47 at 16:30, so U's $25 goes into the end-of-day pay.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 11622,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 4336
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 4336
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 4336
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 4336
+    },
+    {
+     "name": "decide",
+     "ms": 11621
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g025",
+  "finalAt": "2026-11-02T21:01:01.777Z",
+  "choice": "fold",
+  "reason": "Game 40 is final at 57 to 32 and the sheet is complete: two refs (V and W) and a table official (X). Nothing has been paid on PayPal. All three asked to be paid at the end of the day and all three have game 48 at 16:30, so their pay for this game waits for the end of the day.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6355,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1692
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1692
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1692
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1692
+    },
+    {
+     "name": "decide",
+     "ms": 6354
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g027",
+  "finalAt": "2026-11-02T21:01:08.161Z",
+  "choice": "pay_now",
+  "reason": "Game 41 Ridgeway v Lakeshore 5 is final at 58 to 33 and wasn't a forfeit. The sheet is complete with two refs and a table official, all paid per game, and PayPal shows nothing paid for this game. Paying each ref $45 and the table official $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5819,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1695
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1695
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1695
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1695
+    },
+    {
+     "name": "decide",
+     "ms": 5818
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g079",
+  "finalAt": "2026-11-02T21:01:48.990Z",
+  "choice": "pay_now",
+  "reason": "Game 42 is final at 59 to 34, not a forfeit, and the sheet is complete: two refs (D, E) and table official F, all paid per game. PayPal shows nothing paid for this game, so each is paid from the card: refs $45, table official $25.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6303,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1940
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1940
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1940
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1940
+    },
+    {
+     "name": "decide",
+     "ms": 6303
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g077",
+  "finalAt": "2026-11-02T21:02:28.849Z",
+  "choice": "pay_now",
+  "reason": "Game 43 is final 60 to 35 and wasn't a forfeit. The sheet is complete with two refs (G, H) and one table official (I), all paid per game, and PayPal shows nothing paid for this game. Paying the refs $45 each and the table official $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7123,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2664
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2664
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2664
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2664
+    },
+    {
+     "name": "decide",
+     "ms": 7123
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g005",
+  "finalAt": "2026-11-02T21:03:10.599Z",
+  "choice": "pay_now",
+  "reason": "Game 44 (Ridgeway v Harbour) is final at 61 to 36, and the sheet has two refs and a table official. PayPal shows nothing paid for this game. All three are paid per game, so the refs get $45 each and the table official gets $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5896,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1610
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1610
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1610
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1611
+    },
+    {
+     "name": "decide",
+     "ms": 5896
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g029",
+  "finalAt": "2026-11-02T21:03:51.251Z",
+  "choice": "pay_now",
+  "reason": "Game 45 is final at 62 to 37 and wasn't a forfeit. The sheet has both refs (M, N) and the table official (O), and PayPal shows nothing paid for this game. All three are paid per game, so it's ref $45 each and table $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6977,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2067
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2067
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2067
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2067
+    },
+    {
+     "name": "decide",
+     "ms": 6977
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g013",
+  "finalAt": "2026-11-02T21:04:30.635Z",
+  "choice": "pay_now",
+  "reason": "Game 46 went final 40 to 38. The sheet is complete with two refs (P, Q) and a table official (R), all paid per game. PayPal shows nothing paid for this game, so it's refs $45 each and table $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5454,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1770
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1770
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1770
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1770
+    },
+    {
+     "name": "decide",
+     "ms": 5453
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g060",
+  "finalAt": "2026-11-02T21:05:12.901Z",
+  "choice": "pay_now",
+  "reason": "Game 47 final 41 to 39, first time final, sheet complete with two refs and a table official, and PayPal shows nothing paid for this game. Refs S and T paid $45 each and table official U paid $25 from the card. U asked for end-of-day pay but has no later game, so U is paid now.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 9615,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2095
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2095
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2095
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2095
+    },
+    {
+     "name": "decide",
+     "ms": 9615
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g067",
+  "finalAt": "2026-11-02T21:05:57.428Z",
+  "choice": "pay_now",
+  "reason": "Game 48 is final at 42 to 40 and the sheet is full: two refs (V and W) and a table official (X). PayPal shows nothing paid for this game. All three asked to be paid at the end of the day, but this was their last game today, so each is paid now at the card rate: refs $45, table official $25.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5879,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1652
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1652
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1652
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1652
+    },
+    {
+     "name": "decide",
+     "ms": 5879
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g048",
+  "finalAt": "2026-11-02T21:06:37.694Z",
+  "choice": "pay_now",
+  "reason": "Game 49 is final at 43-41. The sheet has two refs and a table official, and the score was never final before. PayPal shows nothing paid for this game, and all three are paid per game with no later game, so the refs get $45 each and the table official $25 from the card.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 8146,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 3203
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 3203
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 3203
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 3203
+    },
+    {
+     "name": "decide",
+     "ms": 8145
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g057",
+  "finalAt": "2026-11-02T21:07:20.126Z",
+  "choice": "pay_now",
+  "reason": "Game 50, Highland v Hilltop, final 44 to 42. The sheet is complete with two refs (D, E) and a table official (F), all paid per game. Card says ref $45 and table $25, and PayPal shows nothing paid for this game.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7863,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1927
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1927
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1927
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1927
+    },
+    {
+     "name": "decide",
+     "ms": 7862
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g053",
+  "finalAt": "2026-11-02T21:11:10.910Z",
+  "choice": "hold",
+  "reason": "Game 17 is final at 57–47. The sheet is complete: 2 refs (A, B) and 1 table official (C), all paid per game. By the card that's $45 per ref and $25 for the table, $115 in total. I couldn't check PayPal for this game because PayPal is switched off, so I can't tell whether it's already paid, and nothing can be sent anyway. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6341,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1908
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1908
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1908
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1908
+    },
+    {
+     "name": "decide",
+     "ms": 6335
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g068",
+  "finalAt": "2026-11-02T21:11:17.277Z",
+  "choice": "hold",
+  "reason": "Game 18 is final 58 to 48 and the sheet is complete: two refs and one table official, all paid per game, so the card gives $45 per ref and $25 for the table official. PayPal couldn't be checked because it is switched off for this run, so I can't confirm the game isn't already paid. I'm holding it and paying nobody.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7258,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1973
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1973
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1973
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1973
+    },
+    {
+     "name": "decide",
+     "ms": 7257
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g018",
+  "finalAt": "2026-11-02T21:11:23.266Z",
+  "choice": "pay_now",
+  "reason": "Game 9 is final at 52 to 47. The sheet has two refs and a table official, and PayPal shows nothing paid for this game. Each is paid their rate from the card: $45 per ref and $25 for the table official.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6218,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2023
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2023
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2024
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2024
+    },
+    {
+     "name": "decide",
+     "ms": 6212
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g073",
+  "finalAt": "2026-11-02T21:11:24.548Z",
+  "choice": "hold",
+  "reason": "Game 19 is final at 59 to 30 and the sheet is complete: two refs at $45 and a table official at $25, $115 in total. I couldn't check PayPal to see if this game was already paid because PayPal is switched off right now, so I'm holding it and nothing was sent.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6523,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1927
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1927
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1927
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1927
+    },
+    {
+     "name": "decide",
+     "ms": 6522
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g006",
+  "finalAt": "2026-11-02T21:11:31.075Z",
+  "choice": "hold",
+  "reason": "Game 20 is final at 60 to 31. The sheet is complete (refs J and K, table official L, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal to see whether this game was already paid, because PayPal is switched off, so I'm holding it rather than risk paying twice.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7340,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1930
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1930
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1930
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1930
+    },
+    {
+     "name": "decide",
+     "ms": 7340
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g039",
+  "finalAt": "2026-11-02T21:11:38.421Z",
+  "choice": "hold",
+  "reason": "Game 21 is final at 61–32 and the sheet is complete: refs M and N, table official O, all paid per game. The card gives $45 per ref and $25 for the table official. I couldn't check PayPal because it's switched off for this run, so I can't confirm the game hasn't already been paid, and nothing can be sent anyway. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6210,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1542
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1542
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1542
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1542
+    },
+    {
+     "name": "decide",
+     "ms": 6209
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g062",
+  "finalAt": "2026-11-02T21:11:44.654Z",
+  "choice": "hold",
+  "reason": "Game 22 is final at 62-33, the sheet is complete (two refs P and Q, table official R, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal because it is switched off for this run, so I can't confirm the game hasn't already been paid, and nothing can be sent anyway. Held, nobody paid.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7602,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2001
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2001
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2001
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2002
+    },
+    {
+     "name": "decide",
+     "ms": 7601
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g069",
+  "finalAt": "2026-11-02T21:11:52.267Z",
+  "choice": "hold",
+  "reason": "Game 23 is final 40–34 and the sheet is full: refs S and T at $45 each, and table official U at $25, who waits for end of day because U has game 31 later. Nobody was paid because PayPal was switched off, so I couldn't check whether this game was already paid or send any money.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6290,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1614
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1614
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1614
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1614
+    },
+    {
+     "name": "decide",
+     "ms": 6290
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g028",
+  "finalAt": "2026-11-02T21:11:58.565Z",
+  "choice": "hold",
+  "reason": "Game 24 sheet is complete (2 refs, 1 table official), final 41-35, not a forfeit, and the card gives ref $45 and table $25. But I couldn't check PayPal because it's switched off, so I can't confirm this game isn't already paid. Also, the game was on May 16 and only went final Nov 2, so that day's end-of-day pay for these three officials has long passed. Held, nobody paid.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 8813,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1526
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1526
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1526
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1528
+    },
+    {
+     "name": "decide",
+     "ms": 8812
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g020",
+  "finalAt": "2026-11-02T21:12:07.387Z",
+  "choice": "hold",
+  "reason": "Game 25 is final at 42 to 36 with a full sheet: two refs (A, B) and one table official (C), all paid per game. That comes to $115 off the card. But PayPal couldn't be checked, so I can't confirm this game hasn't already been paid, and nothing can be sent right now. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 11783,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 4958
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 4958
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 4958
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 4958
+    },
+    {
+     "name": "decide",
+     "ms": 11782
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g023",
+  "finalAt": "2026-11-02T21:12:19.178Z",
+  "choice": "hold",
+  "reason": "Game 26 (Lakeshore 2 v Beacon) went final by forfeit with a full sheet: two refs and a table official. The card pays only a show-up fee for a forfeit, and that fee isn't set, so nobody was paid and the game is held. PayPal couldn't be checked either because it's switched off.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5059,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1686
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1686
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1686
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1686
+    },
+    {
+     "name": "decide",
+     "ms": 5058
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g026",
+  "finalAt": "2026-11-02T21:12:24.244Z",
+  "choice": "hold",
+  "reason": "Game 27 is final 44 to 38 and the sheet is complete: two refs (G, H) and table official I, all paid per game. The card says $45 per ref and $25 for the table. But PayPal is switched off, so I couldn't check whether this game was already paid, and nothing can be sent anyway. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6176,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1708
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1708
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1708
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1708
+    },
+    {
+     "name": "decide",
+     "ms": 6175
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g081",
+  "finalAt": "2026-11-02T21:12:30.426Z",
+  "choice": "hold",
+  "reason": "Game 28 is final 45 to 39 with a full sheet (refs J and K, table official L, all paid per game; card says $45 per ref and $25 for the table). PayPal could not be checked because it is switched off in this run, so I can't confirm the game hasn't already been paid. Held, and nobody was paid.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6628,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1705
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1705
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1705
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1706
+    },
+    {
+     "name": "decide",
+     "ms": 6628
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g084",
+  "finalAt": "2026-11-02T21:12:37.064Z",
+  "choice": "hold",
+  "reason": "Game 29 is final at 46 to 40 and the sheet is complete: two refs (M, N) and table official O, all paid per game, so that's $45, $45 and $25 from the card. But PayPal could not be checked, so I can't confirm the game wasn't already paid. Held and nothing sent.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7043,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2020
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2020
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2020
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2020
+    },
+    {
+     "name": "decide",
+     "ms": 7043
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g040",
+  "finalAt": "2026-11-02T21:12:44.116Z",
+  "choice": "hold",
+  "reason": "Game 30 is final 47 to 41, but the sheet has two refs (P and Q) and no table official. PayPal couldn't be checked this time, so nothing was paid and the game is held for Sam.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 5618,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1853
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1853
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1853
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1853
+    },
+    {
+     "name": "decide",
+     "ms": 5618
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g015",
+  "finalAt": "2026-11-02T21:12:49.742Z",
+  "choice": "hold",
+  "reason": "Game 31 is final 48 to 42 and the sheet is complete: refs S and T, table official U. Nobody was paid because PayPal couldn't be checked: its tools are switched off, so I can't confirm the game hasn't already been paid. If PayPal shows nothing: S and T $45 each now, U ($25 table) waits for end of day since U has game 39 later.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6857,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1681
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1681
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1681
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1681
+    },
+    {
+     "name": "decide",
+     "ms": 6857
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g066",
+  "finalAt": "2026-11-02T21:12:56.639Z",
+  "choice": "hold",
+  "reason": "Game 32 is final 49 to 43, the sheet is complete and the card gives $45 per ref and $25 for the table official. All three officials asked for end-of-day pay and have game 40 later. But I couldn't check PayPal for this game, so I can't confirm it hasn't already been paid. The game also went final on 2 Nov, months after its 16 May date.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 9709,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1777
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1777
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1777
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1777
+    },
+    {
+     "name": "decide",
+     "ms": 9709
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g076",
+  "finalAt": "2026-11-02T21:13:06.384Z",
+  "choice": "hold",
+  "reason": "Game 33 is final at 50 to 44. The sheet is complete (two refs and one table official, all paid per game) and the card gives refs $45 and the table official $25. PayPal couldn't be checked because it's switched off, so I can't confirm this game hasn't already been paid, and nothing can be sent anyway. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7101,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1912
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1912
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1912
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1912
+    },
+    {
+     "name": "decide",
+     "ms": 7100
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g056",
+  "finalAt": "2026-11-02T21:13:13.491Z",
+  "choice": "hold",
+  "reason": "Game 34 is final 51 to 45. The sheet is complete (refs D and E, table official F, all paid per game), and the card gives $45 per ref and $25 for the table official. I couldn't check PayPal to see if this game was already paid, so it's held and nobody was paid.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7804,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2609
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2609
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2609
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2609
+    },
+    {
+     "name": "decide",
+     "ms": 7804
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g047",
+  "finalAt": "2026-11-02T21:13:21.340Z",
+  "choice": "hold",
+  "reason": "Game 35 is final 52–46 and the sheet is complete (refs G and H, table official I, all paid per game), so the card gives $45 per ref and $25 for the table. But PayPal couldn't be checked, so I can't confirm this game hasn't already been paid. It's held and nothing was sent.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 8188,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2967
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2967
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2967
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2968
+    },
+    {
+     "name": "decide",
+     "ms": 8187
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g064",
+  "finalAt": "2026-11-02T21:13:29.542Z",
+  "choice": "hold",
+  "reason": "Game 36 is final, 53 to 47, and the sheet is complete: refs J and K and table official L, all paid per game. By the card that's $45, $45 and $25. But PayPal was switched off, so I couldn't check whether this game was already paid, and nothing could be sent. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7199,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2616
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2616
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2616
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2617
+    },
+    {
+     "name": "decide",
+     "ms": 7198
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g063",
+  "finalAt": "2026-11-02T21:13:36.760Z",
+  "choice": "hold",
+  "reason": "Game 37 is final at 54 to 48 and the sheet is complete: refs M and N at $45 each and table official O at $25, all paid per game. I couldn't check PayPal because PayPal is switched off right now, so I can't confirm the game hasn't already been paid, and I can't pay anyone. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 8345,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 3516
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 3516
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 3516
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 3516
+    },
+    {
+     "name": "decide",
+     "ms": 8344
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g003",
+  "finalAt": "2026-11-02T21:13:45.114Z",
+  "choice": "hold",
+  "reason": "Game 38 is final at 55–30 and the sheet is complete: refs P and Q at $45 each and Official R on the table at $25. We can't see PayPal from here, so we can't tell whether this game is already paid, and nothing can be sent. The game is held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6394,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1749
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1749
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1749
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1750
+    },
+    {
+     "name": "decide",
+     "ms": 6393
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g019",
+  "finalAt": "2026-11-02T21:13:51.518Z",
+  "choice": "hold",
+  "reason": "Game 39 is final, 56 to 31. The sheet is complete: refs S and T, and U on the table. The card pays $45 per ref and $25 for the table. I couldn't check PayPal because it's switched off, so I can't confirm this game hasn't already been paid, and nothing could be sent anyway. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7349,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1956
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1956
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1956
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1956
+    },
+    {
+     "name": "decide",
+     "ms": 7347
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g025",
+  "finalAt": "2026-11-02T21:13:58.878Z",
+  "choice": "hold",
+  "reason": "Game 40 is final 57–32 and the sheet is full: 2 refs and a table official. By the card that's $45 per ref and $25 for the table. I couldn't check PayPal to see if this game was already paid. Also, the game was played May 16 but only marked final Nov 2, so that day's end-of-day pay may already have gone out. Held, nobody paid.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 14292,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1948
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1948
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1948
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1948
+    },
+    {
+     "name": "decide",
+     "ms": 14291
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g027",
+  "finalAt": "2026-11-02T21:14:13.183Z",
+  "choice": "hold",
+  "reason": "Game 41 is final at 58–33 with a full sheet (2 refs, 1 table official, all paid per game), and the card gives $45 per ref and $25 for the table official, $115 in total. I couldn't check PayPal because it's switched off on this run, so I can't confirm the game hasn't already been paid. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6360,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1576
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1576
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1576
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1576
+    },
+    {
+     "name": "decide",
+     "ms": 6360
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g079",
+  "finalAt": "2026-11-02T21:14:19.561Z",
+  "choice": "hold",
+  "reason": "Game 42 is final 59–34 and the sheet is complete: two refs (D, E) and one table official (F), all paid per game. The card gives $45 per ref and $25 for the table official, $115 in total. PayPal was switched off, so I couldn't check whether this game was already paid, and I'm holding it rather than risk paying it twice.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 6825,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1964
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1964
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1964
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1964
+    },
+    {
+     "name": "decide",
+     "ms": 6823
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g077",
+  "finalAt": "2026-11-02T21:14:26.403Z",
+  "choice": "hold",
+  "reason": "Game 43 is final at 60 to 35. The sheet is complete (refs G and H, table official I, all paid per game, none with a later game), and the card gives $45 per ref and $25 for the table official, $115 in all. PayPal couldn't be checked because PayPal is switched off for this run, so I can't confirm the game hasn't already been paid. Nobody was paid, and the game is held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 11462,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 5080
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 5080
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 5080
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 5080
+    },
+    {
+     "name": "decide",
+     "ms": 11461
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g005",
+  "finalAt": "2026-11-02T21:14:37.882Z",
+  "choice": "hold",
+  "reason": "Game 44 is final, 61 to 36, and the sheet is complete: refs J and K at $45 each and table official L at $25, all paid per game with no later games. I couldn't check PayPal because it's switched off, so I can't tell whether this game was already paid. It was also marked final in November for a game scheduled in May. So it's held, and nothing was sent.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7032,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1844
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1844
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1844
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1844
+    },
+    {
+     "name": "decide",
+     "ms": 7032
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g029",
+  "finalAt": "2026-11-02T21:14:44.928Z",
+  "choice": "hold",
+  "reason": "Game 45 is final, 62 to 37, and the sheet is complete: refs M and N, table official O, all paid per game with no later games. The card gives $45 per ref and $25 for the table, $115 in total. But PayPal could not be checked because PayPal access is switched off in this run, so I can't confirm the game isn't already paid. The game was also scheduled for May 16 and only marked final on Nov 2. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7552,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1810
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1810
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1810
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1810
+    },
+    {
+     "name": "decide",
+     "ms": 7551
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g013",
+  "finalAt": "2026-11-02T21:14:52.495Z",
+  "choice": "hold",
+  "reason": "Game 46 is final at 40 to 38 and the sheet is complete: refs P and Q at $45 each and table official R at $25. But PayPal could not be checked or used, so I can't confirm the game hasn't already been paid. Held, and nobody was paid.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7235,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1750
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1750
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1750
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1750
+    },
+    {
+     "name": "decide",
+     "ms": 7234
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g060",
+  "finalAt": "2026-11-02T21:14:59.749Z",
+  "choice": "hold",
+  "reason": "Game 47 is final, 41 to 39, with a full sheet: refs S and T, Official U on the table. Nobody has another game today, so everyone would be paid now ($45 per ref, $25 for the table). But PayPal was switched off, so I couldn't check whether this game was already paid, and nothing can be sent. Held.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 8898,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 3178
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 3178
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 3178
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 3178
+    },
+    {
+     "name": "decide",
+     "ms": 8898
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g067",
+  "finalAt": "2026-11-02T21:15:08.664Z",
+  "choice": "hold",
+  "reason": "Game 48 is final 42 to 40, and the sheet is complete: two refs (V, W) and table official X. None of them has a later game today, so all three are owed now: refs $45 each and table $25, $115 CAD in total. PayPal was switched off, so I couldn't check whether this game was already paid, and nothing could be sent. Held, not paid.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7093,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 1951
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 1951
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 1951
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 1951
+    },
+    {
+     "name": "decide",
+     "ms": 7093
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g048",
+  "finalAt": "2026-11-02T21:15:15.840Z",
+  "choice": "hold",
+  "reason": "Game 49 is final 43 to 41 and the sheet is full (two refs and a table official, all paid per game, none with a later game). But I couldn't check PayPal to see if this game was already paid, because PayPal is switched off right now, so nothing was paid. Also, the game was scheduled for May 16 but only went final on Nov 2.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7541,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2363
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2363
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2363
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2363
+    },
+    {
+     "name": "decide",
+     "ms": 7541
+    }
+   ]
+  }
+ },
+ {
+  "gameId": "g057",
+  "finalAt": "2026-11-02T21:15:23.394Z",
+  "choice": "hold",
+  "reason": "Game 50 (Highland v Hilltop, 44–42) is final and the sheet is complete: two refs (D, E) and one table official (F), all paid per game. But I couldn't check PayPal to see whether this game was already paid, because PayPal is switched off, so I'm holding it and paying nobody.",
+  "agent": {
+   "model": "claude-opus-5-5",
+   "ms": 7116,
+   "calls": 2,
+   "steps": [
+    {
+     "name": "read_game_sheet",
+     "ms": 2442
+    },
+    {
+     "name": "read_rate_card",
+     "ms": 2442
+    },
+    {
+     "name": "check_paypal_for_game",
+     "ms": 2442
+    },
+    {
+     "name": "officials_day_schedule",
+     "ms": 2442
+    },
+    {
+     "name": "decide",
+     "ms": 7115
+    }
+   ]
+  }
+ }
+]

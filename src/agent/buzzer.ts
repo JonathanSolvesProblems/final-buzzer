@@ -15,7 +15,7 @@ import { expected, verifyPayNow, senderBatchId, senderItemId, type GuardVerdict 
 import { decideTool, type Decision } from "./decision.ts";
 import { runLoop, type ToolDef, type TraceStep } from "./loop.ts";
 import { createPayout, getPayout, waitForPayout, isPayoutError, type StructuredError } from "../paypal/payouts.ts";
-import { event, type Ledger, type LedgerPayout } from "../ledger.ts";
+import { event, type Ledger, type LedgerPayout, type AgentRun } from "../ledger.ts";
 
 export type PayPalMode = "live" | "dry" | "off";
 
@@ -168,12 +168,15 @@ export async function runBuzzer(o: BuzzerOptions): Promise<BuzzerResult> {
     }
   }
 
+  // the agent's own run, kept with the record so the board can show what it read and when it chose
+  const agentRun: AgentRun | undefined = o.scripted ? undefined : { model: loop.model, ms: loop.ms, calls: loop.calls, steps: trace.filter((s) => s.kind === "tool" && s.name).map((s) => ({ name: s.name!, ms: s.ms })) };
+
   // ---- enforcement: the guards, then PayPal ------------------------------------------------------
   const done = (partial: Partial<BuzzerResult> & { outcome: Outcome }): BuzzerResult =>
     ({ ...base, decision, blockedBy: null, guard: null, payout: null, hold: null, folded: [], error: null, loop, trace, ...partial });
 
   if (decision.choice === "hold") {
-    const hold = { gameId: game.id, number: game.number, at: new Date().toISOString(), reason: decision.reason, question: decision.question_for_treasurer ?? null, flags: decision.flags, by: "agent" as const };
+    const hold = { gameId: game.id, number: game.number, at: new Date().toISOString(), reason: decision.reason, question: decision.question_for_treasurer ?? null, flags: decision.flags, by: "agent" as const, agent: agentRun };
     ledger.holds[game.id] = hold;
     event(ledger, "hold", { gameId: game.id, number: game.number, detail: decision.reason });
     return done({ outcome: "held", hold: { question: hold.question, reason: hold.reason } });
@@ -183,7 +186,7 @@ export async function runBuzzer(o: BuzzerOptions): Promise<BuzzerResult> {
   if (decision.choice === "fold") {
     if (exp.holdReasons.length) {
       const reason = `the card says hold, so nothing folds: ${exp.holdReasons.join("; ")}`;
-      ledger.holds[game.id] = { gameId: game.id, number: game.number, at: new Date().toISOString(), reason, question: decision.question_for_treasurer ?? null, flags: decision.flags, by: "guard" };
+      ledger.holds[game.id] = { gameId: game.id, number: game.number, at: new Date().toISOString(), reason, question: decision.question_for_treasurer ?? null, flags: decision.flags, by: "guard", agent: agentRun };
       return done({ outcome: "blocked", blockedBy: "guard", guard: { ok: false, reason, checked: [] }, hold: { question: decision.question_for_treasurer ?? null, reason } });
     }
     for (const i of exp.items) (ledger.folds[i.official_id] ??= []).push({ gameId: game.id, number: game.number, official_id: i.official_id, role: i.role, amount: money(i.amount), at: new Date().toISOString() });
@@ -195,7 +198,7 @@ export async function runBuzzer(o: BuzzerOptions): Promise<BuzzerResult> {
   const verdict = verifyPayNow(decision, game, sheet, card);
   if (!verdict.ok) {
     const reason = `guard blocked the payout: ${verdict.reason}`;
-    ledger.holds[game.id] = { gameId: game.id, number: game.number, at: new Date().toISOString(), reason, question: decision.question_for_treasurer ?? `Game ${game.number}: the agent wanted to pay but the gate stopped it (${verdict.reason}). What should be paid?`, flags: decision.flags, by: "guard" };
+    ledger.holds[game.id] = { gameId: game.id, number: game.number, at: new Date().toISOString(), reason, question: decision.question_for_treasurer ?? `Game ${game.number}: the agent wanted to pay but the gate stopped it (${verdict.reason}). What should be paid?`, flags: decision.flags, by: "guard", agent: agentRun };
     event(ledger, "guard_block", { gameId: game.id, number: game.number, detail: verdict.reason });
     return done({ outcome: "blocked", blockedBy: "guard", guard: verdict, hold: { question: ledger.holds[game.id].question, reason } });
   }
@@ -214,6 +217,7 @@ export async function runBuzzer(o: BuzzerOptions): Promise<BuzzerResult> {
     gameId: game.id, number: game.number, senderBatchId: sbid, batchId: null, status: "NOT_SENT",
     items: items.map((i) => ({ official_id: i.official_id, role: i.role, amount: i.amount, receiver: i.receiver })),
     finalAt: o.finalAt.toISOString(), createdAt: new Date().toISOString(), decidedBy: o.scripted ? "script" : "agent", provisional: card.provisional,
+    agent: agentRun,
   };
 
   if (o.paypal === "off") {
@@ -230,7 +234,7 @@ export async function runBuzzer(o: BuzzerOptions): Promise<BuzzerResult> {
   if (isPayoutError(created)) {
     if (created.errorCategory === "duplicate") {
       const reason = created.message;
-      ledger.holds[game.id] = { gameId: game.id, number: game.number, at: new Date().toISOString(), reason, question: `Game ${game.number} already shows a payout on PayPal (${created.existingBatchId ?? "batch id not given"}). Nothing more was sent. Confirm?`, flags: { ...decision.flags, already_paid: true }, by: "paypal" };
+      ledger.holds[game.id] = { gameId: game.id, number: game.number, at: new Date().toISOString(), reason, question: `Game ${game.number} already shows a payout on PayPal (${created.existingBatchId ?? "batch id not given"}). Nothing more was sent. Confirm?`, flags: { ...decision.flags, already_paid: true }, by: "paypal", agent: agentRun };
       event(ledger, "paypal_duplicate", { gameId: game.id, number: game.number, detail: created.existingBatchId });
       return done({ outcome: "blocked", blockedBy: "paypal", guard: verdict, error: created, hold: { question: ledger.holds[game.id].question, reason } });
     }

@@ -186,6 +186,22 @@ function payTable(items, title) {
   return `<h3>${title}</h3><table class="d-pay"><tbody>${items.map((x) => `<tr><th scope="row">${enc(who(x.official_id))}</th><td>${cap(roleName(x.role))}</td><td class="num">${money(x.amount)}</td></tr>`).join("")}</tbody>` +
     `<tfoot><tr><th scope="row">Total</th><td></td><td class="num">${money(total)}</td></tr></tfoot></table>`;
 }
+/** What the agent asked for, in the reader's words. */
+const READ = { read_game_sheet: "the game sheet", read_rate_card: "the rate card", check_paypal_for_game: "PayPal's record of this game", officials_day_schedule: "the officials' day" };
+const listOf = (xs) => xs.length < 2 ? xs.join("") : xs.slice(0, -1).join(", ") + " and " + xs.at(-1);
+/** The agent's run as timed steps from the buzzer: its reads grouped by the turn that asked for them, then its choice.
+ * The run's clock starts at loopStart = (when the record was written) minus (how long the run took). */
+function agentSteps(p, decided, choice) {
+  const a = p.agent; if (!a?.steps?.length || decided == null) return [];
+  const start = decided - a.ms / 1000;
+  const turns = new Map();
+  // reads asked for in the same turn land within a few ms of each other: one line per tenth of a second
+  for (const s of a.steps) { if (s.name === "decide") continue; const k = Math.round(s.ms / 100); (turns.get(k) ?? turns.set(k, []).get(k)).push(READ[s.name] ?? s.name.replace(/_/g, " ")); }
+  const out = [...turns].sort((x, y) => x[0] - y[0]).map(([k, names]) => [Math.max(0, start + k / 10), `The agent asked for ${listOf(names)}`]);
+  const dec = a.steps.find((s) => s.name === "decide");
+  if (dec) out.push([Math.max(0, start + dec.ms / 1000), choice]);
+  return out;
+}
 /** From the buzzer to the money: each step timed from the ledger's own timestamps, on a 60 second ruler. */
 function timeline(p) {
   if (!p.finalAt) return "";
@@ -193,14 +209,17 @@ function timeline(p) {
   const decided = p.createdAt ? (new Date(p.createdAt) - new Date(p.finalAt)) / 1000 : null;
   const done = p.secondsFromBuzzer;
   const steps = [[0, "Final saved on the scorer's phone"]];
-  if (decided != null && decided >= 0) steps.push([decided, sam ? "Sam made the call, and the pay went to PayPal" : "The agent checked the sheet, the rate card and PayPal's record, then sent the pay"]);
+  const agent = sam ? [] : agentSteps(p, decided, `The agent chose to pay now${p.agent?.calls ? `, after ${p.agent.calls} turns` : ""}`);
+  steps.push(...agent);
+  if (decided != null && decided >= 0) steps.push([decided, sam ? "Sam made the call, and the pay went to PayPal" : agent.length ? "The gate checked every amount against the rate card; the pay went to PayPal Payouts" : "The agent checked the sheet, the rate card and PayPal's record, then sent the pay"]);
   if (done != null) steps.push([done, `PayPal confirmed all ${p.items.length} officials paid`]);
   else if (p.status === "DRY_RUN") steps.push([null, "Dry run: PayPal was not called"]);
   let ruler = "";
   if (!sam && done != null) {
     const scale = done > 60 ? Math.ceil(done / 30) * 30 : 60;
     const at = (v) => Math.min(100, (v / scale) * 100).toFixed(1);
-    ruler = `<div class="ruler" role="img" aria-label="Paid ${done} seconds after the buzzer, on a ${scale} second scale"><i class="fill" style="width:${at(done)}%"></i>${decided != null ? `<i class="mark" style="left:${at(decided)}%"></i>` : ""}</div>` +
+    const marks = [...agent.map(([t]) => t), ...(decided != null ? [decided] : [])];
+    ruler = `<div class="ruler" role="img" aria-label="Paid ${done} seconds after the buzzer, on a ${scale} second scale"><i class="fill" style="width:${at(done)}%"></i>${marks.map((t) => `<i class="mark" style="left:${at(t)}%"></i>`).join("")}</div>` +
       `<div class="ruler-scale" aria-hidden="true"><span class="num">0</span><span class="num">${scale / 2}&#8239;s</span><span class="num">${scale}&#8239;s</span></div>`;
   }
   return `<h3>From the buzzer to the money</h3>${ruler}<ol class="steps">${steps.map(([t, w]) => `<li><span class="num">${t == null ? "" : fmtS(t)}</span><span>${w}</span></li>`).join("")}</ol>`;
