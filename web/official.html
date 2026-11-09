@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Final Buzzer: an official's pay</title>
+<meta name="description" content="An official's weekend at the Northside Invitational: every game worked, what it paid, and how soon after the buzzer PayPal confirmed it.">
+<meta name="theme-color" content="#E9EAEC">
+<link rel="icon" href="/brand/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/brand/apple-touch-icon-180.png">
+<link rel="stylesheet" href="/board.css">
+<link rel="stylesheet" href="/official.css">
+</head>
+<body class="official-page">
+<a class="skip" href="#board">Skip to the pay</a>
+<div class="page">
+  <header class="table-top">
+    <a class="lockup" href="/" aria-label="Final Buzzer"><img class="wm" src="/brand/wordmark.svg" alt="Final Buzzer" width="137" height="27"></a>
+    <nav class="nav" aria-label="Pages"><a href="/">The board</a><a href="/score.html">Score a game</a><a href="/money.html">The money</a><a href="/official.html" aria-current="page">Officials</a></nav>
+    <p class="status"><i class="dot" aria-hidden="true"></i><span id="source">Connecting</span></p>
+  </header>
+
+  <main class="housing" id="board" tabindex="-1">
+    <p class="context">The page an official opens on their phone after a game: every game they worked this weekend, what it paid and how soon after the buzzer PayPal confirmed it. Officials are labelled A to X.</p>
+    <nav class="pick who-pick" id="who-pick" aria-label="Choose an official"></nav>
+    <section class="me" aria-labelledby="me-name">
+      <div class="me-head">
+        <h1 id="me-name">Official</h1>
+        <p id="me-pref"></p>
+      </div>
+      <p class="tally" id="me-tally"></p>
+    </section>
+    <div id="days"></div>
+  </main>
+
+  <footer>Northside Youth Basketball is a labelled composite. Officials are labelled A to X; amounts are PayPal sandbox test money on a provisional rate card. Tap a game to open it on the board.</footer>
+</div>
+<script type="module" src="/official.js"></script>
+</body>
+</html>

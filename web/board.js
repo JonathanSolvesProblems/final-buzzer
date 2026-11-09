@@ -183,7 +183,7 @@ function onSheet(g) {
 function payTable(items, title) {
   if (!items.length) return "";
   const total = items.reduce((t, x) => t + Number(x.amount), 0);
-  return `<h3>${title}</h3><table class="d-pay"><tbody>${items.map((x) => `<tr><th scope="row">${enc(who(x.official_id))}</th><td>${cap(roleName(x.role))}</td><td class="num">${money(x.amount)}</td></tr>`).join("")}</tbody>` +
+  return `<h3>${title}</h3><table class="d-pay"><tbody>${items.map((x) => `<tr><th scope="row"><a href="/official.html#${enc(String(x.official_id).replace(/^off-/, ""))}">${enc(who(x.official_id))}</a></th><td>${cap(roleName(x.role))}</td><td class="num">${money(x.amount)}</td></tr>`).join("")}</tbody>` +
     `<tfoot><tr><th scope="row">Total</th><td></td><td class="num">${money(total)}</td></tr></tfoot></table>`;
 }
 /** What the agent asked for, in the reader's words. */
