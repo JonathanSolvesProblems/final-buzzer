@@ -183,14 +183,14 @@ _eve_batches = len({m["senderBatchId"] for m in RC["matched"] if not re.search(r
 _status = {}
 for m in RC["matched"]:
     _status[m["payout_status"]] = _status.get(m["payout_status"], 0) + 1
-RECON_TERM = f"""<div class="term fit" style="font-size:20px;line-height:1.7;padding:34px 40px">$ node src/cli/reconcile.ts <span class="k">&gt; results/reconcile.json</span>
+RECON_TERM = f"""<div class="term fit" style="font-size:18px;line-height:1.8;padding:34px 40px">$ node src/cli/reconcile.ts <span class="k">&gt; results/reconcile.json</span>
 
 <span class="k">window   </span> {RC["window"]["start"][:16].replace("T", " ")}Z to {RC["window"]["end"][:16].replace("T", " ")}Z
 <span class="k">listed   </span> {RC["transactions_listed"]} transactions in PayPal's search
 <span class="k">matched  </span> <span class="c">{RC["matched_items"]} of {len(RC["matched"]) + len(RC["pending"])}</span> ledger payout items, by item id
 <span class="k">items    </span> {_game_items} in {RC["games_confirmed_by_paypal"]} game batches
           {_eve_items} in {_eve_batches} evening batches
-<span class="k">status   </span> {_status.get("UNCLAIMED", 0)} unclaimed (test receivers), {_status.get("SUCCESS", 0)} claimed
+<span class="k">status   </span> {_status.get("UNCLAIMED", 0)} unclaimed by test receivers, {_status.get("SUCCESS", 0)} claimed
 <span class="k">dollars  </span> <span class="c">{RC["dollars_confirmed_by_paypal"]:,} CAD</span> confirmed by PayPal
 <span class="k">fees     </span> {RC["payout_fees"]} CAD in PayPal payout fees
 <span class="k">missing  </span> <span class="c">{RC["not_yet_in_transaction_search"]}</span>
@@ -242,7 +242,7 @@ def build():
     return [
         {
             "id": "board", "badge": "PayPal sandbox · Saturday replayed 2 Nov 2026",
-            "html": COVER, "image": "tmp/shots/slide-board.png", "crop": [0, 366, 1266, 320],
+            "html": COVER, "image": "tmp/shots/slide-board.png", "crop": [0, 366, 1212, 320],
             "caption": "Saturday's 34 games replayed live through the agent and the PayPal sandbox: 28 paid, 81 officials, $3,145, a median of 40.2 seconds from the saved score to PayPal's confirmation. Every tile on the board is a game and its face is its money state. Live at " + URL + ".",
         },
         {
