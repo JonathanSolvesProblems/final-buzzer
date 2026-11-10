@@ -1,37 +1,33 @@
-npm warn deprecated har-validator@5.1.5: this library is no longer supported
-npm warn deprecated uuid@3.4.0: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
-npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
-npm warn deprecated @faker-js/faker@5.5.3: Please update to a newer version.
-(node:37144) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(node:46360) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
 (Use `node --trace-deprecation ...` to show where the warning was created)
 newman
 
 Final Buzzer: the public checks
 
 → The board is up
-  GET https://finalbuzzer.jonathansolvesproblems.com/ [200 OK, 6.89kB, 143ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/ [200 OK, 6.93kB, 146ms]
   √  200
   √  it is the board
 
 → The scorer's page is up
-  GET https://finalbuzzer.jonathansolvesproblems.com/score.html [200 OK, 3.73kB, 23ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/score.html [200 OK, 3.78kB, 23ms]
   √  200
   √  anyone can score from it
 
 → The tournament document
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/tournament [200 OK, 48.25kB, 38ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/tournament [200 OK, 48.25kB, 75ms]
   √  200 JSON
   √  88 games over 4 days
   √  every game has an id, a start and a status
 
 → The rate card
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/rate-card [200 OK, 813B, 18ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/rate-card [200 OK, 813B, 30ms]
   √  200 JSON
   √  $45 a referee, $25 a table official
   √  the card says it is provisional
 
 → The ledger: every payout confirmed by PayPal, every amount on the card
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/ledger [200 OK, 81.77kB, 36ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/ledger [200 OK, 81.77kB, 58ms]
   √  200 JSON
   √  at least Saturday's 28 games paid
   √  every successful payout carries a PayPal batch id and a completion time
@@ -42,33 +38,33 @@ Final Buzzer: the public checks
   √  game 17 is held: PayPal already showed it paid
 
 → The agent is on duty
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/agent [200 OK, 289B, 22ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/agent [200 OK, 289B, 33ms]
   √  200 JSON
   √  a heartbeat under two minutes old, on the PayPal sandbox
 
 → The daily cap on agent runs
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/budget [200 OK, 185B, 17ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/budget [200 OK, 185B, 24ms]
   √  200 JSON
   √  used never exceeds the limit
 
 → Every webhook logged was signature-verified
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/webhooks [200 OK, 1.2kB, 19ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/webhooks [200 OK, 1.2kB, 27ms]
   √  200
   √  at least one event from PayPal
   √  each one verified against the registered webhook
 
 → Sam's tap is refused without the treasurer's PIN
-  POST https://finalbuzzer.jonathansolvesproblems.com/api/holds/g053 [401 Unauthorized, 242B, 22ms]
+  POST https://finalbuzzer.jonathansolvesproblems.com/api/holds/g053 [401 Unauthorized, 242B, 42ms]
   √  401
   √  it asks for the PIN and does nothing
 
 → Closing a gym is refused without the treasurer's PIN
-  POST https://finalbuzzer.jonathansolvesproblems.com/api/replan [401 Unauthorized, 242B, 21ms]
+  POST https://finalbuzzer.jonathansolvesproblems.com/api/replan [401 Unauthorized, 242B, 42ms]
   √  401
   √  it asks for the PIN
 
 → The held game is still held
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/ledger [200 OK, 81.77kB, 22ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/ledger [200 OK, 81.77kB, 102ms]
   √  200
   √  the refused tap changed nothing
 
@@ -85,9 +81,9 @@ Final Buzzer: the public checks
 ├─────────────────────────┼───────────────────┼───────────────────┤
 │              assertions │                31 │                 0 │
 ├─────────────────────────┴───────────────────┴───────────────────┤
-│ total run duration: 1305ms                                      │
+│ total run duration: 1538ms                                      │
 ├─────────────────────────────────────────────────────────────────┤
-│ total data received: 223.8kB (approx)                           │
+│ total data received: 223.88kB (approx)                          │
 ├─────────────────────────────────────────────────────────────────┤
-│ average response time: 34ms [min: 17ms, max: 143ms, s.d.: 34ms] │
+│ average response time: 54ms [min: 23ms, max: 146ms, s.d.: 37ms] │
 └─────────────────────────────────────────────────────────────────┘
