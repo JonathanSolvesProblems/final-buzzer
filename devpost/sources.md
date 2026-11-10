@@ -31,6 +31,7 @@ disagrees. Placeholders are marked as such in the data files and on the board.
 | 88 games, 12 courts, 8 divisions, 52 teams, the start times and the playoff order | everywhere | `tournament-2026.json`: the shape of a real 88-game invitational with every name and id replaced |
 | $45 a referee and $25 a table official per game | the rate card, every payout | `rate-card.json`, marked `provisional`: a placeholder until an association supplies its own card. For scale, the Central Blair Recreation and Park Commission pays $20 to $24 US per event (Altoona Mirror, below) |
 | $350 entry fee; "$17,500 entry fees in" on the money page | invoices, refunds, the money page | `fees.json`, marked `provisional`; 50 paid teams at $350 |
+| A refund through the MCP server's `create_refund`, $175, COMPLETED, 10 November 2026 | the write-up, the README | `results/replan-paypal-refund.json`: invoice NYB26C-015-PP paid through PayPal by a sandbox buyer, refund `8XF64638PY750900U` against capture `27C4904956561835U`. The same file records the other team's payout refused for lack of sandbox balance |
 | Refund when a game cannot be played: entry fee divided by the games the team was scheduled to play | the re-plan | `fees.json`, placeholder wording until an association's own policy |
 | Officials A to X, four of them paid once a day; one staged forfeit; one staged missing table official | the sheet, the board | `officials-2026.json`, labelled generated and staged |
 
