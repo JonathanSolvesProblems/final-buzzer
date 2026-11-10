@@ -16,7 +16,7 @@ Built for the PayPal AI Hackathon, November 2026, by [Jonathan Andrei](https://j
 
 ## How to run it
 
-Node 24 (it runs the TypeScript directly, no build step). Checked on a clean clone, 7 November 2026:
+Node 24 (it runs the TypeScript directly, no build step). Checked on a clean clone with no keys, 10 November 2026:
 
 ```
 git clone https://github.com/JonathanSolvesProblems/final-buzzer.git
@@ -26,9 +26,9 @@ npm test          # 33 tests: the money gate, the feed, the re-plan rules, Sam's
 npm run board     # http://localhost:4173/  the board, /score.html, /money.html, /official.html
 ```
 
-With no keys the board serves the committed results read-only. To have the agent pay live on the PayPal sandbox, add a sandbox app and a Claude key (`copy .env.example .env`, steps in `docs/SANDBOX-SETUP.md`), then run `node src/cli/watch.ts` beside the board and score a game on `/score.html`. A public copy also sets `SAM_PIN` (the board asks for it before a tap pays or a gym closes; scoring stays open) and `MODEL_RUNS_PER_DAY`. Every other command is under [All commands](#all-commands).
+`npm run board` keeps the terminal and prints the address. With no keys the board shows the committed results: Sam's taps and gym closures are refused, and a score saved on `/score.html` is written to `data/tournament-2026.json` with no agent to act on it (`git checkout -- data` undoes it). To have the agent pay live on the PayPal sandbox, add a sandbox app and a Claude key (`cp .env.example .env`, or `copy` on Windows; steps in `docs/SANDBOX-SETUP.md`), then run `node src/cli/watch.ts` beside the board and score a game on `/score.html`. A public copy also sets `SAM_PIN` (the board asks for it before a tap pays or a gym closes; scoring stays open) and `MODEL_RUNS_PER_DAY`. Every other command is under [All commands](#all-commands).
 
-The public checks: `npx newman run postman/final-buzzer.postman_collection.json` runs 11 requests and 31 assertions against the live site, read-only (add `--env-var baseUrl=http://localhost:4173` for your own copy): every successful payout carries a PayPal batch id and a completion time, every amount is on the rate card, the agent's run is kept with its payouts, every logged webhook was signature-verified, and Sam's tap and a gym closure are refused without the PIN. The last run is committed as `results/postman-run.txt`, 0 failures.
+The public checks: `npx newman run postman/final-buzzer.postman_collection.json` runs 11 requests and 31 assertions against the live site, read-only: every successful payout carries a PayPal batch id and a completion time, every amount is on the rate card, the agent's run is kept with its payouts, every webhook in the public log was signature-verified (an event whose signature fails is rejected and kept out of it), and Sam's tap and a gym closure are refused without the PIN. The last run is committed as `results/postman-run.txt`, 0 failures.
 
 ## What the agent decides, and where
 
@@ -59,7 +59,7 @@ Everything runs on the PayPal sandbox with test money. Nothing here has touched 
 ## All commands
 
 ```
-copy .env.example .env         # the sandbox app and the Claude key, see docs/SANDBOX-SETUP.md
+cp .env.example .env           # the sandbox app and the Claude key, see docs/SANDBOX-SETUP.md
 node src/cli/build-sheet.ts    # the officials' sheet for the 88 games
 node src/cli/build-teams.ts    # the teams to invoice
 
@@ -77,7 +77,7 @@ npm test                       # the guards, the feed, the re-plan rules
 npm run check                  # fails when this file's numbers disagree with results/
 ```
 
-Ablations: `replay.ts --paypal off` runs the same day with PayPal removed (the agent decides, nothing can be paid), and `replay.ts --scripted` replaces the model with a fixed rule.
+Ablations: `replay.ts --paypal off` runs the same day with PayPal removed (the agent decides, nothing can be paid), and `replay.ts --scripted` replaces the model with a fixed rule. Both need the sandbox keys and write over the committed files in `results/`; `replay.ts --limit 5 --paypal dry` is the look that sends nothing.
 
 ## What is real and what is staged
 
@@ -85,6 +85,7 @@ Ablations: `replay.ts --paypal off` runs the same day with PayPal removed (the a
 - The officials' sheet is generated (`data/officials-2026.json`) and says so: Officials A to X with sandbox addresses, four of whom asked to be paid once a day.
 - The rate card (`data/rate-card.json`) and the entry fee (`data/fees.json`) are placeholders marked `provisional: true`, and the board says so.
 - Two game cases are staged and labelled in the sheet file: one forfeit, one game with no table official. The chase replay stages when teams pay, one manager's reply and one waitlisted team, labelled in `data/teams-2026.json`.
+- "Paid" means PayPal completed the payout batch. The officials are test addresses, so PayPal holds each item as unclaimed until that address opens an account; an official routed to a real sandbox account (Official A, game 9) shows the money received.
 - Scores in the replay are replay values. Seconds from buzzer to payout are PayPal's completion time against the moment the score was saved.
 - The Bryntum build is the trial and prints its watermark.
 - Not built, though planned: checkout for family registration (Orders and the JS SDK), subscriptions for program fees, disputes, and a rate-card editor so the forfeit hold resolves on the board.

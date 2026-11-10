@@ -26,7 +26,8 @@ const num = (s: string) => Number(s.replace(/,/g, ""));
 
 const readme = (await read("README.md")) ?? "";
 const script = (await read("DEMO-SCRIPT.md")) ?? "";
-const docs = [["README.md", readme], ["DEMO-SCRIPT.md", script]] as const;
+const slides = (await read("devpost/slides/slides.py")) ?? "";
+const docs = [["README.md", readme], ["DEMO-SCRIPT.md", script], ["devpost/slides/slides.py", slides]] as const;
 const card = JSON.parse((await read("data/rate-card.json"))!);
 const replay = await readJson("results/buzzer-replay.json");
 const first = await read("results/first-live-run.json");
@@ -95,6 +96,7 @@ if (replan) {
 
 // 3. claims that must never appear
 // the public checks: the README's request and assertion counts, and "0 failures", come from newman's last run
+if (!postman && /\d+ requests and \d+ assertions/.test(readme)) say("README states the public checks' counts but results/postman-run.txt is missing");
 if (postman) {
   const plain = postman.replace(/│/g, "|");
   const req = plain.match(/requests\s*\|\s*(\d+)\s*\|\s*(\d+)/), asr = plain.match(/assertions\s*\|\s*(\d+)\s*\|\s*(\d+)/);
@@ -110,7 +112,7 @@ const banned: Array<[RegExp, string]> = [
   [/\bno human in the loop\b/i, "Sam is in the loop by design"],
   [/every official (was|got) paid/i, "held games are not paid; say how many were"],
   [/most clubs/i, "no source says how most clubs pay; say how the composite's teams paid"],
-  [/fixed rule[^.]*paid (a second time|twice)|swap the agent for a fixed rule/i, "the scripted ablation never reads PayPal, so it does not test the duplicate; credit the model only with the folds, the PayPal read and Sam's question"],
+  [/(fixed |scripted |the )rule[^.]*(paid|pays)[^.]*(a second time|twice|duplicate)|swap the agent for a fixed rule/i, "the scripted ablation never reads PayPal, so it does not test the duplicate; credit the model only with the folds, the PayPal read and Sam's question"],
 ];
 for (const [re, why] of banned) for (const [name, text] of docs) if (re.test(text)) say(`${name}: "${text.match(re)![0]}" (${why})`);
 if (card.provisional && /\$45 a ref.*Sam confirmed/i.test(readme)) say("README says Sam confirmed the card; data/rate-card.json says provisional");

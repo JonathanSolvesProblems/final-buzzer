@@ -26,8 +26,21 @@ const PAYPAL_MODE = (process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_MODE !==
  *  SAM_PIN and asks for it in a header; unset (local runs, the board test) means no PIN. Scoring stays open:
  *  that is the table official's job, and the agent's daily budget caps what it can cost. */
 const SAM_PIN = process.env.SAM_PIN ?? "";
-const samAllowed = (req: IncomingMessage) => !SAM_PIN || String(req.headers["x-sam-pin"] ?? "") === SAM_PIN;
-const notSam = (req: IncomingMessage) => ({ ok: false, needsPin: true, message: req.headers["x-sam-pin"] ? "That is not the treasurer's PIN." : "This is Sam's call. Enter the treasurer's PIN to act as Sam." });
+const wrongPins = new Map<string, { n: number; until: number }>();
+const caller = (req: IncomingMessage) => String(req.headers["x-forwarded-for"] ?? req.socket.remoteAddress ?? "").split(",")[0].trim();
+const lockedOut = (req: IncomingMessage) => { const w = wrongPins.get(caller(req)); return !!w && w.n >= 5 && Date.now() < w.until; };
+/** A copy with no PayPal keys shows the committed results and never rewrites them: Sam's actions need the sandbox. */
+const KEYLESS = !process.env.PAYPAL_CLIENT_ID;
+function samAllowed(req: IncomingMessage) {
+  if (KEYLESS) return false;
+  if (!SAM_PIN) return true;
+  if (lockedOut(req)) return false;
+  const given = String(req.headers["x-sam-pin"] ?? "");
+  if (given === SAM_PIN) { wrongPins.delete(caller(req)); return true; }
+  if (given) { const w = wrongPins.get(caller(req)); const fresh = !w || Date.now() >= w.until; wrongPins.set(caller(req), { n: fresh ? 1 : w.n + 1, until: Date.now() + 10 * 60_000 }); }
+  return false;
+}
+const notSam = (req: IncomingMessage) => ({ ok: false, needsPin: true, message: KEYLESS ? "This copy has no PayPal sandbox keys, so it shows the committed results and Sam's actions are off. Add keys to .env to act as Sam." : lockedOut(req) ? "Too many wrong PINs from here. Try again in ten minutes." : req.headers["x-sam-pin"] ? "That is not the treasurer's PIN." : "This is Sam's call. Enter the treasurer's PIN to act as Sam." });
 
 /** Sam's tap on a held game: POST /api/holds/<gameId> {"choice":"pay_full"|"pay_show_up"|"pay_nobody"} */
 async function treasurerDecides(gameId: string, choice: TreasurerChoice) {
@@ -50,11 +63,15 @@ const DOC = process.env.TOURNAMENT_FILE ?? "data/tournament-2026.json";
 
 /** The scorer's app saving a score: POST /api/games/<id> {"status":"final"|"forfeit"|"scheduled","hs":52,"as":47}.
  *  Bumps the document's version and stamps the save time on the game, which is the buzzer the agent measures from. */
-async function saveScore(gameId: string, body: { status?: string; hs?: number | null; as?: number | null; note?: string }) {
+/** A score is a whole number from 0 to 199 or nothing: the endpoint is open, so nothing else is ever stored. */
+const points = (v: unknown): number | null => (typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= 199 ? v : null);
+async function saveScore(gameId: string, body: { status?: unknown; hs?: unknown; as?: unknown }) {
   const doc = JSON.parse(await readFile(DOC, "utf8"));
   for (const d of doc.divisions) for (const g of d.games) if (g.id === gameId) {
     const status = body.status === "final" || body.status === "forfeit" ? body.status : "scheduled";
-    g.hs = body.hs ?? null; g.as = body.as ?? null; g.note = body.note ?? (status === "forfeit" ? "forfeit" : "");
+    g.hs = points(body.hs); g.as = points(body.as);
+    // the note is the server's own word, never the caller's; a game the re-plan moved keeps saying where it came from
+    g.note = status === "forfeit" ? "forfeit" : typeof g.note === "string" && g.note.startsWith("moved from") ? g.note : "";
     g.status = status; g.finalAt = status === "scheduled" ? null : new Date().toISOString();
     doc.version = (doc.version ?? 0) + 1; doc.updated_at = new Date().toISOString().replace("T", " ").slice(0, 19);
     await writeFile(DOC, JSON.stringify(doc, null, 2) + "\n");

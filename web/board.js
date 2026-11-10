@@ -41,7 +41,7 @@ function stateOf(g) {
   if (p && (p.status === "PENDING" || p.status === "PROCESSING")) return { kind: "paying", payout: p };
   if (p && p.status.startsWith("ERROR")) return { kind: "held", hold: { reason: `PayPal did not pay: ${p.status}`, question: null, at: p.createdAt } };
   if (folds.length) return { kind: "folded", folds };
-  if (g.status === "forfeit" && g.note.startsWith("not played")) return { kind: "unplayed" };
+  if (g.status === "forfeit" && String(g.note).startsWith("not played")) return { kind: "unplayed" };
   if (g.status !== "scheduled") return { kind: "final" }; // saved on the scorer's phone, the agent has not written yet
   return { kind: "scheduled" };
 }
@@ -72,9 +72,9 @@ function noteHTML(g, s) {
   if (s.kind === "held") return `<span class="note">${heldNote(s.hold)}</span>`;
   if (s.kind === "folded") return `<span class="note">Folds to end of day</span>`;
   if (s.kind === "live") return `<span class="note">In play</span>`;
-  if (s.kind === "final") return `<span class="note">${enc(g.status === "forfeit" ? "Forfeit" : "Final")}${g.hs != null ? ` ${g.hs} to ${g.as}` : ""}, agent working</span>`;
+  if (s.kind === "final") return `<span class="note">${enc(g.status === "forfeit" ? "Forfeit" : "Final")}${g.hs != null ? ` ${Number(g.hs)} to ${Number(g.as)}` : ""}, agent working</span>`;
   if (s.kind === "unplayed") return `<span class="note">Not played, refunded</span>`;
-  if (g.note.startsWith("moved from")) return `<span class="note">Moved, was ${enc(g.note.slice(11).split(":")[0])}</span>`;
+  if (String(g.note).startsWith("moved from")) return `<span class="note">Moved, was ${enc(g.note.slice(11).split(":")[0])}</span>`;
   return `<span class="note">${enc(sentence(g.division))}</span>`;
 }
 const vsHTML = (g) => g.home ? `<span>${enc(sh(g.home))}</span><span>v ${enc(sh(g.away))}</span>` : `<span>${enc(sentence(g.stage))}</span>`;
@@ -145,7 +145,8 @@ scheduler.element.addEventListener("click", (e) => {
 $("phone").addEventListener("click", (e) => { const li = e.target.closest("[data-game]"); if (li) openGame(li.dataset.game); });
 $("entries").addEventListener("click", (e) => { const li = e.target.closest("[data-game]"); if (li) openGame(li.dataset.game); });
 // the scorer's "Watch it on the board" lands here as /#<game id>
-addEventListener("hashchange", () => { if (location.hash.length > 1) openGame(decodeURIComponent(location.hash.slice(1))); });
+const hashId = () => { try { return decodeURIComponent(location.hash.slice(1)); } catch { return ""; } };
+addEventListener("hashchange", () => { if (location.hash.length > 1) openGame(hashId()); });
 $("scrim").addEventListener("click", () => closeGame());
 $("game-card").addEventListener("click", (e) => {
   if (e.target.closest("#game-close")) return closeGame();
@@ -208,10 +209,10 @@ function timeline(p) {
   const sam = p.decidedBy === "treasurer";
   const decided = p.createdAt ? (new Date(p.createdAt) - new Date(p.finalAt)) / 1000 : null;
   const done = p.secondsFromBuzzer;
-  const steps = [[0, "Final saved on the scorer's phone"]];
+  const steps = sam ? [] : [[0, "Final saved on the scorer's phone"]];
   const agent = sam ? [] : agentSteps(p, decided, `The agent chose to pay now${p.agent?.calls ? `, after ${p.agent.calls} turns` : ""}`);
   steps.push(...agent);
-  if (decided != null && decided >= 0) steps.push([decided, sam ? "Sam made the call, and the pay went to PayPal" : agent.length ? "The gate checked every amount against the rate card; the pay went to PayPal Payouts" : "The agent checked the sheet, the rate card and PayPal's record, then sent the pay"]);
+  if (decided != null && decided >= 0) steps.push([decided, sam ? "Sam made the call on the held game, and the pay went to PayPal" : agent.length ? "The gate checked every amount against the rate card; the pay went to PayPal Payouts" : "The agent checked the sheet, the rate card and PayPal's record, then sent the pay"]);
   if (done != null) steps.push([done, `PayPal confirmed all ${p.items.length} officials paid`]);
   else if (p.status === "DRY_RUN") steps.push([null, "Dry run: PayPal was not called"]);
   let ruler = "";
@@ -222,7 +223,7 @@ function timeline(p) {
     ruler = `<div class="ruler" role="img" aria-label="Paid ${done} seconds after the buzzer, on a ${scale} second scale"><i class="fill" style="width:${at(done)}%"></i>${marks.map((t) => `<i class="mark" style="left:${at(t)}%"></i>`).join("")}</div>` +
       `<div class="ruler-scale" aria-hidden="true"><span class="num">0</span><span class="num">${scale / 2}&#8239;s</span><span class="num">${scale}&#8239;s</span></div>`;
   }
-  return `<h3>From the buzzer to the money</h3>${ruler}<ol class="steps">${steps.map(([t, w]) => `<li><span class="num">${t == null ? "" : fmtS(t)}</span><span>${w}</span></li>`).join("")}</ol>`;
+  return `<h3>${sam ? "From Sam's tap to the money" : "From the buzzer to the money"}</h3>${ruler}<ol class="steps">${steps.map(([t, w]) => `<li><span class="num">${t == null ? "" : fmtS(t)}</span><span>${w}</span></li>`).join("")}</ol>`;
 }
 function gameCardHTML(g) {
   const s = kindWithClock(g, cursor());
@@ -234,12 +235,12 @@ function gameCardHTML(g) {
   const head = `<p class="d-kicker">Game <span class="num">${g.number}</span>, ${enc(sentence(g.division))}, ${enc(g.court)}, <span class="num">${g.start.slice(11)}</span></p><h2 id="game-title" tabindex="-1">${enc(matchup(g))}</h2>`;
   const folds = Object.values(ledger.folds).flat().filter((f) => f.gameId === g.id);
   const foldLine = folds.length ? `<p class="d-note">${folds.map((f) => `${enc(who(f.official_id))} (${roleName(f.role)}, ${money(f.amount)})`).join(", ")} asked to be paid once a day, so ${folds.length > 1 ? "their shares go" : "that share goes"} into the evening payout.</p>` : "";
-  const score = g.hs != null ? ` <span class="num">${g.hs}</span> to <span class="num">${g.as}</span>` : "";
+  const score = g.hs != null ? ` <span class="num">${Number(g.hs)}</span> to <span class="num">${Number(g.as)}</span>` : "";
   let face = s.kind, big, sub, body;
   if (s.kind === "paid") {
     const p = s.payout; const total = p.items.reduce((t, x) => t + Number(x.amount), 0);
     big = `Paid <span class="num">${money(total)}</span>`;
-    sub = s.dry ? "Dry run: PayPal was not called" : p.secondsFromBuzzer != null ? `<span class="num">${p.secondsFromBuzzer}</span> seconds after the buzzer, confirmed by PayPal` : "Confirmed by PayPal";
+    sub = s.dry ? "Dry run: PayPal was not called" : p.secondsFromBuzzer != null ? `<span class="num">${p.secondsFromBuzzer}</span> seconds after ${p.decidedBy === "treasurer" ? "Sam's tap" : "the buzzer"}, confirmed by PayPal` : "Confirmed by PayPal";
     body = timeline(p) + payTable(p.items, "Who was paid") + foldLine +
       (p.batchId ? `<div class="d-ref"><span>PayPal reference <span class="ref">${enc(p.batchId)}</span></span><button class="close-x" type="button" data-copy="${enc(p.batchId)}">Copy</button></div>` : "") +
       `<p class="d-note">${p.decidedBy === "treasurer" ? "Sam made this call." : "The agent decided. The rate card was checked in code before PayPal was called."}</p>`;
@@ -249,10 +250,12 @@ function gameCardHTML(g) {
     big = "Folds to end of day"; sub = "Paid with the evening payout, as the officials asked"; body = foldLine;
   } else if (s.kind === "final") {
     big = `Final${score}`; sub = "The agent is reading the sheet, the rate card and PayPal now"; body = payTable(onSheet(g), "On the sheet");
+  } else if (s.kind === "held") {
+    big = "Held for Sam"; sub = enc(heldNote(s.hold)); body = `<p class="d-note">${enc(s.hold.reason ?? "")}</p>` + payTable(onSheet(g), "On the sheet") + `<p class="d-note">Nothing was sent. The officials are paid when Sam decides.</p>`;
   } else if (s.kind === "unplayed") {
     big = "Not played"; sub = "The court closed and no other court could take it"; body = `<p class="d-note">${enc(g.note)}</p>`;
   } else {
-    big = s.kind === "live" ? "In play" : "Not started"; sub = "The officials are paid the moment the score is saved";
+    big = s.kind === "live" ? "In play" : "Not started"; sub = "The officials are paid about 40 seconds after the score is saved";
     body = payTable(onSheet(g), "Paid at the final buzzer") + `<p class="d-act"><a class="btn" href="/score.html#${enc(g.id)}">Score this game</a></p>`;
   }
   return `${bar}${head}<div class="d-flap ${face}"><span class="big">${big}</span><span class="sub">${sub}</span></div>${body}`;
@@ -282,11 +285,12 @@ function render() {
   $("money-day").textContent = `paid out ${new Date(day + "T12:00").toLocaleDateString("en-CA", { weekday: "long" })}`;
   const last = Object.values(ledger.payouts).filter((p) => p.status === "SUCCESS" && p.secondsFromBuzzer != null && dayGames.some((g) => g.id === p.gameId)).sort((a, b) => (b.completedAt ?? "").localeCompare(a.completedAt ?? ""))[0];
   if (last) {
-    const ss = String(Math.round(last.secondsFromBuzzer)).padStart(2, "0").slice(-2);
+    const mid = median(secs);
+    const ss = String(Math.round(mid)).padStart(2, "0").slice(-2);
     setDigit("p1", ss[0]); setDigit("p2", ss[1]);
     const g = T.games.find((x) => x.id === last.gameId);
-    $("secs-sr").textContent = `${last.secondsFromBuzzer} `;
-    $("last-game").textContent = `Game ${g.number}, the latest, at ${last.secondsFromBuzzer} s. Median today ${median(secs)} s.`;
+    $("secs-sr").textContent = `${mid} `;
+    $("last-game").textContent = `The median of ${secs.length} paid game${secs.length === 1 ? "" : "s"} today, ${mid} s. Game ${g.number}, the latest, took ${last.secondsFromBuzzer} s.`;
   } else { setDigit("p1", "0"); setDigit("p2", "0"); $("last-game").textContent = paid.length ? "Paid in a dry run: PayPal was not called, so there is no time to show." : "No payout yet today."; }
   $("p1").classList.toggle("ghosted", !last); $("p2").classList.toggle("ghosted", !last);
   $("count-line").textContent = `${paid.length} of ${dayGames.length} games paid, ${money(dollars)} paid out.`;
@@ -313,6 +317,8 @@ function render() {
     $("held-note").textContent = lastAnswer ?? "";
   } else card.hidden = true;
 
+  // a game the agent held while its drawer was open moves to Sam's card on the next draw
+  if (opened && ledger.holds[opened]) { picked = opened; opened = null; if (location.hash) history.replaceState(null, "", location.pathname + location.search); return render(); }
   const og = opened && dayGames.find((g) => g.id === opened);
   const dr = $("game-card");
   if (og) { const html = gameCardHTML(og); if (html !== drawerHTML) { dr.innerHTML = html; drawerHTML = html; } } else drawerHTML = "";
@@ -357,7 +363,10 @@ function renderPhone(dayGames, now) {
 function renderEntries() {
   const byId = new Map(T.games.map((g) => [g.id, g]));
   // "payout_created" is the step before "paid"; the log keeps the outcome only
-  const recent = ledger.events.filter((e) => e.kind !== "payout_created").slice(-6).reverse();
+  // PayPal's webhooks arrive several to a payout: one line per game, with the count
+  const kept = [];
+  for (const e of ledger.events) { if (e.kind === "payout_created") continue; const last = kept[kept.length - 1]; if (e.kind === "webhook" && last?.kind === "webhook" && last.gameId === e.gameId) { last.n += 1; last.at = e.at; } else kept.push({ ...e, n: 1 }); }
+  const recent = kept.slice(-6).reverse();
   const lines = recent.map((e) => {
     const g = byId.get(e.gameId); const t = new Date(e.at);
     const when = `<time class="num" datetime="${enc(e.at)}" title="${enc(t.toLocaleString("en-CA"))}">${hhmm(t)}</time>`;
@@ -375,6 +384,7 @@ function renderEntries() {
       case "treasurer_pay_nobody": return `${when}<span>${G}: Sam chose to pay nobody.</span>`;
       case "paypal_error": return `${when}<span>${G}: PayPal did not pay: ${enc(String(d ?? ""))}</span>`;
       case "no_paypal": return `${when}<span>${G}: PayPal switched off in this run; nothing could be sent.</span>`;
+      case "webhook": return `${when}<span>${G}: PayPal confirmed it by webhook${e.n > 1 ? `, ${e.n} events` : ""}, each signature verified.</span>`;
       default: return `${when}<span>${G} ${enc(e.kind)}</span>`;
     }
   });
@@ -384,7 +394,7 @@ function renderRate() {
   const c = card;
   $("rate").innerHTML = `<p><b>$${c.per_game.referee} a ref, $${c.per_game.table} a table official, per game.</b> Two refs and one table official on every game, so a full game pays $${c.per_game.referee * 2 + c.per_game.table}.</p>` +
     `<p>On a forfeit the card pays a show-up fee only, so the agent stops and hands the game to Sam. Show-up fee: ${c.forfeit.show_up_fee == null ? "not set yet" : "$" + c.forfeit.show_up_fee}.</p>` +
-    `<p>${c.provisional ? "Provisional until Sam sends his own card." : "Sam's card."} Officials appear as Official A, B and C until they agree to be named.</p>`;
+    `<p>${c.provisional ? "Provisional until Sam sends his own card." : "Sam's card."} Officials appear as Official A to X until they agree to be named.</p>`;
   $("held-card").dataset.showup = c.forfeit.show_up_fee == null ? "none" : "set";
   $("rate-h").textContent = c.provisional ? "Provisional rate card" : "The rate card";
 }
@@ -497,5 +507,5 @@ render();
 document.documentElement.classList.remove("booting");
 document.documentElement.classList.add("booted");
 setTimeout(() => { firstPaint = false; }, 1800);
-if (location.hash.length > 1) openGame(decodeURIComponent(location.hash.slice(1)));
+if (location.hash.length > 1) openGame(hashId());
 setInterval(poll, 2500);

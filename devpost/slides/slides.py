@@ -67,8 +67,8 @@ def hold(label, sentence, buttons, note=""):
 HELD = (
     '<div class="holds">'
     + hold("Game 17, Bantam boys, Gym EF, 9:00", "PayPal already shows this game paid: $115 to 3 officials. Nothing more was sent.<span class=was>Decided in 5.8 s after reading PayPal’s record of the game. Reading PayPal before it pays is the agent’s own work; the server refuses a second payment even if asked.</span>", ["Right, nothing more"])
-    + hold("Game 26, Mini boys, Gym D, 11:30", "Lakeshore 2 v Beacon was a forfeit. The rate card pays a show-up fee for a forfeit, but has no amount for it yet.<q>The card pays only a show-up fee for a forfeit, but it doesn’t say how much, so I can’t work out what to pay.</q>", ["Pay in full, $115", "Pay nobody"], "caught by the code gate")
-    + hold("Game 30, Gym CD, 12:45", "Pinecrest v Glenview has no table official on the sheet. Pay the 2 who are on it now, or nobody until the sheet says who sat at the table.<q>Nobody is paid until Sam confirms who was on the table.</q>", ["Pay the 2 on the sheet, $90", "Pay nobody"], "caught by the code gate")
+    + hold("Game 26, Mini boys, Gym D, 11:30", "Lakeshore 2 v Beacon was a forfeit. The rate card pays a show-up fee for a forfeit, but has no amount for it yet.<q>The card pays only a show-up fee for a forfeit, but it doesn’t say how much, so I can’t work out what to pay.</q>", ["Pay in full, $115", "Pay nobody"], "the code gate stops it too")
+    + hold("Game 30, Gym CD, 12:45", "Pinecrest v Glenview has no table official on the sheet. Pay the 2 who are on it now, or nobody until the sheet says who sat at the table.<q>Nobody is paid until Sam confirms who was on the table.</q>", ["Pay the 2 on the sheet, $90", "Pay nobody"], "the code gate stops it too")
     + '</div>'
     '<p class="small" style="margin:26px 0 10px;font-size:17px">On the board, behind the treasurer’s PIN. Game 17 as Sam sees it:</p>'
     '<div class="shot fixed" style="height:165px;width:876px"><img src="{IMAGE}" alt=""></div>'
@@ -89,7 +89,7 @@ FLOW = (
     + ARROW
     + node("PayPal sandbox", "Payouts, one batch per game. Invoicing through the MCP server. Transaction Search and Webhooks.", "POST /v1/payments/payouts · @paypal/mcp · verify-webhook-signature")
     + ARROW
-    + node("Where it lands", "The officials’ PayPal accounts and their own pages, the board, the money page, and one tap on Sam’s phone for a held game.", "/official.html · Bryntum Scheduler · AG Grid")
+    + node("Where it lands", "Each official’s pay at PayPal and on their own page, the board, the money page, and one tap on Sam’s phone for a held game.", "/official.html · Bryntum Scheduler · AG Grid")
     + '</div>'
     '<div class="band">Two more loops on the same stack: the entry fees before the weekend <code>src/agent/invoices.ts</code> and a gym closure on the day <code>src/agent/replan.ts</code></div>'
 )
@@ -122,7 +122,7 @@ def bar(segs, total, words=False, min_label=.03):
 CHASE = json.loads((ROOT / "results" / "chase.json").read_text(encoding="utf-8"))["outcomes"]
 CHASE_TOTAL = sum(CHASE.values())
 INVOICES = (
-    f'<p class="lead">{CHASE_TOTAL} decisions over 33 days, one per unpaid team per day, each the agent’s choice with PayPal’s record in hand</p>'
+    f'<p class="lead">{CHASE_TOTAL} decisions over 33 days of chasing, each the agent’s choice with PayPal’s record in hand</p>'
     + bar([("wait", CHASE["waited"], "waited"), ("rem", CHASE["reminded"], "reminders"), ("split", CHASE["split"], "split"), ("rel", CHASE["released"], "released")], CHASE_TOTAL, words=True).replace('class="bar"', 'class="bar tall"')
     + f'<div class="legend big"><span class="wait">{CHASE["waited"]} waited: not due yet, or reminded this week</span><span class="rem">{CHASE["reminded"]} reminders through PayPal</span><span class="split">{CHASE["split"]} split into a deposit and a balance</span><span class="rel">{CHASE["released"]} spot released to the waitlist</span></div>'
     '<div class="shot fixed" style="height:287px;margin-top:30px"><img src="{IMAGE}" alt=""></div>'
@@ -265,7 +265,7 @@ def build():
             "caption": "Three of Saturday's 34 games were held for Sam: a score saved twice, which PayPal already showed paid (the agent sent nothing more); a forfeit, whose show-up fee the rate card does not carry yet; and a game with no table official on the sheet. Each shows one sentence and the choices that make sense; Sam's tap pays through the same gate and the same PayPal call as the agent.",
         },
         {
-            "id": "words", "badge": "results/trace · Saturday 2 Nov 2026", "dark": True,
+            "id": "words", "badge": "results/trace · replayed 2 Nov 2026", "dark": True,
             "headline": "The agent’s own words on three games",
             "html": WORDS_HTML,
             "caption": "Each decision is a schema-checked tool call (src/agent/decision.ts) with a reason in the scorer's words. Three of Saturday's 34, as recorded: a plain payment after reading PayPal's record, a fold for officials who asked to be paid once a day, and a question for Sam about a missing table official.",
@@ -274,7 +274,7 @@ def build():
             "id": "how", "badge": "src/agent · PayPal sandbox",
             "headline": "Claude chooses and code checks every cent",
             "html": FLOW, "stage_style": "justify-content:center",
-            "caption": "How it is built: a score saved on a phone, Claude reading four things and choosing one of three actions, a code gate on every amount, then PayPal Payouts, Invoicing through the MCP server, Transaction Search and Webhooks, landing in the officials' accounts, their own pages, the board and the money page.",
+            "caption": "How it is built: a score saved on a phone, Claude reading four things and choosing one of three actions, a code gate on every amount, then PayPal Payouts, Invoicing through the MCP server, Transaction Search and Webhooks, landing at PayPal for each official, on their own pages, the board and the money page.",
         },
         {
             "id": "live", "badge": "Live site · 9 Nov 2026 · /api/webhooks",

@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# Deploy or update Final Buzzer on the OVH box: pull the public repo there, ship the local .env with
+# Deploy or update Final Buzzer on a Docker host: pull the public repo there, ship the local .env with
 # the deployment's extra settings, and rebuild the stack. Touches nothing outside its own folder.
 #
 #   bash deploy/deploy.sh
 set -euo pipefail
-HOST="${DEPLOY_HOST:-jonathan@51.161.82.166}"
+# the box: user@host, from the environment or the DEPLOY_HOST line in .env (never committed)
+HOST="${DEPLOY_HOST:-$(grep -E '^DEPLOY_HOST=' .env 2>/dev/null | cut -d= -f2-)}"
+[ -n "$HOST" ] || { echo "set DEPLOY_HOST=user@host (environment or .env)"; exit 1; }
 DIR="experimental-projects/final-buzzer"
 REPO="https://github.com/JonathanSolvesProblems/final-buzzer.git"
 

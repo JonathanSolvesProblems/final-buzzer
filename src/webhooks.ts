@@ -4,7 +4,7 @@
  *   PAYMENT.PAYOUTSBATCH.SUCCESS / DENIED, PAYMENT.PAYOUTS-ITEM.*  -> the ledger's payout status and times
  *   INVOICING.INVOICE.PAID / CANCELLED                              -> the team's invoice record
  *
- * Every event is appended to the webhook log (WEBHOOK_LOG, results/webhooks.jsonl by default; the board
+ * Every event whose signature verifies is appended to the webhook log (WEBHOOK_LOG, results/webhooks.jsonl by default; the board
  * serves it at /api/webhooks) as received. Signatures are verified with PayPal's
  * verify-webhook-signature when PAYPAL_WEBHOOK_ID is set; without it (local development) the event
  * is applied and marked unverified, never silently trusted as verified.
@@ -39,7 +39,9 @@ export async function handleWebhook(headers: IncomingHttpHeaders, rawBody: strin
   const type: string = ev.event_type ?? "unknown";
   const verified = await verify(headers, rawBody).catch(() => false);
   await mkdir(dirname(WEBHOOK_LOG), { recursive: true });
-  await appendFile(WEBHOOK_LOG, JSON.stringify({ at: new Date().toISOString(), verified, type, id: ev.id, summary: ev.summary }) + "\n");
+  // a rejected event is kept apart (WEBHOOK_LOG + ".rejected"): anyone can post to this address, and the public log
+  // lists only what PayPal's signature check passed (or, with no webhook id set, what was applied unverified)
+  await appendFile(verified === false ? `${WEBHOOK_LOG}.rejected` : WEBHOOK_LOG, JSON.stringify({ at: new Date().toISOString(), verified, type: String(type).slice(0, 80), id: String(ev.id ?? "").slice(0, 80), summary: String(ev.summary ?? "").slice(0, 200) }) + "\n");
   if (verified === false) return { ok: false, verified, event_type: type, applied: "rejected: signature did not verify" };
 
   if (type.startsWith("PAYMENT.PAYOUTSBATCH") || type.startsWith("PAYMENT.PAYOUTS-ITEM")) {

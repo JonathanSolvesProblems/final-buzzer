@@ -16,3 +16,5 @@ results/budget.json
 .design/brand/art/*.gen.json
 tmp/
 prototype/
+__pycache__/
+results/webhooks.jsonl.rejected

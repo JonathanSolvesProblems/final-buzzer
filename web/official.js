@@ -19,7 +19,7 @@ const seen = new Set(); // payouts already shown as paid, so only a new one flip
 
 const officials = sheet.officials;
 function current() {
-  const h = decodeURIComponent(location.hash.slice(1)).toLowerCase();
+  let h = ""; try { h = decodeURIComponent(location.hash.slice(1)).toLowerCase(); } catch { /* a malformed hash shows the default official */ }
   const byId = officials.find((o) => o.id === h || o.id === `off-${h}`);
   return byId ?? officials.find((o) => o.id === "off-d") ?? officials[0];
 }
@@ -43,13 +43,13 @@ function myGames(me) {
     const item = payout?.items.find((i) => i.official_id === me.id);
     const fold = (ledger.folds[me.id] ?? []).find((f) => f.gameId === g.id);
     const day = g.start.slice(0, 10);
-    const evening = fold && Object.values(ledger.payouts).find((p) => !p.gameId && p.status === "SUCCESS" && p.senderBatchId.includes(day) && p.senderBatchId.endsWith(`-${me.id}`));
+    const evening = fold && Object.values(ledger.payouts).find((p) => !p.gameId && p.status === "SUCCESS" && p.senderBatchId.includes(day) && p.senderBatchId.endsWith(`-${me.id}`) && p.items.some((i) => i.game == null || i.game === g.number));
     const hold = ledger.holds[g.id];
     let kind;
     if (payout) kind = "paid";
     else if (fold) kind = "folded";
     else if (hold) kind = "held";
-    else if (g.status === "forfeit" && g.note.startsWith("not played")) kind = "unplayed";
+    else if (g.status === "forfeit" && String(g.note).startsWith("not played")) kind = "unplayed";
     else if (g.status !== "scheduled") kind = "final";
     else kind = "next";
     rows.push({ g, role, amount: item ? Number(item.amount) : amount, kind, payout, fold, evening, hold, day });
@@ -60,14 +60,15 @@ function myGames(me) {
 function stateLine(r) {
   const p = r.payout;
   if (r.kind === "paid") {
-    const when = p.secondsFromBuzzer != null ? `Paid <span class="num">${p.secondsFromBuzzer}</span>${NBSP}s after the buzzer, confirmed by PayPal` : "Paid, confirmed by PayPal";
-    return `${when}${p.decidedBy === "treasurer" ? ", on Sam's call" : ""}. <span class="ref">${enc(p.batchId ?? "")}</span>`;
+    const sam = p.decidedBy === "treasurer";
+    const when = p.secondsFromBuzzer != null ? `Paid ${sam ? "on Sam's call, " : ""}<span class="num">${p.secondsFromBuzzer}</span>${NBSP}s after ${sam ? "Sam's tap" : "the buzzer"}, confirmed by PayPal` : `Paid${sam ? " on Sam's call" : ""}, confirmed by PayPal`;
+    return `${when}. <span class="ref">${enc(p.batchId ?? "")}</span>`;
   }
   if (r.kind === "folded") return r.evening ? `You asked to be paid once a day: paid with the evening payout, confirmed by PayPal. <span class="ref">${enc(r.evening.batchId ?? "")}</span>` : "You asked to be paid once a day: this game goes into tonight's payout.";
   if (r.kind === "held") return `${enc(heldNote(r.hold))}. The agent sent nothing and asked Sam; you are paid when Sam decides.`;
   if (r.kind === "unplayed") return "Not played: the court closed. Nothing is owed for this game.";
   if (r.kind === "final") return "Final. The agent is reading the sheet, the rate card and PayPal now.";
-  return `${sentence(roleName(r.role))} on the sheet. Paid ${money(r.amount)} the moment the score is saved.`;
+  return `${sentence(roleName(r.role))} on the sheet. Paid ${money(r.amount)} about 40 seconds after the score is saved.`;
 }
 
 function render(fromHash = false) {
@@ -82,7 +83,7 @@ function render(fromHash = false) {
   const secs = rows.filter((r) => r.kind === "paid" && r.payout.secondsFromBuzzer != null && r.payout.decidedBy !== "treasurer").map((r) => r.payout.secondsFromBuzzer).sort((a, b) => a - b);
   const median = secs.length ? (secs.length % 2 ? secs[secs.length >> 1] : Math.round(((secs[secs.length / 2 - 1] + secs[secs.length / 2]) / 2) * 10) / 10) : null;
   const owed = rows.filter((r) => ["held", "final"].includes(r.kind) || (r.kind === "folded" && !r.evening)).reduce((s, r) => s + r.amount, 0);
-  const next = rows.filter((r) => r.kind === "next").length;
+  const next = rows.filter((r) => r.kind === "next" || r.kind === "unplayed").length;
   $("me-tally").innerHTML = [
     `<span class="fig"><span class="num">${money(total)}</span> paid</span>`,
     `<span class="fig"><span class="num">${rows.length - next}</span> of ${rows.length} games worked</span>`,
