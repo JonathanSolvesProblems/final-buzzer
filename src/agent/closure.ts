@@ -18,13 +18,13 @@ export interface ClosureOutcome {
   refunds: Refund[]; fee_rule: unknown; loop: ReplanResult["loop"]; document_version: number | null;
 }
 
-export async function runClosure(o: { closure: Closure; paypal: "live" | "dry"; runId: string; docPath?: string; apply?: boolean; onStep?: Parameters<typeof runReplan>[0]["onStep"] }): Promise<ClosureOutcome & { trace: ReplanResult["trace"] }> {
+export async function runClosure(o: { closure: Closure; paypal: "live" | "dry"; runId: string; docPath?: string; apply?: boolean; invoicesPath?: string; outPath?: string; onStep?: Parameters<typeof runReplan>[0]["onStep"] }): Promise<ClosureOutcome & { trace: ReplanResult["trace"] }> {
   const docPath = o.docPath ?? "data/tournament-2026.json";
   const t = await loadFromFile(docPath);
   const sheet = await loadSheet();
   const fees = JSON.parse(await readFile("data/fees.json", "utf8"));
   const teams = JSON.parse(await readFile("data/teams-2026.json", "utf8"));
-  const invoices = await readFile("results/invoices.json", "utf8").then((s) => JSON.parse(s).records, () => ({}));
+  const invoices = await readFile(o.invoicesPath ?? "results/invoices.json", "utf8").then((s) => JSON.parse(s).records, () => ({}));
 
   const r = await runReplan({ tournament: t, sheet, courts: t.courts, closure: o.closure, onStep: o.onStep });
 
@@ -42,7 +42,7 @@ export async function runClosure(o: { closure: Closure; paypal: "live" | "dry"; 
         if (o.paypal !== "live") { entry.status = "DRY_RUN"; refunds.push(entry); continue; }
         // paid on PayPal (a capture on the invoice) -> refund through the invoice; paid by e-transfer -> payout to the manager
         let captureId: string | null = null;
-        if (rec?.invoice_id) { const v: any = await getInvoiceRest(rec.invoice_id); if (!("isError" in v) && v.paid) captureId = v.raw?.payments?.transactions?.[0]?.payment_id ?? null; }
+        for (const id of [rec?.invoice_id, ...(rec?.children ?? [])].filter(Boolean)) { const v = await getInvoiceRest(id); if (!("isError" in v) && v.paypalCaptureId) { captureId = v.paypalCaptureId; break; } }
         if (captureId) {
           mcp ??= await connectPayPalMcp(["payments.createRefund"]);
           const res: any = await mcp.call("create_refund", { capture_id: captureId, amount: { currency_code: fees.currency, value: rule.perGame.toFixed(2) }, note_to_payer: `Game ${u.game_number} could not be played (${o.closure.court} closed). Pro-rata refund by the association's rule.` });
@@ -76,6 +76,6 @@ export async function runClosure(o: { closure: Closure; paypal: "live" | "dry"; 
 
   const out = { at: new Date().toISOString(), paypal: o.paypal === "live" ? "sandbox" : o.paypal, closure: o.closure, affected: r.affected, summary: r.decision?.summary ?? null, applied: r.applied, rejected: r.rejected, unplayable: r.unplayable, refunds, fee_rule: fees.refund_policy, loop: r.loop, document_version: version, trace: r.trace };
   await mkdir("results", { recursive: true });
-  await writeFile("results/replan.json", JSON.stringify(out, null, 2) + "\n");
+  await writeFile(o.outPath ?? "results/replan.json", JSON.stringify(out, null, 2) + "\n");
   return out;
 }
