@@ -66,6 +66,9 @@ button { font: inherit; color: inherit; }
 .topline { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; }
 .topline .days { margin-right: auto; }
 .housing .context { margin: 0 0 12px; max-width: 72ch; font-size: 14px; line-height: 1.45; color: var(--ghost); }
+.housing .cta { margin: 0 0 12px; }
+.housing .cta .btn { display: inline-flex; align-items: center; text-decoration: none; background: var(--yellow); color: var(--housing); font-size: 14px; padding: 10px 18px; }
+.housing .cta .btn:hover { background: var(--yellow-lo); }
 .housing .context a { color: var(--flap); text-underline-offset: 2px; }
 .printed { margin: 0; font-size: 13px; font-weight: 500; color: var(--ghost); display: flex; flex-wrap: wrap; gap: 2px 16px; }
 .printed b { color: var(--flap); font-weight: 600; }

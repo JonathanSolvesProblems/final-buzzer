@@ -34,7 +34,7 @@ const payouts = agGrid.createGrid($("payouts"), { ...common, getRowId: (p) => p.
   { headerName: "Paid", field: "amount", maxWidth: 110, minWidth: 76, cellClass: "num", enableCellChangeFlash: true, valueFormatter: (p) => money(p.value) },
   { headerName: "Seconds", headerTooltip: "Seconds from the final buzzer to PayPal's confirmation", field: "seconds", maxWidth: 120, minWidth: 70, cellClass: "num", enableCellChangeFlash: true, valueFormatter: (p) => p.value == null ? "" : pinned(p) ? `median ${p.value}` : p.value },
   { headerName: "Decided by", field: "decidedBy", maxWidth: 120, cellRenderer: (p) => pinned(p) ? "" : p.value === "treasurer" ? chip("Sam", "treasurer") : p.value === "script" ? chip("script", "") : chip("agent", "") },
-  { headerName: "PayPal", field: "status", minWidth: 180, enableCellChangeFlash: true, cellRenderer: (p) => pinned(p) ? "" : `${chip(esc(p.value === "SUCCESS" ? "Confirmed" : p.value), p.value === "SUCCESS" ? "paid" : "")} <span class="quiet" style="font-size:11px">${esc(p.data.batchId ?? "")}</span>` },
+  { headerName: "PayPal", field: "status", minWidth: 180, enableCellChangeFlash: true, getQuickFilterText: (p) => `${p.value ?? ""} ${p.data?.batchId ?? ""}`, cellRenderer: (p) => pinned(p) ? "" : `${chip(esc(p.value === "SUCCESS" ? "Confirmed" : p.value), p.value === "SUCCESS" ? "paid" : "")} <span class="quiet" style="font-size:11px">${esc(p.data.batchId ?? "")}</span>` },
 ] });
 const holds = agGrid.createGrid($("holds"), { ...common, getRowId: (p) => p.data.gameId, columnDefs: [
   { headerName: "Game", field: "number", maxWidth: 80, cellClass: "num" },

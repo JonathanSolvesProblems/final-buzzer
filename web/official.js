@@ -68,7 +68,7 @@ function stateLine(r) {
   if (r.kind === "held") return `${enc(heldNote(r.hold))}. The agent sent nothing and asked Sam; you are paid when Sam decides.`;
   if (r.kind === "unplayed") return "Not played: the court closed. Nothing is owed for this game.";
   if (r.kind === "final") return "Final. The agent is reading the sheet, the rate card and PayPal now.";
-  return `${sentence(roleName(r.role))} on the sheet. Paid ${money(r.amount)} about 40 seconds after the score is saved.`;
+  return `${sentence(roleName(r.role))} on the sheet. Paid ${money(r.amount)} about 40 seconds after the score is saved${current()?.payout_preference === "end_of_day" ? ", or with the evening payout, as you asked" : ""}.`;
 }
 
 function render(fromHash = false) {

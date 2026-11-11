@@ -45,14 +45,19 @@ function stateOf(g) {
   if (p && p.status.startsWith("ERROR")) return { kind: "held", hold: { reason: `PayPal did not pay: ${p.status}`, question: null, at: p.createdAt } };
   if (folds.length) return { kind: "folded", folds };
   if (g.status === "forfeit" && String(g.note).startsWith("not played")) return { kind: "unplayed" };
-  if (g.status !== "scheduled") return { kind: "final" }; // saved on the scorer's phone, the agent has not written yet
+  // saved on the scorer's phone, the agent has not written a result yet; once it has handed the batch to
+  // PayPal (its payout_created line, after this save) the game is with PayPal, waiting for the confirmation
+  if (g.status !== "scheduled") return ledger.events.some((e) => e.kind === "payout_created" && e.gameId === g.id && g.finalAt && e.at > g.finalAt) ? { kind: "paying", payout: null } : { kind: "final" };
   return { kind: "scheduled" };
 }
 /** The replay's clock: the latest game the agent acted on, plus a game's length. */
 function cursor() {
-  const acted = ledger.events.filter((e) => e.gameId).map((e) => T.games.find((g) => g.id === e.gameId)).filter(Boolean);
+  const acted = ledger.events.filter((e) => e.gameId).map((e) => T.games.find((g) => g.id === e.gameId)).filter((g) => g && g.start.startsWith(day));
   if (!acted.length) return null;
   const latest = acted.reduce((a, b) => (a.start > b.start ? a : b));
+  // a clock only makes sense on a day played in order: when a visitor has scored a late game and the morning
+  // is untouched, nothing is "in play"
+  if (T.games.some((g) => g.start.startsWith(day) && g.start < latest.start && g.status === "scheduled")) return null;
   return new Date(new Date(latest.start).getTime() + GAME_MINUTES * 60000);
 }
 function kindWithClock(g, now) {
@@ -75,12 +80,12 @@ function noteHTML(g, s) {
   if (s.kind === "held") return `<span class="note">${heldNote(s.hold)}</span>`;
   if (s.kind === "folded") return `<span class="note">Folds to end of day</span>`;
   if (s.kind === "live") return `<span class="note">In play</span>`;
-  if (s.kind === "final") return `<span class="note">${enc(g.status === "forfeit" ? "Forfeit" : "Final")}${g.hs != null ? ` ${Number(g.hs)} to ${Number(g.as)}` : ""}, agent working</span>`;
+  if (s.kind === "final") return `<span class="note">${enc(g.status === "forfeit" ? "Forfeit" : "Final")}${g.hs != null ? ` ${Number(g.hs)} to ${Number(g.as)}` : ""}</span>`;
   if (s.kind === "unplayed") return `<span class="note">Not played, refunded</span>`;
   if (String(g.note).startsWith("moved from")) return `<span class="note">Moved, was ${enc(g.note.slice(11).split(":")[0])}</span>`;
   return `<span class="note">${enc(sentence(g.division))}</span>`;
 }
-const vsHTML = (g) => g.home ? `<span>${enc(sh(g.home))}</span><span>v ${enc(sh(g.away))}</span>` : `<span>${enc(sentence(g.stage))}</span>`;
+const vsHTML = (g) => g.home ? `<span>${enc(sh(g.home))}</span><span>v ${enc(sh(g.away))}</span>` : `<span>${enc(matchup(g))}</span>`;
 function tileHTML(g, s) {
   const face = (cls) => `<div class="face ${cls}" aria-hidden="true"><span class="vs">${vsHTML(g)}</span>${noteHTML(g, s)}</div>`;
   const boot = firstPaint ? ` boot-in" style="--d:${bootDelay(g)}ms` : "";
@@ -161,6 +166,13 @@ function closeGame(restore = true) {
   if (location.hash) history.replaceState(null, "", location.pathname + location.search);
   if (restore && lastFocus?.isConnected) lastFocus.focus({ preventScroll: true });
 }
+// a tile is a button to a keyboard too: Enter or Space on the focused game opens it
+scheduler.element.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  const el = e.target.closest?.(".b-sch-event-wrap") ?? document.activeElement?.closest?.(".b-sch-event-wrap"); if (!el) return;
+  const id = el.dataset.eventId ?? scheduler.resolveEventRecord(el)?.id; if (!id) return;
+  e.preventDefault(); openGame(id);
+});
 scheduler.element.addEventListener("click", (e) => {
   const el = e.target.closest(".b-sch-event-wrap"); if (!el) return;
   const rec = scheduler.resolveEventRecord(el); if (rec) openGame(rec.id);
@@ -236,7 +248,7 @@ function timeline(p) {
   const agent = sam ? [] : agentSteps(p, decided, `The agent chose to pay now${p.agent?.calls ? `, after ${p.agent.calls} turns` : ""}`);
   steps.push(...agent);
   if (decided != null && decided >= 0) steps.push([decided, sam ? "Sam made the call on the held game, and the pay went to PayPal" : agent.length ? "The gate checked every amount against the rate card; the pay went to PayPal Payouts" : "The agent checked the sheet, the rate card and PayPal's record, then sent the pay"]);
-  if (done != null) steps.push([done, `PayPal confirmed all ${p.items.length} officials paid`]);
+  if (done != null) steps.push([done, `PayPal completed the batch for all ${p.items.length} officials`]);
   else if (p.status === "DRY_RUN") steps.push([null, "Dry run: PayPal was not called"]);
   let ruler = "";
   if (!sam && done != null) {
@@ -268,7 +280,7 @@ function gameCardHTML(g) {
       (p.batchId ? `<div class="d-ref"><span>PayPal reference <span class="ref">${enc(p.batchId)}</span></span><button class="close-x" type="button" data-copy="${enc(p.batchId)}">Copy</button></div>` : "") +
       `<p class="d-note">${p.decidedBy === "treasurer" ? "Sam made this call." : "The agent decided. The rate card was checked in code before PayPal was called."}</p>`;
   } else if (s.kind === "paying") {
-    big = `Final${score}`; sub = "With PayPal, waiting for confirmation"; body = payTable(s.payout.items, "Being paid");
+    big = `Final${score}`; sub = "The agent chose to pay. The batch is with PayPal, waiting for its confirmation"; body = payTable(s.payout?.items ?? onSheet(g), "Being paid");
   } else if (s.kind === "folded") {
     big = "Folds to end of day"; sub = "Paid with the evening payout, as the officials asked"; body = foldLine;
   } else if (s.kind === "final") {
@@ -302,7 +314,11 @@ function render() {
   const states = dayGames.map((g) => ({ g, s: kindWithClock(g, now) }));
   const paid = states.filter((x) => x.s.kind === "paid");
   const secs = paid.map((x) => x.s.payout.secondsFromBuzzer).filter((v) => v != null);
-  const dollars = paid.reduce((sum, x) => sum + x.s.payout.items.reduce((a, i) => a + Number(i.amount), 0), 0);
+  // every dollar PayPal completed for this day, as the money page counts it: games paid at the buzzer, games paid
+  // on Sam's call, and the evening payouts of the officials who asked to be paid once a day
+  const numbers = new Set(dayGames.map((g) => g.number));
+  const dollars = Object.values(ledger.payouts).filter((p) => p.status === "SUCCESS" || p.status === "DRY_RUN")
+    .reduce((sum, p) => sum + p.items.reduce((a, i) => a + (dayGames.some((g) => g.id === p.gameId) || (!p.gameId && numbers.has(i.game)) ? Number(i.amount) : 0), 0), 0);
   $("paid-n").textContent = paid.length; $("of").textContent = dayGames.length;
   $("money").textContent = money(dollars);
   $("money-day").textContent = `paid out ${new Date(day + "T12:00").toLocaleDateString("en-CA", { weekday: "long" })}`;
@@ -502,7 +518,7 @@ async function poll() {
   try {
     const [l, r, d, a] = await Promise.all([
       fetch("/api/ledger").then((x) => x.text()),
-      fetch("/api/replay").then((x) => x.json()).catch(() => null),
+      null,
       fetch(`/api/tournament?v=${T.version}`).then((x) => (x.status === 304 ? null : x.json())).catch(() => null),
       fetch("/api/agent").then((x) => x.json()).catch(() => null),
     ]);

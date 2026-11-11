@@ -8,6 +8,8 @@ import { createServer, type IncomingMessage } from "node:http";
 import { readFile, stat, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { dirname, extname, join, normalize } from "node:path";
+import { gzipSync } from "node:zlib";
+import { createHash } from "node:crypto";
 import { loadFromFile } from "./app/feed.ts";
 import { loadSheet, loadRateCard } from "./agent/sheet.ts";
 import { checkMove, GAME_MINUTES } from "./agent/replan.ts";
@@ -69,8 +71,16 @@ const points = (v: unknown): number | null => (typeof v === "number" && Number.i
 async function saveScore(gameId: string, body: { status?: unknown; hs?: unknown; as?: unknown }) {
   const doc = JSON.parse(await readFile(DOC, "utf8"));
   for (const d of doc.divisions) for (const g of d.games) if (g.id === gameId) {
-    const status = body.status === "final" || body.status === "forfeit" ? body.status : "scheduled";
-    g.hs = points(body.hs); g.as = points(body.as);
+    if (body.status !== "final" && body.status !== "forfeit" && body.status !== "scheduled") return { ok: false, refused: true, message: "status is final, forfeit or scheduled" };
+    const status = body.status;
+    const hs = points(body.hs), as = points(body.as);
+    // a final is two whole scores that differ: anything else would start a payout on a game nobody finished
+    if (status === "final" && (hs == null || as == null)) return { ok: false, refused: true, message: "A final needs both scores, whole numbers from 0 to 199." };
+    if (status === "final" && hs === as) return { ok: false, refused: true, message: "A basketball game cannot end level. Check the scores." };
+    // the same final saved again within a few seconds is one tap landing twice, not a second save
+    if (status === "final" && g.status === "final" && g.hs === hs && g.as === as && g.finalAt && Date.now() - Date.parse(g.finalAt) < 15000)
+      return { ok: true, game: { id: g.id, status: g.status, hs: g.hs, as: g.as, finalAt: g.finalAt }, version: doc.version, repeat: true };
+    g.hs = hs; g.as = as;
     // the note is the server's own word, never the caller's; a game the re-plan moved keeps saying where it came from
     g.note = status === "forfeit" ? "forfeit" : typeof g.note === "string" && g.note.startsWith("moved from") ? g.note : "";
     g.status = status; g.finalAt = status === "scheduled" ? null : new Date().toISOString();
@@ -104,7 +114,7 @@ const server = createServer(async (req, res) => {
     if (req.method === "POST" && path.startsWith("/api/games/")) {
       const out = await saveScore(decodeURIComponent(path.slice("/api/games/".length)), JSON.parse(await readBody(req) || "{}"));
       // the scorer learns at once whether the agent will run on this save or hold it (the day's demo budget)
-      return json(res, out.ok ? 200 : 404, out.ok ? { ...out, budget: await peekBudget() } : out);
+      return json(res, out.ok ? 200 : (out as any).refused ? 400 : 404, out.ok ? { ...out, budget: await peekBudget() } : out);
     }
     if (path === "/api/budget") return json(res, 200, await peekBudget());
     // the agent on duty's last heartbeat, so the board can say whether anyone is watching the scorer's saves
@@ -167,7 +177,12 @@ const server = createServer(async (req, res) => {
     else { if (path === "/") path = "/index.html"; file = join("web", normalize(path)); }
     if (file.includes("..")) return json(res, 400, { isError: true, message: "bad path" });
     const s = await stat(file).catch(() => null);
-    if (!s || !s.isFile()) return json(res, 404, { isError: true, message: `not found: ${path}` });
+    if (!s || !s.isFile()) {
+      if (extname(path) && extname(path) !== ".html") return json(res, 404, { isError: true, message: `not found: ${path}` });
+      res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+      res.end(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Not on the board | Final Buzzer</title><body style="margin:0;min-height:100vh;display:grid;place-items:center;background:#E9EAEC;color:#16171A;font:16px/1.5 system-ui,sans-serif"><main style="padding:24px;max-width:36ch"><h1 style="font-size:28px;margin:0 0 8px">That page is not on the board</h1><p style="margin:0 0 16px">There is nothing at this address.</p><p style="margin:0"><a href="/" style="color:inherit;font-weight:600">Back to the board</a></p></main></body></html>`);
+      return;
+    }
     return send(res, await readFile(file), extname(file));
   } catch (e) {
     return json(res, 500, { isError: true, message: (e as Error).message });
@@ -175,9 +190,22 @@ const server = createServer(async (req, res) => {
 });
 server.listen(PORT, () => console.log(`Final Buzzer board on http://localhost:${PORT}/`));
 
+/** Text goes out gzipped when the browser takes it: the scheduler's module alone is 4.6 MB plain. Big bodies are
+ *  compressed once and kept, keyed by a hash of their bytes, so a changed file is compressed again. */
+const zipped = new Map<string, Buffer>();
+const TEXT = new Set([".html", ".js", ".mjs", ".css", ".json", ".svg"]);
 function send(res: import("node:http").ServerResponse, body: Buffer, ext: string) {
-  res.writeHead(200, { "Content-Type": types[ext] ?? "application/octet-stream", "Cache-Control": "no-cache" });
-  res.end(body);
+  const head: Record<string, string> = { "Content-Type": types[ext] ?? "application/octet-stream", "Cache-Control": "no-cache", "Vary": "Accept-Encoding" };
+  const accepts = String(res.req.headers["accept-encoding"] ?? "").includes("gzip");
+  if (!accepts || !TEXT.has(ext) || body.length < 1024) { res.writeHead(200, head); res.end(body); return; }
+  let out: Buffer;
+  if (body.length > 200_000) {
+    const key = createHash("sha1").update(body).digest("hex");
+    out = zipped.get(key) ?? gzipSync(body);
+    if (!zipped.has(key)) { if (zipped.size > 40) zipped.clear(); zipped.set(key, out); }
+  } else out = gzipSync(body, { level: 6 });
+  res.writeHead(200, { ...head, "Content-Encoding": "gzip" });
+  res.end(out);
 }
 function readBody(req: import("node:http").IncomingMessage): Promise<string> {
   return new Promise((resolve, reject) => { let s = ""; req.on("data", (c) => { s += c; }); req.on("end", () => resolve(s)); req.on("error", reject); });

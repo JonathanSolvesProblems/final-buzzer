@@ -34,7 +34,7 @@ function render() {
     const folded = Object.values(ledger.folds ?? {}).flat().some((f) => f.gameId === g.id);
     const score = g.hs != null && g.status !== "scheduled" ? ` ${Number(g.hs)} to ${Number(g.as)}.` : "";
     // the ledger first, as on the board: a game the agent paid or held reads that way whatever the document says
-    const state = h ? `<span class="state">${heldNote(h)}</span>` : p ? `${score} <span class="state paid">Officials paid${p.secondsFromBuzzer != null ? ", " + p.secondsFromBuzzer + " s after the buzzer" : ""}</span>` : folded ? `<span class="state">Folds to end of day</span>` : g.status === "scheduled" ? "" : `<span class="state">${sentence(g.status)}${score}, agent working</span>`;
+    const state = h ? `<span class="state">${heldNote(h)}</span>` : p ? `${score} <span class="state paid">Officials paid${p.secondsFromBuzzer != null ? ", " + p.secondsFromBuzzer + " s after the buzzer" : ""}</span>` : folded ? `<span class="state">Folds to end of day</span>` : g.status === "scheduled" ? "" : `<span class="state">${sentence(g.status)}${score.replace(/[.]$/, "")}, agent working</span>`;
     const isOpen = open === g.id;
     return `<li class="${isOpen ? "open" : ""}" data-id="${g.id}">
       <b>${matchup(g)}</b><span class="when">${g.start.slice(11)} ${g.court}</span>
@@ -46,12 +46,18 @@ function render() {
   $("games").querySelectorAll("li").forEach((li) => li.addEventListener("click", (e) => { if (e.target.closest(".sheet, .acts, .saved")) return; open = open === li.dataset.id ? null : li.dataset.id; render(); }));
   if (open) {
     const g = T.games.find((x) => x.id === open);
+    let saving = false;
+    const whole = (v) => Number.isInteger(v) && v >= 0 && v <= 199;
     const save = async (status) => {
+      if (saving) return;
       const hs = $("hs").value === "" ? null : Number($("hs").value), as = $("as").value === "" ? null : Number($("as").value);
       if (status === "final" && (hs == null || as == null)) { $("saved").textContent = "Both scores first."; return; }
+      if (status === "final" && !(whole(hs) && whole(as))) { $("saved").textContent = "Scores are whole numbers from 0 to 199."; return; }
+      if (status === "final" && hs === as) { $("saved").textContent = "A basketball game cannot end level. Check the scores."; return; }
+      saving = true; for (const id of ["final", "forfeit", "reopen"]) $(id).disabled = true;
       const body = status === "forfeit" ? { status, hs: 20, as: 0, note: "forfeit" } : status === "scheduled" ? { status, hs: null, as: null } : { status, hs, as };
       const r = await fetch(`/api/games/${encodeURIComponent(g.id)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then((x) => x.json()).catch((e) => ({ ok: false, message: `The page could not reach the server: ${e.message}` }));
-      const at = r.ok && r.game.finalAt ? new Date(r.game.finalAt).toLocaleTimeString("en-CA") : "";
+      const at = r.ok && r.game.finalAt ? new Date(r.game.finalAt).toLocaleTimeString("en-GB") : "";
       notes[g.id] = !r.ok ? esc(r.message) : status === "scheduled" ? "Reopened." :
         r.budget?.exhausted ? `Saved at ${at}. ${esc(r.budget.message)} The agent holds this game for Sam instead of paying it. <a href="/#${encodeURIComponent(g.id)}">See it on the board</a>` :
         `Saved at ${at}. The agent is on it, usually paid within a minute. <a href="/#${encodeURIComponent(g.id)}">Watch it on the board</a>`;
@@ -59,6 +65,7 @@ function render() {
       T = normalise(await get("/api/tournament"));
       setTimeout(render, 900);
     };
+    if (!$("final")) return; // the open game is on another day or court
     $("final").addEventListener("click", () => save("final"));
     $("forfeit").addEventListener("click", () => save("forfeit"));
     $("reopen").addEventListener("click", () => save("scheduled"));
