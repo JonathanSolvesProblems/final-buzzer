@@ -1,33 +1,33 @@
-(node:46360) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(node:36636) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
 (Use `node --trace-deprecation ...` to show where the warning was created)
 newman
 
 Final Buzzer: the public checks
 
 → The board is up
-  GET https://finalbuzzer.jonathansolvesproblems.com/ [200 OK, 6.93kB, 146ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/ [200 OK, 7.59kB, 133ms]
   √  200
   √  it is the board
 
 → The scorer's page is up
-  GET https://finalbuzzer.jonathansolvesproblems.com/score.html [200 OK, 3.78kB, 23ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/score.html [200 OK, 3.83kB, 23ms]
   √  200
   √  anyone can score from it
 
 → The tournament document
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/tournament [200 OK, 48.25kB, 75ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/tournament [200 OK, 48.42kB, 22ms]
   √  200 JSON
   √  88 games over 4 days
   √  every game has an id, a start and a status
 
 → The rate card
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/rate-card [200 OK, 813B, 30ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/rate-card [200 OK, 836B, 18ms]
   √  200 JSON
   √  $45 a referee, $25 a table official
   √  the card says it is provisional
 
 → The ledger: every payout confirmed by PayPal, every amount on the card
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/ledger [200 OK, 81.77kB, 58ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/ledger [200 OK, 92.3kB, 18ms]
   √  200 JSON
   √  at least Saturday's 28 games paid
   √  every successful payout carries a PayPal batch id and a completion time
@@ -38,7 +38,7 @@ Final Buzzer: the public checks
   √  game 17 is held: PayPal already showed it paid
 
 → The agent is on duty
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/agent [200 OK, 289B, 33ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/agent [200 OK, 288B, 21ms]
   √  200 JSON
   √  a heartbeat under two minutes old, on the PayPal sandbox
 
@@ -48,23 +48,23 @@ Final Buzzer: the public checks
   √  used never exceeds the limit
 
 → Every webhook logged was signature-verified
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/webhooks [200 OK, 1.2kB, 27ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/webhooks [200 OK, 6.13kB, 21ms]
   √  200
   √  at least one event from PayPal
   √  each one verified against the registered webhook
 
 → Sam's tap is refused without the treasurer's PIN
-  POST https://finalbuzzer.jonathansolvesproblems.com/api/holds/g053 [401 Unauthorized, 242B, 42ms]
+  POST https://finalbuzzer.jonathansolvesproblems.com/api/holds/g053 [401 Unauthorized, 242B, 19ms]
   √  401
   √  it asks for the PIN and does nothing
 
 → Closing a gym is refused without the treasurer's PIN
-  POST https://finalbuzzer.jonathansolvesproblems.com/api/replan [401 Unauthorized, 242B, 42ms]
+  POST https://finalbuzzer.jonathansolvesproblems.com/api/replan [401 Unauthorized, 242B, 21ms]
   √  401
   √  it asks for the PIN
 
 → The held game is still held
-  GET https://finalbuzzer.jonathansolvesproblems.com/api/ledger [200 OK, 81.77kB, 102ms]
+  GET https://finalbuzzer.jonathansolvesproblems.com/api/ledger [200 OK, 92.3kB, 22ms]
   √  200
   √  the refused tap changed nothing
 
@@ -81,9 +81,9 @@ Final Buzzer: the public checks
 ├─────────────────────────┼───────────────────┼───────────────────┤
 │              assertions │                31 │                 0 │
 ├─────────────────────────┴───────────────────┴───────────────────┤
-│ total run duration: 1538ms                                      │
+│ total run duration: 1293ms                                      │
 ├─────────────────────────────────────────────────────────────────┤
-│ total data received: 223.88kB (approx)                          │
+│ total data received: 250.5kB (approx)                           │
 ├─────────────────────────────────────────────────────────────────┤
-│ average response time: 54ms [min: 23ms, max: 146ms, s.d.: 37ms] │
+│ average response time: 31ms [min: 18ms, max: 133ms, s.d.: 32ms] │
 └─────────────────────────────────────────────────────────────────┘
