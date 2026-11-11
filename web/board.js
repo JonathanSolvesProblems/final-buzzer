@@ -68,10 +68,12 @@ function kindWithClock(g, now) {
   return s;
 }
 
+/* the last drag the schedule refused: the game that was asked about, and the games named as in its way */
+const asked = { id: null, blockers: new Set() };
 /* ---- the tile ---- */
 function noteHTML(g, s) {
   if (s.kind === "paid") {
-    const secs = s.payout.secondsFromBuzzer;
+    const secs = s.payout.secondsFromBuzzer == null ? null : Number(s.payout.secondsFromBuzzer).toFixed(1);
     if (s.payout.decidedBy === "treasurer") return `<span class="note">Paid, Sam's call</span>`;
     if (secs == null) return `<span class="note">Paid${s.dry ? ", dry run" : ""}</span>`;
     return `<span class="note"><span class="num">${secs}&#8239;s</span></span>`;
@@ -89,7 +91,8 @@ const vsHTML = (g) => g.home ? `<span>${enc(sh(g.home))}</span><span>v ${enc(sh(
 function tileHTML(g, s) {
   const face = (cls) => `<div class="face ${cls}" aria-hidden="true"><span class="vs">${vsHTML(g)}</span>${noteHTML(g, s)}</div>`;
   const boot = firstPaint ? ` boot-in" style="--d:${bootDelay(g)}ms` : "";
-  return `<div class="flap ${s.kind}${flipped.has(g.id) ? " just-flipped" : ""}${g.id === opened ? " picked" : ""}${boot}">${s.kind === "held" ? face("top") + face("bottom") : face("top")}</div>`;
+  const mark = asked.id === g.id ? " asked" : asked.blockers.has(g.number) && g.start.startsWith(day) ? " blocker" : "";
+  return `<div class="flap ${s.kind}${mark}${flipped.has(g.id) ? " just-flipped" : ""}${g.id === opened ? " picked" : ""}${boot}">${s.kind === "held" ? face("top") + face("bottom") : face("top")}</div>`;
 }
 const label = (g, s) => `Game ${g.number}, ${g.division.toLowerCase()}, ${matchup(g)}, ${g.court}, ${g.start.slice(11)}, ${({ paid: "final, officials paid", paying: "final, paying", held: "held for Sam", folded: "final, folds to end of day", live: "in play", final: "final, the agent is working", unplayed: "not played, refunded", scheduled: "not started" })[s.kind]}`;
 
@@ -130,6 +133,10 @@ function fitHours() {
 addEventListener("resize", fitHours);
 fitHours();
 /* ---- drag a game that has not started: the schedule's rules answer, and nothing is saved ---- */
+function markMove(id, problems) {
+  asked.id = id; asked.blockers = new Set((problems ?? []).flatMap((p) => [...p.matchAll(/game (\d+)/g)].map((m) => Number(m[1]))).filter((n) => n !== T.games.find((g) => g.id === id)?.number));
+  scheduler.refreshRows?.();
+}
 function sayMove(html, cls) { const el = $("move-check"); el.className = `move-check ${cls}`; el.innerHTML = html; el.hidden = false; }
 scheduler.on("beforeEventDropFinalize", ({ context }) => {
   const rec = context.eventRecords?.[0] ?? context.eventRecord, to = context.newResource ?? context.resourceRecord, at = context.startDate;
@@ -138,13 +145,14 @@ scheduler.on("beforeEventDropFinalize", ({ context }) => {
   fetch("/api/check-move", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ gameId: rec.id, court: to.name, start }) })
     .then((r) => r.json()).then((c) => {
       if (c.isError) return sayMove(`<b>Not checked.</b> ${enc(c.message)}`, "no");
+      markMove(c.ok || c.same ? null : rec.id, c.problems);
       if (c.same) return sayMove(`<b>Game ${c.game} is already there.</b> Drop it on another court or time to ask the schedule's rules.`, "");
       const where = `${enc(c.to.court)} at ${enc(c.to.start)}`;
       const notes = c.notes.length ? ` ${enc(c.notes.join(". "))}.` : "";
       if (c.ok) sayMove(`<b>Game ${c.game} can move to ${where}.</b> The floor is free, both teams keep two hours between starts and the playoff order holds.${notes} Nothing was saved: moving a game is Sam's call.`, "yes");
       else sayMove(`<b>Game ${c.game} cannot move to ${where}.</b> ${enc(c.problems.join("; ").replace(/\d{4}-\d\d-\d\d /g, ""))}. These are the rules the agent's own moves are checked against when a gym closes. Nothing was saved.`, "no");
     }).catch(() => sayMove("<b>Not checked.</b> The server did not answer.", "no"))
-    .finally(() => context.finalize(false));
+    .finally(() => { context.finalize(false); setTimeout(() => { scheduler.refreshRows?.(); scheduler.refresh?.(); }, 120); });
 });
 /* ---- a tile opens its game: a held game on the held card, any other game in the game drawer ---- */
 let picked = null;   // the held game on the card, when Sam picked one from the board
@@ -275,7 +283,7 @@ function gameCardHTML(g) {
   if (s.kind === "paid") {
     const p = s.payout; const total = p.items.reduce((t, x) => t + Number(x.amount), 0);
     big = `Paid <span class="num">${money(total)}</span>`;
-    sub = s.dry ? "Dry run: PayPal was not called" : p.secondsFromBuzzer != null ? `<span class="num">${p.secondsFromBuzzer}</span> seconds after ${p.decidedBy === "treasurer" ? "Sam's tap" : "the buzzer"}, confirmed by PayPal` : "Confirmed by PayPal";
+    sub = s.dry ? "Dry run: PayPal was not called" : p.secondsFromBuzzer != null ? `<span class="num">${Number(p.secondsFromBuzzer).toFixed(1)}</span> seconds after ${p.decidedBy === "treasurer" ? "Sam's tap" : "the buzzer"}, confirmed by PayPal` : "Confirmed by PayPal";
     body = timeline(p) + payTable(p.items, "Who was paid") + foldLine +
       (p.batchId ? `<div class="d-ref"><span>PayPal reference <span class="ref">${enc(p.batchId)}</span></span><button class="close-x" type="button" data-copy="${enc(p.batchId)}">Copy</button></div>` : "") +
       `<p class="d-note">${p.decidedBy === "treasurer" ? "Sam made this call." : "The agent decided. The rate card was checked in code before PayPal was called."}</p>`;
@@ -333,7 +341,7 @@ function render() {
     setDigit("p1", ss[0]); setDigit("p2", ss[1]);
     const g = T.games.find((x) => x.id === last.gameId);
     $("secs-sr").textContent = `${mid} `;
-    $("last-game").textContent = `The median of ${secs.length} paid game${secs.length === 1 ? "" : "s"} today, ${mid} s. Game ${g.number}, the latest, took ${last.secondsFromBuzzer} s.`;
+    $("last-game").textContent = `The median of ${secs.length} paid game${secs.length === 1 ? "" : "s"} today, ${mid} s. Game ${g.number}, the latest, took ${Number(last.secondsFromBuzzer).toFixed(1)} s.`;
   } else { setDigit("p1", "0"); setDigit("p2", "0"); $("last-game").textContent = paid.length ? "Paid in a dry run: PayPal was not called, so there is no time to show." : "No payout yet today."; }
   $("p1").classList.toggle("ghosted", !last); $("p2").classList.toggle("ghosted", !last);
   $("count-line").textContent = `${paid.length} of ${dayGames.length} games paid, ${money(dollars)} paid out.`;

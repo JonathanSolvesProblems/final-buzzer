@@ -297,6 +297,8 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
 .move-check { margin: 0 0 10px; max-width: 86ch; background: var(--flap); color: var(--ink-muted); padding: 10px 16px 12px; font-size: 14px; line-height: 1.45; clip-path: var(--chamfer); text-wrap: pretty; }
 .move-check b { display: block; margin-bottom: 2px; font-size: 18px; font-weight: 700; line-height: 1.25; color: var(--housing); }
 .move-check.no { box-shadow: inset 0 -4px 0 var(--yellow); }
+.courts .flap.asked::after, .courts .flap.blocker::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; border: 2px solid var(--yellow); border-radius: 4px; }
+.courts .flap.blocker::after { border-style: dashed; }
 .courts .b-sch-event-wrap:has(.flap.scheduled) { cursor: grab; }
 .courts .b-sch-event-wrap.b-dragging { opacity: .85; z-index: 30; }
 .plan h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
@@ -378,3 +380,8 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
 .flap.final .note { color: var(--flap); left: 11px; }
 .flap.unplayed { --face-bg: var(--keyline); --face-ink: var(--ghost); }
 .flap.unplayed .face::before { content: ""; position: absolute; inset: 1px; background: var(--housing); clip-path: var(--chamfer-3); }
+
+@media (max-width: 430px) {
+  .nav { margin-left: -5px; gap: 0; }
+  .nav a { padding: 8px 5px; font-size: 13.5px; }
+}

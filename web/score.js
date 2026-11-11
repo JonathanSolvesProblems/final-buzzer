@@ -34,7 +34,7 @@ function render() {
     const folded = Object.values(ledger.folds ?? {}).flat().some((f) => f.gameId === g.id);
     const score = g.hs != null && g.status !== "scheduled" ? ` ${Number(g.hs)} to ${Number(g.as)}.` : "";
     // the ledger first, as on the board: a game the agent paid or held reads that way whatever the document says
-    const state = h ? `<span class="state">${heldNote(h)}</span>` : p ? `${score} <span class="state paid">Officials paid${p.secondsFromBuzzer != null ? ", " + p.secondsFromBuzzer + " s after the buzzer" : ""}</span>` : folded ? `<span class="state">Folds to end of day</span>` : g.status === "scheduled" ? "" : `<span class="state">${sentence(g.status)}${score.replace(/[.]$/, "")}, agent working</span>`;
+    const state = h ? `<span class="state">${heldNote(h)}</span>` : p ? `${score} <span class="state paid">Officials paid${p.secondsFromBuzzer != null ? ", " + Number(p.secondsFromBuzzer).toFixed(1) + " s after the buzzer" : ""}</span>` : folded ? `<span class="state">Folds to end of day</span>` : g.status === "scheduled" ? "" : `<span class="state">${sentence(g.status)}${score.replace(/[.]$/, "")}, agent working</span>`;
     const isOpen = open === g.id;
     return `<li class="${isOpen ? "open" : ""}" data-id="${g.id}">
       <b>${matchup(g)}</b><span class="when">${g.start.slice(11)} ${g.court}</span>

@@ -61,7 +61,7 @@ function stateLine(r) {
   const p = r.payout;
   if (r.kind === "paid") {
     const sam = p.decidedBy === "treasurer";
-    const when = p.secondsFromBuzzer != null ? `Paid ${sam ? "on Sam's call, " : ""}<span class="num">${p.secondsFromBuzzer}</span>${NBSP}s after ${sam ? "Sam's tap" : "the buzzer"}, confirmed by PayPal` : `Paid${sam ? " on Sam's call" : ""}, confirmed by PayPal`;
+    const when = p.secondsFromBuzzer != null ? `Paid ${sam ? "on Sam's call, " : ""}<span class="num">${Number(p.secondsFromBuzzer).toFixed(1)}</span>${NBSP}s after ${sam ? "Sam's tap" : "the buzzer"}, confirmed by PayPal` : `Paid${sam ? " on Sam's call" : ""}, confirmed by PayPal`;
     return `${when}. <span class="ref">${enc(p.batchId ?? "")}</span>`;
   }
   if (r.kind === "folded") return r.evening ? `You asked to be paid once a day: paid with the evening payout, confirmed by PayPal. <span class="ref">${enc(r.evening.batchId ?? "")}</span>` : "You asked to be paid once a day: this game goes into tonight's payout.";
