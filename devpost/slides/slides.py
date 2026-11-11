@@ -96,18 +96,23 @@ FLOW = (
 
 # ---- the live payout of 9 November: the webhooks are the proof --------------------------------------
 WEBHOOKS = [
-    ("12:15:07", "PAYMENT.PAYOUTSBATCH.PROCESSING", "the batch is being processed"),
-    ("12:15:12", "PAYMENT.PAYOUTSBATCH.SUCCESS", "the batch completed"),
-    ("12:15:17", "PAYMENT.PAYOUTS-ITEM.UNCLAIMED", "Official G’s $45 is waiting to be claimed"),
-    ("12:15:17", "PAYMENT.PAYOUTS-ITEM.UNCLAIMED", "Official H’s $45 is waiting to be claimed"),
-    ("12:15:17", "PAYMENT.PAYOUTS-ITEM.UNCLAIMED", "Official I’s $25 is waiting to be claimed"),
+    ("01:30:37", "PAYMENT.PAYOUTSBATCH.PROCESSING", "the batch is being processed", False),
+    ("01:30:46", "PAYMENT.PAYOUTS-ITEM.SUCCEEDED", "Official D’s $45 landed in a PayPal account", True),
+    ("01:30:47", "PAYMENT.PAYOUTS-ITEM.UNCLAIMED", "a test address: $45 waits to be claimed", False),
+    ("01:30:48", "PAYMENT.PAYOUTS-ITEM.UNCLAIMED", "a test address: $25 waits to be claimed", False),
+    ("01:30:56", "PAYMENT.PAYOUTSBATCH.SUCCESS", "the batch completed", False),
 ]
 LIVE = (
-    '<div class="hero-line"><span class="flap-y">41.2<small>s</small></span><p>Game 3, Westbrook v Maple Hill, scored on the public site at 12:14:17Z on 9 November; PayPal confirmed the batch at 12:14:59Z. Then PayPal told the site so, five times.</p></div>'
+    '<div class="two" style="grid-template-columns:600px 1fr;gap:48px;align-items:start">'
+    '<div><div class="shot" style="height:auto;background:#fff"><img src="{IMAGE}" alt="" style="height:auto;object-fit:contain"></div>'
+    '<p class="small" style="margin:14px 0 0;font-size:17px">Official D’s own PayPal account, seconds later: the payment and its note, as PayPal shows it to the person paid.</p></div>'
+    '<div class="right" style="justify-content:flex-start">'
+    '<div class="hero-line"><span class="flap-y">45.6<small>s</small></span><p>Game 2, Maple Hill v Northside, scored on the public site on the evening of 10 November. PayPal confirmed the batch 45.6 seconds after the saved score.</p></div>'
     '<div class="events">'
-    + "".join(f'<div class="ev{" key" if e.endswith("SUCCESS") else ""}"><span class="t">{t}<small>Z</small></span><span class="ty">{e}</span><span class="what">{w}</span><span class="ok">signature verified</span></div>' for t, e, w in WEBHOOKS)
+    + "".join(f'<div class="ev slim{" key" if k else ""}"><span class="t">{t}<small>Z</small></span><span class="ty">{e}</span><span class="what">{w}</span></div>' for t, e, w, k in WEBHOOKS)
     + '</div>'
-    '<p class="small" style="margin:18px 0 0;font-size:18px">Every event is verified against the webhook registered for the live site before the ledger moves, and every event the receiver has seen is listed at /api/webhooks. The items read “unclaimed” because the officials’ sandbox addresses have no PayPal account to land in. Batch YYXSX844BZZ5J.</p>'
+    '<p class="small" style="margin:14px 0 0;font-size:16px">Five webhook events, each signature-verified against the webhook registered for the live site before the ledger moves (/api/webhooks). Batch LWECCKCWTM9ZS.</p>'
+    '</div></div>'
 )
 
 # ---- invoices: the chase as the hero, the grid as proof --------------------------------------------
@@ -277,10 +282,10 @@ def build():
             "caption": "How it is built: a score saved on a phone, Claude reading four things and choosing one of three actions, a code gate on every amount, then PayPal Payouts, Invoicing through the MCP server, Transaction Search and Webhooks, landing at PayPal for each official, on their own pages, the board and the money page.",
         },
         {
-            "id": "live", "badge": "Live site · 9 Nov 2026 · /api/webhooks",
-            "headline": "Scored on the public site and paid in 41.2 seconds, and PayPal said so five times",
-            "html": LIVE, "stage_style": "justify-content:center",
-            "caption": "Game 3 was scored on the public site on 9 November 2026 and its officials were paid in 41.2 seconds, with the agent on duty: it asked for the sheet, the rate card and PayPal's record at 3.0 s, chose at 6.6 s, and PayPal confirmed at 41.2 s. Five webhook events arrived signature-verified (the batch processing, the batch success, one per official); every event the receiver has seen is listed at /api/webhooks.",
+            "id": "live", "badge": "Live site · 10 Nov 2026 · batch LWECCKCWTM9ZS",
+            "headline": "Scored on the public site, and 45.6 seconds later the referee has the money",
+            "html": LIVE, "image": "tmp/shots/slide-paypal-activity-g2.png", "crop": [38, 452, 872, 466], "scale": 1,
+            "caption": "Game 2 was scored on the public site on 10 November 2026 with the agent on duty, and PayPal confirmed its officials' pay 45.6 seconds after the saved score. Official D is routed to a real sandbox PayPal account: the $45 shows there with the game's note. The other two officials are test addresses, so PayPal holds their items as unclaimed. Five webhook events arrived signature-verified; every one is listed at /api/webhooks.",
         },
         {
             "id": "invoices", "badge": "PayPal MCP server · results/chase.json",

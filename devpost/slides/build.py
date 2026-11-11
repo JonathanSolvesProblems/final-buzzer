@@ -134,6 +134,10 @@ body.dark .url { color: var(--keyline); }
 .ev .ty { font-family: var(--mono); font-size: 18px; font-weight: 600; }
 .ev .what { color: var(--ink-muted); }
 .ev .ok { font-size: 15px; font-weight: 600; color: var(--ink-muted); white-space: nowrap; }
+.ev.slim { grid-template-columns: 104px 1fr; gap: 4px 16px; padding: 12px 18px; font-size: 17px; }
+.ev.slim .t { font-size: 24px; grid-row: span 2; }
+.ev.slim .ty { font-size: 15px; }
+.ev.slim .what { grid-column: 2; }
 .ev.key { background: var(--housing); color: var(--flap); }
 .ev.key .what, .ev.key .ok { color: var(--ghost); }
 .lead { margin: 0 0 14px; font-size: 24px; font-weight: 600; line-height: 1.3; }

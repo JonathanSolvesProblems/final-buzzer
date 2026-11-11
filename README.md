@@ -85,7 +85,7 @@ Ablations: `replay.ts --paypal off` runs the same day with PayPal removed (the a
 - The officials' sheet is generated (`data/officials-2026.json`) and says so: Officials A to X with sandbox addresses, four of whom asked to be paid once a day.
 - The rate card (`data/rate-card.json`) and the entry fee (`data/fees.json`) are placeholders marked `provisional: true`, and the board says so.
 - Two game cases are staged and labelled in the sheet file: one forfeit, one game with no table official. The chase replay stages when teams pay, one manager's reply and one waitlisted team, labelled in `data/teams-2026.json`.
-- "Paid" means PayPal completed the payout batch. The officials are test addresses, so PayPal holds each item as unclaimed until that address opens an account; an official routed to a real sandbox account (Official A, game 9) shows the money received.
+- "Paid" means PayPal completed the payout batch. The officials are test addresses, so PayPal holds each item as unclaimed until that address opens an account; an official routed to a real sandbox PayPal account shows the money received (Official D, game 2, 10 November: $45 in the account 45.6 seconds after the saved score, with the game's note).
 - Scores in the replay are replay values. Seconds from buzzer to payout are PayPal's completion time against the moment the score was saved.
 - The Bryntum build is the trial and prints its watermark.
 - Not built, though planned: checkout for family registration (Orders and the JS SDK), subscriptions for program fees, disputes, and a rate-card editor so the forfeit hold resolves on the board.

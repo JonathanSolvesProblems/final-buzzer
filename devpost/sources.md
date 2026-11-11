@@ -18,7 +18,7 @@ disagrees. Placeholders are marked as such in the data files and on the board.
 | 52 teams invoiced, 50 paid, 32 reminders, 1 split, 1 released | README, Devpost, the money page | `invoices.json` (`records`), `chase.json` (`outcomes`) |
 | 9 of 10 games moved, 1 cannot be played, 2 refunds of $175 | README, Devpost | `replan.json` |
 | First live payout, game 17, 40.2 s, 2 November 2026 | README | `first-live-run.json` |
-| Live payouts on the public site: game 10 in 40.6 s (3 November), game 1 in 39.2 s (7 November), Friday's game g002 in 41.2 s with five signature-verified payout webhooks (9 November, batch YYXSX844BZZ5J) | the board, the money page, Devpost | the deployed ledger, `/api/ledger`; `/api/webhooks` |
+| Live payouts on the public site: game 10 in 40.6 s (3 November), game 1 in 39.2 s (7 November), Friday's game g002 in 41.2 s with five signature-verified payout webhooks (9 November, batch YYXSX844BZZ5J), Thursday's game 2 in 45.6 s with Official D's $45 received in a sandbox PayPal account (10 November, batch LWECCKCWTM9ZS, item webhook PAYMENT.PAYOUTS-ITEM.SUCCEEDED) | the board, the money page, Devpost | the deployed ledger, `/api/ledger`; `/api/webhooks` |
 | The agent's run on each payout and hold (the reads at about 1.6 s, the choice at about 6 s) | the drawer on the board | `agent` on each ledger record, written by `buzzer.ts`; older records backfilled from `results/agent-runs.json` (extracted from the committed traces) |
 | The public checks: requests and assertions against the live site, 0 failures | README, Devpost | `postman/final-buzzer.postman_collection.json`, last run `results/postman-run.txt` |
 | $4,025 paid to officials across all days | the money page | the deployed ledger, `/api/ledger` |
