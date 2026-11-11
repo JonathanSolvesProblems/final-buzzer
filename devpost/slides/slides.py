@@ -244,7 +244,7 @@ PHONES = (
 
 
 RULES = (
-    '<div class="shot fixed" style="height:auto"><img src="{IMAGE}" alt="" style="height:auto"></div>'
+    '<div class="shot fixed" style="height:auto;width:842px"><img src="{IMAGE}" alt="" style="height:auto"></div>'
     '<div class="shot fixed" style="height:auto;margin-top:22px"><img src="{IMAGE_2}" alt="" style="height:auto"></div>'
     '<div class="band" style="text-align:left">The drop is checked by <code>POST /api/check-move</code> against the rules the agent&rsquo;s own moves are held to: a floor shared by joined courts, two hours between a team&rsquo;s starts, playoff order. Nothing is saved.</div>'
 )
@@ -328,8 +328,8 @@ def build():
         {
             "id": "rules", "badge": "Bryntum Scheduler · live site · 11 Nov 2026",
             "headline": "Drag a game onto a floor another court shares, and the board says no",
-            "html": RULES, "image": "tmp/shots/slide-rules.png", "crop": [40, 245, 1200, 58],
-            "image_2": "tmp/shots/slide-rules.png", "crop_2": [40, 441, 1200, 214],
+            "html": RULES, "image": "tmp/shots/slide-rules.png", "crop": [40, 172, 737, 88],
+            "image_2": "tmp/shots/slide-rules-grid.png", "crop_2": [40, 398, 1200, 214],
             "caption": "The board is a Bryntum Scheduler: courts are the resources, the four days the time axis, each game an event drawn as a flip-scoreboard tile. Drag a game that has not started and the drop is checked against the rules the agent's own re-plan moves are held to. Here game 52 is dropped on Gym CD at 9:00, which shares its floor with Gym D, where game 53 is playing. The board answers in a sentence and nothing is saved, because moving a game is Sam's call.",
         },
     ]
