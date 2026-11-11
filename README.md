@@ -4,6 +4,8 @@ Every official paid at the final buzzer. A youth basketball tournament's money, 
 
 **Live demo: https://finalbuzzer.jonathansolvesproblems.com** (the board) · [/score.html](https://finalbuzzer.jonathansolvesproblems.com/score.html) (score a game and watch the agent pay) · [/money.html](https://finalbuzzer.jonathansolvesproblems.com/money.html) (every payout and invoice) · [/official.html](https://finalbuzzer.jonathansolvesproblems.com/official.html) (one official's weekend, as they see it). PayPal sandbox, test money.
 
+**Demo video (2:57): https://www.youtube.com/watch?v=fie7eCmoTZs** · Blog post: [Final Buzzer: a PayPal agent that pays officials at the buzzer](https://jonathanandrei.com/blog/final-buzzer-paypal-agent-pays-officials-at-the-buzzer/)
+
 ![The board: every game a tile whose face is its money state](preview/1-the-board.png)
 
 | | |
