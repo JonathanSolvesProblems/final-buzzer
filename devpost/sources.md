@@ -37,6 +37,7 @@ disagrees. Placeholders are marked as such in the data files and on the board.
 
 ## Published sources
 
+- F.O.G. Canada, home page (read 11 November 2026): the Annual Charity Golf Tournament on 8 August 2026 at La Cité Golf, Hawkesbury, Ontario; "$110 CAD Per Player", "49 Golfers Registered", "100 % Goes to the Hospital", the Brockville General Hospital. https://fogcanada.ca/ The cash, e-transfer and by-hand tracking before PayPal is my own account as the site's builder, not a published source.
 - Montreal United, About Us (read 11 November 2026): "For the past 40 years, Hugh Alexander Scarlett has played, coached, and refereed the sport he loves"; he "created and launched Montreal United, a basketball-focused youth and mentorship organization". https://montrealunited.ca/about-us/
 - Montreal United, L.A.B Invitational rules (read 11 November 2026): "Fifteen minutes after the scheduled time, any team failing to be on the court will lose the game by default"; "Please note: Schedule is subject to change." Games at Collège Notre-Dame and Lower Canada College; the 2027 tournament is 21, 22 and 23 May 2027. https://montrealunited.ca/l-a-b-registration/
 
