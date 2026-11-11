@@ -50,7 +50,7 @@ The agent's run stays with the record (`agent` on each ledger payout and hold: w
 - **Invoicing** (REST, `src/paypal/invoicing.ts`): a payment made outside PayPal (the composite's teams paid by e-transfer) recorded against its invoice, so the invoice is the one record of who has paid.
 - **Webhooks** (`src/webhooks.ts`): payout batches and invoice payments update the ledger as PayPal reports them, signature-verified against the webhook registered for the live site on 8 November 2026. Every event the receiver has seen is listed at [/api/webhooks](https://finalbuzzer.jonathansolvesproblems.com/api/webhooks); until the sandbox app had a webhook, the seconds were read by polling the payout.
 - **Claude** (`@anthropic-ai/sdk`, `src/agent/loop.ts`): the loop runs on `stop_reason`, with a terminal decision tool.
-- **Bryntum Scheduler** (`web/board.js`): the court-by-time board. Every game is a flap tile whose face is its money state, read from the agent's ledger every few seconds. A tile opens its game: who was paid, how much, the PayPal batch; a held tile opens Sam's decision; a game not started links to the scorer's page. "Close a gym" sends the agent's re-plan back onto the same grid.
+- **Bryntum Scheduler** (`web/board.js`): the court-by-time board. Every game is a flap tile whose face is its money state, read from the agent's ledger every few seconds. A tile opens its game: who was paid, how much, the PayPal batch; a held tile opens Sam's decision; a game not started links to the scorer's page. "Close a gym" sends the agent's re-plan back onto the same grid. Drag a game that has not started to another court or time and the drop is checked by `POST /api/check-move` against the same rules the agent's moves are held to (a floor shared by joined courts, two hours between a team's starts, playoff order); the answer is shown on the board and nothing is saved.
 - **AG Grid** (`web/money.js`): the treasurer's money board, every payout, hold and invoice. Rows keep their identity across polls, so a payout that lands while Sam watches flashes in place; a pinned total row carries the dollars and the median seconds; one search runs across all three grids; "Export for the accountant" writes the officials' pay and the entry fees to CSV; a row opens its game on the board.
 - **Hosting** (`Dockerfile`, `deploy/`): two containers from one image on a small VPS behind Traefik with HTTPS. One serves the board, the money board, the scorer's page and the PayPal webhook receiver; the other is the agent on duty, paying as games go final and writing a heartbeat the board shows. A daily cap on agent runs keeps a public demo from spending without limit, and a tap that pays, or a gym closing, asks for the treasurer's PIN.
 
@@ -100,7 +100,7 @@ Officials paid a median of 40.2 s after the final buzzer: Saturday's 34 games re
 
 | | Result |
 |---|---|
-| Games paid | 28 of Saturday's 34, 81 officials, $3,145 CAD paid out |
+| Games paid | 28 of Saturday's 34, 81 payments to 24 officials, $3,145 CAD paid out |
 | Buzzer to payout | median 40.2 s, fastest 38.7 s, slowest 45.8 s. About 7 s is the agent deciding; the rest is PayPal completing the batch |
 | Held for Sam | 3: a game PayPal already showed paid (a re-saved score), the staged forfeit, the game with no table official |
 | End-of-day batch | 12 shares folded during the day, paid that evening as one payout per official, $420 (`results/settle-2026-05-16.json`) |

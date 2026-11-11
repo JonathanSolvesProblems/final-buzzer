@@ -39,7 +39,7 @@ setTimeout(() => {
 
   <main class="housing" id="board" tabindex="-1">
     <h1 class="sr">The board</h1>
-    <p class="context">Northside Invitational, 14 to 17 May 2026, replayed on the PayPal sandbox. Every tile is a game and its face is its money state. <a href="/score.html">Score a game that has not started</a> and watch its officials get paid.</p>
+    <p class="context">Northside Invitational, 14 to 17 May 2026, replayed on the PayPal sandbox. Every tile is a game and its face is its money state. <a href="/score.html">Score a game that has not started</a> and watch its officials get paid, or drag one to another court and the schedule's rules answer.</p>
     <div class="topline">
       <nav class="pick days" aria-label="Tournament days" id="days"></nav>
       <details class="pop key">
@@ -51,7 +51,15 @@ setTimeout(() => {
           <li><i class="l-held"></i>Held for Sam</li>
           <li><i class="l-fold"></i>Folds to end of day</li>
           <li>Tap any game to see who was paid and why</li>
+          <li>Drag a game that has not started: the schedule's rules answer</li>
         </ul>
+      </details>
+      <details class="pop scanner">
+        <summary>Score from your phone</summary>
+        <div class="scan">
+          <div class="qr"><img src="/qr-score.svg" alt="QR code for the scorer's page, finalbuzzer.jonathansolvesproblems.com/score.html" width="148" height="148"></div>
+          <p>Scan to open the scorer's page. Save a final score there and watch this board: the game's officials are paid through PayPal about 40 seconds later.</p>
+        </div>
       </details>
       <details class="pop closer" id="closer">
         <summary>Close a gym</summary>
@@ -63,6 +71,7 @@ setTimeout(() => {
       </details>
     </div>
     <section class="plan" id="plan" aria-live="polite" hidden></section>
+    <p class="move-check" id="move-check" role="status" hidden></p>
     <section class="scoreline" aria-label="Today so far">
       <aside class="hold" id="held-card" aria-labelledby="held-title" hidden>
         <div class="top">

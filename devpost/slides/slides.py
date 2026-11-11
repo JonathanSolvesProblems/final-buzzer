@@ -24,7 +24,7 @@ F = lambda s: f'<span class="fig">{s}</span>'
 COVER = (
     '<div class="cover-hero"><div class="digits"><span class="digit">4</span><span class="digit">0</span></div>'
     '<div><p class="cover-say">seconds after the final buzzer, the officials are paid</p>'
-    '<p class="cover-sub">The median of Saturday’s 28 paid games on PayPal’s clock: 81 officials, $3,145, every payout confirmed by PayPal.</p></div></div>'
+    '<p class="cover-sub">The median of Saturday’s 28 paid games on PayPal’s clock: 81 payments to 24 officials, $3,145, every batch completed by PayPal on its sandbox.</p></div></div>'
     '<div class="cover-board"><img src="{IMAGE}" alt=""></div>'
 )
 
@@ -107,7 +107,7 @@ LIVE = (
     '<div><div class="shot" style="height:auto;background:#fff"><img src="{IMAGE}" alt="" style="height:auto;object-fit:contain"></div>'
     '<p class="small" style="margin:14px 0 0;font-size:17px">Official D’s own PayPal account, seconds later: the payment and its note, as PayPal shows it to the person paid.</p></div>'
     '<div class="right" style="justify-content:flex-start">'
-    '<div class="hero-line"><span class="flap-y">45.6<small>s</small></span><p>Game 2, Maple Hill v Northside, scored on the public site on the evening of 10 November. PayPal confirmed the batch 45.6 seconds after the saved score.</p></div>'
+    '<div class="hero-line"><span class="flap-y">45.6<small>s</small></span><p>Game 2, Maple Hill v Northside, scored on the public site, 10 November, 20:30 Eastern (01:30 UTC). PayPal confirmed the batch 45.6 seconds after the saved score.</p></div>'
     '<div class="events">'
     + "".join(f'<div class="ev slim{" key" if k else ""}"><span class="t">{t}<small>Z</small></span><span class="ty">{e}</span><span class="what">{w}</span></div>' for t, e, w, k in WEBHOOKS)
     + '</div>'
@@ -246,9 +246,9 @@ PHONES = (
 def build():
     return [
         {
-            "id": "board", "badge": "PayPal sandbox · Saturday replayed 2 Nov 2026",
+            "id": "board", "badge": "Bryntum Scheduler · PayPal sandbox · replayed 2 Nov 2026",
             "html": COVER, "image": "tmp/shots/slide-board.png", "crop": [0, 366, 1212, 320],
-            "caption": "Saturday's 34 games replayed live through the agent and the PayPal sandbox: 28 paid, 81 officials, $3,145, a median of 40.2 seconds from the saved score to PayPal's confirmation. Every tile on the board is a game and its face is its money state. Live at " + URL + ".",
+            "caption": "Saturday's 34 games replayed live through the agent and the PayPal sandbox: 28 paid, 81 payments to 24 officials, $3,145, a median of 40.2 seconds from the saved score to PayPal's confirmation. Every tile on the board is a game and its face is its money state. Live at " + URL + ".",
         },
         {
             "id": "drawer", "badge": "PayPal sandbox · batch S9C26657WUH3J",

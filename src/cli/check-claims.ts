@@ -60,7 +60,9 @@ if (replay && replay.finished) {
     figure(name, text, /(\d+) games paid, a median/gi, [p.games_paid], "the replay");
     figure(name, text, /\$([\d,]+(?:\.\d+)?) (?:CAD )?(?:moved|paid out)/gi, [p.dollars], "the replay");
   }
-  figure("README.md", readme, /(\d+) of Saturday's (\d+), (\d+) officials/g, [p.games_paid, replay.games_run, p.officials_paid], "the replay");
+  const distinct = new Set(replay.per_game.flatMap((g: any) => g.payout?.status === "SUCCESS" ? g.payout.items.map((i: any) => i.official_id) : [])).size;
+  figure("README.md", readme, /(\d+) of Saturday's (\d+), (\d+) payments to (\d+) officials/g, [p.games_paid, replay.games_run, p.officials_paid, distinct], "the replay");
+  for (const [name, text] of docs) if (/\b81 officials\b/.test(text)) say(`${name} says 81 officials: there are 81 payments to ${distinct} officials`);
   figure("README.md", readme, /fastest ([\d.]+) s, slowest ([\d.]+) s/g, [s.min, s.max], "the replay");
   figure("README.md", readme, /\| Held for Sam \| (\d+):/g, [replay.outcomes.held], "the replay");
   figure("README.md", readme, /(\d+) shares folded during the day/g, [replay.folds], "the replay");

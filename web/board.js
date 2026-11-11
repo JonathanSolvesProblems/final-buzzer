@@ -27,7 +27,7 @@ const bootDelay = (g) => {
   const lane = courtsOn(day).findIndex((c) => c.id === g.courtId);
   return Math.round(Math.min(1, Math.max(0, (new Date(g.start) - dayStart(day)) / span)) * 760 + Math.max(0, lane) * 45);
 };
-const events = (t) => t.games.map((g) => ({ id: g.id, resourceId: g.courtId, name: matchup(g), startDate: g.start, duration: GAME_MINUTES, durationUnit: "minute" }));
+const events = (t) => t.games.map((g) => ({ id: g.id, resourceId: g.courtId, name: matchup(g), startDate: g.start, duration: GAME_MINUTES, durationUnit: "minute", draggable: g.status === "scheduled", resizable: false }));
 
 /* ---- money state per game, from the ledger ---- */
 function stateOf(g) {
@@ -100,10 +100,13 @@ const scheduler = new Scheduler({
   columns: [{ text: "Court", field: "name", width: 92, htmlEncode: false, renderer: ({ record }) => `<div class="court">${enc(record.name)}</div>` }],
   resources: courtsOn(day),
   events: events(T),
-  rowHeight: 52, barMargin: 2, readOnly: true, eventStyle: null, eventColor: null, autoHeight: true,
+  rowHeight: 52, barMargin: 2, eventStyle: null, eventColor: null, autoHeight: true,
+  // nothing on the board is edited in place: the one gesture is dragging a game that has not started, and
+  // the drop is only ever a question to the schedule's rules (see the drop listener below)
+  enableDeleteKey: false, createEventOnDblClick: false,
   // the board wears its own surface, not a Bryntum theme; without this the component fetches one from a CDN
   detectCSSCompatibilityIssues: false,
-  features: { eventTooltip: false, eventEdit: false, eventDragCreate: false, eventDrag: false, eventResize: false, eventMenu: false, scheduleMenu: false, cellMenu: false, headerMenu: false, cellEdit: false, regionResize: false, scheduleTooltip: false, timeRanges: { showCurrentTimeLine: false, showHeaderElements: true } },
+  features: { eventTooltip: false, eventEdit: false, eventDragCreate: false, eventDrag: { constrainDragToTimeline: true, showTooltip: false, showExactDropPosition: true }, eventCopyPaste: false, eventResize: false, eventMenu: false, scheduleMenu: false, cellMenu: false, headerMenu: false, cellEdit: false, regionResize: false, scheduleTooltip: false, timeRanges: { showCurrentTimeLine: false, showHeaderElements: true } },
   eventRenderer({ eventRecord, renderData }) {
     const g = T.games.find((x) => x.id === eventRecord.id);
     const s = kindWithClock(g, cursor());
@@ -121,6 +124,23 @@ function fitHours() {
 }
 addEventListener("resize", fitHours);
 fitHours();
+/* ---- drag a game that has not started: the schedule's rules answer, and nothing is saved ---- */
+function sayMove(html, cls) { const el = $("move-check"); el.className = `move-check ${cls}`; el.innerHTML = html; el.hidden = false; }
+scheduler.on("beforeEventDropFinalize", ({ context }) => {
+  const rec = context.eventRecords?.[0] ?? context.eventRecord, to = context.newResource ?? context.resourceRecord, at = context.startDate;
+  context.async = true;
+  const start = `${String(at.getHours()).padStart(2, "0")}:${String(at.getMinutes()).padStart(2, "0")}`;
+  fetch("/api/check-move", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ gameId: rec.id, court: to.name, start }) })
+    .then((r) => r.json()).then((c) => {
+      if (c.isError) return sayMove(`<b>Not checked.</b> ${enc(c.message)}`, "no");
+      if (c.same) return sayMove(`<b>Game ${c.game} is already there.</b> Drop it on another court or time to ask the schedule's rules.`, "");
+      const where = `${enc(c.to.court)} at ${enc(c.to.start)}`;
+      const notes = c.notes.length ? ` ${enc(c.notes.join(". "))}.` : "";
+      if (c.ok) sayMove(`<b>Game ${c.game} can move to ${where}.</b> The floor is free, both teams keep two hours between starts and the playoff order holds.${notes} Nothing was saved: moving a game is Sam's call.`, "yes");
+      else sayMove(`<b>Game ${c.game} cannot move to ${where}.</b> ${enc(c.problems.join("; ").replace(/\d{4}-\d\d-\d\d /g, ""))}. These are the rules the agent's own moves are checked against when a gym closes. Nothing was saved.`, "no");
+    }).catch(() => sayMove("<b>Not checked.</b> The server did not answer.", "no"))
+    .finally(() => context.finalize(false));
+});
 /* ---- a tile opens its game: a held game on the held card, any other game in the game drawer ---- */
 let picked = null;   // the held game on the card, when Sam picked one from the board
 let drawerHTML = ""; // what the drawer holds now, so a poll that changes nothing leaves focus and motion alone

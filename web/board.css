@@ -183,6 +183,9 @@ button { font: inherit; color: inherit; }
 @keyframes settle { from { transform: rotateX(70deg); opacity: .4; } to { transform: none; opacity: 1; } }
 
 /* the key, folded behind "Key" */
+.scan { display: flex; gap: 14px; align-items: center; width: 372px; }
+.scan .qr { flex: none; background: var(--flap); padding: 6px; line-height: 0; }
+.scan p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--flap); }
 .key .legend { display: grid; gap: 8px; width: max-content; margin: 0; list-style: none; font-size: 12px; color: var(--flap); }
 .legend li { display: flex; align-items: center; gap: 8px; }
 .legend i { position: relative; flex: none; width: 24px; height: 14px; display: block; clip-path: var(--chamfer-3); }
@@ -234,7 +237,7 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
   .pick button, .btn, .pop > summary { min-height: 44px; }
   .housing { padding: 12px 10px; margin-left: -6px; margin-right: -6px; }
   .topline { flex-wrap: wrap; }
-  .key { display: none; }
+  .key, .pop.scanner { display: none; }
   .digit { width: 42px; height: 60px; font-size: 56px; line-height: 64px; }
   .hold .bottom .btn:first-child { flex-basis: 100%; }
   .courts { display: none; }
@@ -288,6 +291,12 @@ footer { margin-top: 24px; font-size: 11px; color: var(--ink-muted); }
 .close select { font: 600 13px/1 var(--body); color: var(--housing); background: var(--flap); border: 0; padding: 8px; clip-path: var(--chamfer-3); min-height: 36px; }
 .close .btn { grid-column: 1 / -1; }
 .plan { margin: 0 0 10px; background: var(--black-face); color: var(--flap); padding: 10px 14px 12px; clip-path: var(--chamfer); }
+.move-check { margin: 0 0 10px; background: var(--black-face); color: var(--flap); padding: 10px 14px; font-size: 13px; line-height: 1.45; clip-path: var(--chamfer); box-shadow: inset 4px 0 0 var(--keyline); }
+.move-check.yes { box-shadow: inset 4px 0 0 var(--flap); }
+.move-check.no { box-shadow: inset 4px 0 0 var(--yellow); }
+.move-check b { font-weight: 700; }
+.courts .b-sch-event-wrap:has(.flap.scheduled) { cursor: grab; }
+.courts .b-sch-event-wrap.b-dragging { opacity: .85; z-index: 30; }
 .plan h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
 .plan h3 { margin: 10px 0 4px; font-size: 12px; font-weight: 600; color: var(--ghost); }
 .plan p { margin: 0; font-size: 13px; }

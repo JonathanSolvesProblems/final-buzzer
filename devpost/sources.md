@@ -9,7 +9,7 @@ disagrees. Placeholders are marked as such in the data files and on the board.
 | Figure | Used in | File and field |
 |---|---|---|
 | Median 40.2 s from buzzer to payout; fastest 38.7 s, slowest 45.8 s | README, Devpost, the board | `buzzer-replay.json`, `seconds_from_buzzer`: PayPal's `time_completed` on the batch minus the moment the score was saved |
-| 28 of Saturday's 34 games paid, 81 officials, $3,145 CAD | README, Devpost | `buzzer-replay.json`, `payouts` |
+| 28 of Saturday's 34 games paid, 81 payments to 24 officials, $3,145 CAD | README, Devpost | `buzzer-replay.json`, `payouts` |
 | 3 games held: a re-saved score PayPal already showed paid, the staged forfeit, the game with no table official | README, Devpost, the board | `buzzer-replay.json`, `outcomes.held` and `holds` |
 | 12 shares folded during the day, paid that evening as 4 payouts, $420 | README | `settle-2026-05-16.json`, `settled[].items` |
 | All 99 ledger payout items found in PayPal's transaction search: 30 games, $3,795 CAD, $31.68 in fees | README, Devpost | `reconcile.json`, through the MCP server's `list_transactions` |

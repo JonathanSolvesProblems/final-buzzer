@@ -10,6 +10,7 @@ import { createRequire } from "node:module";
 import { dirname, extname, join, normalize } from "node:path";
 import { loadFromFile } from "./app/feed.ts";
 import { loadSheet, loadRateCard } from "./agent/sheet.ts";
+import { checkMove, GAME_MINUTES } from "./agent/replan.ts";
 import { loadLedger, saveLedger } from "./ledger.ts";
 import { resolveHold, type TreasurerChoice } from "./agent/resolve.ts";
 import { handleWebhook, WEBHOOK_LOG } from "./webhooks.ts";
@@ -122,6 +123,27 @@ const server = createServer(async (req, res) => {
       const body = JSON.parse(await readBody(req) || "{}");
       const out = await treasurerDecides(decodeURIComponent(path.slice("/api/holds/".length)), body.choice);
       return json(res, out.ok ? 200 : 409, out);
+    }
+    /** Would this move break the schedule? POST /api/check-move {"gameId":"g061","court":"Gym D","start":"11:30"}.
+     *  The same rules the re-plan agent's moves are checked against (src/agent/replan.ts). Read-only: nothing
+     *  is saved, so it needs no PIN. The start snaps to the day's own slots. */
+    if (req.method === "POST" && path === "/api/check-move") {
+      const body = JSON.parse(await readBody(req) || "{}");
+      const t = await loadFromFile(DOC);
+      const g = t.games.find((x) => x.id === String(body.gameId ?? ""));
+      if (!g) return json(res, 404, { isError: true, message: "no such game" });
+      const court = t.courts.find((c) => c.name === String(body.court ?? "") || c.id === String(body.court ?? ""));
+      if (!court) return json(res, 400, { isError: true, message: "no such court" });
+      if (!/^\d\d:\d\d$/.test(String(body.start ?? ""))) return json(res, 400, { isError: true, message: "start is HH:MM" });
+      const mins = (s: string) => Number(s.slice(0, 2)) * 60 + Number(s.slice(3, 5));
+      const day = g.start.slice(0, 10);
+      const starts = [...new Set(t.games.filter((x) => x.start.startsWith(day)).map((x) => x.start.slice(11, 16)))].sort();
+      const last = mins(starts.at(-1)!) + GAME_MINUTES;
+      const grid = [...starts, `${String(Math.floor(last / 60)).padStart(2, "0")}:${String(last % 60).padStart(2, "0")}`];
+      const start = grid.reduce((a, b) => Math.abs(mins(b) - mins(body.start)) < Math.abs(mins(a) - mins(body.start)) ? b : a);
+      const same = court.name === g.court && start === g.start.slice(11, 16);
+      const check = g.status !== "scheduled" ? { ok: false, problems: [`game ${g.number} has been played`], officials_to_reassign: 0, notes: [] } : checkMove(t, await loadSheet(), g, court.name, start);
+      return json(res, 200, { ...check, same, saved: false, game: g.number, from: { court: g.court, start: g.start.slice(11, 16) }, to: { court: court.name, start } });
     }
     /** A gym closes: POST /api/replan {"court":"Gym D","from":"14:00","day":"2026-05-16"}. The agent re-plans,
      *  the moves are written into the document, the refunds go through PayPal, and the plan comes back. */
