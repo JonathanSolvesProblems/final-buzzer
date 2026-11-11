@@ -4,6 +4,15 @@ Every official paid at the final buzzer. A youth basketball tournament's money, 
 
 **Live demo: https://finalbuzzer.jonathansolvesproblems.com** (the board) · [/score.html](https://finalbuzzer.jonathansolvesproblems.com/score.html) (score a game and watch the agent pay) · [/money.html](https://finalbuzzer.jonathansolvesproblems.com/money.html) (every payout and invoice) · [/official.html](https://finalbuzzer.jonathansolvesproblems.com/official.html) (one official's weekend, as they see it). PayPal sandbox, test money.
 
+![The board: every game a tile whose face is its money state](preview/1-the-board.png)
+
+| | |
+|---|---|
+| ![Live payout in the official's own PayPal account](preview/2-live-payout.png) | ![The agent's run, drawn from the ledger](preview/3-the-agents-run.png) |
+| ![Games held for Sam](preview/4-when-not-to-pay.png) | ![Invoices through PayPal's MCP server](preview/6-invoices-through-mcp.png) |
+
+More in [preview/](preview/README.md).
+
 Sam runs a youth basketball association. Its invitational is 88 games over a weekend, two referees and a table official on every game, 52 teams paying an entry fee. After last year's tournament the officials were paid by hand, one e-transfer at a time, and some teams never paid at all.
 
 Final Buzzer is the association's treasurer as an agent. When a game goes final on the scorer's phone, the agent reads the game sheet, the rate card and PayPal's own record, decides whether to pay now, hold for Sam, or fold into an end-of-day batch, and pays the officials through PayPal Payouts. Before the tournament it invoices every team through PayPal Invoicing and chases the ones that stall: a reminder, a deposit-and-balance split, or the spot released to the waitlist. When a gym closes it re-plans the day against the schedule's own rules and refunds, pro rata, the games that cannot be played. Claude makes each of those choices; code enforces the rate card; PayPal confirms the money.
@@ -139,6 +148,17 @@ A first run of the chase found two faults, both fixed before this run: after a s
 Every move is re-checked in code before anything changes: free court, both halves of a joined court, team rest of two hours, playoff order. Building this run found two gaps in those rules, both fixed with tests: joined courts sharing a floor with their halves, and playoff games depending on the games that feed them.
 
 `npm run check` reads every figure in this section back from those files (the model cost estimates excepted: they are priced from token counts, not measured) and fails when one disagrees.
+
+## Sources
+
+Every figure and quote above, with where it comes from. The full table, figure by figure, is [devpost/sources.md](devpost/sources.md).
+
+- 35,813 officials, 18.3% paid what they are worth, nearly 59% agreeing that most new officials quit within one to three years: National Association of Sports Officials, 2023 National Officiating Survey, as reported by the NFHS, "NASO Survey Indicates Concerns with Sportsmanship, Shortage of Officials", 8 November 2023. https://www.nfhs.org/stories/naso-survey-indicates-concerns-with-sportsmanship-shortage-of-officials and https://www.naso.org/35813-individuals-respond-to-national-officiating-survey/
+- Referees waiting up to two weeks for their cheques, and cash in pay envelopes: William Kibler, "Central Blair Recreation and Park Commission to try paying refs in cash", Altoona Mirror, September 2026. https://www.altoonamirror.com/news/local-news/2026/09/central-blair-recreation-and-park-commission-to-try-paying-refs-in-cash
+- Officials paid months late, and "There's no job in the world that pays people three four months after they do work for you": Prep Network, "Meet the Referee Fighting for the Future of Youth Sports Officials", 3 March 2026. https://prepnetwork.com/?p=9289
+- The schedule, Montreal United's Lindsay A. Burnett Invitational, its rules (a forfeit after fifteen minutes, "Schedule is subject to change") and its 2027 dates: https://montrealunited.ca/l-a-b-registration/ ; Hugh Scarlett "played, coached, and refereed" for 40 years: https://montrealunited.ca/about-us/ (both read 11 November 2026).
+- The products named beside Final Buzzer, each from its own public page (read 9 November 2026): SportsEngine https://www.sportsengine.com/ , LeagueApps https://leagueapps.com/youth-sports-management-platform/payments/ , assignr https://www.assignr.com/ , ArbiterPay https://en.wikipedia.org/wiki/ArbiterSports , Refr Sports (the Prep Network article above).
+- Every measured figure (seconds, games, dollars, invoices, refunds) is read from the committed files in `results/`, and `npm run check` fails when the prose and those files disagree.
 
 ## Licence
 
