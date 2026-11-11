@@ -27,7 +27,7 @@ const bootDelay = (g) => {
   const lane = courtsOn(day).findIndex((c) => c.id === g.courtId);
   return Math.round(Math.min(1, Math.max(0, (new Date(g.start) - dayStart(day)) / span)) * 760 + Math.max(0, lane) * 45);
 };
-const events = (t) => t.games.map((g) => ({ id: g.id, resourceId: g.courtId, name: matchup(g), startDate: g.start, duration: GAME_MINUTES, durationUnit: "minute", draggable: g.status === "scheduled", resizable: false }));
+const events = (t) => t.games.map((g) => ({ id: g.id, resourceId: g.courtId, name: matchup(g), startDate: g.start, duration: GAME_MINUTES, durationUnit: "minute", resizable: false }));
 
 /* ---- money state per game, from the ledger ---- */
 function stateOf(g) {
@@ -57,7 +57,7 @@ function cursor() {
   const latest = acted.reduce((a, b) => (a.start > b.start ? a : b));
   // a clock only makes sense on a day played in order: when a visitor has scored a late game and the morning
   // is untouched, nothing is "in play"
-  if (T.games.some((g) => g.start.startsWith(day) && g.start < latest.start && g.status === "scheduled")) return null;
+  if (T.games.some((g) => g.start.startsWith(day) && g.start < latest.start && stateOf(g).kind === "scheduled")) return null;
   return new Date(new Date(latest.start).getTime() + GAME_MINUTES * 60000);
 }
 function kindWithClock(g, now) {
@@ -138,9 +138,12 @@ function markMove(id, problems) {
   scheduler.refreshRows?.();
 }
 function sayMove(html, cls) { const el = $("move-check"); el.className = `move-check ${cls}`; el.innerHTML = html; el.hidden = false; }
+// the money state comes from the ledger, not the document: a game the agent paid, held or folded stays put
+scheduler.on("beforeEventDrag", ({ eventRecord }) => { const g = T.games.find((x) => x.id === eventRecord.id); return !!g && stateOf(g).kind === "scheduled"; });
 scheduler.on("beforeEventDropFinalize", ({ context }) => {
   const rec = context.eventRecords?.[0] ?? context.eventRecord, to = context.newResource ?? context.resourceRecord, at = context.startDate;
   context.async = true;
+  if (!rec || !to || !at) { context.finalize(false); return; }
   const start = `${String(at.getHours()).padStart(2, "0")}:${String(at.getMinutes()).padStart(2, "0")}`;
   fetch("/api/check-move", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ gameId: rec.id, court: to.name, start }) })
     .then((r) => r.json()).then((c) => {

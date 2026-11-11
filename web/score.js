@@ -55,6 +55,7 @@ function render() {
       if (status === "final" && !(whole(hs) && whole(as))) { $("saved").textContent = "Scores are whole numbers from 0 to 199."; return; }
       if (status === "final" && hs === as) { $("saved").textContent = "A basketball game cannot end level. Check the scores."; return; }
       saving = true; for (const id of ["final", "forfeit", "reopen"]) $(id).disabled = true;
+      try {
       const body = status === "forfeit" ? { status, hs: 20, as: 0, note: "forfeit" } : status === "scheduled" ? { status, hs: null, as: null } : { status, hs, as };
       const r = await fetch(`/api/games/${encodeURIComponent(g.id)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then((x) => x.json()).catch((e) => ({ ok: false, message: `The page could not reach the server: ${e.message}` }));
       const at = r.ok && r.game.finalAt ? new Date(r.game.finalAt).toLocaleTimeString("en-GB") : "";
@@ -64,6 +65,10 @@ function render() {
       $("saved").innerHTML = notes[g.id];
       T = normalise(await get("/api/tournament"));
       setTimeout(render, 900);
+      } finally {
+        // whatever happened, the scorer can try again
+        saving = false; for (const id of ["final", "forfeit", "reopen"]) if ($(id)) $(id).disabled = false;
+      }
     };
     if (!$("final")) return; // the open game is on another day or court
     $("final").addEventListener("click", () => save("final"));

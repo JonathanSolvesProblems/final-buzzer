@@ -68,6 +68,7 @@ const DOC = process.env.TOURNAMENT_FILE ?? "data/tournament-2026.json";
  *  Bumps the document's version and stamps the save time on the game, which is the buzzer the agent measures from. */
 /** A score is a whole number from 0 to 199 or nothing: the endpoint is open, so nothing else is ever stored. */
 const points = (v: unknown): number | null => (typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= 199 ? v : null);
+let saving: Promise<unknown> = Promise.resolve();
 async function saveScore(gameId: string, body: { status?: unknown; hs?: unknown; as?: unknown }) {
   const doc = JSON.parse(await readFile(DOC, "utf8"));
   for (const d of doc.divisions) for (const g of d.games) if (g.id === gameId) {
@@ -112,7 +113,11 @@ const server = createServer(async (req, res) => {
       return json(res, out.ok ? 200 : 400, out);
     }
     if (req.method === "POST" && path.startsWith("/api/games/")) {
-      const out = await saveScore(decodeURIComponent(path.slice("/api/games/".length)), JSON.parse(await readBody(req) || "{}"));
+      // one save at a time: each reads, changes and writes the whole document, so two at once would lose one
+      const gameId = decodeURIComponent(path.slice("/api/games/".length)), saveBody = JSON.parse(await readBody(req) || "{}");
+      const run = saving.then(() => saveScore(gameId, saveBody));
+      saving = run.catch(() => undefined);
+      const out = await run;
       // the scorer learns at once whether the agent will run on this save or hold it (the day's demo budget)
       return json(res, out.ok ? 200 : (out as any).refused ? 400 : 404, out.ok ? { ...out, budget: await peekBudget() } : out);
     }
@@ -152,7 +157,10 @@ const server = createServer(async (req, res) => {
       const grid = [...starts, `${String(Math.floor(last / 60)).padStart(2, "0")}:${String(last % 60).padStart(2, "0")}`];
       const start = grid.reduce((a, b) => Math.abs(mins(b) - mins(body.start)) < Math.abs(mins(a) - mins(body.start)) ? b : a);
       const same = court.name === g.court && start === g.start.slice(11, 16);
-      const check = g.status !== "scheduled" ? { ok: false, problems: [`game ${g.number} has been played`], officials_to_reassign: 0, notes: [] } : checkMove(t, await loadSheet(), g, court.name, start);
+      // played means the document says so or the ledger has acted on it: the replay's games stay "scheduled" in the document
+      const led = await readFile(LEDGER, "utf8").then(JSON.parse).catch(() => null);
+      const acted = !!led && (Object.values(led.payouts ?? {}).some((p: any) => p.gameId === g.id) || !!led.holds?.[g.id] || Object.values(led.folds ?? {}).flat().some((f: any) => f.gameId === g.id));
+      const check = g.status !== "scheduled" || acted ? { ok: false, problems: [`game ${g.number} has been played`], officials_to_reassign: 0, notes: [] } : checkMove(t, await loadSheet(), g, court.name, start);
       return json(res, 200, { ...check, same, saved: false, game: g.number, from: { court: g.court, start: g.start.slice(11, 16) }, to: { court: court.name, start } });
     }
     /** A gym closes: POST /api/replan {"court":"Gym D","from":"14:00","day":"2026-05-16"}. The agent re-plans,
