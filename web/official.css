@@ -9,7 +9,7 @@
 .me .tally .num { font-size: 26px; }
 .day h2 { margin: 20px 0 8px; font-size: 15px; font-weight: 700; color: var(--flap); display: flex; align-items: baseline; gap: 10px; }
 .day h2 .num { font-size: 18px; color: var(--ghost); font-weight: 600; }
-.rows { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rim); }
+.rows { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rim); max-width: 860px; }
 .rows li { border-bottom: 1px solid var(--rim); }
 .rows a { display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 2px 14px; align-items: center; padding: 10px 4px; color: inherit; text-decoration: none; }
 .rows a:hover { background: var(--black-face); }

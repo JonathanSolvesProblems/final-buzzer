@@ -320,8 +320,12 @@ function render() {
   const dollars = Object.values(ledger.payouts).filter((p) => p.status === "SUCCESS" || p.status === "DRY_RUN")
     .reduce((sum, p) => sum + p.items.reduce((a, i) => a + (dayGames.some((g) => g.id === p.gameId) || (!p.gameId && numbers.has(i.game)) ? Number(i.amount) : 0), 0), 0);
   $("paid-n").textContent = paid.length; $("of").textContent = dayGames.length;
-  $("money").textContent = money(dollars);
-  $("money-day").textContent = `paid out ${new Date(day + "T12:00").toLocaleDateString("en-CA", { weekday: "long" })}`;
+  // the figure beside "games paid" is those games' money; the day's whole total (with the evening payouts and
+  // a game paid before it was held) is named next to it, so the board agrees with the money page
+  const forGames = paid.reduce((sum, x) => sum + x.s.payout.items.reduce((s2, i) => s2 + Number(i.amount), 0), 0);
+  const weekday = new Date(day + "T12:00").toLocaleDateString("en-CA", { weekday: "long" });
+  $("money").textContent = money(forGames);
+  $("money-day").textContent = dollars > forGames ? `for those games, ${money(dollars)} in all on ${weekday}` : `paid out ${weekday}`;
   const last = Object.values(ledger.payouts).filter((p) => p.status === "SUCCESS" && p.secondsFromBuzzer != null && dayGames.some((g) => g.id === p.gameId)).sort((a, b) => (b.completedAt ?? "").localeCompare(a.completedAt ?? ""))[0];
   if (last) {
     const mid = median(secs);

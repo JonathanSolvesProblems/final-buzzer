@@ -27,17 +27,17 @@ const pinned = (p) => !!p.node?.rowPinned;
 function median(xs) { const s = [...xs].sort((a, b) => a - b), m = s.length >> 1; return s.length ? (s.length % 2 ? s[m] : Math.round(((s[m - 1] + s[m]) / 2) * 10) / 10) : null; }
 
 const payouts = agGrid.createGrid($("payouts"), { ...common, getRowId: (p) => p.data.id, columnDefs: [
-  { headerName: "Game", field: "number", maxWidth: 64, minWidth: 52, cellClass: "num" },
+  { headerName: "Game", field: "number", maxWidth: 64, minWidth: 52, cellClass: "num", headerClass: "ag-right-aligned-header" },
   { headerName: "Matchup", field: "matchup", minWidth: 140 },
   { headerName: "Court", field: "court", maxWidth: 110, cellClass: "quiet" },
   { headerName: "Officials", field: "officials", minWidth: 150, cellClass: "quiet" },
-  { headerName: "Paid", field: "amount", maxWidth: 110, minWidth: 76, cellClass: "num", enableCellChangeFlash: true, valueFormatter: (p) => money(p.value) },
-  { headerName: "Seconds", headerTooltip: "Seconds from the final buzzer to PayPal's confirmation", field: "seconds", maxWidth: 120, minWidth: 70, cellClass: "num", enableCellChangeFlash: true, valueFormatter: (p) => p.value == null ? "" : pinned(p) ? `median ${p.value}` : p.value },
+  { headerName: "Paid", field: "amount", maxWidth: 110, minWidth: 76, cellClass: "num", headerClass: "ag-right-aligned-header", enableCellChangeFlash: true, valueFormatter: (p) => money(p.value) },
+  { headerName: "Seconds", headerTooltip: "Seconds from the final buzzer to PayPal's confirmation", field: "seconds", maxWidth: 120, minWidth: 70, cellClass: "num", headerClass: "ag-right-aligned-header", enableCellChangeFlash: true, valueFormatter: (p) => p.value == null ? "" : pinned(p) ? `median ${p.value}` : p.value },
   { headerName: "Decided by", field: "decidedBy", maxWidth: 120, cellRenderer: (p) => pinned(p) ? "" : p.value === "treasurer" ? chip("Sam", "treasurer") : p.value === "script" ? chip("script", "") : chip("agent", "") },
   { headerName: "PayPal", field: "status", minWidth: 180, enableCellChangeFlash: true, getQuickFilterText: (p) => `${p.value ?? ""} ${p.data?.batchId ?? ""}`, cellRenderer: (p) => pinned(p) ? "" : `${chip(esc(p.value === "SUCCESS" ? "Confirmed" : p.value), p.value === "SUCCESS" ? "paid" : "")} <span class="quiet" style="font-size:11px">${esc(p.data.batchId ?? "")}</span>` },
 ] });
 const holds = agGrid.createGrid($("holds"), { ...common, getRowId: (p) => p.data.gameId, columnDefs: [
-  { headerName: "Game", field: "number", maxWidth: 80, cellClass: "num" },
+  { headerName: "Game", field: "number", maxWidth: 80, cellClass: "num", headerClass: "ag-right-aligned-header" },
   { headerName: "Matchup", field: "matchup", minWidth: 160 },
   { headerName: "Why", field: "reason", minWidth: 260, wrapText: true, autoHeight: true },
   { headerName: "The question for Sam", field: "question", minWidth: 260, wrapText: true, autoHeight: true },
@@ -47,9 +47,9 @@ const invoices = agGrid.createGrid($("invoices"), { ...common, getRowId: (p) => 
   { headerName: "Team", field: "team", minWidth: 140 },
   { headerName: "Division", field: "division", maxWidth: 130, cellClass: "quiet" },
   { headerName: "Invoice", field: "invoice_number", minWidth: 190, cellClass: "quiet" },
-  { headerName: "Amount", field: "amount", maxWidth: 110, cellClass: "num", valueFormatter: (p) => money(p.value) },
+  { headerName: "Amount", field: "amount", maxWidth: 110, cellClass: "num", headerClass: "ag-right-aligned-header", valueFormatter: (p) => money(p.value) },
   { headerName: "Due", field: "due_date", maxWidth: 120, cellClass: "quiet" },
-  { headerName: "Reminders", field: "reminders", maxWidth: 110, cellClass: "num", valueFormatter: (p) => p.value?.length ?? 0 },
+  { headerName: "Reminders", field: "reminders", maxWidth: 110, cellClass: "num", headerClass: "ag-right-aligned-header", valueFormatter: (p) => p.value?.length ?? 0 },
   { headerName: "Status", field: "status", maxWidth: 130, enableCellChangeFlash: true, cellRenderer: (p) => chip(esc(p.value), p.value === "paid" ? "paid" : p.value === "held" ? "held" : "") },
   { headerName: "PayPal id", field: "invoice_id", minWidth: 200, cellClass: "quiet" },
 ] });
