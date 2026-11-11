@@ -115,6 +115,8 @@ export async function runBuzzer(o: BuzzerOptions): Promise<BuzzerResult> {
         if (o.paypal === "off") return { isError: true, errorCategory: "permission", isRetryable: false, message: "PayPal tools are switched off in this run. Nothing can be checked or paid." };
         const prior = Object.values(ledger.payouts).find((p) => p.gameId === game.id);
         if (!prior) return { already_paid: false, sender_batch_id: sbid, checked: "no batch recorded for this game; PayPal also refuses a repeat of this batch id for 30 days" };
+        // a refused attempt (PayPal rejected the batch at creation, so no batch exists) is not a payment: the game can be paid now
+        if (!prior.batchId && prior.status.startsWith("ERROR")) return { already_paid: false, sender_batch_id: sbid, checked: `PayPal refused the previous attempt (${prior.status}); no batch exists for this game, so it can be paid now` };
         if (o.paypal === "dry" || !prior.batchId) return { already_paid: true, batch: { batchId: prior.batchId, status: prior.status, completedAt: prior.completedAt ?? null, items: prior.items }, source: "ledger (dry run, PayPal not asked)" };
         const live = await getPayout(prior.batchId);
         if (isPayoutError(live)) return live;
