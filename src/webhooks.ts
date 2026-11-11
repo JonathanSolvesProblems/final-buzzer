@@ -51,7 +51,11 @@ export async function handleWebhook(headers: IncomingHttpHeaders, rawBody: strin
     const rec = Object.values(ledger.payouts).find((p) => p.batchId === batchId);
     if (!rec) return { ok: true, verified, event_type: type, applied: `batch ${batchId} is not in the ledger` };
     if (type.startsWith("PAYMENT.PAYOUTSBATCH")) {
-      rec.status = ev.resource.batch_header.batch_status ?? rec.status;
+      // events can arrive out of order (PROCESSING after the agent already read SUCCESS from PayPal): a batch
+      // that PayPal has finished never goes back to processing
+      const incoming: string | undefined = ev.resource.batch_header.batch_status;
+      const finished = ["SUCCESS", "DENIED", "CANCELED"].includes(rec.status);
+      if (incoming && !(finished && ["PENDING", "PROCESSING"].includes(incoming))) rec.status = incoming;
       const completed = ev.resource.batch_header.time_completed ?? null;
       if (completed) { rec.completedAt = completed; rec.secondsFromBuzzer = Math.round((new Date(completed).getTime() - new Date(rec.finalAt).getTime()) / 100) / 10; }
     } else {

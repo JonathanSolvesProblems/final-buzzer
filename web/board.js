@@ -35,7 +35,10 @@ function stateOf(g) {
   const showup = Object.values(ledger.payouts).find((p) => p.gameId === g.id && p.senderBatchId.endsWith("-showup"));
   const hold = ledger.holds[g.id];
   const folds = Object.values(ledger.folds).flat().filter((f) => f.gameId === g.id);
-  const p = payout ?? showup;
+  let p = payout ?? showup;
+  // a payout PayPal refused belongs to an earlier save: once the game is reopened, or saved final again after
+  // it, the record is history and the game reads as not started or as the agent's to act on
+  if (p && p.status.startsWith("ERROR") && (g.status === "scheduled" || (g.finalAt && p.createdAt && g.finalAt > p.createdAt))) p = undefined;
   if (hold) return { kind: "held", hold };
   if (p && (p.status === "SUCCESS" || p.status === "DRY_RUN")) return { kind: "paid", payout: p, folds, dry: p.status === "DRY_RUN" };
   if (p && (p.status === "PENDING" || p.status === "PROCESSING")) return { kind: "paying", payout: p };

@@ -22,7 +22,7 @@ Node 24 (it runs the TypeScript directly, no build step). Checked on a clean clo
 git clone https://github.com/JonathanSolvesProblems/final-buzzer.git
 cd final-buzzer
 npm install
-npm test          # 33 tests: the money gate, the feed, the re-plan rules, Sam's tap, the demo's daily cap
+npm test          # 36 tests: the money gate, the feed, the re-plan rules, Sam's tap, the daily cap, the webhooks
 npm run board     # http://localhost:4173/  the board, /score.html, /money.html, /official.html
 ```
 
